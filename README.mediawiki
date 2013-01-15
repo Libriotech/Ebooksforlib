@@ -1,0 +1,30 @@
+=Ebooksforlib=
+
+Ebooksforlib is an ebook portal for libraries. 
+
+==Overview==
+
+* Let patrons log in with their ordinary library credentials
+* Discover ebooks through browsing or searching
+* Borrow ebooks
+
+Preparation of ebooks for reading as well as a browser-based web-app for reading the books will be provided by related projects. 
+
+==License==
+
+See the LICENSE file. 
+
+==Repository==
+
+* https://github.com/MagnusEnger/Ebooksforlib
+
+==Sponsors==
+
+* Buskerud county library
+* Oslo public library
+
+The sponsors have received grants from the National library of Norway. 
+
+==Authors==
+
+* Magnus Enger (Libriotech)
