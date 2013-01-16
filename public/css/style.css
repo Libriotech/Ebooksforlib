@@ -1,3 +1,7 @@
 body {
 font-family: sans-serif;
 }
+
+.userbar {
+  text-align: right;
+}

@@ -7,6 +7,14 @@
 </head>
 <body>
 
+<div class="userbar">
+[% IF session.logged_in_user %]
+Hiya, <a href="/my">[% session.user.name %]</a>! <a href="/logout">Log out</a>
+[% ELSE %]
+<a href="/login">Log in</a>
+[% END %]
+</div>
+
 <h1>[% IF pagetitle %][% pagetitle %][% ELSE %][% vars.appname %][% END %]</h1>
 [% content %]
 

@@ -1,10 +1,23 @@
 package Ebooksforlib;
 use Dancer ':syntax';
+use Dancer::Plugin::Auth::Extensible;
+use Data::Dumper;
 
 our $VERSION = '0.1';
 
 hook 'before' => sub {
+
     var appname => config->{appname};
+
+    if ( logged_in_user ) {
+        # Get the data for the logged in user
+        my $user = logged_in_user;
+        # Remove the password, no reason to be passing it around
+        delete $user->{password};
+        # Store the data in the session, so it's available to templates etc
+        session user => $user;
+    }
+
 };
 
 get '/' => sub {
@@ -13,6 +26,14 @@ get '/' => sub {
 
 get '/about' => sub {
     template 'about', { pagetitle => 'About' };
+};
+
+get '/my' => sub {
+    template 'my', { pagetitle => 'My page' };
+};
+
+get '/admin' => require_role admin => sub { 
+    template 'admin', { pagetitle => 'Admin' };
 };
 
 # Reader-app API
