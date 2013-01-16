@@ -25,3 +25,18 @@ show_errors: 1
 # DO NOT EVER USE THIS FEATURE IN PRODUCTION 
 # OR TINY KITTENS SHALL DIE WITH LOTS OF SUFFERING
 auto_reload: 0
+
+plugins:
+    Database:
+        driver: 'mysql'
+        database: 'ebok'
+        host: 'localhost'
+        port: 3306
+        username: 'ebok'
+        password: 'pass'
+        connection_check_threshold: 10
+        dbi_params:
+            RaiseError: 1
+            AutoCommit: 1
+        on_connect_do: ["SET NAMES 'utf8'", "SET CHARACTER SET 'utf8'" ]
+        log_queries: 1

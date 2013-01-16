@@ -1,0 +1,6 @@
+# Ignore the environment-specific config files
+# This way the *-dist files supplied can be renamed and editing without
+# git picking up on them. 
+
+environments/development.yml
+environments/production.yml
