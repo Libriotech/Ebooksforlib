@@ -1,0 +1,10 @@
+<h2>Users</h2>
+
+[% IF users %]
+    <table>
+    <tr><th>ID</th><th>Username</th><th>Name</th></tr>
+    [% FOREACH user IN users %]
+    <tr><td>[% user.id %]</td><td>[% user.username %]</td><td>[% user.name %]</td></tr>
+    [% END %]
+    </table>
+[% END %]

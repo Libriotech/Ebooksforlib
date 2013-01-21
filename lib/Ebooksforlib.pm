@@ -1,6 +1,7 @@
 package Ebooksforlib;
 use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
+use Dancer::Plugin::DBIC;
 use Data::Dumper;
 
 our $VERSION = '0.1';
@@ -38,7 +39,11 @@ get '/admin' => require_role admin => sub {
 };
 
 get '/superadmin' => require_role superadmin => sub { 
-    template 'superadmin', { pagetitle => 'Superadmin' };
+    my @users = schema->resultset('User')->all;
+    template 'superadmin', { 
+        'pagetitle' => 'Superadmin', 
+        'users'     => \@users,
+    };
 };
 
 # Reader-app API
