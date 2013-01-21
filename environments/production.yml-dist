@@ -16,6 +16,15 @@ show_errors: 0
 route_cache: 1
 
 plugins:
+    DBIC:
+        default:
+            dsn:  dbi:mysql:ebok
+            schema_class: Ebookforlib::Schema
+            user: ebok
+            pass: pass
+            options:
+                RaiseError: 1
+                PrintError: 1
     Database:
         driver: 'mysql'
         database: 'ebok'
