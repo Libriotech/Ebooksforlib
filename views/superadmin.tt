@@ -4,11 +4,12 @@
 
 [% IF users %]
     <table>
-    <tr><th>ID</th><th>Username</th><th>Name</th><th>Actions</th></tr>
+    <tr><th>ID</th><th>Username</th><th>Name</th><th>Role</th><th>Actions</th></tr>
     [% FOREACH user IN users %]
     <tr><td>[% user.id %]</td>
         <td>[% user.username %]</td>
         <td>[% user.name %]</td>
+        <td>[% user.user_roles.role_id %]</td>
         <td>
             <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
             <a href="/users/delete/[% user.id %]"><img src="/images/user_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
