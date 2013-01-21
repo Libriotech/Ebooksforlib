@@ -46,6 +46,12 @@ get '/superadmin' => require_role superadmin => sub {
     };
 };
 
+get '/users/:action/:id?' => require_role superadmin => sub { 
+    template 'users', { 
+        'pagetitle' => param 'action', 
+    };
+};
+
 # Reader-app API
 # The server-side component of the reader-app will be talking to this API
 # TODO These are dummy functions with hardcoded responses, for now

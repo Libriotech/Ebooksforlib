@@ -1,5 +1,7 @@
 <h2>Users</h2>
 
+<p><a href="/users/add/"><img src="/images/user_add.png" height="16" width="16" alt="Add" title="Add">Add a new user</a></p>
+
 [% IF users %]
     <table>
     <tr><th>ID</th><th>Username</th><th>Name</th><th>Actions</th></tr>
@@ -8,9 +10,8 @@
         <td>[% user.username %]</td>
         <td>[% user.name %]</td>
         <td>
-            <a href="/users/add"><img src="/images/user_add.png" height="16" width="16">Add</a>
-            <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16">Edit</a>
-            <a href="/users/delete/[% user.id %]"><img src="/images/user_delete.png" height="16" width="16">Delete</a>
+            <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+            <a href="/users/delete/[% user.id %]"><img src="/images/user_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
         </td>
     </tr>
     [% END %]
