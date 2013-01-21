@@ -22,8 +22,6 @@ engines:
     start_tag: '[%'
     end_tag:   '%]'
 
-session: simple
-
 plugins:
     Auth::Extensible:
         realms:

@@ -26,6 +26,9 @@ show_errors: 1
 # OR TINY KITTENS SHALL DIE WITH LOTS OF SUFFERING
 auto_reload: 0
 
+session: YAML
+session_dir: "/tmp/ebooksforlib-sessions"
+
 plugins:
     DBIC:
         default:
