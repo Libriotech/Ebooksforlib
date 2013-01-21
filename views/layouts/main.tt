@@ -9,9 +9,19 @@
 
 <div class="userbar">
 [% IF session.logged_in_user %]
-Hiya, <a href="/my">[% session.user.name %]</a>! <a href="/logout">Log out</a>
+    Hiya, <a href="/my">[% session.user.name %]</a>! 
+        [% FOREACH role IN session.roles %]
+            [% IF role == 'admin' %]
+                <a href="/admin">admin</a>
+            [% ELSIF role == 'superadmin' %]
+                <a href="/superadmin">superadmin</a>
+            [% ELSE %]
+                nope
+            [% END %]
+        [% END %]
+    <a href="/logout">Log out</a>
 [% ELSE %]
-<a href="/login">Log in</a>
+    <a href="/login">Log in</a>
 [% END %]
 </div>
 

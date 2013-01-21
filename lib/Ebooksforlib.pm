@@ -15,7 +15,8 @@ hook 'before' => sub {
         # Remove the password, no reason to be passing it around
         delete $user->{password};
         # Store the data in the session, so it's available to templates etc
-        session user => $user;
+        session user  => $user;
+        session roles => user_roles;
     }
 
 };
@@ -34,6 +35,10 @@ get '/my' => sub {
 
 get '/admin' => require_role admin => sub { 
     template 'admin', { pagetitle => 'Admin' };
+};
+
+get '/superadmin' => require_role superadmin => sub { 
+    template 'superadmin', { pagetitle => 'Superadmin' };
 };
 
 # Reader-app API
