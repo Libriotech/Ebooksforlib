@@ -28,3 +28,7 @@ The sponsors have received grants from the National library of Norway.
 ==Authors==
 
 * Magnus Enger (Libriotech)
+
+==Icons==
+
+"Silk Icons" courtesy of [http://www.famfamfam.com/lab/icons/silk/ famfamfam.com]
