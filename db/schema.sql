@@ -43,7 +43,7 @@ INSERT INTO roles SET id = 2, role = 'superadmin';
 INSERT INTO users SET id = 1, username = 'henrik', password = 'pass', name = 'Henrik Ibsen';
 INSERT INTO users SET id = 2, username = 'sigrid', password = 'pass', name = 'Sigrid Undset';
 
--- Libraris
+-- Libraries
 INSERT INTO libraries SET id = 1, name = 'Storevik';
 INSERT INTO libraries SET id = 2, name = 'Lillevik';
 

@@ -39,10 +39,18 @@ get '/admin' => require_role admin => sub {
 };
 
 get '/superadmin' => require_role superadmin => sub { 
-    my @users = schema->resultset('User')->all;
+    my @users     = schema->resultset('User')->all;
+    my @libraries = schema->resultset('Library')->all;
     template 'superadmin', { 
         'pagetitle' => 'Superadmin', 
         'users'     => \@users,
+        'libraries' => \@libraries,
+    };
+};
+
+get '/libraries/:action/:id?' => require_role superadmin => sub { 
+    template 'libraries', { 
+        'pagetitle' => param 'action', 
     };
 };
 
