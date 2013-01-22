@@ -39,6 +39,7 @@ plugins:
             options:
                 RaiseError: 1
                 PrintError: 1
+                mysql_enable_utf8: 1
     Database:
         driver: 'mysql'
         database: 'ebok'
