@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=<% settings.charset %>" />
+<meta charset="UTF-8">
 <title>[% IF template.pagetitle %][% template.pagetitle %] > [% END %][% vars.appname %]</title>
 <link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
 </head>
