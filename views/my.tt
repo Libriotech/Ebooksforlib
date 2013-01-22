@@ -1,3 +1,5 @@
+[% META pagetitle = 'My page' %]
+
 [% USE Dumper %]
 
 <pre>

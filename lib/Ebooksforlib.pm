@@ -27,37 +27,36 @@ get '/' => sub {
 };
 
 get '/about' => sub {
-    template 'about', { pagetitle => 'About' };
+    template 'about';
 };
 
 get '/my' => sub {
-    template 'my', { pagetitle => 'My page' };
+    template 'my';
 };
 
 get '/admin' => require_role admin => sub { 
-    template 'admin', { pagetitle => 'Admin' };
+    template 'admin';
 };
 
 get '/superadmin' => require_role superadmin => sub { 
     my @users     = schema->resultset('User')->all;
     my @libraries = schema->resultset('Library')->all;
     template 'superadmin', { 
-        'pagetitle' => 'Superadmin', 
         'users'     => \@users,
         'libraries' => \@libraries,
     };
 };
 
+get '/libraries/add' => require_role superadmin => sub { 
+    template 'libraries_form';
+};
+
 get '/libraries/:action/:id?' => require_role superadmin => sub { 
-    template 'libraries', { 
-        'pagetitle' => param 'action', 
-    };
+    template 'libraries';
 };
 
 get '/users/:action/:id?' => require_role superadmin => sub { 
-    template 'users', { 
-        'pagetitle' => param 'action', 
-    };
+    template 'users';
 };
 
 # Reader-app API

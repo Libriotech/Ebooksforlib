@@ -1,6 +1,8 @@
+[% META pagetitle = 'Superadmin' %]
+
 <h2>Libraries</h2>
 
-<p><a href="/libraries/add/"><img src="/images/building_add.png" height="16" width="16" alt="Add" title="Add">Add a new library</a></p>
+<p><a href="/libraries/add"><img src="/images/building_add.png" height="16" width="16" alt="Add" title="Add">Add a new library</a></p>
 
 [% IF libraries %]
     <table>
