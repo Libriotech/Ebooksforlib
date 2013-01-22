@@ -1,0 +1,15 @@
+[% IF library %]
+  [% META pagetitle = 'Edit library' %]
+[% ELSE %]
+  [% META pagetitle = 'Add library' %]
+[% END %]
+
+<form method="POST" action="/libraries/add">
+  <fieldset>
+  <legend>Library details</legend>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required/>
+    <br />
+    <input type="submit" id="save" value="Save" />
+  </fieldset>
+</form>

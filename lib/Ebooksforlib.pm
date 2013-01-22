@@ -2,7 +2,8 @@ package Ebooksforlib;
 use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC;
-use Data::Dumper;
+use Dancer::Plugin::FlashMessage;
+use Data::Dumper; # DEBUG 
 
 our $VERSION = '0.1';
 
@@ -49,6 +50,14 @@ get '/superadmin' => require_role superadmin => sub {
 
 get '/libraries/add' => require_role superadmin => sub { 
     template 'libraries_form';
+};
+
+post '/libraries/add' => require_role superadmin => sub {
+    my $new_library = schema->resultset('Library')->create({
+        name  => param 'name',
+    });
+    flash info => 'A new library was added!';
+    redirect '/superadmin';
 };
 
 get '/libraries/:action/:id?' => require_role superadmin => sub { 

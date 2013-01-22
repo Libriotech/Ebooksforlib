@@ -5,3 +5,18 @@ font-family: sans-serif;
 .userbar {
   text-align: right;
 }
+
+.flash {
+  text-align: center;
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.error {
+  background-color: #fc5252;
+}
+
+.info {
+  background-color: #b5f2a6;
+}
