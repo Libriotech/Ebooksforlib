@@ -4,7 +4,7 @@
 
 <p><a href="/libraries/add"><img src="/images/building_add.png" height="16" width="16" alt="Add" title="Add">Add a new library</a></p>
 
-[% IF libraries.length %]
+[% IF libraries.size %]
     <table>
     <tr><th>ID</th><th>Name</th><th>Actions</th></tr>
     [% FOREACH library IN libraries %]
@@ -23,7 +23,7 @@
 
 <p><a href="/users/add/"><img src="/images/user_add.png" height="16" width="16" alt="Add" title="Add">Add a new user</a></p>
 
-[% IF users.length %]
+[% IF users.size %]
     <table>
     <tr><th>ID</th><th>Username</th><th>Name</th><th>Role</th><th>Actions</th></tr>
     [% FOREACH user IN users %]
