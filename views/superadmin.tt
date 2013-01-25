@@ -21,7 +21,7 @@
 
 <h2>Users</h2>
 
-<p><a href="/users/add/"><img src="/images/user_add.png" height="16" width="16" alt="Add" title="Add">Add a new user</a></p>
+<p><a href="/users/add"><img src="/images/user_add.png" height="16" width="16" alt="Add" title="Add">Add a new user</a></p>
 
 [% IF users.size %]
     <table>

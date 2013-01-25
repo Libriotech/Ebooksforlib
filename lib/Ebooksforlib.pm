@@ -124,10 +124,32 @@ get '/libraries/delete_ok/:id?' => require_role superadmin => sub {
     
 };
 
-get '/users/:action/:id?' => require_role superadmin => sub { 
-    template 'users';
+### Local users
+
+get '/users/add' => require_role superadmin => sub { 
+    template 'users_add';
 };
 
+post '/users/add' => require_role superadmin => sub {
+
+    my $username = param 'username';
+    my $password = param 'password'; # FIXME Encrypt the password!!
+    my $name     = param 'name';
+    try {
+        my $new_users = rset('User')->create({
+            username => $username, 
+            password => $password, 
+            name     => $name,
+        });
+        flash info => 'A new user was added!';
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'users_add', { name => $name };
+    };
+
+};
 # Reader-app API
 # The server-side component of the reader-app will be talking to this API
 # TODO These are dummy functions with hardcoded responses, for now
