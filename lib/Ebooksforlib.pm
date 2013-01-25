@@ -63,8 +63,8 @@ post '/libraries/add' => require_role superadmin => sub {
         flash info => 'A new library was added!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got a database error:<br />$_";
-        error "DB error: $_";
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
         template 'libraries_add', { name => $name };
     };
 
@@ -89,8 +89,8 @@ post '/libraries/edit' => require_role superadmin => sub {
         flash info => 'A library was updated!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got a database error:<br />$_";
-        error "DB error: $_";
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
         template 'libraries_edit', { library => $library };
     };
 
