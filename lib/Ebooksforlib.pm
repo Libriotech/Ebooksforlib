@@ -41,8 +41,8 @@ get '/admin' => require_role admin => sub {
 };
 
 get '/superadmin' => require_role superadmin => sub { 
-    my @users     = schema->resultset('User')->all;
-    my @libraries = schema->resultset('Library')->all;
+    my @users     = rset('User')->all;
+    my @libraries = rset('Library')->all;
     template 'superadmin', { 
         'users'     => \@users,
         'libraries' => \@libraries,
@@ -56,28 +56,25 @@ get '/libraries/add' => require_role superadmin => sub {
 post '/libraries/add' => require_role superadmin => sub {
 
     my $name = param 'name';
-    if ( schema->resultset('Library')->count({ name  => $name }) ) {
-        flash error => "A library with that name already exists";
-        template 'libraries_form', { name => $name };
-    } else {
-        my $new_library = schema->resultset('Library')->create({
-            name  => param 'name',
+    try {
+        my $new_library = rset('Library')->create({
+            name  => $name,
         });
         flash info => 'A new library was added!';
         redirect '/superadmin';
-    }
+    } catch {
+        flash error => "Oops, we got a database error:<br />$_";
+        error "DB error: $_";
+        template 'libraries_form', { name => $name };
+    };
 
-#    try {
-#        my $new_library = schema->resultset('Library')->create({
-#            name  => param 'name',
-#        });
-#    } catch {
-#        flash error => "got a db error: ";
-#        redirect '/superadmin';
-#    };
-#
-#    flash info => 'A new library was added!';
-#    redirect '/superadmin';
+};
+
+get '/libraries/edit/:id' => require_role superadmin => sub {
+
+    my $id = param 'id';
+    my $library = rset('Library')->find( $id );
+    template 'libraries_form', { library => $library };
 
 };
 

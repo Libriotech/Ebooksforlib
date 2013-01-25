@@ -8,7 +8,7 @@
   <fieldset>
   <legend>Library details</legend>
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" value="[% name %]" required/>
+    <input type="text" name="name" id="name" value="[% name %][% library.name %]" required/>
     <br />
     <input type="submit" id="save" value="Save" />
   </fieldset>
