@@ -181,6 +181,34 @@ post '/users/edit' => require_role superadmin => sub {
 
 };
 
+get '/users/delete/:id?' => require_role superadmin => sub { 
+    
+    # Confirm delete
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    template 'users_delete', { user => $user };
+    
+};
+
+get '/users/delete_ok/:id?' => require_role superadmin => sub { 
+    
+    # Do the actual delete
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    # TODO Check that this user is ready to be deleted!
+    try {
+        $user->delete;
+        flash info => 'A user was deleted!';
+        info "Deleted user with ID = $id";
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/superadmin';
+    };
+    
+};
+
 # Reader-app API
 # The server-side component of the reader-app will be talking to this API
 # TODO These are dummy functions with hardcoded responses, for now

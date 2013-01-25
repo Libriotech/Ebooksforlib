@@ -1,0 +1,5 @@
+[% META pagetitle = 'Confirm deletion of user' %]
+
+<p>Are you sure you want to delete the user called <em>[% user.name %]</em>?</p>
+
+<p><a href="/users/delete_ok/[% user.id %]">Yes</a> or <a href="/superadmin">No</a></p>
