@@ -3,6 +3,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
+use Dancer::Exception qw(:all);
 use Data::Dumper; # DEBUG 
 
 our $VERSION = '0.1';
@@ -53,11 +54,31 @@ get '/libraries/add' => require_role superadmin => sub {
 };
 
 post '/libraries/add' => require_role superadmin => sub {
-    my $new_library = schema->resultset('Library')->create({
-        name  => param 'name',
-    });
-    flash info => 'A new library was added!';
-    redirect '/superadmin';
+
+    my $name = param 'name';
+    if ( schema->resultset('Library')->count({ name  => $name }) ) {
+        flash error => "A library with that name already exists";
+        template 'libraries_form', { name => $name };
+    } else {
+        my $new_library = schema->resultset('Library')->create({
+            name  => param 'name',
+        });
+        flash info => 'A new library was added!';
+        redirect '/superadmin';
+    }
+
+#    try {
+#        my $new_library = schema->resultset('Library')->create({
+#            name  => param 'name',
+#        });
+#    } catch {
+#        flash error => "got a db error: ";
+#        redirect '/superadmin';
+#    };
+#
+#    flash info => 'A new library was added!';
+#    redirect '/superadmin';
+
 };
 
 get '/libraries/:action/:id?' => require_role superadmin => sub { 
