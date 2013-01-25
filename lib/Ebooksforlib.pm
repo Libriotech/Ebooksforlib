@@ -150,6 +150,37 @@ post '/users/add' => require_role superadmin => sub {
     };
 
 };
+
+get '/users/edit/:id' => require_role superadmin => sub {
+
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    template 'users_edit', { user => $user };
+
+};
+
+post '/users/edit' => require_role superadmin => sub {
+
+    my $id   = param 'id';
+    my $username = param 'username';
+    my $password = param 'password'; # FIXME Encrypt the password!!
+    my $name     = param 'name';
+    my $user = rset('User')->find( $id );
+    try {
+        $user->set_column('username', $username);
+        $user->set_column('password', $password);
+        $user->set_column('name', $name);
+        $user->update;
+        flash info => 'A user was updated!';
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'users_edit', { user => $user };
+    };
+
+};
+
 # Reader-app API
 # The server-side component of the reader-app will be talking to this API
 # TODO These are dummy functions with hardcoded responses, for now
