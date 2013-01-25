@@ -96,8 +96,32 @@ post '/libraries/edit' => require_role superadmin => sub {
 
 };
 
-get '/libraries/:action/:id?' => require_role superadmin => sub { 
-    template 'libraries';
+get '/libraries/delete/:id?' => require_role superadmin => sub { 
+    
+    # Confirm delete
+    my $id = param 'id';
+    my $library = rset('Library')->find( $id );
+    template 'libraries_delete', { library => $library };
+    
+};
+
+get '/libraries/delete_ok/:id?' => require_role superadmin => sub { 
+    
+    # Do the actual delete
+    my $id = param 'id';
+    my $library = rset('Library')->find( $id );
+    # TODO Check that this library is ready to be deleted!
+    try {
+        $library->delete;
+        flash info => 'A library was deleted!';
+        info "Deleted library with ID = $id";
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/superadmin';
+    };
+    
 };
 
 get '/users/:action/:id?' => require_role superadmin => sub { 

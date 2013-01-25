@@ -1,0 +1,5 @@
+[% META pagetitle = 'Confirm deletion of library' %]
+
+<p>Are you sure you want to delete the <em>[% library.name %]</em> library?</p>
+
+<p><a href="/libraries/delete_ok/[% library.id %]">Yes</a> or <a href="/superadmin">No</a></p>
