@@ -50,7 +50,7 @@ get '/superadmin' => require_role superadmin => sub {
 };
 
 get '/libraries/add' => require_role superadmin => sub { 
-    template 'libraries_form';
+    template 'libraries_add';
 };
 
 post '/libraries/add' => require_role superadmin => sub {
@@ -65,7 +65,7 @@ post '/libraries/add' => require_role superadmin => sub {
     } catch {
         flash error => "Oops, we got a database error:<br />$_";
         error "DB error: $_";
-        template 'libraries_form', { name => $name };
+        template 'libraries_add', { name => $name };
     };
 
 };
@@ -74,7 +74,25 @@ get '/libraries/edit/:id' => require_role superadmin => sub {
 
     my $id = param 'id';
     my $library = rset('Library')->find( $id );
-    template 'libraries_form', { library => $library };
+    template 'libraries_edit', { library => $library };
+
+};
+
+post '/libraries/edit' => require_role superadmin => sub {
+
+    my $id   = param 'id';
+    my $name = param 'name';
+    my $library = rset('Library')->find( $id );
+    try {
+        $library->set_column('name', $name);
+        $library->update;
+        flash info => 'A library was updated!';
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got a database error:<br />$_";
+        error "DB error: $_";
+        template 'libraries_edit', { library => $library };
+    };
 
 };
 

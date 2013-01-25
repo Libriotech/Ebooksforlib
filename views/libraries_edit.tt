@@ -1,0 +1,5 @@
+[% META pagetitle = 'Edit library' %]
+
+<form method="POST" action="/libraries/edit">
+[% INCLUDE libraries_form.tt %]
+</form>
