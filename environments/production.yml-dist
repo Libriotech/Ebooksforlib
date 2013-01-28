@@ -15,6 +15,9 @@ show_errors: 0
 # cache route resolution for maximum performance
 route_cache: 1
 
+# Minimum password length
+min_pass: 12
+
 session: YAML
 session_dir: "/tmp/ebooksforlib-sessions"
 
