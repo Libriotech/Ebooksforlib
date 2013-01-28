@@ -15,5 +15,5 @@
 [% IF user.id %]
 <input type="hidden" name="id" id="id" value="[% user.id %]"/>
 [% END %]
-<input type="submit" id="save" value="Save" />
 </fieldset>
+<input type="submit" id="save" value="Save" />
