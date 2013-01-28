@@ -42,9 +42,26 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("name", ["name"]);
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:28:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M4L+rXHSHRdT6XNgiYa/8A
+=head2 user_libraries
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::UserLibrary>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_libraries",
+  "Ebooksforlib::Schema::Result::UserLibrary",
+  { "foreign.library_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:34:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CY56i+wneETcptXU8Q99rQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

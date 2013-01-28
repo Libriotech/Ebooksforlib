@@ -1,6 +1,7 @@
 -- Database schema for Ebooksforlib
 
 DROP TABLE IF EXISTS user_roles;
+DROP TABLE IF EXISTS user_libraries;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -30,6 +31,14 @@ CREATE TABLE user_roles (
     CONSTRAINT user_roles_fk_2 FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE user_libraries (
+    user_id    INTEGER NOT NULL,
+    library_id INTEGER NOT NULL,
+    PRIMARY KEY user_library (user_id, library_id), 
+    CONSTRAINT user_libraries_fk_1 FOREIGN KEY (user_id)    REFERENCES users     (id) ON DELETE CASCADE,
+    CONSTRAINT user_libraries_fk_2 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Sample data
 -- TODO Split this out into a separate file
 
@@ -45,6 +54,9 @@ INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V866
 INSERT INTO libraries SET id = 1, name = 'Storevik';
 INSERT INTO libraries SET id = 2, name = 'Lillevik';
 
--- User roles
+-- Users and roles
 INSERT INTO user_roles SET user_id = 1, role_id = 1; -- Henrik is admin at Storevik
-INSERT INTO user_roles SET user_id = 2, role_id = 2; -- Sigrid is superadmin
+INSERT INTO user_roles SET user_id = 2, role_id = 2; -- Sigrid is superadmin, not connected to a library
+
+-- Users and libraries
+INSERT INTO user_libraries SET user_id = 1, library_id = 1

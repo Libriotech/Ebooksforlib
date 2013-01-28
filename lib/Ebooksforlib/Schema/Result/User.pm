@@ -60,6 +60,21 @@ __PACKAGE__->add_unique_constraint("username", ["username"]);
 
 =head1 RELATIONS
 
+=head2 user_libraries
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::UserLibrary>
+
+=cut
+
+__PACKAGE__->has_many(
+  "user_libraries",
+  "Ebooksforlib::Schema::Result::UserLibrary",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 user_roles
 
 Type: has_many
@@ -76,8 +91,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:28:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1TYKfUIUzt5vK1Y7AZQMyA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:34:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9gluzhHIZ53+XMlerX0caQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
