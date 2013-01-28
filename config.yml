@@ -5,6 +5,9 @@
 # Your application's name
 appname: "Ebooksforlib"
 
+# Minimum password length
+min_pass: 4
+
 # when the charset is set to UTF-8 Dancer will handle for you
 # all the magic of encoding and decoding. You should not care
 # about unicode within your app when this setting is set (recommended).

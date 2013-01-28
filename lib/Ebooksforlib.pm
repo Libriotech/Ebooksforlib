@@ -4,13 +4,15 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
+use Crypt::SaltedHash;
 use Data::Dumper; # DEBUG 
 
 our $VERSION = '0.1';
 
 hook 'before' => sub {
 
-    var appname => config->{appname};
+    var appname  => config->{appname};
+    var min_pass => config->{min_pass};
 
     if ( logged_in_user ) {
         # Get the data for the logged in user
@@ -132,13 +134,20 @@ get '/users/add' => require_role superadmin => sub {
 
 post '/users/add' => require_role superadmin => sub {
 
-    my $username = param 'username';
-    my $password = param 'password'; # FIXME Encrypt the password!!
-    my $name     = param 'name';
+    my $name      = param 'name';
+    my $username  = param 'username';
+    my $password1 = param 'password1';
+    my $password2 = param 'password2';  
+    
+    # Check the provided data
+    _check_password_length( $password1 )             or return template 'users_add';
+    _check_password_match(  $password1, $password2 ) or return template 'users_add';
+    
+    # Data looks good, try to save it
     try {
         my $new_users = rset('User')->create({
             username => $username, 
-            password => $password, 
+            password => _encrypt_password($password1), 
             name     => $name,
         });
         flash info => 'A new user was added!';
@@ -163,12 +172,10 @@ post '/users/edit' => require_role superadmin => sub {
 
     my $id   = param 'id';
     my $username = param 'username';
-    my $password = param 'password'; # FIXME Encrypt the password!!
     my $name     = param 'name';
     my $user = rset('User')->find( $id );
     try {
         $user->set_column('username', $username);
-        $user->set_column('password', $password);
         $user->set_column('name', $name);
         $user->update;
         flash info => 'A user was updated!';
@@ -177,6 +184,35 @@ post '/users/edit' => require_role superadmin => sub {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
         template 'users_edit', { user => $user };
+    };
+
+};
+
+get '/users/password/:id' => require_role superadmin => sub {
+    template 'users_password';
+};
+
+post '/users/password' => require_role superadmin => sub {
+
+    my $id        = param 'id';
+    my $password1 = param 'password1';
+    my $password2 = param 'password2'; 
+    
+    # Check the provided data
+    _check_password_length( $password1 )             or return template 'users_password', { id => $id };
+    _check_password_match(  $password1, $password2 ) or return template 'users_password', { id => $id };
+    
+    # Data looks good, try to save it
+    my $user = rset('User')->find( $id );
+    try {
+        $user->set_column( 'password', _encrypt_password($password1) );
+        $user->update;
+        flash info => "The password was updated for user with ID = $id!";
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, error when trying to update password:<br />$_";
+        error "$_";
+        template 'users_password', { id => $id };
     };
 
 };
@@ -247,5 +283,37 @@ get '/rest/getbook' => sub {
     };
 
 };
+
+### Utility functions
+# TODO Move these to a separate .pm
+
+sub _check_password_length {
+    my ( $password1 ) = @_;
+    if ( length $password1 < config->{min_pass} ) {
+        error "*** Password is too short: " . length $password1;
+        flash error => 'Passwords is too short! (The minimum is ' . config->{min_pass} . '.)';
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+sub _check_password_match {
+    my ( $password1, $password2 ) = @_;
+    if ( $password1 ne $password2 ) {
+        error "*** Passwords do not match";
+        flash error => "Passwords do not match!";
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+sub _encrypt_password {
+    my $password = shift;
+    my $csh = Crypt::SaltedHash->new();
+    $csh->add( $password );
+    return $csh->generate;
+}
 
 true;

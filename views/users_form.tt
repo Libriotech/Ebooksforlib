@@ -1,15 +1,16 @@
 <fieldset>
 <legend>Login info</legend>
 <label for="username">Username:</label>
-<input type="text" name="username" id="username" value="[% username %][% user.username %]" required/>
-<br />
-<label for="password">Password:</label>
-<input type="password" name="password" id="password" value="[% password %][% user.password %]" required/>
+<input type="text" name="username" id="username" value="[% params.username %][% user.username %]" required/>
+[% IF adding %]
+    <br />
+    [% INCLUDE 'users_passwordfields.tt' %]
+[% END %]
 </fieldset>
 <fieldset>
 <legend>About the user</legend>
 <label for="name">Name:</label>
-<input type="text" name="name" id="name" value="[% name %][% user.name %]" required/>
+<input type="text" name="name" id="name" value="[% params.name %][% user.name %]" required/>
 <br />
 [% IF user.id %]
 <input type="hidden" name="id" id="id" value="[% user.id %]"/>
