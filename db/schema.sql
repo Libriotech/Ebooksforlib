@@ -25,11 +25,9 @@ CREATE TABLE libraries (
 CREATE TABLE user_roles (
     user_id    INTEGER NOT NULL,
     role_id    INTEGER NOT NULL,
-    library_id INTEGER,
     PRIMARY KEY user_role (user_id, role_id), 
     CONSTRAINT user_roles_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-    CONSTRAINT user_roles_fk_2 FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE,
-    CONSTRAINT user_roles_fk_3 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
+    CONSTRAINT user_roles_fk_2 FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data
@@ -48,5 +46,5 @@ INSERT INTO libraries SET id = 1, name = 'Storevik';
 INSERT INTO libraries SET id = 2, name = 'Lillevik';
 
 -- User roles
-INSERT INTO user_roles SET user_id = 1, role_id = 1, library_id = 1; -- Henrik is admin at Storevik
+INSERT INTO user_roles SET user_id = 1, role_id = 1; -- Henrik is admin at Storevik
 INSERT INTO user_roles SET user_id = 2, role_id = 2; -- Sigrid is superadmin

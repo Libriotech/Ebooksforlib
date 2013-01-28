@@ -40,27 +40,11 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 255 },
 );
 __PACKAGE__->set_primary_key("id");
-
-=head1 RELATIONS
-
-=head2 user_roles
-
-Type: has_many
-
-Related object: L<Ebooksforlib::Schema::Result::UserRole>
-
-=cut
-
-__PACKAGE__->has_many(
-  "user_roles",
-  "Ebooksforlib::Schema::Result::UserRole",
-  { "foreign.library_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
+__PACKAGE__->add_unique_constraint("name", ["name"]);
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-21 15:58:34
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iIzFrJMLnVILAeG+ilu6KA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:28:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M4L+rXHSHRdT6XNgiYa/8A
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

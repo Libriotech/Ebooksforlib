@@ -35,7 +35,7 @@ __PACKAGE__->table("users");
 
   data_type: 'varchar'
   is_nullable: 0
-  size: 32
+  size: 64
 
 =head2 name
 
@@ -51,7 +51,7 @@ __PACKAGE__->add_columns(
   "username",
   { data_type => "varchar", is_nullable => 0, size => 32 },
   "password",
-  { data_type => "varchar", is_nullable => 0, size => 32 },
+  { data_type => "varchar", is_nullable => 0, size => 64 },
   "name",
   { data_type => "varchar", is_nullable => 1, size => 255 },
 );
@@ -76,8 +76,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-21 12:22:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eZgY8TxZqGgGOD8TuAOtVg
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:28:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1TYKfUIUzt5vK1Y7AZQMyA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
