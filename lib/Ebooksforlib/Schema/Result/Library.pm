@@ -63,6 +63,6 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:34:13
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CY56i+wneETcptXU8Q99rQ
 
+__PACKAGE__->many_to_many( users => 'user_libraries', 'user' );
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;

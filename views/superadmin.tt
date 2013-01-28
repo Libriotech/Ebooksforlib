@@ -25,15 +25,21 @@
 
 [% IF users.size %]
     <table>
-    <tr><th>ID</th><th>Username</th><th>Name</th><th>Role</th><th>Actions</th></tr>
+    <tr><th>ID</th><th>Username</th><th>Name</th><th>Role</th><th>Libraries</th><th>Actions</th></tr>
     [% FOREACH user IN users %]
     <tr><td>[% user.id %]</td>
         <td>[% user.username %]</td>
         <td>[% user.name %]</td>
         <td>[% user.user_roles.role_id %]</td>
         <td>
+            [% FOREACH library IN user.libraries %]
+            [% library.name %]
+            [% END %]
+        </td>
+        <td>
             <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
             <a href="/users/password/[% user.id %]"><img src="/images/key.png" height="16" width="16" alt="Change password" title="Change password"></a>
+            <a href="/users/libraries/[% user.id %]"><img src="/images/building.png" height="16" width="16" alt="Edit library-connections" title="Edit library-connections"></a>
             <a href="/users/delete/[% user.id %]"><img src="/images/user_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
         </td>
     </tr>

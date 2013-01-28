@@ -16,4 +16,16 @@
 <input type="hidden" name="id" id="id" value="[% user.id %]"/>
 [% END %]
 </fieldset>
+[% IF adding %]
+    <fieldset>
+    <legend>Connect to a library</legend>
+    <label for="name">Library:</label>
+    <select name="library" id="library">
+    <option>Select a library...</option>
+    [% FOREACH library IN libraries %]
+    <option value="[% library.id %]">[% library.name %]</option>
+    [% END %]
+    </select>
+    </fieldset>
+[% END %]
 <input type="submit" id="save" value="Save" />

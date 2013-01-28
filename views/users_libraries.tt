@@ -1,0 +1,21 @@
+[% META pagetitle = 'Edit connections to libraries' %]
+
+<h2>Remove existing connections</h2>
+
+<ul>
+[% FOREACH library in user.libraries %]
+<li>[% library.name %]</li>
+[% END %]
+</ul>
+
+<h2>Add a new connection</h2>
+
+<form action="/users/libraries" method="POST">
+<input type="hidden" name="user_id" id="user_id" value="[% user.id %]" />
+<select name="library_id" id="library_id">
+[% FOREACH library IN libraries %]
+<option value="[% library.id %]">[% library.name %]</option>
+[% END %]
+</select>
+<input type="submit" value="Add"/>
+</form>

@@ -129,15 +129,17 @@ get '/libraries/delete_ok/:id?' => require_role superadmin => sub {
 ### Local users
 
 get '/users/add' => require_role superadmin => sub { 
-    template 'users_add';
+    my @libraries = rset('Library')->all;
+    template 'users_add', { libraries => \@libraries };
 };
 
 post '/users/add' => require_role superadmin => sub {
 
-    my $name      = param 'name';
-    my $username  = param 'username';
-    my $password1 = param 'password1';
-    my $password2 = param 'password2';  
+    my $name       = param 'name';
+    my $username   = param 'username';
+    my $password1  = param 'password1';
+    my $password2  = param 'password2';
+    my $library_id = param 'library';  
     
     # Check the provided data
     _check_password_length( $password1 )             or return template 'users_add';
@@ -145,11 +147,19 @@ post '/users/add' => require_role superadmin => sub {
     
     # Data looks good, try to save it
     try {
-        my $new_users = rset('User')->create({
+        my $new_user = rset('User')->create({
             username => $username, 
             password => _encrypt_password($password1), 
             name     => $name,
         });
+        debug "*** Created new user with ID = " . $new_user->id;
+        # debug Dumper $new_user;
+        if ( $library_id ) {
+            rset('UserLibrary')->create({
+                user_id    => $new_user->id, 
+                library_id => $library_id, 
+            });
+        }
         flash info => 'A new user was added!';
         redirect '/superadmin';
     } catch {
@@ -215,6 +225,34 @@ post '/users/password' => require_role superadmin => sub {
         template 'users_password', { id => $id };
     };
 
+};
+
+get '/users/libraries/:id' => require_role superadmin => sub { 
+    
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    my @libraries = rset('Library')->all;
+    template 'users_libraries', { user => $user, libraries => \@libraries };
+    
+};
+
+# Add a connection between user and library
+post '/users/libraries' => require_role superadmin => sub { 
+    
+    my $user_id    = param 'user_id';
+    my $library_id = param 'library_id';
+    try {
+        rset('UserLibrary')->create({
+            user_id    => $user_id, 
+            library_id => $library_id, 
+        });
+        flash info => 'A new library was connected!';
+        redirect '/users/libraries/' . $user_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/users/libraries/' . $user_id;
+    };    
 };
 
 get '/users/delete/:id?' => require_role superadmin => sub { 
