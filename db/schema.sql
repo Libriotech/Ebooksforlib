@@ -40,8 +40,8 @@ INSERT INTO roles SET id = 1, role = 'admin';
 INSERT INTO roles SET id = 2, role = 'superadmin';
 
 -- Users
-INSERT INTO users SET id = 1, username = 'henrik', password = '{SSHA}naJx7DlkVcnRkTUm2sOzg5IsaYPfm76H', name = 'Henrik Ibsen';
-INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset';
+INSERT INTO users SET id = 1, username = 'henrik', password = '{SSHA}naJx7DlkVcnRkTUm2sOzg5IsaYPfm76H', name = 'Henrik Ibsen';  -- password = pass
+INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset'; -- password = pass
 
 -- Libraries
 INSERT INTO libraries SET id = 1, name = 'Storevik';
