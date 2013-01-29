@@ -25,12 +25,16 @@
 
 [% IF users.size %]
     <table>
-    <tr><th>ID</th><th>Username</th><th>Name</th><th>Role</th><th>Libraries</th><th>Actions</th></tr>
+    <tr><th>ID</th><th>Username</th><th>Name</th><th>Roles</th><th>Libraries</th><th>Actions</th></tr>
     [% FOREACH user IN users %]
     <tr><td>[% user.id %]</td>
         <td>[% user.username %]</td>
         <td>[% user.name %]</td>
-        <td>[% user.user_roles.role_id %]</td>
+        <td>
+            [% FOREACH role IN user.roles %]
+            [% role.role %]
+            [% END %]
+        </td>
         <td>
             [% FOREACH library IN user.libraries %]
             [% library.name %]

@@ -96,4 +96,6 @@ __PACKAGE__->has_many(
 
 __PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
 
+__PACKAGE__->many_to_many( roles => 'user_roles', 'role' );
+
 1;
