@@ -2,4 +2,7 @@
 
 <p>Are you sure you want to delete the <em>[% library.name %]</em> library?</p>
 
-<p><a href="/libraries/delete_ok/[% library.id %]">Yes</a> or <a href="/superadmin">No</a></p>
+<p>
+    <a href="/libraries/delete_ok/[% library.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+    <a href="/superadmin"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
+</p>
