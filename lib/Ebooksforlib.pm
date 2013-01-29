@@ -385,7 +385,12 @@ get '/rest/listbooks' => sub {
 };
 
 get '/rest/getbook' => sub {
-    return send_file( config->{books_root} . '1/book-1.epub', system_path => 1, content_type => 'application/epub+zip' );
+    return send_file( 
+        config->{books_root} . '1/book-1.epub', 
+        system_path  => 1, 
+        content_type => 'application/epub+zip', 
+        filename     => 'book-1.epub'
+    );
 };
 
 ### Utility functions
