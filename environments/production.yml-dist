@@ -18,6 +18,10 @@ route_cache: 1
 # Minimum password length
 min_pass: 12
 
+# The root directory where books are stored. This directory should contain 
+# numbered subfolders, one for each book. Include trailing slash. 
+books_root: '/path/to/directory/'
+
 session: YAML
 session_dir: "/tmp/ebooksforlib-sessions"
 

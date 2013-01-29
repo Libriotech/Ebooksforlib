@@ -369,19 +369,23 @@ get '/rest/logout' => sub {
 
 get '/rest/listbooks' => sub {
 
-    return { 
-        1 => { title => 'a', author => 'b' },
-        2 => { title => 'c', author => 'd' },
-    };
+    return [ 
+        { 
+            bid    => 1, 
+            title  => 'Three men in a boat', 
+            author => 'Jerome K. Jerome'
+        },
+        { 
+            bid    => 2, 
+            title  => 'Brand', 
+            author => 'Henrik Ibsen' 
+        },
+    ];
 
 };
 
 get '/rest/getbook' => sub {
-
-    return { 
-        login => 'ok'
-    };
-
+    return send_file( config->{books_root} . '1/book-1.epub', system_path => 1, content_type => 'application/epub+zip' );
 };
 
 ### Utility functions

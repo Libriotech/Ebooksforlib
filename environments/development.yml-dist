@@ -29,6 +29,10 @@ auto_reload: 0
 # Minimum password length
 min_pass: 4
 
+# The root directory where books are stored. This directory should contain 
+# numbered subfolders, one for each book. Include trailing slash. 
+books_root: '/path/to/directory/'
+
 session: YAML
 session_dir: "/tmp/ebooksforlib-sessions"
 
