@@ -237,7 +237,7 @@ get '/users/libraries/:id' => require_role superadmin => sub {
 };
 
 # Add a connection between user and library
-post '/users/libraries' => require_role superadmin => sub { 
+get '/users/libraries/add/:user_id/:library_id' => require_role superadmin => sub { 
     
     my $user_id    = param 'user_id';
     my $library_id = param 'library_id';
@@ -253,6 +253,24 @@ post '/users/libraries' => require_role superadmin => sub {
         error "$_";
         redirect '/users/libraries/' . $user_id;
     };    
+};
+
+get '/users/libraries/delete/:user_id/:library_id' => require_role superadmin => sub { 
+    
+    my $user_id    = param 'user_id';
+    my $library_id = param 'library_id';
+    my $connection = rset('UserLibrary')->find({ user_id => $user_id, library_id => $library_id });
+    # TODO Check that this user is ready to be deleted!
+    try {
+        $connection->delete;
+        flash info => 'A connection was deleted!';
+        redirect '/users/libraries/' . $user_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/users/libraries/' . $user_id;
+    };
+    
 };
 
 get '/users/delete/:id?' => require_role superadmin => sub { 

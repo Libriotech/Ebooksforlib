@@ -1,21 +1,27 @@
 [% META pagetitle = 'Edit connections to libraries' %]
 
+<p>User: [% user.name %] (username = [% user.username %], id = [% user.id %]) <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16" alt="Edit this user" title="Edit this user"></a></p>
+
 <h2>Remove existing connections</h2>
 
 <ul>
 [% FOREACH library in user.libraries %]
-<li>[% library.name %]</li>
+<li><a href="/users/libraries/delete/[% user.id %]/[% library.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this connection" title="Delete this connection"> [% library.name %]</a></li>
 [% END %]
 </ul>
 
 <h2>Add a new connection</h2>
 
-<form action="/users/libraries" method="POST">
-<input type="hidden" name="user_id" id="user_id" value="[% user.id %]" />
-<select name="library_id" id="library_id">
+<ul>
 [% FOREACH library IN libraries %]
-<option value="[% library.id %]">[% library.name %]</option>
+    [% library_already_connected = 0 %]
+    [% FOREACH userlib in user.libraries %]
+        [% IF userlib.id == library.id %]
+            [% library_already_connected = 1 %]
+        [% END %]
+    [% END %]
+    [% IF library_already_connected == 0 %]
+        <li><a href="/users/libraries/add/[% user.id %]/[% library.id %]"><img src="/images/add.png" height="16" width="16" alt="Connect to this library" title="Connect to this library"> [% library.name %]</a></li>
+    [% END %]
 [% END %]
-</select>
-<input type="submit" value="Add"/>
-</form>
+</ul>
