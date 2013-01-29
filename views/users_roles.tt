@@ -1,0 +1,27 @@
+[% META pagetitle = 'Edit roles' %]
+
+<p>User: [% user.name %] (username = [% user.username %], id = [% user.id %]) <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16" alt="Edit this user" title="Edit this user"></a></p>
+
+<h2>Remove existing roles</h2>
+
+<ul>
+[% FOREACH role in user.roles %]
+<li><a href="/users/roles/delete/[% user.id %]/[% role.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this role" title="Delete this role"> [% role.role %]</a></li>
+[% END %]
+</ul>
+
+<h2>Add new roles</h2>
+
+<ul>
+[% FOREACH role IN roles %]
+    [% role_already_connected = 0 %]
+    [% FOREACH userrole in user.roles %]
+        [% IF userrole.id == role.id %]
+            [% role_already_connected = 1 %]
+        [% END %]
+    [% END %]
+    [% IF role_already_connected == 0 %]
+        <li><a href="/users/roles/add/[% user.id %]/[% role.id %]"><img src="/images/add.png" height="16" width="16" alt="Add this role" title="Add this role"> [% role.role %]</a></li>
+    [% END %]
+[% END %]
+</ul>

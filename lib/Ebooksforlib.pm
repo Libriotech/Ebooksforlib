@@ -227,6 +227,50 @@ post '/users/password' => require_role superadmin => sub {
 
 };
 
+get '/users/roles/:id' => require_role superadmin => sub { 
+    
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    my @roles = rset('Role')->all;
+    template 'users_roles', { user => $user, roles => \@roles };
+    
+};
+
+get '/users/roles/add/:user_id/:role_id' => require_role superadmin => sub { 
+    
+    my $user_id = param 'user_id';
+    my $role_id = param 'role_id';
+    try {
+        rset('UserRole')->create({
+            user_id => $user_id, 
+            role_id => $role_id, 
+        });
+        flash info => 'A new role was added!';
+        redirect '/users/roles/' . $user_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/users/roles/' . $user_id;
+    };    
+};
+
+get '/users/roles/delete/:user_id/:role_id' => require_role superadmin => sub { 
+    
+    my $user_id = param 'user_id';
+    my $role_id = param 'role_id';
+    my $role = rset('UserRole')->find({ user_id => $user_id, role_id => $role_id });
+    try {
+        $role->delete;
+        flash info => 'A role was deleted!';
+        redirect '/users/roles/' . $user_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/users/roles/' . $user_id;
+    };
+    
+};
+
 get '/users/libraries/:id' => require_role superadmin => sub { 
     
     my $id = param 'id';
