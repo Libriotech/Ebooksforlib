@@ -1,0 +1,3 @@
+[submodule "vendor/Dancer-Plugin-Auth-Extensible-Provider-SIP2"]
+	path = vendor/Dancer-Plugin-Auth-Extensible-Provider-SIP2
+	url = https://github.com/MagnusEnger/Dancer-Plugin-Auth-Extensible-Provider-SIP2.git
