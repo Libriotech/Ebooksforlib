@@ -27,3 +27,5 @@ plugins:
                 provider: 'Database'
                 disable_roles: 0
                 no_default_pages: 0
+            sip2:
+                provider: 'SIP2'
