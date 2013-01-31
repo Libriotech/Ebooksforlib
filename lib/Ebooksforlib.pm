@@ -30,6 +30,14 @@ get '/' => sub {
     template 'index';
 };
 
+get '/login' => sub {
+    template 'login';
+};
+
+get '/login' => sub {
+    template 'login';
+};
+
 get '/about' => sub {
     template 'about';
 };
