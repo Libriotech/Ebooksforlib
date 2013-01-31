@@ -23,9 +23,12 @@ plugins:
     Auth::Extensible:
         no_default_pages: 1
         realms:
+            localkoha:
+                provider: 'SIP2'
+                host: 127.0.0.1:6001
+                username: term1
+                password: term1
             local:
                 provider: 'Database'
                 disable_roles: 0
                 no_default_pages: 0
-            sip2:
-                provider: 'SIP2'
