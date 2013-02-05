@@ -34,8 +34,8 @@ get '/login' => sub {
     template 'login';
 };
 
-get '/login' => sub {
-    template 'login';
+get '/login/denied' => sub {
+    redirect '/login';
 };
 
 get '/about' => sub {
