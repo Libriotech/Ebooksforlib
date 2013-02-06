@@ -14,16 +14,6 @@ hook 'before' => sub {
     var appname  => config->{appname};
     var min_pass => config->{min_pass};
 
-    if ( logged_in_user ) {
-        # Get the data for the logged in user
-        my $user = logged_in_user;
-        # Remove the password, no reason to be passing it around
-        # delete $user->{password};
-        # Store the data in the session, so it's available to templates etc
-        session user  => $user;
-        session roles => user_roles;
-    }
-
 };
 
 get '/' => sub {
@@ -35,25 +25,35 @@ get '/log/in' => sub {
 };
 
 post '/log/in' => sub {
-    debug "**** Doing our own login";
     
-    my $username = param 'username';
-    my $password = param 'password';
-    my $realm    = param 'realm';
+    my $username  = param 'username';
+    my $password  = param 'password';
+    my $userrealm = param 'realm';
     
-    my ($success, $realm) = authenticate_user( $username, $password, $realm );
+    my ($success, $realm) = authenticate_user( $username, $password, $userrealm );
     if ($success) {
+
+        debug "*** Successfull login for $username, $password, $realm";
         session logged_in_user => $username;
+        session logged_in_user_realm => $realm;
         
-        # TODO Get the data from logged_in_user
-        # TODO Store the full name of the user in the session
+        # Get the data about the logged_in_user and store some of it in the session
+        my $user = logged_in_user;
+        session logged_in_user_name => $user->{name};
+
+        # Store roles in the session (will be used in the templates)
+        session logged_in_user_roles => user_roles;
+
         # TODO Update the local user or create a new one
         # TODO Set the realm to be the local database? 
         
-        session logged_in_user_realm => $realm;
         redirect params->{return_url} || '/';
+
     } else {
+
+        debug "*** Login failed for $username, $password, $realm";
         forward '/log/in', { login_failed => 1 }, { method => 'GET' };
+
     }
 };
 
