@@ -34,6 +34,23 @@ get '/log/in' => sub {
     template 'login';
 };
 
+post '/log/in' => sub {
+    debug "**** Doing our own login";
+    
+    my $username = param 'username';
+    my $password = param 'password';
+    my $realm    = param 'realm';
+    
+    my ($success, $realm) = authenticate_user( $username, $password, $realm );
+    if ($success) {
+        session logged_in_user => $username;
+        session logged_in_user_realm => $realm;
+        redirect params->{return_url} || '/';
+    } else {
+        forward '/log/in', { login_failed => 1 }, { method => 'GET' };
+    }
+};
+
 any ['get','post'] => '/log/out' => sub {
     session->destroy;
     if (params->{return_url}) {

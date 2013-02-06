@@ -2,7 +2,7 @@
 
 <p>You need to log in to continue.</p>
 
-<form method="post" action="/login">
+<form method="post" action="/log/in">
 <label for="username">Username:</label>
 <input type="text" name="username" id="username">
 <br />
