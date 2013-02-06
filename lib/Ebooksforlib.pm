@@ -18,7 +18,7 @@ hook 'before' => sub {
         # Get the data for the logged in user
         my $user = logged_in_user;
         # Remove the password, no reason to be passing it around
-        delete $user->{password};
+        # delete $user->{password};
         # Store the data in the session, so it's available to templates etc
         session user  => $user;
         session roles => user_roles;
@@ -30,7 +30,7 @@ get '/' => sub {
     template 'index';
 };
 
-get '/login' => sub {
+get '/log/in' => sub {
     template 'login';
 };
 

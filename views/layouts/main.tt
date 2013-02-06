@@ -21,7 +21,7 @@
         [% END %]
     <a href="/logout">Log out</a>
 [% ELSE %]
-    <a href="/login">Log in</a>
+    <a href="/log/in">Log in</a>
 [% END %]
 </div>
 
