@@ -19,7 +19,7 @@
                 nope
             [% END %]
         [% END %]
-    <a href="/logout">Log out</a>
+    <a href="/log/out">Log out</a>
 [% ELSE %]
     <a href="/log/in">Log in</a>
 [% END %]

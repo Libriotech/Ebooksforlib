@@ -2,7 +2,7 @@
 
 <p>You need to log in to continue.</p>
 
-<form method="post">
+<form method="post" action="/login">
 <label for="username">Username:</label>
 <input type="text" name="username" id="username">
 <br />
@@ -10,7 +10,7 @@
 <input type="password" name="password" id="password">
 <br />
 <label for="realm">Realm:</label>
-<input type="text" name="realm" id="realm">
+<input type="text" name="realm" id="realm" value="localkoha">
 <br />
 <input type="submit" value="Login">
 </form>

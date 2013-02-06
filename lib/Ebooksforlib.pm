@@ -34,6 +34,15 @@ get '/log/in' => sub {
     template 'login';
 };
 
+any ['get','post'] => '/log/out' => sub {
+    session->destroy;
+    if (params->{return_url}) {
+        redirect params->{return_url};
+    } else {
+        redirect '/';
+    }
+};
+
 get '/login/denied' => sub {
     redirect '/login';
 };
