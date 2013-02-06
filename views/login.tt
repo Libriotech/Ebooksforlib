@@ -9,5 +9,8 @@
 <label for="password">Password:</label>
 <input type="password" name="password" id="password">
 <br />
+<label for="realm">Realm:</label>
+<input type="text" name="realm" id="realm">
+<br />
 <input type="submit" value="Login">
 </form>
