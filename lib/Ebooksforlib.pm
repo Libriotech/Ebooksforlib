@@ -44,6 +44,12 @@ post '/log/in' => sub {
     my ($success, $realm) = authenticate_user( $username, $password, $realm );
     if ($success) {
         session logged_in_user => $username;
+        
+        # TODO Get the data from logged_in_user
+        # TODO Store the full name of the user in the session
+        # TODO Update the local user or create a new one
+        # TODO Set the realm to be the local database? 
+        
         session logged_in_user_realm => $realm;
         redirect params->{return_url} || '/';
     } else {
