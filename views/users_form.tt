@@ -12,6 +12,9 @@
 <label for="name">Name:</label>
 <input type="text" name="name" id="name" value="[% params.name %][% user.name %]" required/>
 <br />
+<label for="email">Email:</label>
+<input type="text" name="email" id="email" value="[% params.email %][% user.email %]" required/>
+<br />
 [% IF user.id %]
 <input type="hidden" name="id" id="id" value="[% user.id %]"/>
 [% END %]

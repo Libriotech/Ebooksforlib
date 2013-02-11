@@ -179,6 +179,7 @@ post '/users/add' => require_role superadmin => sub {
     my $username   = param 'username';
     my $password1  = param 'password1';
     my $password2  = param 'password2';
+    my $email      = param 'email';
     my $library_id = param 'library';  
     
     # Check the provided data
@@ -191,6 +192,7 @@ post '/users/add' => require_role superadmin => sub {
             username => $username, 
             password => _encrypt_password($password1), 
             name     => $name,
+            email    => $email,
         });
         debug "*** Created new user with ID = " . $new_user->id;
         # debug Dumper $new_user;
@@ -223,10 +225,12 @@ post '/users/edit' => require_role superadmin => sub {
     my $id   = param 'id';
     my $username = param 'username';
     my $name     = param 'name';
+    my $email    = param 'email';
     my $user = rset('User')->find( $id );
     try {
         $user->set_column('username', $username);
-        $user->set_column('name', $name);
+        $user->set_column('name',     $name);
+        $user->set_column('email',    $email);
         $user->update;
         flash info => 'A user was updated!';
         redirect '/superadmin';
