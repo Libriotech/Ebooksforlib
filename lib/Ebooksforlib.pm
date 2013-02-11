@@ -60,7 +60,7 @@ post '/log/in' => sub {
         if( ! $new_user->in_storage ) {
             # do some stuff
             $new_user->insert;
-            debug "*** User $username was added";
+            debug "*** User $username was added, with id = " . $new_user->id;
             # TODO Connect this user to the correct library based on the realm
             # used to sign in
             debug '*** Going to look up library with realm = ' . $realm;
