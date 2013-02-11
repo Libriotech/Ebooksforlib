@@ -6,10 +6,11 @@
 
 [% IF libraries.size %]
     <table>
-    <tr><th>ID</th><th>Name</th><th>Actions</th></tr>
+    <tr><th>ID</th><th>Name</th><th>Realm</th><th>Actions</th></tr>
     [% FOREACH library IN libraries %]
     <tr><td>[% library.id %]</td>
         <td>[% library.name %]</td>
+        <td>[% library.realm %]</td>
         <td>
             <a href="/libraries/edit/[% library.id %]"><img src="/images/building_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
             <a href="/libraries/delete/[% library.id %]"><img src="/images/building_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>

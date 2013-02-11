@@ -147,11 +147,13 @@ get '/libraries/edit/:id' => require_role superadmin => sub {
 
 post '/libraries/edit' => require_role superadmin => sub {
 
-    my $id   = param 'id';
-    my $name = param 'name';
+    my $id    = param 'id';
+    my $name  = param 'name';
+    my $realm = param 'realm';
     my $library = rset('Library')->find( $id );
     try {
         $library->set_column('name', $name);
+        $library->set_column('realm', $realm);
         $library->update;
         flash info => 'A library was updated!';
         redirect '/superadmin';

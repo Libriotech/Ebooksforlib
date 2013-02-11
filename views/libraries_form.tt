@@ -2,6 +2,9 @@
 <legend>Library details</legend>
 <label for="name">Name:</label>
 <input type="text" name="name" id="name" value="[% name %][% library.name %]" required/>
+<br />
+<label for="realm">Realm:</label>
+<input type="text" name="realm" id="realm" value="[% realm %][% library.realm %]" /> <img src="/images/information.png" height="16" width="16" title="Please note: Authentication realms have to be configured in the application's config file before they can be referenced here.">
 [% IF library.id %]
 <input type="hidden" name="id" id="id" value="[% library.id %]"/>
 [% END %]
