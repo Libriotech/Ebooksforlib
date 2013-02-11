@@ -69,7 +69,7 @@ post '/log/in' => sub {
             debug "*** User $username was updated";
         }
         
-        # TODO Set the realm to be the local database so that further calls to 
+        # Set the realm to be the local database so that further calls to 
         # logged_in_user will talk to the database, not SIP2
         session logged_in_user_realm => 'local';
         
