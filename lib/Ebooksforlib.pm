@@ -61,7 +61,7 @@ post '/log/in' => sub {
             # do some stuff
             $new_user->insert;
             debug "*** User $username was added, with id = " . $new_user->id;
-            # TODO Connect this user to the correct library based on the realm
+            # Connect this user to the correct library based on the realm
             # used to sign in
             debug '*** Going to look up library with realm = ' . $realm;
             my $library = rset('Library')->find({ realm => $realm });
@@ -79,8 +79,7 @@ post '/log/in' => sub {
             } else {
                 error '*** Could not find library with realm = ' . $realm;
             }
-            # TODO Redirect to a special page for newly added users (or /my with
-            # a special message)
+            flash info => "Welcome, new user!";
         } else {
             debug "*** User $username was updated";
         }
