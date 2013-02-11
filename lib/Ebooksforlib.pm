@@ -21,7 +21,8 @@ get '/' => sub {
 };
 
 get '/log/in' => sub {
-    template 'login';
+    my @librariers = rset('Library')->all;
+    template 'login', { libraries => \@librariers };
 };
 
 post '/log/in' => sub {
