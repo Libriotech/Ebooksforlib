@@ -60,9 +60,25 @@ post '/log/in' => sub {
         if( ! $new_user->in_storage ) {
             # do some stuff
             $new_user->insert;
+            debug "*** User $username was added";
             # TODO Connect this user to the correct library based on the realm
             # used to sign in
-            debug "*** User $username was added";
+            debug '*** Going to look up library with realm = ' . $realm;
+            my $library = rset('Library')->find({ realm => $realm });
+            if ( $library ) {
+                debug '*** Going to connect to library with id = ' . $library->id;
+                try {
+                    rset('UserLibrary')->create({
+                        user_id    => $new_user->id, 
+                        library_id => $library->id, 
+                    });
+                } catch {
+                    # This is a serious error! 
+                    error '*** Error when trying to connect user ' . $new_user->id . ' to library ' . $library->id . '. Error message: ' . $_;
+                };
+            } else {
+                error '*** Could not find library with realm = ' . $realm;
+            }
             # TODO Redirect to a special page for newly added users (or /my with
             # a special message)
         } else {
