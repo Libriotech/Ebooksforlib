@@ -31,6 +31,12 @@ __PACKAGE__->table("libraries");
   is_nullable: 0
   size: 255
 
+=head2 realm
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 32
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -38,8 +44,11 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
+  "realm",
+  { data_type => "varchar", is_nullable => 1, size => 32 },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint("realm", ["realm"]);
 __PACKAGE__->add_unique_constraint("name", ["name"]);
 
 =head1 RELATIONS
@@ -60,8 +69,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-28 15:34:13
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CY56i+wneETcptXU8Q99rQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-11 12:13:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:05EobbyQ+69Hadutdat/6g
 
 __PACKAGE__->many_to_many( users => 'user_libraries', 'user' );
 
