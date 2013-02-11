@@ -1,7 +1,19 @@
 [% META pagetitle = 'My page' %]
-
 [% USE Dumper %]
 
+<p>Here is the information we have about you:</p>
+
+<ul>
+<li>Username:  [% userdata.username %]</li>
+<li>Real name: [% userdata.name %]</li>
+<li>Email:     [% userdata.email %]</li>
+</ul>
+
+<p>If any of this is incorrect, you need to update it in your local library system.</p>
+
+<hr />
+
+<p>Session data, purely for debug purposes:</p>
 <pre>
 [% Dumper.dump_html(session) %]
 </pre>

@@ -35,7 +35,10 @@ post '/log/in' => sub {
 
         debug "*** Successfull login for $username, $password, $realm";
         session logged_in_user => $username;
+        # Set the realm to be the real realm temporarily, we will change this later
         session logged_in_user_realm => $realm;
+        # Also keep the real realm around in case we need it
+        session logged_in_user_real_realm => $realm;
         
         # Get the data about the logged_in_user and store some of it in the session
         my $user = logged_in_user;
@@ -44,8 +47,30 @@ post '/log/in' => sub {
         # Store roles in the session (will be used in the templates)
         session logged_in_user_roles => user_roles;
 
-        # TODO Update the local user or create a new one
-        # TODO Set the realm to be the local database? 
+        # Update the local user or create a new one
+        my $new_user = rset('User')->update_or_new({
+            username => $username,
+            name     => $user->{name},
+            email    => $user->{email},
+        }, { 
+            key => 'username' 
+        });
+
+        if( ! $new_user->in_storage ) {
+            # do some stuff
+            $new_user->insert;
+            # TODO Connect this user to the correct library based on the realm
+            # used to sign in
+            debug "*** User $username was added";
+            # TODO Redirect to a special page for newly added users (or /my with
+            # a special message)
+        } else {
+            debug "*** User $username was updated";
+        }
+        
+        # TODO Set the realm to be the local database so that further calls to 
+        # logged_in_user will talk to the database, not SIP2
+        session logged_in_user_realm => 'local';
         
         redirect params->{return_url} || '/';
 
@@ -75,7 +100,7 @@ get '/about' => sub {
 };
 
 get '/my' => sub {
-    template 'my';
+    template 'my', { userdata => logged_in_user };
 };
 
 get '/admin' => require_role admin => sub { 
