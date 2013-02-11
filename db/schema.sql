@@ -53,7 +53,7 @@ INSERT INTO users SET id = 1, username = 'henrik', password = '{SSHA}naJx7DlkVcn
 INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset', email = 'sigrid@example.org'; -- password = pass
 
 -- Libraries
-INSERT INTO libraries SET id = 1, name = 'Storevik';
+INSERT INTO libraries SET id = 1, name = 'Storevik', realm = 'storevik';
 INSERT INTO libraries SET id = 2, name = 'Lillevik';
 
 -- Users and roles

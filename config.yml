@@ -23,7 +23,7 @@ plugins:
     Auth::Extensible:
         no_default_pages: 1
         realms:
-            localkoha:
+            storevik:
                 provider: 'SIP2'
                 host: 127.0.0.1:6001
                 username: term1
