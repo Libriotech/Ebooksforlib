@@ -7,8 +7,9 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id       INTEGER     AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(32) NOT NULL       UNIQUE KEY,
-    password VARCHAR(64) NOT NULL, 
-    name     VARCHAR(255) 
+    password VARCHAR(64) NOT NULL,
+    name     VARCHAR(255),
+    email    VARCHAR(255) NOT NULL       UNIQUE KEY
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS roles;
@@ -47,8 +48,8 @@ INSERT INTO roles SET id = 1, role = 'admin';
 INSERT INTO roles SET id = 2, role = 'superadmin';
 
 -- Users
-INSERT INTO users SET id = 1, username = 'henrik', password = '{SSHA}naJx7DlkVcnRkTUm2sOzg5IsaYPfm76H', name = 'Henrik Ibsen';  -- password = pass
-INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset'; -- password = pass
+INSERT INTO users SET id = 1, username = 'henrik', password = '{SSHA}naJx7DlkVcnRkTUm2sOzg5IsaYPfm76H', name = 'Henrik Ibsen', email = 'henrik@example.org';  -- password = pass
+INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset', email = 'sigrid@example.org'; -- password = pass
 
 -- Libraries
 INSERT INTO libraries SET id = 1, name = 'Storevik';
