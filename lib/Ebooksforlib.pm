@@ -119,7 +119,9 @@ get '/about' => sub {
 };
 
 get '/my' => sub {
-    template 'my', { userdata => logged_in_user };
+    debug '*** Showing My Page for user with id = ' . session('logged_in_user_id');
+    my $user = rset( 'User' )->find( session('logged_in_user_id') );
+    template 'my', { userdata => logged_in_user, user => $user };
 };
 
 get '/admin' => require_role admin => sub { 
