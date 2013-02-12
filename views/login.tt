@@ -9,7 +9,7 @@
 <label for="password">Password:</label>
 <input type="password" name="password" id="password">
 <br />
-<label for="realm">Realm:</label>
+<label for="realm">Library:</label>
 <select name="realm" id="realm">
 [% FOREACH l IN libraries %]
     [% IF l.realm != '' %]
