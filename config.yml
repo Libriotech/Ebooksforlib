@@ -19,6 +19,15 @@ engines:
     end_tag:   '%]'
     WRAPPER: layouts/main.tt
 
+# Config options for SIP2 auth providers, with examples:
+# host: 127.0.0.1:1965
+# If the server needs a login before it will talk to clients:
+# username: term1
+# password: term1
+# If the server does not provide the BL and CQ fields to indicate valid 
+# usernames and passwords, look for the given string in the AF field:
+# auth_denied: 'ikke akseptert'
+
 plugins:
     Auth::Extensible:
         no_default_pages: 1
