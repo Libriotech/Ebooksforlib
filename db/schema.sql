@@ -9,7 +9,7 @@ CREATE TABLE users (
     username VARCHAR(32) NOT NULL       UNIQUE KEY,
     password VARCHAR(64) NOT NULL,
     name     VARCHAR(255),
-    email    VARCHAR(255) NOT NULL       UNIQUE KEY
+    email    VARCHAR(255) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS roles;

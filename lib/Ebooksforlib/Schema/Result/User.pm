@@ -46,7 +46,7 @@ __PACKAGE__->table("users");
 =head2 email
 
   data_type: 'varchar'
-  is_nullable: 0
+  is_nullable: 1
   size: 255
 
 =cut
@@ -61,10 +61,9 @@ __PACKAGE__->add_columns(
   "name",
   { data_type => "varchar", is_nullable => 1, size => 255 },
   "email",
-  { data_type => "varchar", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->add_unique_constraint("email", ["email"]);
 __PACKAGE__->add_unique_constraint("username", ["username"]);
 
 =head1 RELATIONS
@@ -100,8 +99,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-11 10:16:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OlIVjrV3dPk3YQMUVFlnuA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-12 10:46:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AwgwCGXFZiJ056yuuj0IJg
 
 __PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
 
