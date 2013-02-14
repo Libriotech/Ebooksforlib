@@ -1,0 +1,6 @@
+[% META pagetitle = 'Add book' %]
+
+<form method="POST" action="/books/add">
+[% adding = 1 %]
+[% INCLUDE books_form.tt %]
+</form>

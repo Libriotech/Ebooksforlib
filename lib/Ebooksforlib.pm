@@ -136,6 +136,8 @@ get '/my' => sub {
     template 'my', { userdata => logged_in_user, user => $user };
 };
 
+### Routes below this point require admin/superadmin privileges
+
 get '/admin' => require_role admin => sub { 
     template 'admin';
 };
@@ -148,6 +150,60 @@ get '/superadmin' => require_role superadmin => sub {
         'libraries' => \@libraries,
     };
 };
+
+### Books
+
+get '/books/add' => require_role admin => sub {
+    template 'books_add';
+};
+
+post '/books/add' => require_role admin => sub {
+
+    my $title = param 'title';
+    my $date  = param 'date';
+    try {
+        my $new_book = rset('Book')->create({
+            title  => $title,
+            date   => $date,
+        });
+        flash info => 'A new book was added!';
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'books_add', { title => $title, date => $date };
+    };
+
+};
+
+get '/books/edit/:id' => require_role admin => sub {
+    my $book_id = param 'id';
+    my $book = rset('Book')->find( $book_id );
+    template 'books_edit', { book => $book };
+};
+
+
+post '/books/edit' => require_role admin => sub {
+
+    my $id    = param 'id';
+    my $title = param 'title';
+    my $date  = param 'date';
+    my $book = rset('Book')->find( $id );
+    try {
+        $book->set_column('title', $title);
+        $book->set_column('date', $date);
+        $book->update;
+        flash info => 'A book was updated!';
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'books_edit', { book => $book };
+    };
+
+};
+
+### Libraries
 
 get '/libraries/add' => require_role superadmin => sub { 
     template 'libraries_add';

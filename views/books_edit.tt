@@ -1,0 +1,5 @@
+[% META pagetitle = 'Edit book' %]
+
+<form method="POST" action="/books/edit">
+[% INCLUDE books_form.tt %]
+</form>

@@ -1,0 +1,12 @@
+<fieldset>
+<legend>Basic info</legend>
+<label for="title">Title:</label>
+<input type="text" name="title" id="title" value="[% params.title %][% book.title %]" required/>
+<br />
+<label for="date">Published:</label>
+<input type="text" name="date" id="date" value="[% params.date %][% book.date %]" required/>
+[% IF book.id %]
+<input type="hidden" name="id" id="id" value="[% book.id %]"/>
+[% END %]
+</fieldset>
+<input type="submit" id="save" value="Save" />
