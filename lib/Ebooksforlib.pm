@@ -22,9 +22,15 @@ get '/' => sub {
 };
 
 get '/book/:id' => sub {
-    my $bookid = param 'id';
-    my $book = rset('Book')->find( $bookid );
+    my $book_id = param 'id';
+    my $book = rset('Book')->find( $book_id );
     template 'book', { book => $book };
+};
+
+get '/creator/:id' => sub {
+    my $creator_id = param 'id';
+    my $creator = rset('Creator')->find( $creator_id );
+    template 'creator', { creator => $creator };
 };
 
 get '/log/in' => sub {

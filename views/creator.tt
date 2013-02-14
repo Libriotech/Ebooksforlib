@@ -1,0 +1,11 @@
+[% META pagetitle = 'Creator page' %]
+
+<h2>[% creator.name %]</h2> 
+
+<p>Creator of:</p>
+
+<ul>
+[% FOREACH book IN creator.books %]
+<li><a href="/book/[% book.id %]">[% book.title %]</a> ([% book.date %])</li>
+[% END %]
+</ul>
