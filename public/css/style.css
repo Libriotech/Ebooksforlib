@@ -4,6 +4,7 @@ font-family: sans-serif;
 
 .userbar {
   text-align: right;
+  float: right;
 }
 
 .flash {
