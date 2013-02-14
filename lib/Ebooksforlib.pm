@@ -17,7 +17,14 @@ hook 'before' => sub {
 };
 
 get '/' => sub {
-    template 'index';
+    my @books = rset('Book')->all;
+    template 'index', { books => \@books };
+};
+
+get '/book/:id' => sub {
+    my $bookid = param 'id';
+    my $book = rset('Book')->find( $bookid );
+    template 'book', { book => $book };
 };
 
 get '/log/in' => sub {

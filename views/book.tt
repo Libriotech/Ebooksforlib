@@ -1,0 +1,7 @@
+[% META pagetitle = 'Detail page' %]
+
+<h2>[% book.title %]</h2> 
+
+<p>av [% book.creator %]</p>
+
+<p>Første gang utgitt [% book.date %]</p>
