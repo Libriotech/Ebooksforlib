@@ -1,5 +1,14 @@
-<ul>
+<table>
+<tr><th>Title</th><th>Author(s)</th><th>Published</th></tr>
 [% FOREACH book IN books %]
-<li><a href="/book/[% book.id %]">[% book.title %]</a> av [% book.creator %] ([% book.date %])</li>
+<tr>
+<td><a href="/book/[% book.id %]">[% book.title %]</a></td>
+<td>
+    [% FOREACH creator IN book.creators %]
+    <a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% END %]
+    [% END %]
+</td>
+<td>[% book.date %]</td>
+</tr>
 [% END%]
-</ul>
+</table>

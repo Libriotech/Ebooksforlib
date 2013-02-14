@@ -1,4 +1,4 @@
-package Ebooksforlib::Schema::Result::Book;
+package Ebooksforlib::Schema::Result::Creator;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -11,11 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Ebooksforlib::Schema::Result::Book
+Ebooksforlib::Schema::Result::Creator
 
 =cut
 
-__PACKAGE__->table("books");
+__PACKAGE__->table("creators");
 
 =head1 ACCESSORS
 
@@ -25,27 +25,19 @@ __PACKAGE__->table("books");
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 title
+=head2 name
 
   data_type: 'varchar'
   is_nullable: 0
   size: 255
-
-=head2 date
-
-  data_type: 'varchar'
-  is_nullable: 0
-  size: 32
 
 =cut
 
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "title",
+  "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
-  "date",
-  { data_type => "varchar", is_nullable => 0, size => 32 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -62,14 +54,14 @@ Related object: L<Ebooksforlib::Schema::Result::BookCreator>
 __PACKAGE__->has_many(
   "book_creators",
   "Ebooksforlib::Schema::Result::BookCreator",
-  { "foreign.book_id" => "self.id" },
+  { "foreign.creator_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-14 15:32:01
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pshmuUWs4FuQX6XZjlitrw
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PCyBUIvt536BUxRavtkbrg
 
-__PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
+__PACKAGE__->many_to_many( books => 'book_creators', 'book' );
 
 1;

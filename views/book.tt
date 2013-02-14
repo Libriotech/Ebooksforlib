@@ -2,6 +2,12 @@
 
 <h2>[% book.title %]</h2> 
 
-<p>av [% book.creator %]</p>
+<p>av:</p>
+
+<ul>
+[% FOREACH creator IN book.creators %]
+<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
+[% END %]
+</ul>
 
 <p>Første gang utgitt [% book.date %]</p>
