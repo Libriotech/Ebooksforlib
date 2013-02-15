@@ -16,6 +16,32 @@
 <p>ISBN: [% book.isbn %].</p>
 [% END %]
 
+<h2>Other books by the same creator(s)</h2>
+
+[% SET books = [ ] %]
+[%# Loop through the creators connected to this book %]
+[% FOREACH creator IN book.creators %]
+    [%# Loop through the books connected to this creator %]
+    [% FOREACH cbook IN creator.books %]
+        [%# Do not include the book we are currently looking at %]
+        [% IF cbook.id != book.id %]
+            [% SET already_added = 0 %]
+            [% FOREACH b IN books %]
+                [%# Do not include books we have already added %]
+                [% IF cbook.id == b.id %]
+                    [% SET already_added = 1 %]
+                [% END %]
+            [% END %]
+            [%# Save the book for later if it has not been added already %]
+            [% IF already_added == 0 %]
+                [% books.push( cbook ) %]
+            [% END %]
+        [% END %]
+    [% END %]
+[% END %]
+[% INCLUDE 'books_table.tt' books=books %]
+
+[%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]
     [% IF role == 'admin' %]
 <div class="adminactions">
