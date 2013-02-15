@@ -16,8 +16,7 @@
 <p>ISBN: [% book.isbn %].</p>
 [% END %]
 
-<h2>Other books by the same creator(s)</h2>
-
+[%# Collect unique books created by the same creators as the current book %]
 [% SET books = [ ] %]
 [%# Loop through the creators connected to this book %]
 [% FOREACH creator IN book.creators %]
@@ -39,7 +38,11 @@
         [% END %]
     [% END %]
 [% END %]
-[% INCLUDE 'books_table.tt' books=books %]
+
+[% IF books.size %]
+    <h2>Other books by the same creator(s)</h2>
+    [% INCLUDE 'books_table.tt' books=books %]
+[% END %]
 
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]
