@@ -4,7 +4,7 @@
 
 <ul>
 [% FOREACH creator IN book.creators %]
-<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
+<li><a href="/books/creators/delete/[% book.id %]/[% creator.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this creator" title="Delete this creator"></a> <a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
 [% END %]
 </ul>
 

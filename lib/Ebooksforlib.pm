@@ -225,6 +225,21 @@ post '/books/creators/add' => require_role admin => sub {
     };
 };
 
+get '/books/creators/delete/:book_id/:creator_id' => require_role admin => sub {
+    my $book_id    = param 'book_id';
+    my $creator_id = param 'creator_id';
+    my $book_creator = rset('BookCreator')->find({ book_id => $book_id, creator_id => $creator_id });
+    try {
+        $book_creator->delete;
+        flash info => 'A creator was deleted from this book!';
+        redirect '/books/creators/add/' . $book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/books/creators/add/' . $book_id;
+    };
+};
+
 ### Books
 
 get '/books/add' => require_role admin => sub {
