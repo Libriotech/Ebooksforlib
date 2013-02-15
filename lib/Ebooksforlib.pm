@@ -33,6 +33,11 @@ get '/creator/:id' => sub {
     template 'creator', { creator => $creator };
 };
 
+get '/lists' => sub {
+    my $user = rset('User')->find( session 'logged_in_user_id' );
+    template 'lists', { user => $user };
+};
+
 get '/list/:id' => sub {
     my $list_id = param 'id';
     my $list = rset('List')->find( $list_id );
@@ -159,12 +164,6 @@ get '/superadmin' => require_role superadmin => sub {
 };
 
 ### Lists
-
-get '/lists' => require_role admin => sub {
-    
-    my @lists = rset('List')->search({ library_id => _get_library_for_admin_user( session 'logged_in_user_id' ) });
-    template 'lists', { lists => \@lists };
-};
 
 ### Creators
 

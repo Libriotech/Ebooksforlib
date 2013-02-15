@@ -1,7 +1,13 @@
-[% META pagetitle = 'Lists for your library' %]
+[% META pagetitle = 'Lists' %]
 
 <ul>
-[% FOREACH list IN lists %]
-<li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+[% FOREACH library IN user.libraries %]
+<li>[% library.name %]</a>
+    <ul>
+    [% FOREACH list IN library.lists %]
+    <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+    [% END %]
+    </ul>
+</li>
 [% END %]
 </ul>
