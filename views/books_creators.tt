@@ -1,0 +1,38 @@
+<h2>[% book.title %]</h2> 
+
+<p>Creator(s):</p>
+
+<ul>
+[% FOREACH creator IN book.creators %]
+<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
+[% END %]
+</ul>
+
+<p>Published: [% book.date %].</p>
+
+[% IF book.isbn %]
+<p>ISBN: [% book.isbn %].</p>
+[% END %]
+
+<hr />
+
+<h2>Add a creator</h2>
+
+<form method="POST" action="/books/creators/add">
+<input type="hidden" name="bookid" id="bookid" value="[% book.id %]" />
+<select name="creatorid" id="creatorid">
+<option>Choose a creator...</option>
+[% FOREACH creator IN creators %]
+    [% creator_already_connected = 0 %]
+    [% FOREACH bookcreator in book.creators %]
+        [% IF creator.id == bookcreator.id %]
+            [% creator_already_connected = 1 %]
+        [% END %]
+    [% END %]
+    [% IF creator_already_connected == 0 %]
+        <option value="[% creator.id %]">[% creator.name %]</option>
+    [% END %]
+[% END %]
+</select>
+<input type="submit" value="Add" />
+</form>

@@ -15,3 +15,15 @@
 [% IF book.isbn %]
 <p>ISBN: [% book.isbn %].</p>
 [% END %]
+
+[% FOREACH role IN session.logged_in_user_roles %]
+    [% IF role == 'admin' %]
+<div class="adminactions">
+<p>Admin actions</p>
+<p>
+    <a href="/books/edit/[% book.id %]">Edit</a>
+    <a href="/books/creators/add/[% book.id %]">Add author</a>
+</p>
+</div>
+    [% END %]
+[% END %]

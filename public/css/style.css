@@ -21,3 +21,9 @@ font-family: sans-serif;
 .info {
   background-color: #b5f2a6;
 }
+
+.adminactions {
+  border: 1px dotted black;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}

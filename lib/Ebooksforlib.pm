@@ -199,6 +199,32 @@ post '/creators/edit' => require_role admin => sub {
 
 };
 
+### Creators and books
+
+get '/books/creators/add/:bookid' => require_role admin => sub {
+    my $book_id = param 'bookid';
+    my $book     = rset('Book')->find( $book_id );
+    my @creators = rset('Creator')->all;
+    template 'books_creators', { book => $book, creators => \@creators };
+};
+
+post '/books/creators/add' => require_role admin => sub {
+    my $book_id    = param 'bookid';
+    my $creator_id = param 'creatorid';
+    try {
+        rset('BookCreator')->create({
+            book_id    => $book_id, 
+            creator_id => $creator_id, 
+        });
+        flash info => 'A new creator was added!';
+        redirect '/books/creators/add/' . $book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/books/creators/add/' . $book_id;
+    };
+};
+
 ### Books
 
 get '/books/add' => require_role admin => sub {
@@ -216,7 +242,7 @@ post '/books/add' => require_role admin => sub {
             date   => $date,
             isbn   => $isbn,
         });
-        flash info => 'A new book was added!';
+        flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
         redirect '/admin';
     } catch {
         flash error => "Oops, we got an error:<br />$_";
@@ -245,7 +271,7 @@ post '/books/edit' => require_role admin => sub {
         $book->set_column('date', $date);
         $book->set_column('isbn', $isbn);
         $book->update;
-        flash info => 'A book was updated!';
+        flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
         redirect '/admin';
     } catch {
         flash error => "Oops, we got an error:<br />$_";
