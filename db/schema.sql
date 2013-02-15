@@ -70,7 +70,7 @@ CREATE TABLE lists (
     id         INTEGER AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(255) NOT NULL,
     library_id INTEGER NOT NULL,
-    is_genre   BIT DEFAULT 0,
+    is_genre   INTEGER(1) DEFAULT 0,
     CONSTRAINT lists_fk_1 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

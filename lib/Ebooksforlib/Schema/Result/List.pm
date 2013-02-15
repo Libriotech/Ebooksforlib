@@ -39,10 +39,9 @@ __PACKAGE__->table("lists");
 
 =head2 is_genre
 
-  data_type: 'bit'
-  default_value: 'b'0''
+  data_type: 'integer'
+  default_value: 0
   is_nullable: 1
-  size: 1
 
 =cut
 
@@ -54,7 +53,7 @@ __PACKAGE__->add_columns(
   "library_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_genre",
-  { data_type => "bit", default_value => "b'0'", is_nullable => 1, size => 1 },
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -91,8 +90,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-15 14:40:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uxxwgq5mVxX4GPeLkhaIoQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-15 15:51:03
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Cp4v5rf0EqXtj1LEGgru1g
 
 __PACKAGE__->many_to_many( books => 'list_books', 'book' );
 
