@@ -21,8 +21,8 @@
 <div class="adminactions">
 <p>Admin actions</p>
 <p>
-    <a href="/books/edit/[% book.id %]">Edit</a>
-    <a href="/books/creators/add/[% book.id %]">Add author</a>
+    <a href="/books/edit/[% book.id %]">Edit</a> |
+    <a href="/books/creators/add/[% book.id %]">Connect creators</a>
 </p>
 </div>
     [% END %]
