@@ -1,0 +1,5 @@
+[% META pagetitle = 'Edit creator' %]
+
+<form method="POST" action="/creators/edit">
+[% INCLUDE creators_form.tt %]
+</form>

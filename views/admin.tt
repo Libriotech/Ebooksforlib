@@ -1,3 +1,7 @@
 [% META pagetitle = 'Admin' %]
 
-<p><a href="/books/add">Add a new book</a></p>
+<h2>Actions</h2>
+<ul>
+<li><a href="/books/add">Add a new book</a></li>
+<li><a href="/creators/add">Add a new creator</a></li>
+</ul>

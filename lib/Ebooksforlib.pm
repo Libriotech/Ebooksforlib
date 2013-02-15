@@ -151,6 +151,54 @@ get '/superadmin' => require_role superadmin => sub {
     };
 };
 
+### Creators
+
+get '/creators/add' => require_role admin => sub {
+    template 'creators_add';
+};
+
+post '/creators/add' => require_role admin => sub {
+
+    my $name = param 'name';
+    try {
+        my $new_creator = rset('Creator')->create({
+            name  => $name,
+        });
+        flash info => 'A new creator was added! <a href="/creator/' . $new_creator->id . '">View</a>';
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'creators_add', { name => $name };
+    };
+
+};
+
+get '/creators/edit/:id' => require_role admin => sub {
+    my $creator_id = param 'id';
+    my $creator = rset('Creator')->find( $creator_id );
+    template 'creators_edit', { creator => $creator };
+};
+
+
+post '/creators/edit' => require_role admin => sub {
+
+    my $id   = param 'id';
+    my $name = param 'name';
+    my $creator = rset('Creator')->find( $id );
+    try {
+        $creator->set_column('name', $name);
+        $creator->update;
+        flash info => 'A creator was updated! <a href="/creator/' . $creator->id . '">View</a>';
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'creators_edit', { creator => $creator };
+    };
+
+};
+
 ### Books
 
 get '/books/add' => require_role admin => sub {
