@@ -1,4 +1,4 @@
-[% META pagetitle = 'Connect creators' %]
+[% META pagetitle = 'Connect books and creators' %]
 
 <h2>[% book.title %]</h2> 
 
