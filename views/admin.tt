@@ -4,5 +4,12 @@
 <ul>
 <li><a href="/books/add">Add a new book</a></li>
 <li><a href="/creators/add">Add a new creator</a></li>
-<li><a href="/lists">View all lists for your library</a></li>
+</ul>
+
+<h2>Lists</h2>
+
+<ul>
+[% FOREACH list IN lists %]
+<li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+[% END %]
 </ul>
