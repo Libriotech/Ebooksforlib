@@ -2,6 +2,7 @@
 
 <h2>[% creator.name %]</h2> 
 
+[% IF creator.books.size %]
 <p>Creator of:</p>
-
 [% INCLUDE 'books_table.tt' books=creator.books %]
+[% END %]
