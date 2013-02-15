@@ -33,6 +33,12 @@ get '/creator/:id' => sub {
     template 'creator', { creator => $creator };
 };
 
+get '/list/:id' => sub {
+    my $list_id = param 'id';
+    my $list = rset('List')->find( $list_id );
+    template 'list', { list => $list };
+};
+
 get '/log/in' => sub {
     my @librariers = rset('Library')->all;
     template 'login', { libraries => \@librariers };

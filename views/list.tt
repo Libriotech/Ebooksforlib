@@ -1,0 +1,5 @@
+[% META pagetitle = 'List contents' %]
+
+<h2>[% list.name %]</h2>
+
+[% INCLUDE 'books_table.tt' books=list.books %]
