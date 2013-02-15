@@ -161,10 +161,12 @@ post '/books/add' => require_role admin => sub {
 
     my $title = param 'title';
     my $date  = param 'date';
+    my $isbn  = param 'isbn'; # TODO Check the validity 
     try {
         my $new_book = rset('Book')->create({
             title  => $title,
             date   => $date,
+            isbn   => $isbn,
         });
         flash info => 'A new book was added!';
         redirect '/admin';
@@ -188,10 +190,12 @@ post '/books/edit' => require_role admin => sub {
     my $id    = param 'id';
     my $title = param 'title';
     my $date  = param 'date';
+    my $isbn  = param 'isbn';
     my $book = rset('Book')->find( $id );
     try {
         $book->set_column('title', $title);
         $book->set_column('date', $date);
+        $book->set_column('isbn', $isbn);
         $book->update;
         flash info => 'A book was updated!';
         redirect '/admin';

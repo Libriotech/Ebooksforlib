@@ -5,6 +5,9 @@
 <br />
 <label for="date">Published:</label>
 <input type="text" name="date" id="date" value="[% params.date %][% book.date %]" required/>
+<br />
+<label for="isbn">ISBN:</label>
+<input type="text" name="isbn" id="isbn" value="[% params.isbn %][% book.isbn %]" required/>
 [% IF book.id %]
 <input type="hidden" name="id" id="id" value="[% book.id %]"/>
 [% END %]
