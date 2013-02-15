@@ -4,4 +4,5 @@
 <ul>
 <li><a href="/books/add">Add a new book</a></li>
 <li><a href="/creators/add">Add a new creator</a></li>
+<li><a href="/lists">View all lists for your library</a></li>
 </ul>

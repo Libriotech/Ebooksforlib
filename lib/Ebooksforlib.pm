@@ -151,6 +151,14 @@ get '/superadmin' => require_role superadmin => sub {
     };
 };
 
+### Lists
+
+get '/lists' => require_role admin => sub {
+    
+    my @lists = rset('List')->search({ library_id => _get_library_for_admin_user( session 'logged_in_user_id' ) });
+    template 'lists', { lists => \@lists };
+};
+
 ### Creators
 
 get '/creators/add' => require_role admin => sub {
@@ -648,6 +656,14 @@ get '/rest/getbook' => sub {
 
 ### Utility functions
 # TODO Move these to a separate .pm
+
+# Assumes that admin users are only connected to one library
+sub _get_library_for_admin_user {
+    my $user_id = shift;
+    my $user = rset('User')->find( $user_id );
+    my @libraries = $user->libraries;
+    return $libraries[0]->id;
+}
 
 sub _check_password_length {
     my ( $password1 ) = @_;

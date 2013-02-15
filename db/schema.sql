@@ -130,3 +130,23 @@ INSERT INTO book_creators SET book_id = 4, creator_id = 5;
 INSERT INTO book_creators SET book_id = 5, creator_id = 6;
 INSERT INTO book_creators SET book_id = 5, creator_id = 7;
 INSERT INTO book_creators SET book_id = 6, creator_id = 1;
+
+-- Lists
+INSERT INTO lists SET id = 1, name = 'Classics',          library_id = 1, is_genre = 1;
+INSERT INTO lists SET id = 2, name = 'Humour',            library_id = 1, is_genre = 1;
+INSERT INTO lists SET id = 3, name = 'Easter reading',    library_id = 1, is_genre = 0;
+INSERT INTO lists SET id = 4, name = 'Henrik recommends', library_id = 1, is_genre = 0;
+INSERT INTO lists SET id = 5, name = 'Crime',             library_id = 2, is_genre = 1;
+INSERT INTO lists SET id = 6, name = 'Young adult',       library_id = 2, is_genre = 1;
+
+-- Books in lists
+INSERT INTO list_book SET list_id = 1, book_id = 1;
+INSERT INTO list_book SET list_id = 1, book_id = 2;
+INSERT INTO list_book SET list_id = 1, book_id = 4;
+INSERT INTO list_book SET list_id = 1, book_id = 6;
+INSERT INTO list_book SET list_id = 2, book_id = 3;
+INSERT INTO list_book SET list_id = 2, book_id = 5;
+INSERT INTO list_book SET list_id = 3, book_id = 1;
+INSERT INTO list_book SET list_id = 3, book_id = 5;
+INSERT INTO list_book SET list_id = 4, book_id = 2;
+INSERT INTO list_book SET list_id = 4, book_id = 3;
