@@ -2,4 +2,8 @@
 
 <h2>[% list.name %]</h2>
 
-[% INCLUDE 'books_table.tt' books=list.books %]
+[% IF list.books.size %]
+    [% INCLUDE 'books_table.tt' books=list.books %]
+[% ELSE %]
+    <p>Sorry, there are not title in this list yet.</p>
+[% END %]
