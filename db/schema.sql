@@ -46,7 +46,8 @@ DROP TABLE IF EXISTS books;
 CREATE TABLE books (
     id      INTEGER AUTO_INCREMENT PRIMARY KEY,
     title   VARCHAR(255) NOT NULL, 
-    date    VARCHAR(32) NOT NULL
+    date    VARCHAR(32) NOT NULL, 
+    isbn    VARCHAR(64)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS creators;
@@ -86,12 +87,12 @@ INSERT INTO user_roles SET user_id = 2, role_id = 2; -- Sigrid is superadmin, no
 INSERT INTO user_libraries SET user_id = 1, library_id = 1;
 
 -- Books
-INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891';
-INSERT INTO books SET id = 2, title = 'Tales From The Fjeld',             date = '1892';
-INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date = '1893';
-INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894';
-INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895';
-INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895';
+INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891', isbn = '9780123456789';
+INSERT INTO books SET id = 2, title = 'Tales From The Fjeld',             date = '1892', isbn = '9780123456788';
+INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date = '1893', isbn = '9780123456787';
+INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894', isbn = '9780123456786';
+INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895', isbn = '9780123456785';
+INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895', isbn = '9780123456784';
 
 -- Creators
 INSERT INTO creators SET id = 1, name = 'Henrik J. Ibsen';
