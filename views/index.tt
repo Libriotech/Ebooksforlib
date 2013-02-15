@@ -1,5 +1,5 @@
 <table>
-<tr><th>Title</th><th>Author(s)</th><th>Published</th></tr>
+<tr><th>Title</th><th>Author(s)</th><th>Published</th><th>ISBN</th></tr>
 [% FOREACH book IN books %]
 <tr>
 <td><a href="/book/[% book.id %]">[% book.title %]</a></td>
@@ -9,6 +9,7 @@
     [% END %]
 </td>
 <td>[% book.date %]</td>
+<td>[% book.isbn %]</td>
 </tr>
 [% END%]
 </table>

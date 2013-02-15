@@ -11,3 +11,7 @@
 </ul>
 
 <p>Published [% book.date %].</p>
+
+[% IF book.isbn %]
+<p>ISBN: [% book.isbn %].</p>
+[% END %]
