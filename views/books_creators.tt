@@ -36,3 +36,5 @@
 </select>
 <input type="submit" value="Add" />
 </form>
+
+<p><a href="/creators/add">Add a new creator</a></p>
