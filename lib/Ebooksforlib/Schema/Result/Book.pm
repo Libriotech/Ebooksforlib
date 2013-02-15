@@ -74,9 +74,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 list_books
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-15 09:58:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TQS4ZBrI18VsRVD1Ic50gA
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::ListBook>
+
+=cut
+
+__PACKAGE__->has_many(
+  "list_books",
+  "Ebooksforlib::Schema::Result::ListBook",
+  { "foreign.book_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-15 14:40:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XcdmAK3kLfmrMQir65/SfA
 
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 

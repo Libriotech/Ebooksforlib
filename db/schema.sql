@@ -1,5 +1,7 @@
 -- Database schema for Ebooksforlib
 
+DROP TABLE IF EXISTS list_book;
+DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS user_libraries;
 
@@ -62,6 +64,22 @@ CREATE TABLE book_creators (
     PRIMARY KEY book_creator (book_id, creator_id), 
     CONSTRAINT book_creators_fk_1 FOREIGN KEY (book_id)    REFERENCES books    (id) ON DELETE CASCADE,
     CONSTRAINT book_creators_fk_2 FOREIGN KEY (creator_id) REFERENCES creators (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE lists (
+    id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name       VARCHAR(255) NOT NULL,
+    library_id INTEGER NOT NULL,
+    is_genre   BIT DEFAULT 0,
+    CONSTRAINT lists_fk_1 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE list_book (
+    book_id    INTEGER NOT NULL,
+    list_id    INTEGER NOT NULL,
+    PRIMARY KEY list_book (book_id, list_id), 
+    CONSTRAINT list_book_fk_1 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE,
+    CONSTRAINT list_book_fk_2 FOREIGN KEY (list_id) REFERENCES lists (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data
