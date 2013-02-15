@@ -95,4 +95,6 @@ __PACKAGE__->has_many(
 
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 
+__PACKAGE__->many_to_many( lists => 'list_books', 'list' );
+
 1;
