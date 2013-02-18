@@ -150,7 +150,7 @@ get '/my' => sub {
 ### Routes below this point require admin/superadmin privileges
 
 get '/admin' => require_role admin => sub { 
-    my @lists = rset('List')->search({ library_id => _get_library_for_admin_user( session 'logged_in_user_id' ) });
+    my @lists = rset('List')->search({ library_id => _get_library_for_admin_user() });
     template 'admin', { lists => \@lists };
 };
 
