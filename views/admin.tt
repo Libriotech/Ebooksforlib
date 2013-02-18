@@ -8,6 +8,8 @@
 
 <h2>Lists</h2>
 
+<p><a href="/lists/add"><img src="/images/script_add.png" height="16" width="16" alt="Edit" title="Edit"> Add a new list</a></p>
+
 <ul>
 [% FOREACH list IN lists %]
 <li>

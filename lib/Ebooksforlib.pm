@@ -165,6 +165,39 @@ get '/superadmin' => require_role superadmin => sub {
 
 ### Lists
 
+get '/lists/add' => require_role admin => sub {
+    template 'lists_add';
+};
+
+post '/lists/add' => require_role admin => sub {
+
+    my $name     = param 'name';
+    my $is_genre = param 'is_genre';
+    unless ( defined $is_genre ) {
+        $is_genre = 0;
+    }
+    # Tie the list to the logged in users's library
+    my $user = rset('User')->find( session 'logged_in_user_id' );
+    my @libraries = $user->libraries;
+    my $library = $libraries[0];
+    my $library_id = $library->id;
+    debug "*** Library ID: $library_id";
+    try {
+        my $new_list = rset('List')->create({
+            name       => $name,
+            is_genre   => $is_genre,
+            library_id => $library_id,
+        });
+        flash info => 'A new list was added! <a href="/list/' . $new_list->id . '">View</a>';
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'lists_add', { name => $name, is_genre => $is_genre };
+    };
+
+};
+
 get '/lists/edit/:id' => require_role admin => sub {
     my $list_id = param 'id';
     my $list = rset('List')->find( $list_id );

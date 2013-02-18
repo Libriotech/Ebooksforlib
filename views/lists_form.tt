@@ -3,7 +3,7 @@
 <label for="name">Name:</label>
 <input type="text" name="name" id="name" value="[% params.name %][% list.name %]" required/>
 <br />
-<label for="is_genre">This is a genre list:</label>
+<label for="is_genre">This list is a genre:</label>
 [% IF params.is_genre || list.is_genre %]
 <input type="checkbox" name="is_genre" id="is_genre" value="1" checked="checked" />
 [% ELSE %]
