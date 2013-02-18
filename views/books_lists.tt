@@ -24,7 +24,10 @@
 [% SET lists_for_current_library = 0 %]
 [% FOREACH list IN book.lists %]
     [% IF list.library_id == library_id %]
-        <li><a href="/books/lists/delete/[% book.id %]/[% list.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete from this list" title="Delete from this list"></a> <a href="/creator/[% list.id %]">[% list.name %]</a></li>
+        <li>
+            <a href="/books/lists/delete/[% book.id %]/[% list.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete from this list" title="Delete from this list"></a>
+            <a href="/list/[% list.id %]">[% list.name %]</a>
+        </li>
         [% lists_for_current_library = lists_for_current_library + 1 %]
     [% END %]
 [% END %]
@@ -35,5 +38,28 @@
 [% END %]
 
 <hr />
+
+<h2>Add to a list</h2>
+
+<form method="POST" action="/books/lists">
+<input type="hidden" name="book_id" id="book_id" value="[% book.id %]" />
+<select name="list_id" id="list_id">
+<option>Choose a list...</option>
+[% FOREACH list IN lists %]
+    [% list_already_connected = 0 %]
+    [% FOREACH booklist in book.lists %]
+        [% IF list.id == booklist.id %]
+            [% list_already_connected = 1 %]
+        [% END %]
+    [% END %]
+    [% IF list_already_connected == 0 %]
+        <option value="[% list.id %]">[% list.name %]</option>
+    [% END %]
+[% END %]
+</select>
+<input type="submit" value="Add" />
+</form>
+
+
 
 <p><a href="/lists/add">Add a new list</a></p>

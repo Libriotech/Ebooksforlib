@@ -261,7 +261,25 @@ get '/books/lists/:book_id' => require_role admin => sub {
     my $book_id = param 'book_id';
     my $book    = rset('Book')->find( $book_id );
     my $library_id = _get_library_for_admin_user();
-    template 'books_lists', { book => $book, library_id => $library_id };
+    my @lists = rset('List')->search({ library_id => $library_id });
+    template 'books_lists', { book => $book, lists => \@lists, library_id => $library_id };
+};
+
+post '/books/lists' => require_role admin => sub {
+    my $book_id = param 'book_id';
+    my $list_id = param 'list_id';
+    try {
+        rset('ListBook')->create({
+            book_id => $book_id, 
+            list_id => $list_id, 
+        });
+        flash info => 'This book was added to a list!';
+        redirect '/books/lists/' . $book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/books/lists/' . $book_id;
+    };
 };
 
 get '/books/lists/delete/:book_id/:list_id' => require_role admin => sub {
@@ -270,7 +288,7 @@ get '/books/lists/delete/:book_id/:list_id' => require_role admin => sub {
     my $book_list = rset('ListBook')->find({ book_id => $book_id, list_id => $list_id });
     try {
         $book_list->delete;
-        flash info => 'This book was deleted from a book!';
+        flash info => 'This book was deleted from a list!';
         redirect '/books/lists/' . $book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
