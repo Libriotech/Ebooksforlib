@@ -1,0 +1,5 @@
+[% META pagetitle = 'Edit list' %]
+
+<form method="POST" action="/lists/edit">
+[% INCLUDE lists_form.tt %]
+</form>

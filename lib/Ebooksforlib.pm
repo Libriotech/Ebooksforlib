@@ -165,6 +165,32 @@ get '/superadmin' => require_role superadmin => sub {
 
 ### Lists
 
+get '/lists/edit/:id' => require_role admin => sub {
+    my $list_id = param 'id';
+    my $list = rset('List')->find( $list_id );
+    template 'lists_edit', { list => $list };
+};
+
+post '/lists/edit' => require_role admin => sub {
+
+    my $id   = param 'id';
+    my $name = param 'name';
+    my $is_genre = param 'is_genre';
+    my $list = rset('List')->find( $id );
+    try {
+        $list->set_column('name', $name);
+        $list->set_column('is_genre', $is_genre);
+        $list->update;
+        flash info => 'A list was updated! <a href="/list/' . $list->id . '">View</a>';
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        template 'lists_edit', { list => $list };
+    };
+
+};
+
 ### Creators
 
 get '/creators/add' => require_role admin => sub {

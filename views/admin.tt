@@ -10,6 +10,9 @@
 
 <ul>
 [% FOREACH list IN lists %]
-<li><a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size %])</li>
+<li>
+<a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+<a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size %])
+</li>
 [% END %]
 </ul>
