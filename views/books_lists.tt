@@ -1,0 +1,39 @@
+[% META pagetitle = 'Connect books to lists' %]
+
+<h2>[% book.title %]</h2> 
+
+<p>Creator(s):</p>
+
+<ul>
+[% FOREACH creator IN book.creators %]
+<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
+[% END %]
+</ul>
+
+<p>Published: [% book.date %].</p>
+
+[% IF book.isbn %]
+<p>ISBN: [% book.isbn %].</p>
+[% END %]
+
+<hr />
+
+<h2>Current lists</h2>
+
+<ul>
+[% SET lists_for_current_library = 0 %]
+[% FOREACH list IN book.lists %]
+    [% IF list.library_id == library_id %]
+        <li><a href="/books/lists/delete/[% book.id %]/[% list.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete from this list" title="Delete from this list"></a> <a href="/creator/[% list.id %]">[% list.name %]</a></li>
+        [% lists_for_current_library = lists_for_current_library + 1 %]
+    [% END %]
+[% END %]
+</ul>
+
+[% IF lists_for_current_library == 0 %]
+<p>This book is not connected to any lists, yet.</p>
+[% END %]
+
+<hr />
+
+<p><a href="/lists/add">Add a new list</a></p>

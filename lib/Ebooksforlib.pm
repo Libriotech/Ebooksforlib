@@ -255,6 +255,30 @@ get '/lists/delete_ok/:id?' => require_role admin => sub {
     
 };
 
+### Lists and books
+
+get '/books/lists/:book_id' => require_role admin => sub {
+    my $book_id = param 'book_id';
+    my $book    = rset('Book')->find( $book_id );
+    my $library_id = _get_library_for_admin_user();
+    template 'books_lists', { book => $book, library_id => $library_id };
+};
+
+get '/books/lists/delete/:book_id/:list_id' => require_role admin => sub {
+    my $book_id = param 'book_id';
+    my $list_id = param 'list_id';
+    my $book_list = rset('ListBook')->find({ book_id => $book_id, list_id => $list_id });
+    try {
+        $book_list->delete;
+        flash info => 'This book was deleted from a book!';
+        redirect '/books/lists/' . $book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/books/lists/' . $book_id;
+    };
+};
+
 ### Creators
 
 get '/creators/add' => require_role admin => sub {
@@ -755,7 +779,7 @@ get '/rest/getbook' => sub {
 
 # Assumes that admin users are only connected to one library
 sub _get_library_for_admin_user {
-    my $user_id = shift;
+    my $user_id = session 'logged_in_user_id';
     my $user = rset('User')->find( $user_id );
     my @libraries = $user->libraries;
     return $libraries[0]->id;

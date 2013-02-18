@@ -73,8 +73,9 @@
 <div class="adminactions">
 <p>Admin actions</p>
 <p>
-    <a href="/books/edit/[% book.id %]">Edit</a> |
-    <a href="/books/creators/add/[% book.id %]">Connect creators</a>
+    <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
+    <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
+    <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a>
 </p>
 </div>
     [% END %]
