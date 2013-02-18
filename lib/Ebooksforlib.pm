@@ -176,6 +176,9 @@ post '/lists/edit' => require_role admin => sub {
     my $id   = param 'id';
     my $name = param 'name';
     my $is_genre = param 'is_genre';
+    unless ( defined $is_genre ) {
+        $is_genre = 0;
+    }
     my $list = rset('List')->find( $id );
     try {
         $list->set_column('name', $name);
