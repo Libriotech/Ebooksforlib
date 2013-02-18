@@ -191,6 +191,34 @@ post '/lists/edit' => require_role admin => sub {
 
 };
 
+get '/lists/delete/:id?' => require_role admin => sub { 
+    
+    # Confirm delete
+    my $id = param 'id';
+    my $list = rset('List')->find( $id );
+    template 'lists_delete', { list => $list };
+    
+};
+
+get '/lists/delete_ok/:id?' => require_role admin => sub { 
+    
+    # Do the actual delete
+    my $id = param 'id';
+    my $list = rset('List')->find( $id );
+    # TODO Check that this library is ready to be deleted!
+    try {
+        $list->delete;
+        flash info => 'A list was deleted!';
+        info "Deleted list with ID = $id";
+        redirect '/admin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/admin';
+    };
+    
+};
+
 ### Creators
 
 get '/creators/add' => require_role admin => sub {
