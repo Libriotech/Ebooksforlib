@@ -282,13 +282,19 @@ post '/books/lists' => require_role admin => sub {
     };
 };
 
+get '/lists/books/:list_id' => require_role admin => sub {
+    my $list_id = param 'list_id';
+    my $list    = rset('List')->find( $list_id );
+    template 'lists_books', { list => $list };
+};
+
 get '/books/lists/delete/:book_id/:list_id' => require_role admin => sub {
     my $book_id = param 'book_id';
     my $list_id = param 'list_id';
     my $book_list = rset('ListBook')->find({ book_id => $book_id, list_id => $list_id });
     try {
         $book_list->delete;
-        flash info => 'This book was deleted from a list!';
+        flash info => 'This book was deleted from a list! <a href="/lists/books/' . $list_id . '">Delete more from this list<a>';
         redirect '/books/lists/' . $book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
