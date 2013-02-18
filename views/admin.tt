@@ -10,6 +10,6 @@
 
 <ul>
 [% FOREACH list IN lists %]
-<li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+<li><a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size %])</li>
 [% END %]
 </ul>
