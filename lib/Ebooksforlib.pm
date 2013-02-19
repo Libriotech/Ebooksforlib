@@ -41,9 +41,10 @@ get '/creator/:id' => sub {
     template 'creator', { creator => $creator };
 };
 
-get '/lists' => require_login sub {
-    my $user = rset('User')->find( session 'logged_in_user_id' );
-    template 'lists', { user => $user };
+get '/lists' => sub {
+    my @genres = rset('List')->search({ library_id => session('chosen_library'), is_genre => 1 });
+    my @lists  = rset('List')->search({ library_id => session('chosen_library'), is_genre => 0 });
+    template 'lists', { genres => \@genres, lists => \@lists };
 };
 
 get '/list/:id' => sub {

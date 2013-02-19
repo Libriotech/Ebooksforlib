@@ -1,13 +1,19 @@
-[% META pagetitle = 'Lists' %]
+[% META pagetitle = 'Genres &amp; lists' %]
 
-<ul>
-[% FOREACH library IN user.libraries %]
-<li>[% library.name %]</a>
+[% IF genres.size %]
+    <h2>Genres</h2>
     <ul>
-    [% FOREACH list IN library.lists %]
-    <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+    [% FOREACH genre IN genres %]
+        <li><a href="/list/[% genre.id %]">[% genre.name %]</a></li>
     [% END %]
     </ul>
-</li>
 [% END %]
-</ul>
+
+[% IF lists.size %]
+    <h2>Lists</h2>
+    <ul>
+    [% FOREACH list IN lists %]
+        <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+    [% END %]
+    </ul>
+[% END %]
