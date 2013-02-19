@@ -10,16 +10,21 @@
 <div class="userbar">
 [% IF session.logged_in_user %]
     Hiya, <a href="/my">[% IF session.logged_in_user_name %][% session.logged_in_user_name %][% ELSE %][% session.logged_in_user %][% END %]</a>! 
-        [% FOREACH role IN session.logged_in_user_roles %]
-            [% IF role == 'admin' %]
-                <a href="/admin">admin</a>
-            [% ELSIF role == 'superadmin' %]
-                <a href="/superadmin">superadmin</a>
-            [% END %]
+    [% FOREACH role IN session.logged_in_user_roles %]
+        [% IF role == 'admin' %]
+            <a href="/admin">admin</a>
+        [% ELSIF role == 'superadmin' %]
+            <a href="/superadmin">superadmin</a>
         [% END %]
+    [% END %]
     <a href="/log/out">Log out</a>
 [% ELSE %]
     <a href="/log/in">Log in</a>
+[% END %]
+[% IF session.chosen_library %]
+    <a href="/library/choose" title="Choose another library">[% session.chosen_library_name %]</a>
+[% ELSE %]
+    <a href="/library/choose">Choose library</a>
 [% END %]
 </div>
 

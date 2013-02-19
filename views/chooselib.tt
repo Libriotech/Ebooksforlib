@@ -1,0 +1,18 @@
+[% META pagetitle = 'Choose library' %]
+
+[% UNLESS session.chosen_library %]
+    <p>You need to choose a library before you proceed.</p>
+[% ELSE %]
+    <p>You can change your chosen library at any time.</p>
+[% END %]
+
+<ul>
+[% FOREACH library IN libraries %]
+<li>
+    <a href="/library/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]">[% library.name %]</a>
+    [% IF session.chosen_library == library.id %]
+        <img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes">
+    [% END %]
+</li>
+[% END %]
+</ul>

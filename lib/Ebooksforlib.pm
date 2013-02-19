@@ -13,6 +13,14 @@ hook 'before' => sub {
 
     var appname  => config->{appname};
     var min_pass => config->{min_pass};
+    
+    # Force users to choose a library
+    unless ( session('chosen_library') && session('chosen_library_name') ) {
+        # To exempt the front page, include this below: || request->path eq '/'
+        unless ( request->path =~ /\/library\/.*/ || request->path =~ /\/log\/.*/ ) {
+            return redirect '/library/choose?return_url=' . request->path();
+        }
+    }
 
 };
 
@@ -109,6 +117,17 @@ post '/log/in' => sub {
         }
         
         session logged_in_user_id => $new_user->id;
+
+        # Now we need to store the connection to a library in the session
+        # This will override any previous choice, but that should be OK.
+        # TODO We assume that a user will only be connected to one library. 
+        # As long as we are only using SIP2 that should be OK. When/if
+        # the national library card is implemented we should let users who
+        # are connected to more than one library choose which one they want 
+        # to be their chosen library after they log in.
+        my @libraries = $new_user->libraries;
+        session chosen_library      => $libraries[0]->id;
+        session chosen_library_name => $libraries[0]->name;
         
         # Set the realm to be the local database so that further calls to 
         # logged_in_user will talk to the database, not SIP2
@@ -145,6 +164,29 @@ get '/my' => sub {
     debug '*** Showing My Page for user with id = ' . session('logged_in_user_id');
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     template 'my', { userdata => logged_in_user, user => $user };
+};
+
+get '/library/choose' => sub {
+    my @libraries = rset( 'Library' )->all;
+    # debug 'referer: ' . request->referer;
+    template 'chooselib', { libraries => \@libraries, return_url => params->{return_url} };
+};
+
+get '/library/set/:library_id' => sub {
+    my $library_id = param 'library_id';
+    # cookie chosen_library => $library_id; # FIXME Expiry
+    my $library = rset('Library')->find( $library_id );
+    if ( $library ) {
+        session chosen_library => $library->id;
+        session chosen_library_name => $library->name;
+        flash info => "A library was chosen.";
+        if (params->{return_url}) {
+           return redirect params->{return_url};
+        }
+    } else {
+        flash error => "Not a valid library.";
+    }
+    redirect '/library/choose';
 };
 
 ### Routes below this point require admin/superadmin privileges
