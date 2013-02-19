@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS list_book;
 DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS user_libraries;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS providers;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -82,6 +84,23 @@ CREATE TABLE list_book (
     CONSTRAINT list_book_fk_2 FOREIGN KEY (list_id) REFERENCES lists (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE providers (
+    id          INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(255) NOT NULL, 
+    description TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE items (
+    id          INTEGER AUTO_INCREMENT PRIMARY KEY,
+    book_id     INTEGER NOT NULL,
+    library_id  INTEGER NOT NULL,
+    provider_id INTEGER NOT NULL,
+    loan_period INTEGER NOT NULL DEFAULT 0,
+    CONSTRAINT items_fk_1 FOREIGN KEY (book_id)     REFERENCES books     (id) ON DELETE CASCADE,
+    CONSTRAINT items_fk_2 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE, 
+    CONSTRAINT items_fk_3 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Sample data
 -- TODO Split this out into a separate file
 
@@ -111,6 +130,25 @@ INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date =
 INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894', isbn = '9780123456786';
 INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895', isbn = '9780123456785';
 INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895', isbn = '9780123456784';
+
+-- Providers
+INSERT INTO providers SET id = 1, name = 'Provider A', description = 'This is our first provider.';
+INSERT INTO providers SET id = 2, name = 'Provider B', description = 'This is our second provider.';
+
+-- Items
+INSERT INTO items SET id = 1,  book_id = 1, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 2,  book_id = 1, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 3,  book_id = 1, library_id = 1, provider_id = 2, loan_period = 5;
+INSERT INTO items SET id = 4,  book_id = 2, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 5,  book_id = 3, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 6,  book_id = 4, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 7,  book_id = 5, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 8,  book_id = 6, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 9,  book_id = 1, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 10, book_id = 1, library_id = 2, provider_id = 2, loan_period = 7;
+INSERT INTO items SET id = 11, book_id = 2, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 12, book_id = 5, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 13, book_id = 6, library_id = 2, provider_id = 1, loan_period = 7;
 
 -- Creators
 INSERT INTO creators SET id = 1, name = 'Henrik J. Ibsen';
