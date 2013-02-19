@@ -45,8 +45,8 @@
     <h2>Genres</h2>
     <ul>
     [% FOREACH list IN book.lists %]
-        [% IF list.is_genre == 1 %]
-            <li><a href="/list/[% list.id %]">[% list.name %]</a> ([% list.library.name %])</li>
+        [% IF list.is_genre == 1 && list.library.id == session.chosen_library %]
+            <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
         [% END %]
     [% END %]
     </ul>
@@ -54,8 +54,8 @@
     <h2>Lists</h2>
     <ul>
     [% FOREACH list IN book.lists %]
-        [% IF list.is_genre == 0 %]
-            <li><a href="/list/[% list.id %]">[% list.name %]</a> ([% list.library.name %])</li>
+        [% IF list.is_genre == 0 && list.library.id == session.chosen_library %]
+            <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
         [% END %]
     [% END %]
     </ul>
