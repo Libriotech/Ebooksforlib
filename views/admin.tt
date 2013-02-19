@@ -8,14 +8,30 @@
 
 <h2>Lists</h2>
 
-<p><a href="/lists/add"><img src="/images/script_add.png" height="16" width="16" alt="Edit" title="Edit"> Add a new list</a></p>
+<p><a href="/lists/add"><img src="/images/script_add.png" height="16" width="16" alt="Edit" title="Edit"> Add a new genre or list</a></p>
 
+<h3>Genres</h3>
 <ul>
 [% FOREACH list IN lists %]
-<li>
-<a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
-<a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
-<a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size %])
-</li>
+    [% IF list.is_genre == 1 %]
+        <li>
+        <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+        <a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
+        <a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size or 0 %])
+        </li>
+    [% END %]
+[% END %]
+</ul>
+
+<h3>Lists</h3>
+<ul>
+[% FOREACH list IN lists %]
+    [% IF list.is_genre == 0 %]
+        <li>
+        <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+        <a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
+        <a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size or 0 %])
+        </li>
+    [% END %]
 [% END %]
 </ul>
