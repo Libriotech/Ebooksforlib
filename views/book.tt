@@ -62,6 +62,23 @@
 
 [% END %]
 
+<h2>Items</h2>
+[% IF book.items.size %]
+    <table>
+    <tr><th>ID</th><th>Loan period</th></tr>
+    [% FOREACH item IN book.items %]
+        [% IF item.library_id == session.chosen_library %]
+            <tr>
+                <td>[% item.id %]</td>
+                <td>[% item.loan_period %]</td>
+            </tr>
+        [% END %]
+    [% END %]
+    </table>
+[% ELSE %]
+    <p>No items, yet!</p>
+[% END %]
+
 [% IF books.size %]
     <h2>Other books by the same creator(s)</h2>
     [% INCLUDE 'books_table.tt' books=books %]
@@ -75,7 +92,8 @@
 <p>
     <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
     <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
-    <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a>
+    <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
+    <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a>
 </p>
 </div>
     [% END %]

@@ -37,3 +37,21 @@
 [% ELSE %]
     <p>No items, yet!</p>
 [% END %]
+
+<h2>Add more items</h2>
+
+<form method="POST" action="/books/items/add">
+Add 
+<input type="number" id="num_copies" name="num_copies" value="1" min="1" max="1000" size="3"> 
+copies from 
+<select name="provider_id" id="provider_id">
+[% FOREACH provider IN providers %]
+<option value="[% provider.id %]">[% provider.name %]</option>
+[% END %]
+</select>
+with a loan period of 
+<input type="number" id="loan_period" name="loan_period" value="1" min="1" max="1000" size="3"> 
+days
+<input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
+<input type="submit" value="now">.
+</form>

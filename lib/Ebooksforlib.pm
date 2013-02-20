@@ -206,6 +206,73 @@ get '/superadmin' => require_role superadmin => sub {
     };
 };
 
+### Items
+
+get '/books/items/:book_id' => require_role admin => sub {
+    my $book_id = param 'book_id';
+    my $book    = rset('Book')->find( $book_id );
+    my $library_id = _get_library_for_admin_user();
+    my @providers  = rset('Provider')->all;
+    template 'books_items', { book => $book, library_id => $library_id, providers => \@providers };
+};
+
+get '/books/items/delete/:item_id' => require_role admin => sub {
+    my $item_id = param 'item_id';
+    my $item    = rset('Item')->find( $item_id );
+    my $book    = rset('Book')->find( $item->book_id );
+    template 'books_items_delete', { item => $item, book => $book };
+};
+
+post '/books/items/add' => require_role admin => sub {
+
+    my $book_id     = param 'book_id';
+    my $num_copies  = param 'num_copies';
+    my $loan_period = param 'loan_period';
+    my $provider_id = param 'provider_id';
+    my $library_id  = _get_library_for_admin_user();
+    
+    my $new_items_count = 0;
+    for ( 1..$num_copies ) {
+        try {
+            my $new_item = rset('Item')->create({
+                book_id     => $book_id,
+                loan_period => $loan_period,
+                library_id  => $library_id,
+                provider_id => $provider_id
+            });
+            $new_items_count++;
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+            return redirect '/books/items/' . $book_id;
+        }
+    }
+    flash info => "Added $new_items_count new item(s)!";
+    redirect '/books/items/' . $book_id;
+
+
+};
+
+get '/books/items/delete_ok/:item_id?' => require_role admin => sub { 
+    
+    my $item_id = param 'item_id';
+    my $item = rset('Item')->find( $item_id );
+    my $book = rset('Book')->find( $item->book_id );
+    # TODO Check that this item is ready to be deleted!
+    # Items with active loans should not be deleted! 
+    try {
+        $item->delete;
+        flash info => 'An item was deleted!';
+        info "Deleted item with ID = $item_id";
+        redirect '/books/items/' . $book->id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/books/items/' . $book->id;
+    };
+    
+};
+
 ### Lists
 
 get '/lists/add' => require_role admin => sub {
