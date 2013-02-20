@@ -1,0 +1,34 @@
+[% META pagetitle = 'Edit loan period' %]
+
+<h2>The book</h2>
+
+<p>Title: [% item.book.title %]</p> 
+
+<p>Creator(s):</p>
+
+<ul>
+[% FOREACH creator IN item.book.creators %]
+<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
+[% END %]
+</ul>
+
+<p>Published: [% item.book.date %].</p>
+
+[% IF item.book.isbn %]
+<p>ISBN: [% item.book.isbn %].</p>
+[% END %]
+
+<hr />
+
+<h2>Change loan period for item with ID = [% item.id %]</h2>
+
+<p>Provider: [% item.provider.name %]</p>
+
+<p>Current loan period: [% item.loan_period %]</p>
+
+<form method="POST" action="/books/items/edit">
+<input type="hidden" name="item_id" id="item_id" value="[% item.id %]">
+New loan period: 
+<input type="number" id="loan_period" name="loan_period" value="[% item.loan_period %]" min="1" max="1000" size="3"> 
+<input type="submit" value="Save">
+</form>

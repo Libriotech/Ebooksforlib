@@ -29,7 +29,10 @@
                 <td>[% item.id %]</td>
                 <td>[% item.loan_period %]</td>
                 <td>[% item.provider.name %]</td>
-                <td><a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a></td>
+                <td>
+                    <a href="/books/items/edit/[% item.id %]"><img src="/images/clock_edit.png" height="16" width="16" alt="Change the loan period for this item" title="Change the loan period for this item"></a>
+                    <a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a>
+                </td>
             </tr>
         [% END %]
     [% END %]

@@ -216,6 +216,30 @@ get '/books/items/:book_id' => require_role admin => sub {
     template 'books_items', { book => $book, library_id => $library_id, providers => \@providers };
 };
 
+get '/books/items/edit/:item_id' => require_role admin => sub {
+    my $item_id = param 'item_id';
+    my $item = rset('Item')->find( $item_id );
+    template 'books_items_edit', { item => $item };
+};
+
+post '/books/items/edit' => require_role admin => sub {
+
+    my $item_id     = param 'item_id';
+    my $loan_period = param 'loan_period';
+    my $item = rset('Item')->find( $item_id );
+    try {
+        $item->set_column( 'loan_period', $loan_period );
+        $item->update;
+        flash info => 'An item was updated!';
+        redirect '/books/items/' . $item->book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/books/items/' . $item->book_id;
+    };
+
+};
+
 get '/books/items/delete/:item_id' => require_role admin => sub {
     my $item_id = param 'item_id';
     my $item    = rset('Item')->find( $item_id );
@@ -249,7 +273,6 @@ post '/books/items/add' => require_role admin => sub {
     }
     flash info => "Added $new_items_count new item(s)!";
     redirect '/books/items/' . $book_id;
-
 
 };
 
