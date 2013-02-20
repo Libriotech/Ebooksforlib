@@ -596,7 +596,7 @@ post '/books/edit' => require_role admin => sub {
         $book->set_column('isbn', $isbn);
         $book->update;
         flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
-        redirect '/admin';
+        redirect '/book/' . $book->id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
