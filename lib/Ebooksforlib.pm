@@ -240,6 +240,30 @@ post '/books/items/edit' => require_role admin => sub {
 
 };
 
+post '/books/items/editall' => require_role admin => sub {
+
+    my $book_id     = param 'book_id';
+    my $loan_period = param 'loan_period';
+    my $library_id  = _get_library_for_admin_user();
+    my @items = rset('Item')->search({ book_id => $book_id, library_id => $library_id });
+    
+    my $edited_items_count = 0;
+    foreach my $item ( @items ) {
+        try {
+            $item->set_column( 'loan_period', $loan_period );
+            $item->update;
+            $edited_items_count++;
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+            return redirect '/books/items/' . $item->book_id;
+        };
+    }
+    flash info => "Updated $edited_items_count items.";
+    redirect '/books/items/' . $book_id;
+
+};
+
 get '/books/items/delete/:item_id' => require_role admin => sub {
     my $item_id = param 'item_id';
     my $item    = rset('Item')->find( $item_id );

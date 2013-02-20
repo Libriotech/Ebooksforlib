@@ -21,6 +21,7 @@
 <h2>Current items</h2>
 
 [% IF book.items.size %]
+    [% SET item_count = 0 %]
     <table>
     <tr><th>ID</th><th>Loan period</th><th>Provider</th><th>Actions</th></tr>
     [% FOREACH item IN book.items %]
@@ -34,12 +35,24 @@
                     <a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a>
                 </td>
             </tr>
+            [% item_count = item_count + 1 %]
         [% END %]
     [% END %]
     </table>
+    <p>[% item_count %] items</p>
 [% ELSE %]
     <p>No items, yet!</p>
 [% END %]
+
+<h2>Change loan period for all items</h2>
+
+<form method="POST" action="/books/items/editall">
+<input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
+Give all items a new loan period of 
+<input type="number" id="loan_period" name="loan_period" value="1" min="1" max="1000" size="3"> 
+days
+<input type="submit" value="now">.
+</form>
 
 <h2>Add more items</h2>
 
