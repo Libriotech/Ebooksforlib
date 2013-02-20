@@ -499,11 +499,11 @@ post '/creators/edit' => require_role admin => sub {
         $creator->set_column('name', $name);
         $creator->update;
         flash info => 'A creator was updated! <a href="/creator/' . $creator->id . '">View</a>';
-        redirect '/admin';
+        redirect '/creator/' . $creator->id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
-        template 'creators_edit', { creator => $creator };
+        redirect '/creator/' . $creator->id;
     };
 
 };

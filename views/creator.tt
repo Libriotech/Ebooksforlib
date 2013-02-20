@@ -6,3 +6,15 @@
 <p>Creator of:</p>
 [% INCLUDE 'books_table.tt' books=creator.books %]
 [% END %]
+
+[%# Display admin links if the user has the right role %]
+[% FOREACH role IN session.logged_in_user_roles %]
+    [% IF role == 'admin' %]
+<div class="adminactions">
+<p>Admin actions</p>
+<p>
+    <a href="/creators/edit/[% creator.id %]" title="Edit this creaor">Edit</a>
+</p>
+</div>
+    [% END %]
+[% END %]
