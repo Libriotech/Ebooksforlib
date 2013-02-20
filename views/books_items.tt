@@ -1,0 +1,39 @@
+[% META pagetitle = 'Items' %]
+
+<h2>[% book.title %]</h2> 
+
+<p>Creator(s):</p>
+
+<ul>
+[% FOREACH creator IN book.creators %]
+<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
+[% END %]
+</ul>
+
+<p>Published: [% book.date %].</p>
+
+[% IF book.isbn %]
+<p>ISBN: [% book.isbn %].</p>
+[% END %]
+
+<hr />
+
+<h2>Current items</h2>
+
+[% IF book.items.size %]
+    <table>
+    <tr><th>ID</th><th>Loan period</th><th>Provider</th><th>Actions</th></tr>
+    [% FOREACH item IN book.items %]
+        [% IF item.library_id == library_id %]
+            <tr>
+                <td>[% item.id %]</td>
+                <td>[% item.loan_period %]</td>
+                <td>[% item.provider.name %]</td>
+                <td><a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a></td>
+            </tr>
+        [% END %]
+    [% END %]
+    </table>
+[% ELSE %]
+    <p>No items, yet!</p>
+[% END %]
