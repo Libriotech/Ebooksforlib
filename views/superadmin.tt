@@ -67,7 +67,11 @@
             <td>[% provider.items.size %]</td>
             <td>[% provider.description %]</td>
             <td>
-                <a href="/providers/edit/[% provider.id %]"><img src="/images/basket_edit.png" height="16" width="16" alt="Edit" title="Edit"></a> 
+                <a href="/providers/edit/[% provider.id %]"><img src="/images/basket_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+                [%# Only suggest deleting providers that have zero items %]
+                [% UNLESS provider.items.0 %]
+                    <a href="/providers/delete/[% provider.id %]"><img src="/images/basket_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
+                [% END %]
             </td>
         </tr>
     [% END %]

@@ -264,6 +264,36 @@ post '/providers/edit' => require_role superadmin => sub {
 
 };
 
+get '/providers/delete/:id' => require_role superadmin => sub {
+    my $id = param 'id';
+    my $provider = rset('Provider')->find( $id );
+    template 'providers_delete', { provider => $provider };
+};
+
+get '/providers/delete_ok/:id?' => require_role superadmin => sub { 
+    
+    my $id = param 'id';
+    my $provider = rset('Provider')->find( $id );
+    # Check that this provider has no items
+    my $num_items = rset('Item')->search({ provider_id => $id })->count;
+    debug "*** Number of items: $num_items";
+    if ( $num_items > 0 ) {
+        flash error => "Sorry, that provider still has $num_items items attached!";
+        return redirect '/superadmin';
+    }
+    try {
+        $provider->delete;
+        flash info => 'A provider was deleted!';
+        info "Deleted provider with ID = $id";
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/superadmin';
+    };
+    
+};
+
 ### Items
 
 get '/books/items/:book_id' => require_role admin => sub {
