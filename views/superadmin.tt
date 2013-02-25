@@ -52,3 +52,24 @@
     [% END %]
     </table>
 [% END %]
+
+<h2>Providers</h2>
+
+<p><a href="/providers/add"><img src="/images/basket_add.png" height="16" width="16" alt="Add" title="Add">Add a new provider</a></p>
+
+[% IF providers.size %]
+    <table>
+    <tr><th>ID</th><th>Name</th><th>Number of items</th><th>Description</th><th>Actions</th></tr>
+    [% FOREACH provider IN providers %]
+        <tr>
+            <td>[% provider.id %]</td>
+            <td>[% provider.name %]</td>
+            <td>[% provider.items.size %]</td>
+            <td>[% provider.description %]</td>
+            <td>
+                <a href="/providers/edit/[% provider.id %]"><img src="/images/basket_edit.png" height="16" width="16" alt="Edit" title="Edit"></a> 
+            </td>
+        </tr>
+    [% END %]
+    </table>
+[% END %]

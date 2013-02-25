@@ -1,0 +1,5 @@
+[% META pagetitle = 'Edit provider' %]
+
+<form method="POST" action="/providers/edit">
+[% INCLUDE providers_form.tt %]
+</form>

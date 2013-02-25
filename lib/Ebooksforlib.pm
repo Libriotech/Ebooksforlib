@@ -127,8 +127,13 @@ post '/log/in' => sub {
         # are connected to more than one library choose which one they want 
         # to be their chosen library after they log in.
         my @libraries = $new_user->libraries;
-        session chosen_library      => $libraries[0]->id;
-        session chosen_library_name => $libraries[0]->name;
+        if ( $libraries[0] ) {
+            session chosen_library      => $libraries[0]->id;
+            session chosen_library_name => $libraries[0]->name;
+        } else {
+            session chosen_library      => 10000;
+            session chosen_library_name => 'x';
+        }
         
         # Set the realm to be the local database so that further calls to 
         # logged_in_user will talk to the database, not SIP2
@@ -200,10 +205,63 @@ get '/admin' => require_role admin => sub {
 get '/superadmin' => require_role superadmin => sub { 
     my @users     = rset('User')->all;
     my @libraries = rset('Library')->all;
+    my @providers = rset('Provider')->all;
     template 'superadmin', { 
         'users'     => \@users,
         'libraries' => \@libraries,
+        'providers' => \@providers,
     };
+};
+
+### Providers
+
+get '/providers/add' => require_role superadmin => sub {
+    template 'providers_add';
+};
+
+post '/providers/add' => require_role superadmin => sub {
+
+    my $name        = param 'name';
+    my $description = param 'description';
+    try {
+        my $new_provider = rset('Provider')->create({
+            name        => $name,
+            description => $description,
+        });
+        flash info => 'A new provider was added!';
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/superadmin';
+    };
+
+};
+
+get '/providers/edit/:id' => require_role superadmin => sub {
+    my $id = param 'id';
+    my $provider = rset('Provider')->find( $id );
+    template 'providers_edit', { provider => $provider };
+};
+
+post '/providers/edit' => require_role superadmin => sub {
+
+    my $id = param 'id';
+    my $name = param 'name';
+    my $description = param 'description';
+    my $provider = rset('Provider')->find( $id );
+    try {
+        $provider->set_column( 'name', $name );
+        $provider->set_column( 'description', $description );
+        $provider->update;
+        flash info => 'A provider was updated!';
+        redirect '/superadmin';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/superadmin';
+    };
+
 };
 
 ### Items

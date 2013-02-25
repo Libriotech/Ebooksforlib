@@ -1,0 +1,14 @@
+<fieldset>
+<legend>Provider details</legend>
+<label for="name">Name:</label>
+<input type="text" name="name" id="name" value="[% name %][% provider.name %]" required/>
+<br />
+<label for="description">Description:</label>
+<br />
+<textarea name="description" id="description" rows="10" cols="100">[% description %][% provider.description %]</textarea>
+[% IF provider.id %]
+<input type="hidden" name="id" id="id" value="[% provider.id %]"/>
+[% END %]
+<br />
+<input type="submit" id="save" value="Save" />
+</fieldset>
