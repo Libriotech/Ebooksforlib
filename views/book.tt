@@ -72,7 +72,14 @@
                 <td>[% item.id %]</td>
                 <td>[% item.loan_period %]</td>
                 <td>[% item.loan.due %]</td>
-                <td>[% UNLESS item.loan.due %]<a href="/borrow/[% item.id %]">Borrow</a>[% END %]</td>
+                <td>
+                    [% UNLESS item.loan.due %]
+                        <a href="/borrow/[% item.id %]">Borrow</a>
+                    [% END %]
+                    [% IF item.loan.user_id == session.logged_in_user_id %]
+                        You have borrowed this item!
+                    [% END %]
+                </td>
             </tr>
         [% END %]
     [% END %]

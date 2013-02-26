@@ -5,6 +5,8 @@ use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Crypt::SaltedHash;
+use DateTime;
+use DateTime::Duration;
 use Data::Dumper; # DEBUG 
 
 our $VERSION = '0.1';
@@ -173,15 +175,28 @@ get '/my' => sub {
 };
 
 get '/borrow/:item_id' => sub {
+
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
     my $user = rset('User')->find( session('logged_in_user_id') );
+
+    # Calculate the due date/time
+    my $dt = DateTime->now;
+    my $loan_period = DateTime::Duration->new(
+        days    => $item->loan_period,
+        minutes => 60,
+    );
+    $dt->add_duration( $loan_period );
+    my $due = $dt->ymd . ' ' . $dt->hms;
+    debug "*** Due date: $due";
+
     try {
         my $new_loan = rset('Loan')->create({
             item_id => $item_id,
             user_id => $user->id,
+            due     => $due,
         });
-        flash info => 'You borrowed a book!';
+        flash info => "You borrowed a book which is due $due!";
         redirect '/book/' . $item->book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
