@@ -67,16 +67,14 @@ get '/borrow/:item_id' => require_login sub {
         minutes => 60,
     );
     $dt->add_duration( $loan_period );
-    my $due = $dt->ymd . ' ' . $dt->hms;
-    debug "*** Due date: $due";
 
     try {
         my $new_loan = rset('Loan')->create({
             item_id => $item_id,
             user_id => $user->id,
-            due     => $due,
+            due     => $dt,
         });
-        flash info => "You borrowed a book which is due $due!";
+        flash info => "You borrowed a book!";
         redirect '/book/' . $item->book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";

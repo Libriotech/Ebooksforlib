@@ -8,6 +8,7 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 
+__PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
@@ -101,9 +102,13 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 09:27:47
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qKQ2CxGMW33wj2ycB+seIg
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:47:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JonBs2sIITRW1KZs/qCmYw
 
+sub time_left {
+    my $self = shift;
+    my $now = DateTime->now;
+    return 5;
+}
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;

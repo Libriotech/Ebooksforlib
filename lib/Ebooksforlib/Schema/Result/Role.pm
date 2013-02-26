@@ -8,6 +8,7 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 
+__PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
@@ -59,8 +60,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-01-21 12:22:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zIR0ZD7iuW9gzfG+NgZj2A
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:47:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:o2sOWvbP9PcjhHQNLOMJPw
 
 __PACKAGE__->many_to_many( users => 'user_roles', 'role' );
 
