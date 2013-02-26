@@ -174,7 +174,7 @@ get '/my' => sub {
     template 'my', { userdata => logged_in_user, user => $user };
 };
 
-get '/borrow/:item_id' => sub {
+get '/borrow/:item_id' => require_login sub {
 
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
