@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS user_libraries;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS providers;
+DROP TABLE IF EXISTS loans;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -100,6 +101,17 @@ CREATE TABLE items (
     CONSTRAINT items_fk_2 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE, 
     CONSTRAINT items_fk_3 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE loans (
+    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
+    item_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    loaned  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    due     DATETIME DEFAULT NULL,
+    CONSTRAINT loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
+    CONSTRAINT loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- Sample data
 -- TODO Split this out into a separate file

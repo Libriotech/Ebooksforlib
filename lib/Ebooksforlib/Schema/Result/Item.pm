@@ -112,9 +112,24 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
+=head2 loans
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-19 15:21:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Pg0Owbk9LQgnBz56cqqpYg
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Loan>
+
+=cut
+
+__PACKAGE__->has_many(
+  "loans",
+  "Ebooksforlib::Schema::Result::Loan",
+  { "foreign.item_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 08:34:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:T3EQBD+l27tFyX7VVCKLrw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
