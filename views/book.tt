@@ -82,7 +82,7 @@
                         [% item.loan.due %]
                     [% ELSE %]
                         Not on loan
-                        [% IF user_has_borrowed != 1 %]
+                        [% IF user_has_borrowed != 1 && session.logged_in_user_id %]
                             <a href="/borrow/[% item.id %]">Borrow</a>
                         [% END %]
                     [% END %]
