@@ -63,6 +63,16 @@
 [% END %]
 
 <h2>Items</h2>
+
+[%# Check if the logged in user has already borrowed this book %]
+[% SET user_has_borrowed = 0 %]
+[% FOREACH item IN book.items %]
+    [% IF item.loan.user_id == session.logged_in_user_id %]
+        <p>You have borrowed this book until [% item.loan.due %]!</p>
+        [% SET user_has_borrowed = 1 %]
+    [% END %]
+[% END %]
+
 [% IF book.items.size %]
     <table>
     <tr><th>ID</th><th>Loan period</th><th>Due date</th><td></td></tr>
@@ -79,11 +89,8 @@
                     [% END %]
                 </td>
                 <td>
-                    [% UNLESS item.loan.due %]
+                    [% IF !item.loan.due && user_has_borrowed == 0 %]
                         <a href="/borrow/[% item.id %]">Borrow</a>
-                    [% END %]
-                    [% IF item.loan.user_id == session.logged_in_user_id %]
-                        You have borrowed this item!
                     [% END %]
                 </td>
             </tr>
