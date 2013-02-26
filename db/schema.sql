@@ -4,9 +4,9 @@ DROP TABLE IF EXISTS list_book;
 DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS user_libraries;
+DROP TABLE IF EXISTS loans;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS providers;
-DROP TABLE IF EXISTS loans;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -103,11 +103,11 @@ CREATE TABLE items (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE loans (
-    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
-    item_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL UNIQUE KEY, -- item_id should only occur once in this table at any one time
     user_id INTEGER NOT NULL,
     loaned  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     due     DATETIME DEFAULT NULL,
+    PRIMARY KEY item_loan (item_id, user_id),
     CONSTRAINT loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
     CONSTRAINT loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

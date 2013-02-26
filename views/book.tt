@@ -65,12 +65,13 @@
 <h2>Items</h2>
 [% IF book.items.size %]
     <table>
-    <tr><th>ID</th><th>Loan period</th><td></td></tr>
+    <tr><th>ID</th><th>Loan period</th><th>Due date</th><td></td></tr>
     [% FOREACH item IN book.items %]
         [% IF item.library_id == session.chosen_library %]
             <tr>
                 <td>[% item.id %]</td>
                 <td>[% item.loan_period %]</td>
+                <td>[% item.loan.due %]</td>
                 <td><a href="/borrow/[% item.id %]">Borrow</a></td>
             </tr>
         [% END %]

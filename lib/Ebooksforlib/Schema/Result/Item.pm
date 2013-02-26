@@ -112,24 +112,24 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
-=head2 loans
+=head2 loan
 
-Type: has_many
+Type: might_have
 
 Related object: L<Ebooksforlib::Schema::Result::Loan>
 
 =cut
 
-__PACKAGE__->has_many(
-  "loans",
+__PACKAGE__->might_have(
+  "loan",
   "Ebooksforlib::Schema::Result::Loan",
   { "foreign.item_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 08:34:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:T3EQBD+l27tFyX7VVCKLrw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 09:27:47
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MgXPQX7/J4+SJcYOGe6aVQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
