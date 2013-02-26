@@ -179,6 +179,12 @@ get '/borrow/:item_id' => require_login sub {
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
     my $user = rset('User')->find( session('logged_in_user_id') );
+    
+    # Check that any item of the book this item belongs to is not already on loan to the user
+    if ( _user_has_borrowed( $user, $item->book ) ) {
+        flash error => "You have already borrowed this book!";
+        return redirect '/book/' . $item->book_id;
+    }
 
     # Calculate the due date/time
     my $dt = DateTime->now;
@@ -1078,6 +1084,17 @@ get '/rest/getbook' => sub {
 
 ### Utility functions
 # TODO Move these to a separate .pm
+
+sub _user_has_borrowed {
+    my ( $user, $book ) = @_;
+    foreach my $loan ( $user->loans ) {
+        if ( $loan->item->book->id == $book->id ) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
 
 # Assumes that admin users are only connected to one library
 sub _get_library_for_admin_user {
