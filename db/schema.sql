@@ -123,10 +123,12 @@ INSERT INTO roles SET id = 2, role = 'superadmin';
 -- Users
 INSERT INTO users SET id = 1, username = 'henrik', password = '{SSHA}naJx7DlkVcnRkTUm2sOzg5IsaYPfm76H', name = 'Henrik Ibsen', email = 'henrik@example.org';  -- password = pass
 INSERT INTO users SET id = 2, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset', email = 'sigrid@example.org'; -- password = pass
+INSERT INTO users SET id = 3, username = 'test1',  name = 'Test 1', email = 'test1@example.org'; -- password = pass
+INSERT INTO users SET id = 4, username = 'test2',  name = 'Test 2', email = 'test2@example.org'; -- password = pass
 
 -- Libraries
 INSERT INTO libraries SET id = 1, name = 'Storevik', realm = 'storevik';
-INSERT INTO libraries SET id = 2, name = 'Lillevik';
+INSERT INTO libraries SET id = 2, name = 'Lillevik', realm = 'lillevik';
 
 -- Users and roles
 INSERT INTO user_roles SET user_id = 1, role_id = 1; -- Henrik is admin at Storevik
@@ -134,6 +136,8 @@ INSERT INTO user_roles SET user_id = 2, role_id = 2; -- Sigrid is superadmin, no
 
 -- Users and libraries
 INSERT INTO user_libraries SET user_id = 1, library_id = 1;
+INSERT INTO user_libraries SET user_id = 3, library_id = 2; 
+INSERT INTO user_libraries SET user_id = 4, library_id = 2;
 
 -- Books
 INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891', isbn = '9780123456789';
@@ -148,19 +152,36 @@ INSERT INTO providers SET id = 1, name = 'Provider A', description = 'This is ou
 INSERT INTO providers SET id = 2, name = 'Provider B', description = 'This is our second provider.';
 
 -- Items
+-- Storevik
 INSERT INTO items SET id = 1,  book_id = 1, library_id = 1, provider_id = 1, loan_period = 7;
-INSERT INTO items SET id = 2,  book_id = 1, library_id = 1, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 2,  book_id = 1, library_id = 1, provider_id = 1, loan_period = 28;
 INSERT INTO items SET id = 3,  book_id = 1, library_id = 1, provider_id = 2, loan_period = 5;
 INSERT INTO items SET id = 4,  book_id = 2, library_id = 1, provider_id = 1, loan_period = 7;
 INSERT INTO items SET id = 5,  book_id = 3, library_id = 1, provider_id = 1, loan_period = 7;
 INSERT INTO items SET id = 6,  book_id = 4, library_id = 1, provider_id = 1, loan_period = 7;
 INSERT INTO items SET id = 7,  book_id = 5, library_id = 1, provider_id = 1, loan_period = 7;
 INSERT INTO items SET id = 8,  book_id = 6, library_id = 1, provider_id = 1, loan_period = 7;
+-- Lillevik
 INSERT INTO items SET id = 9,  book_id = 1, library_id = 2, provider_id = 1, loan_period = 7;
-INSERT INTO items SET id = 10, book_id = 1, library_id = 2, provider_id = 2, loan_period = 7;
-INSERT INTO items SET id = 11, book_id = 2, library_id = 2, provider_id = 1, loan_period = 7;
-INSERT INTO items SET id = 12, book_id = 5, library_id = 2, provider_id = 1, loan_period = 7;
-INSERT INTO items SET id = 13, book_id = 6, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 10,  book_id = 1, library_id = 2, provider_id = 1, loan_period = 28;
+INSERT INTO items SET id = 11,  book_id = 1, library_id = 2, provider_id = 2, loan_period = 5;
+INSERT INTO items SET id = 12,  book_id = 2, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 13,  book_id = 3, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 14,  book_id = 4, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 15,  book_id = 5, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 16,  book_id = 6, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 17,  book_id = 6, library_id = 2, provider_id = 1, loan_period = 7;
+INSERT INTO items SET id = 18,  book_id = 6, library_id = 2, provider_id = 1, loan_period = 7;
+
+-- Loans
+-- User: Test 1, Library: Lillevik
+INSERT INTO loans SET item_id = 10, user_id = 3, loaned = NOW() - INTERVAL 21 DAY, due = NOW() + INTERVAL 7 DAY; -- borrowed 21 days ago, due in 7 days
+INSERT INTO loans SET item_id = 14, user_id = 3, loaned = NOW() - INTERVAL 7 DAY, due = NOW(); -- due now
+INSERT INTO loans SET item_id = 15, user_id = 3, loaned = NOW(), due = NOW() + INTERVAL 7 DAY; -- borrowed now
+-- User: Test 2, Library: Lillevik
+INSERT INTO loans SET item_id = 9, user_id = 4,  loaned = NOW(), due = NOW();
+INSERT INTO loans SET item_id = 11, user_id = 4, loaned = NOW(), due = NOW();
+INSERT INTO loans SET item_id = 12, user_id = 4, loaned = NOW(), due = NOW();
 
 -- Creators
 INSERT INTO creators SET id = 1, name = 'Henrik J. Ibsen';
