@@ -5,13 +5,24 @@
 <h2>Current loans</h2>
 
 <table>
-<tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th></tr>
+<tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Time left</th></tr>
 [% FOREACH loan IN user.loans %]
     <tr>
         <td><a href="/book/[% loan.item.book.id %]">[% loan.item.book.title %]</a></td>
         <td>[% date.format( time => loan.loaned.epoch, format => '%d. %b %Y kl. %H.%M', locale => 'nb_NO' ) %]</td>
         <td>[% loan.item.loan_period %]</td>
         <td>[% date.format( time => loan.due.epoch, format => '%d. %b %Y kl. %H.%M', locale => 'nb_NO' ) %]</td>
+        <td>
+            [% IF loan.time_left.months %]
+                [% loan.time_left.months %] months, 
+            [% END %]
+            [% IF loan.time_left.weeks %]
+                [% loan.time_left.weeks %] weeks, 
+            [% END %]
+                [% loan.time_left.days %] days, 
+            [% loan.time_left.hours %] hours, 
+            [% loan.time_left.minutes %] minutes
+        </td>
     </tr>
 [% END %]
 </table>

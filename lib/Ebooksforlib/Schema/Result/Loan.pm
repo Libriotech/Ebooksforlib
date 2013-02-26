@@ -108,7 +108,8 @@ __PACKAGE__->belongs_to(
 sub time_left {
     my $self = shift;
     my $now = DateTime->now;
-    return 5;
+    my $diff = $self->due - $now;
+    return $diff;
 }
 
 1;

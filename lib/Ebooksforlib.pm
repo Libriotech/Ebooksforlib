@@ -64,7 +64,6 @@ get '/borrow/:item_id' => require_login sub {
     my $dt = DateTime->now;
     my $loan_period = DateTime::Duration->new(
         days    => $item->loan_period,
-        minutes => 60,
     );
     $dt->add_duration( $loan_period );
 
