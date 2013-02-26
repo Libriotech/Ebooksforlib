@@ -41,6 +41,43 @@ get '/book/:id' => sub {
     };
 };
 
+get '/borrow/:item_id' => require_login sub {
+
+    my $item_id = param 'item_id';
+    my $item = rset('Item')->find( $item_id );
+    my $user = rset('User')->find( session('logged_in_user_id') );
+    
+    # Check that any item of the book this item belongs to is not already on loan to the user
+    if ( _user_has_borrowed( $user, $item->book ) ) {
+        flash error => "You have already borrowed this book!";
+        return redirect '/book/' . $item->book_id;
+    }
+
+    # Calculate the due date/time
+    my $dt = DateTime->now;
+    my $loan_period = DateTime::Duration->new(
+        days    => $item->loan_period,
+        minutes => 60,
+    );
+    $dt->add_duration( $loan_period );
+    my $due = $dt->ymd . ' ' . $dt->hms;
+    debug "*** Due date: $due";
+
+    try {
+        my $new_loan = rset('Loan')->create({
+            item_id => $item_id,
+            user_id => $user->id,
+            due     => $due,
+        });
+        flash info => "You borrowed a book which is due $due!";
+        redirect '/book/' . $item->book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/book/' . $item->book_id;
+    };
+};
+
 get '/creator/:id' => sub {
     my $creator_id = param 'id';
     my $creator = rset('Creator')->find( $creator_id );
@@ -176,43 +213,6 @@ get '/my' => sub {
     debug '*** Showing My Page for user with id = ' . session('logged_in_user_id');
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     template 'my', { userdata => logged_in_user, user => $user };
-};
-
-get '/borrow/:item_id' => require_login sub {
-
-    my $item_id = param 'item_id';
-    my $item = rset('Item')->find( $item_id );
-    my $user = rset('User')->find( session('logged_in_user_id') );
-    
-    # Check that any item of the book this item belongs to is not already on loan to the user
-    if ( _user_has_borrowed( $user, $item->book ) ) {
-        flash error => "You have already borrowed this book!";
-        return redirect '/book/' . $item->book_id;
-    }
-
-    # Calculate the due date/time
-    my $dt = DateTime->now;
-    my $loan_period = DateTime::Duration->new(
-        days    => $item->loan_period,
-        minutes => 60,
-    );
-    $dt->add_duration( $loan_period );
-    my $due = $dt->ymd . ' ' . $dt->hms;
-    debug "*** Due date: $due";
-
-    try {
-        my $new_loan = rset('Loan')->create({
-            item_id => $item_id,
-            user_id => $user->id,
-            due     => $due,
-        });
-        flash info => "You borrowed a book which is due $due!";
-        redirect '/book/' . $item->book_id;
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
-        redirect '/book/' . $item->book_id;
-    };
 };
 
 get '/library/choose' => sub {
