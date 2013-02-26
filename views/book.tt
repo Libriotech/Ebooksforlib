@@ -1,4 +1,5 @@
 [% META pagetitle = 'Book page' %]
+[% USE date %]
 
 <h2>[% book.title %]</h2> 
 
@@ -79,7 +80,7 @@
                 <td>[% item.loan_period %]</td>
                 <td>
                     [% IF item.loan.due %]
-                        [% item.loan.due %]
+                        Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
                     [% ELSE %]
                         Not on loan
                         [% IF user_has_borrowed != 1 && session.logged_in_user_id %]
