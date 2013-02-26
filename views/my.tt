@@ -1,6 +1,20 @@
 [% META pagetitle = 'My page' %]
 [% USE Dumper %]
 
+<h2>Current loans</h2>
+
+<table>
+<tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th></tr>
+[% FOREACH loan IN user.loans %]
+    <tr>
+        <td><a href="/book/[% loan.item.book.id %]">[% loan.item.book.title %]</a></td>
+        <td>[% loan.loaned %]</td>
+        <td>[% loan.item.loan_period %]</td>
+        <td>[% loan.due %]</td>
+    </tr>
+[% END %]
+</table>
+
 <h2>Basic information</h2>
 
 <p>Here is the information we have about you:</p>
