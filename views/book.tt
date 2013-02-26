@@ -71,7 +71,13 @@
             <tr>
                 <td>[% item.id %]</td>
                 <td>[% item.loan_period %]</td>
-                <td>[% item.loan.due %]</td>
+                <td>
+                    [% IF item.loan.due %]
+                        [% item.loan.due %]
+                    [% ELSE %]
+                        Not on loan
+                    [% END %]
+                </td>
                 <td>
                     [% UNLESS item.loan.due %]
                         <a href="/borrow/[% item.id %]">Borrow</a>
