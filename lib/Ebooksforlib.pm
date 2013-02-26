@@ -39,6 +39,7 @@ get '/book/:id' => sub {
         my $user = rset('User')->find( session('logged_in_user_id') );
         $user_has_borrowed = _user_has_borrowed( $user, $book )
     }
+    # TODO Check the number of concurrent loans
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
@@ -56,6 +57,8 @@ get '/borrow/:item_id' => require_login sub {
         flash error => "You have already borrowed this book!";
         return redirect '/book/' . $item->book_id;
     }
+    
+    # TODO Check the number of concurrent loans
 
     # Calculate the due date/time
     my $dt = DateTime->now;
