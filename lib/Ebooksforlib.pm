@@ -172,6 +172,24 @@ get '/my' => sub {
     template 'my', { userdata => logged_in_user, user => $user };
 };
 
+get '/borrow/:item_id' => sub {
+    my $item_id = param 'item_id';
+    my $item = rset('Item')->find( $item_id );
+    my $user = rset('User')->find( session('logged_in_user_id') );
+    try {
+        my $new_loan = rset('Loan')->create({
+            item_id => $item_id,
+            user_id => $user->id,
+        });
+        flash info => 'You borrowed a book!';
+        redirect '/book/' . $item->book_id;
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+        redirect '/book/' . $item->book_id;
+    };
+};
+
 get '/library/choose' => sub {
     my @libraries = rset( 'Library' )->all;
     # debug 'referer: ' . request->referer;
