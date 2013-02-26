@@ -1,4 +1,5 @@
 [% META pagetitle = 'My page' %]
+[% USE date %]
 [% USE Dumper %]
 
 <h2>Current loans</h2>
@@ -8,9 +9,9 @@
 [% FOREACH loan IN user.loans %]
     <tr>
         <td><a href="/book/[% loan.item.book.id %]">[% loan.item.book.title %]</a></td>
-        <td>[% loan.loaned %]</td>
+        <td>[% date.format( time => loan.loaned.epoch, format => '%d. %b %Y kl. %H.%M', locale => 'nb_NO' ) %]</td>
         <td>[% loan.item.loan_period %]</td>
-        <td>[% loan.due %]</td>
+        <td>[% date.format( time => loan.due.epoch, format => '%d. %b %Y kl. %H.%M', locale => 'nb_NO' ) %]</td>
     </tr>
 [% END %]
 </table>
