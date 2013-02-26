@@ -61,11 +61,13 @@ get '/borrow/:item_id' => require_login sub {
     # TODO Check the number of concurrent loans
 
     # Calculate the due date/time
-    my $dt = DateTime->now;
+    my $dt = DateTime->now( time_zone => setting('time_zone') );
+    debug '*** Now: ' . $dt->datetime;
     my $loan_period = DateTime::Duration->new(
         days    => $item->loan_period,
     );
     $dt->add_duration( $loan_period );
+    debug '*** Due: ' . $dt->datetime;
 
     try {
         my $new_loan = rset('Loan')->create({

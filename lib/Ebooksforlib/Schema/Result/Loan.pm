@@ -105,9 +105,29 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:47:21
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JonBs2sIITRW1KZs/qCmYw
 
+use Dancer ':syntax';
+
+__PACKAGE__->add_columns(
+  "loaned",
+  {
+    data_type => "timestamp",
+    datetime_undef_if_invalid => 1,
+    default_value => \"current_timestamp",
+    is_nullable => 0,
+    timezone => setting('time_zone'),
+  },
+  "due",
+  {
+    data_type => "datetime",
+    datetime_undef_if_invalid => 1,
+    is_nullable => 1,
+    timezone => setting('time_zone'),
+  },
+);
+
 sub time_left {
     my $self = shift;
-    my $now = DateTime->now;
+    my $now = DateTime->now( time_zone => setting('time_zone'), );
     my $diff = $self->due - $now;
     return $diff;
 }

@@ -20,6 +20,7 @@ min_pass: 12
 
 date_format: "%d-%b-%Y %H:%M:%S"
 locale: "en_US"
+time_zone: 'Europe/Oslo'
 
 # The root directory where books are stored. This directory should contain 
 # numbered subfolders, one for each book. Include trailing slash. 
