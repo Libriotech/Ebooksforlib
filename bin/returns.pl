@@ -43,7 +43,7 @@ foreach my $odue ( @overdues ) {
      if ( $debug ) {
         say 'Item ' . $odue->item_id . ' - ' .  $odue->item->library->name;
         say "\t" . $odue->loaned . " -> " . $odue->due;
-        say "\t" . $odue->user->name;
+        say "\tUser: " . $odue->user->id . ' -> ' . $odue->user->username;
     }
     
     # Do the actual return
@@ -53,7 +53,7 @@ foreach my $odue ( @overdues ) {
         try {
             my $old_loan = rset('OldLoan')->create({
                 item_id  => $odue->item_id,
-                user_id  => $odue->user_id,
+                user_id  => 1,
                 loaned   => $odue->loaned,
                 due      => $odue->due,
                 returned => DateTime->now( time_zone => setting('time_zone') )
