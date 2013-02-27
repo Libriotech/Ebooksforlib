@@ -22,6 +22,7 @@
 
 [% IF book.items.size %]
     [% SET item_count = 0 %]
+    [% SET deleted_count = 0 %]
     <table>
     <tr><th>ID</th><th>Loan period</th><th>Provider</th><th>Actions</th></tr>
     [% FOREACH item IN book.items %]
@@ -36,6 +37,7 @@
                         <a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a>
                     [% ELSE %]
                         Deleted
+                        [% deleted_count = deleted_count + 1 %]
                     [% END %]
                 </td>
             </tr>
@@ -43,7 +45,7 @@
         [% END %]
     [% END %]
     </table>
-    <p>[% item_count %] items</p>
+    <p>[% item_count %] items, [% deleted_count %] deleted.</p>
 [% ELSE %]
     <p>No items, yet!</p>
 [% END %]
