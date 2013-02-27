@@ -44,6 +44,7 @@ foreach my $odue ( @overdues ) {
         say 'Item ' . $odue->item_id . ' - ' .  $odue->item->library->name;
         say "\t" . $odue->loaned . " -> " . $odue->due;
         say "\tUser: " . $odue->user->id . ' -> ' . $odue->user->username;
+        say "\tAnon: " . $odue->user->anonymize;
     }
     
     # Do the actual return
@@ -51,9 +52,14 @@ foreach my $odue ( @overdues ) {
         
         # Add an old loan
         try {
+            my $user_id = 1; # This is the hard coded anonymous user
+            if ( $odue->user->anonymize == 0 ) {
+                # Use the actual user id of the user that has had the book on loan
+                $user_id = $odue->user->id;
+            }
             my $old_loan = rset('OldLoan')->create({
                 item_id  => $odue->item_id,
-                user_id  => 1,
+                user_id  => $user_id,
                 loaned   => $odue->loaned,
                 due      => $odue->due,
                 returned => DateTime->now( time_zone => setting('time_zone') )
