@@ -31,6 +31,14 @@
     <p>You have no current loans.</p>
 [% END %]
 
+<h2>History</h2>
+
+[% IF user.anonymize == 1 %]
+    <p>Your returned loans <em>are</em> being anonymized. <a href="/anon/toggle">Change</a></p>
+[% ELSE %]
+    <p>Your returned loans are <em>not</em> being anonymized. <a href="/anon/toggle">Change</a></p>
+[% END %]
+
 <h2>Basic information</h2>
 
 <p>Here is the information we have about you:</p>

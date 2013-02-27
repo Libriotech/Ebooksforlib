@@ -1,0 +1,20 @@
+[% META pagetitle = 'Change anonymization setting' %]
+
+[% IF user.anonymize == 1 %]
+
+    <p>Your returned loans <em>are</em> being anonymized.</p>
+    <p>Some text about the implications of changing...</p>
+
+[% ELSE %]
+
+    <p>Your returned loans are <em>not</em> being anonymized.</p>
+    <p>Some text about the implications of changing...</p>
+    
+[% END %]
+
+<p>Do you want to change?</p>
+
+<p>
+<a href="/anon/toggle_ok"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+<a href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
+</p>

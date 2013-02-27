@@ -244,6 +244,28 @@ get '/library/set/:library_id' => sub {
     redirect '/library/choose';
 };
 
+get '/anon/toggle' => require_login sub {
+    my $user = rset( 'User' )->find( session('logged_in_user_id') );
+    template 'anon_toggle', { user => $user };
+};
+
+get '/anon/toggle_ok' => require_login sub {
+    my $user = rset( 'User' )->find( session('logged_in_user_id') );
+    my $new_anonymize = 0;
+    if ( $user->anonymize == 0 ) {
+        $new_anonymize = 1;
+    }
+    try {
+        $user->set_column( 'anonymize', $new_anonymize );
+        $user->update;
+        flash info => 'Your anonymization setting was updated!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+    };
+    redirect '/my';
+};
+
 ### Routes below this point require admin/superadmin privileges
 
 get '/admin' => require_role admin => sub { 
