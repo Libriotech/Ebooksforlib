@@ -514,10 +514,9 @@ get '/books/items/delete_ok/:item_id?' => require_role admin => sub {
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
     my $book = rset('Book')->find( $item->book_id );
-    # TODO Check that this item is ready to be deleted!
-    # Items with active loans should not be deleted! 
     try {
-        $item->delete;
+        $item->set_column( 'deleted', 1 );
+        $item->update;
         flash info => 'An item was deleted!';
         info "Deleted item with ID = $item_id";
         redirect '/books/items/' . $book->id;
