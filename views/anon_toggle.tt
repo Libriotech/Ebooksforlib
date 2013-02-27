@@ -15,6 +15,6 @@
 <p>Do you want to change?</p>
 
 <p>
-<a href="/anon/toggle_ok"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+<a href="/anon_toggle_ok"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
 <a href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>

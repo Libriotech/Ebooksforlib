@@ -244,12 +244,12 @@ get '/library/set/:library_id' => sub {
     redirect '/library/choose';
 };
 
-get '/anon/toggle' => require_login sub {
+get '/anon_toggle' => require_login sub {
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     template 'anon_toggle', { user => $user };
 };
 
-get '/anon/toggle_ok' => require_login sub {
+get '/anon_toggle_ok' => require_login sub {
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     my $new_anonymize = 0;
     if ( $user->anonymize == 0 ) {
@@ -263,6 +263,34 @@ get '/anon/toggle_ok' => require_login sub {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
     };
+    redirect '/my';
+};
+
+get '/anon/:id' => require_login sub {
+    my $id = param 'id';
+    my $oldloan = rset( 'OldLoan' )->find( $id );
+    template 'anon', { oldloan => $oldloan };
+};
+
+get '/anon_ok/:id' => require_login sub {
+    my $id = param 'id';
+    my $oldloan = rset( 'OldLoan' )->find({ 
+        id      => $id,
+        user_id => session('logged_in_user_id'),
+    });
+    if ( $oldloan ) {
+        try {
+            $oldloan->set_column( 'user_id', 1 );
+            $oldloan->update;
+            flash info => 'Your loan was anonymized!';
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+        };
+    } else {
+        flash error => "Sorry, could not find the right loan";
+        debug "*** item_id = $id, user_id = " . session('logged_in_user_id');
+    }
     redirect '/my';
 };
 

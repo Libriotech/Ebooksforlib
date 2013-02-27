@@ -34,9 +34,27 @@
 <h2>History</h2>
 
 [% IF user.anonymize == 1 %]
-    <p>Your returned loans <em>are</em> being anonymized. <a href="/anon/toggle">Change</a></p>
+    <p>Your returned loans <em>are</em> being anonymized. <a href="/anon_toggle">Change</a></p>
 [% ELSE %]
-    <p>Your returned loans are <em>not</em> being anonymized. <a href="/anon/toggle">Change</a></p>
+    <p>Your returned loans are <em>not</em> being anonymized. <a href="/anon_toggle">Change</a></p>
+[% END %]
+
+[% IF user.old_loans.size %]
+    <table>
+    <tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Returned</th><td></td></tr>
+    [% FOREACH loan IN user.old_loans %]
+        <tr>
+            <td><a href="/book/[% loan.item.book.id %]">[% loan.item.book.title %]</a></td>
+            <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
+            <td>[% loan.item.loan_period %]</td>
+            <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
+            <td>[% date.format( time => loan.returned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
+            <td><a href="/anon/[% loan.id %]">Anonymize</a></td>
+        </tr>
+    [% END %]
+    </table>
+[% ELSE %]
+    <p>You have no old loans (that have not been anonymized).</p>
 [% END %]
 
 <h2>Basic information</h2>

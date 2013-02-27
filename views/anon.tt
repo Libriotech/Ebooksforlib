@@ -1,0 +1,8 @@
+[% META pagetitle = 'Anonymization a single loan' %]
+
+<p>Are you sure you want to anonymize your loan of <cite>[% oldloan.item.book.title %]</cite>?</p>
+
+<p>
+<a href="/anon_ok/[% oldloan.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+<a href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
+</p>
