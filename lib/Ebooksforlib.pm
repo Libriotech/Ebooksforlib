@@ -325,8 +325,9 @@ get '/anon_all_ok' => require_login sub {
 ### Routes below this point require admin/superadmin privileges
 
 get '/admin' => require_role admin => sub { 
+    my $library = rset('Library')->find( _get_library_for_admin_user() );
     my @lists = rset('List')->search({ library_id => _get_library_for_admin_user() });
-    template 'admin', { lists => \@lists };
+    template 'admin', { library => $library, lists => \@lists };
 };
 
 get '/superadmin' => require_role superadmin => sub { 

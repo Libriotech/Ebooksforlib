@@ -29,7 +29,8 @@ DROP TABLE IF EXISTS libraries;
 CREATE TABLE libraries (
     id    INTEGER AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(255) UNIQUE KEY NOT NULL,
-    realm varchar(32)  UNIQUE KEY 
+    realm varchar(32)  UNIQUE KEY, 
+    concurrent_loans INTEGER NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_roles (
@@ -141,8 +142,8 @@ INSERT INTO users SET id = 4, username = 'test1',  name = 'Test 1', email = 'tes
 INSERT INTO users SET id = 5, username = 'test2',  name = 'Test 2', email = 'test2@example.org'; -- password = pass
 
 -- Libraries
-INSERT INTO libraries SET id = 1, name = 'Storevik', realm = 'storevik';
-INSERT INTO libraries SET id = 2, name = 'Lillevik', realm = 'lillevik';
+INSERT INTO libraries SET id = 1, name = 'Storevik', realm = 'storevik', concurrent_loans = 3;
+INSERT INTO libraries SET id = 2, name = 'Lillevik', realm = 'lillevik', concurrent_loans = 4;
 
 -- Users and roles
 INSERT INTO user_roles SET user_id = 2, role_id = 1; -- Henrik is admin at Storevik

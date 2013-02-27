@@ -38,6 +38,12 @@ __PACKAGE__->table("libraries");
   is_nullable: 1
   size: 32
 
+=head2 concurrent_loans
+
+  data_type: 'integer'
+  default_value: 1
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -47,6 +53,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 255 },
   "realm",
   { data_type => "varchar", is_nullable => 1, size => 32 },
+  "concurrent_loans",
+  { data_type => "integer", default_value => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("realm", ["realm"]);
@@ -100,8 +108,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:46:34
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jIPoOe/ycZ1pK9nmMCTyXg
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-27 16:18:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0DgRfdONpVJd85AF6RoN1w
 
 __PACKAGE__->many_to_many( users => 'user_libraries', 'user' );
 

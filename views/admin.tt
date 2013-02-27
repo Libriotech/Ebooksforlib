@@ -1,5 +1,9 @@
 [% META pagetitle = 'Admin' %]
 
+<h2>Concurrent loans</h2>
+
+<p>Users connected to your library are limited to [% library.concurrent_loans %] concurrent loans.</p>
+
 <h2>Actions</h2>
 <ul>
 <li><a href="/books/add">Add a new book</a></li>
