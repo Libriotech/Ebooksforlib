@@ -11,11 +11,12 @@ DROP TABLE IF EXISTS providers;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-    id       INTEGER     AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(32) NOT NULL       UNIQUE KEY,
-    password VARCHAR(64) NOT NULL,
-    name     VARCHAR(255),
-    email    VARCHAR(255) 
+    id        INTEGER     AUTO_INCREMENT PRIMARY KEY,
+    username  VARCHAR(32) NOT NULL       UNIQUE KEY,
+    password  VARCHAR(64) NOT NULL,
+    name      VARCHAR(255),
+    email     VARCHAR(255), 
+    anonymize INTEGER(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS roles;
