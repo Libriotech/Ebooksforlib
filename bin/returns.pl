@@ -19,7 +19,8 @@
 
 use Dancer ':script';
 use Dancer::Plugin::DBIC;
-# use DateTime;
+use Try::Tiny;
+use DateTime;
 use Getopt::Long;
 use Data::Dumper;
 use Pod::Usage;
@@ -34,17 +35,44 @@ my ( $run, $verbose, $debug ) = get_options();
 # Find the loans that have a due date in the past
 my @overdues = rset('Loan')->search({ due => \'< NOW()' });
 my $num_overdues = 0;
+my $num_returned = 0;
 my %overdues_per_library;
 foreach my $odue ( @overdues ) {
      
      # Say what we found
      if ( $debug ) {
-        say $odue->item_id . ' - ' .  $odue->item->library->name;
+        say 'Item ' . $odue->item_id . ' - ' .  $odue->item->library->name;
         say "\t" . $odue->loaned . " -> " . $odue->due;
         say "\t" . $odue->user->name;
     }
     
     # Do the actual return
+    if ( $run ) {
+        
+        # Add an old loan
+        try {
+            my $old_loan = rset('OldLoan')->create({
+                item_id  => $odue->item_id,
+                user_id  => $odue->user_id,
+                loaned   => $odue->loaned,
+                due      => $odue->due,
+                returned => DateTime->now( time_zone => setting('time_zone') )
+            });
+            say "\tAdded to old loans" if $debug;
+        } catch {
+            say "Oops, we got an error:\n$_";
+        };
+        
+        # Delete the loan
+        try {
+            $odue->delete;
+            $num_returned++;
+            say "\tRemoved from loans" if $debug;
+        } catch {
+            say "Oops, we got an error:\n$_";
+        };
+        
+    }
     
     # Do some counting
     $num_overdues++;
@@ -57,6 +85,7 @@ if ( $verbose ) {
     foreach my $library ( keys %overdues_per_library ) {
         say "\t$library: " . $overdues_per_library{ $library };
     }
+    say "Returned $num_returned loans.";
 }
 
 sub get_options {
