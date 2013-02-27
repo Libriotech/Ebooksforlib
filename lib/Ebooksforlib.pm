@@ -294,6 +294,28 @@ get '/anon_ok/:id' => require_login sub {
     redirect '/my';
 };
 
+get '/anon_all' => require_login sub {
+    template 'anon_all';
+};
+
+get '/anon_all_ok' => require_login sub {
+    my $user = rset( 'User' )->find( session('logged_in_user_id') );
+    my $num_anon = 0;
+    foreach my $oldloan ( $user->old_loans ) {
+        try {
+            $oldloan->set_column( 'user_id', 1 );
+            $oldloan->update;
+            $num_anon++;
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+            return redirect '/my';
+        };
+    } 
+    flash info => "Anonymized $num_anon loans!";
+    redirect '/my';
+};
+
 ### Routes below this point require admin/superadmin privileges
 
 get '/admin' => require_role admin => sub { 
