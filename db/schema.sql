@@ -99,6 +99,7 @@ CREATE TABLE items (
     library_id  INTEGER NOT NULL,
     provider_id INTEGER NOT NULL,
     loan_period INTEGER NOT NULL DEFAULT 0,
+    deleted     INTEGER DEFAULT 0,
     CONSTRAINT items_fk_1 FOREIGN KEY (book_id)     REFERENCES books     (id) ON DELETE CASCADE,
     CONSTRAINT items_fk_2 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE, 
     CONSTRAINT items_fk_3 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE
