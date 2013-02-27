@@ -123,7 +123,7 @@ returns.pl - Script to be run as a cron job to "return" ebooks that are due. Par
         
 =head1 SYNOPSIS
             
-perl returns.pl -r
+DANCER_ENVIRONMENT=production perl returns.pl -r
                
 =head1 OPTIONS
               
