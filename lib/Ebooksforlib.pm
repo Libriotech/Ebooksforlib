@@ -34,6 +34,11 @@ get '/' => sub {
 get '/book/:id' => sub {
     my $book_id = param 'id';
     my $book = rset('Book')->find( $book_id );
+    my @items = rset('Item')->search({
+        book_id    => $book->id, 
+        library_id => session('chosen_library'), 
+        deleted    => 0,
+    });
     my $user_has_borrowed = 0;
     if ( session('logged_in_user_id') ) {
         my $user = rset('User')->find( session('logged_in_user_id') );
@@ -43,6 +48,7 @@ get '/book/:id' => sub {
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
+        items             => \@items,
     };
 };
 

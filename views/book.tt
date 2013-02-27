@@ -70,26 +70,24 @@
     <p>You have already borrowed this book!</p>
 [% END %]
 
-[% IF book.items.size %]
+[% IF items.size %]
     <table>
     <tr><th>ID</th><th>Loan period</th><th>Loan status</th></tr>
-    [% FOREACH item IN book.items %]
-        [% IF item.library_id == session.chosen_library %]
-            <tr>
-                <td>[% item.id %]</td>
-                <td>[% item.loan_period %]</td>
-                <td>
-                    [% IF item.loan.due %]
-                        Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
-                    [% ELSE %]
-                        Not on loan
-                        [% IF user_has_borrowed != 1 && session.logged_in_user_id %]
-                            <a href="/borrow/[% item.id %]">Borrow</a>
-                        [% END %]
+    [% FOREACH item IN items %]
+        <tr>
+            <td>[% item.id %]</td>
+            <td>[% item.loan_period %]</td>
+            <td>
+                [% IF item.loan.due %]
+                    Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
+                [% ELSE %]
+                    Not on loan
+                    [% IF user_has_borrowed != 1 && session.logged_in_user_id %]
+                        <a href="/borrow/[% item.id %]">Borrow</a>
                     [% END %]
-                </td>
-            </tr>
-        [% END %]
+                [% END %]
+            </td>
+        </tr>
     [% END %]
     </table>
 [% ELSE %]
