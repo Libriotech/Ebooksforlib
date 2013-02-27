@@ -4,6 +4,13 @@
 
 <p>Users connected to your library are limited to [% library.concurrent_loans %] concurrent loans.</p>
 
+<p>Set a new limit (this will not affect books that are already on loan):</p>
+
+<form method="POST" action="/concurrent_loans">
+<input type="number" id="concurrent_loans" name="concurrent_loans" value="[% library.concurrent_loans %]" min="1" max="1000" size="3">
+<input type="submit" value="Save">
+</form>
+
 <h2>Actions</h2>
 <ul>
 <li><a href="/books/add">Add a new book</a></li>

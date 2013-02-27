@@ -899,6 +899,22 @@ get '/libraries/delete_ok/:id?' => require_role superadmin => sub {
     
 };
 
+post '/concurrent_loans' => require_role admin => sub { 
+    
+    my $concurrent_loans = param 'concurrent_loans';
+    my $library = rset('Library')->find( _get_library_for_admin_user() );
+    try {
+        $library->set_column( 'concurrent_loans', $concurrent_loans );
+        $library->update;
+        flash info => 'The number of concurrent loans was updated!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+    };
+    redirect '/admin';
+
+};
+
 ### Local users
 
 get '/users/add' => require_role superadmin => sub { 
