@@ -190,6 +190,7 @@ INSERT INTO items SET id = 18,  book_id = 6, library_id = 2, provider_id = 1, lo
 -- User: Test 1, Library: Lillevik
 INSERT INTO loans SET item_id = 10, user_id = 4, loaned = NOW() - INTERVAL 21 DAY, due = NOW() + INTERVAL 7 DAY; -- borrowed 21 days ago, due in 7 days
 INSERT INTO loans SET item_id = 14, user_id = 4, loaned = NOW() - INTERVAL 7 DAY, due = NOW(); -- due now
+INSERT INTO loans SET item_id = 16, user_id = 4, loaned = NOW() - INTERVAL 7 DAY, due = NOW(); -- due now
 INSERT INTO loans SET item_id = 15, user_id = 4, loaned = NOW(), due = NOW() + INTERVAL 7 DAY; -- borrowed now
 -- User: Test 2, Library: Lillevik
 INSERT INTO loans SET item_id = 9, user_id = 5,  loaned = NOW() - INTERVAL 7 DAY, due = NOW(); -- due now
