@@ -112,6 +112,16 @@ CREATE TABLE loans (
     CONSTRAINT loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE old_loans (
+    id       INTEGER AUTO_INCREMENT PRIMARY KEY,
+    item_id  INTEGER NOT NULL, -- item_id can occur more than once
+    user_id  INTEGER NOT NULL,
+    loaned   DATETIME NOT NULL,
+    due      DATETIME NOT NULL,
+    returned DATETIME NOT NULL,
+    CONSTRAINT old_loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
+    CONSTRAINT old_loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data
 -- TODO Split this out into a separate file

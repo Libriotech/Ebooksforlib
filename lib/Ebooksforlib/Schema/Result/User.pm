@@ -84,6 +84,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 old_loans
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::OldLoan>
+
+=cut
+
+__PACKAGE__->has_many(
+  "old_loans",
+  "Ebooksforlib::Schema::Result::OldLoan",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 user_libraries
 
 Type: has_many
@@ -115,8 +130,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:47:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+8cPs1ocxoZE7FS7idjvFA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-27 10:30:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:o54NCBrWW92s4gZn+j462g
 
 __PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
 

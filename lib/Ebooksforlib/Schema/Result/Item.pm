@@ -128,9 +128,24 @@ __PACKAGE__->might_have(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 old_loans
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:46:34
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QbkY39he0Rk74BsJmgPldA
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::OldLoan>
+
+=cut
+
+__PACKAGE__->has_many(
+  "old_loans",
+  "Ebooksforlib::Schema::Result::OldLoan",
+  { "foreign.item_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-27 10:30:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:d4LpQF8euVW5MJ7YKu7M9w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
