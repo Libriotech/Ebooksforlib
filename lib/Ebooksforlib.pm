@@ -32,19 +32,24 @@ get '/' => sub {
 };
 
 get '/book/:id' => sub {
+    
     my $book_id = param 'id';
     my $book = rset('Book')->find( $book_id );
+    
+    # Get the items for this book and library, that are not deleted
     my @items = rset('Item')->search({
         book_id    => $book->id, 
         library_id => session('chosen_library'), 
         deleted    => 0,
     });
+    
+    # Check if the user has already borrowed this book 
     my $user_has_borrowed = 0;
     if ( session('logged_in_user_id') ) {
         my $user = rset('User')->find( session('logged_in_user_id') );
         $user_has_borrowed = _user_has_borrowed( $user, $book )
     }
-    # TODO Check the number of concurrent loans
+    
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
