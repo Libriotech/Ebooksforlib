@@ -81,11 +81,18 @@ get '/borrow/:item_id' => require_login sub {
         flash error => "You have already borrowed this book!";
         return redirect '/book/' . $item->book_id;
     }
-    
-    # TODO Check the number of concurrent loans
-    
-    # FIXME Check that the user belongs to the same library as the item
 
+    # FIXME Check that the user belongs to the same library as the item
+    
+    # Check the number of concurrent loans
+    # Users should not see this, unless they try to cheat the system, because the 
+    # "Borrow" links should be hidden when they have reached the threshold
+    my $library = rset('Library')->find( session('chosen_library') );
+    if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
+        flash error => "You have already reached the number of concurrent loans for your library!";
+        return redirect '/book/' . $item->book_id;
+    }
+    
     # Calculate the due date/time
     my $dt = DateTime->now( time_zone => setting('time_zone') );
     debug '*** Now: ' . $dt->datetime;
