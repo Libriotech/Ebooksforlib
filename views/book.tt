@@ -82,7 +82,7 @@
                     Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
                 [% ELSE %]
                     Not on loan
-                    [% IF session.logged_in_user_id && user_has_borrowed != 1 && limit_reached != 1 %]
+                    [% IF session.logged_in_user_id && user_belongs_to_library == 1 && user_has_borrowed != 1 && limit_reached != 1 %]
                         <a href="/borrow/[% item.id %]">Borrow</a>
                     [% END %]
                 [% END %]
@@ -92,6 +92,9 @@
     </table>
     [% IF limit_reached == 1 %]
         <p>You have reached the maximum number of concurrent loans for this library.</p>
+    [% END %]
+    [% IF user_belongs_to_library == 0 %]
+        <p>You do not have permission to borrow books from this library.</p>
     [% END %]
 [% ELSE %]
     <p>No items, yet!</p>

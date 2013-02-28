@@ -45,9 +45,15 @@ get '/book/:id' => sub {
     
     my $user_has_borrowed = 0;
     my $limit_reached = 0;
+    my $user_belongs_to_library = 0;
     if ( session('logged_in_user_id') ) {
     
         my $user = rset('User')->find( session('logged_in_user_id') );
+    
+        # FIXME Check that the user belongs to the chosen library
+        if ( $user->belongs_to_library( session('chosen_library') ) ) {
+            $user_belongs_to_library = 1;
+        }
     
         # Check if the user has already borrowed this book
         $user_has_borrowed = _user_has_borrowed( $user, $book );
@@ -57,16 +63,15 @@ get '/book/:id' => sub {
         if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
             $limit_reached = 1;
         }
-    
+        
     }
-    
-    # FIXME Check that the user belongs to the chosen library
     
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
         items             => \@items,
         limit_reached     => $limit_reached,
+        user_belongs_to_library => $user_belongs_to_library,
     };
 };
 

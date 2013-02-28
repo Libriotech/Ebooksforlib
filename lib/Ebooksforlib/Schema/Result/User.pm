@@ -156,4 +156,14 @@ sub number_of_loans_from_library {
     return $number_of_loans;
 }
 
+sub belongs_to_library {
+    my ( $self, $library_id ) = @_;
+    foreach my $library ( $self->libraries ) {
+        if ( $library->id == $library_id ) {
+            return 1;
+        }
+    }
+    return 0;    
+}
+
 1;
