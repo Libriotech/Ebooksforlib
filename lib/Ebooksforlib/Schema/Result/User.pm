@@ -145,4 +145,15 @@ __PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
 
 __PACKAGE__->many_to_many( roles => 'user_roles', 'role' );
 
+sub number_of_loans_from_library {
+    my ( $self, $library_id ) = @_;
+    my $number_of_loans = 0;
+    foreach my $loan ( $self->loans ) {
+        if ( $loan->item->library_id == $library_id ) {
+            $number_of_loans++;
+        }
+    }
+    return $number_of_loans;
+}
+
 1;

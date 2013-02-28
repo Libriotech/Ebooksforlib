@@ -43,17 +43,28 @@ get '/book/:id' => sub {
         deleted    => 0,
     });
     
-    # Check if the user has already borrowed this book 
     my $user_has_borrowed = 0;
+    my $limit_reached = 0;
     if ( session('logged_in_user_id') ) {
+    
         my $user = rset('User')->find( session('logged_in_user_id') );
-        $user_has_borrowed = _user_has_borrowed( $user, $book )
+    
+        # Check if the user has already borrowed this book
+        $user_has_borrowed = _user_has_borrowed( $user, $book );
+
+        # Check the number of concurrent loans
+        my $library = rset('Library')->find( session('chosen_library') );
+        if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
+            $limit_reached = 1;
+        }
+    
     }
     
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
         items             => \@items,
+        limit_reached     => $limit_reached,
     };
 };
 

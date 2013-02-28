@@ -78,7 +78,7 @@
     <p>Here are the libraries you are connected to:</p>
     <ul>
     [% FOREACH l IN user.libraries %]
-    <li>[% l.name %]</li>
+    <li>[% l.name %]. Concurrent loans: [% l.concurrent_loans %]</li>
     [% END %]
     </ul>
 [% ELSE %]
