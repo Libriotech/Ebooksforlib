@@ -41,7 +41,6 @@
 [% END %]
 
 [% IF book.lists.size %]
-[%# FIXME Only display lists from relevant libraries %]
 
     <h2>Genres</h2>
     <ul>
