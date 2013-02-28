@@ -50,7 +50,7 @@ get '/book/:id' => sub {
     
         my $user = rset('User')->find( session('logged_in_user_id') );
     
-        # FIXME Check that the user belongs to the chosen library
+        # Check that the user belongs to the chosen library
         if ( $user->belongs_to_library( session('chosen_library') ) ) {
             $user_belongs_to_library = 1;
         }
