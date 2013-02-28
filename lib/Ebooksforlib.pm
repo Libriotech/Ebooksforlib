@@ -261,8 +261,12 @@ get '/my' => sub {
 
 get '/library/choose' => sub {
     my @libraries = rset( 'Library' )->all;
-    # debug 'referer: ' . request->referer;
-    template 'chooselib', { libraries => \@libraries, return_url => params->{return_url} };
+    my $user = rset( 'User' )->find( session('logged_in_user_id') );
+    template 'chooselib', { 
+        libraries          => \@libraries, 
+        return_url         => params->{return_url}, 
+        belongs_to_library => $user->belongs_to_library( session('chosen_library') ),
+    };
 };
 
 get '/library/set/:library_id' => sub {
