@@ -80,6 +80,14 @@ get '/borrow/:item_id' => require_login sub {
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
     my $user = rset('User')->find( session('logged_in_user_id') );
+
+    # Check that the user belongs to the same library as the item
+    # This should not happen, unless the user is trying to cheat the system
+    unless ( $user->belongs_to_library( $item->library_id ) ) {
+        flash error => "You are trying to borrow a book from a library you do not belong to!";
+        debug '!!! User ' . $user->id . ' tried to borrow item ' . $item->id . ' which does not belong to the users library';
+        return redirect '/book/' . $item->book_id;
+    }
     
     # Check that any item of the book this item belongs to is not already on loan to the user
     if ( _user_has_borrowed( $user, $item->book ) ) {
@@ -87,8 +95,6 @@ get '/borrow/:item_id' => require_login sub {
         return redirect '/book/' . $item->book_id;
     }
 
-    # FIXME Check that the user belongs to the same library as the item
-    
     # Check the number of concurrent loans
     # Users should not see this, unless they try to cheat the system, because the 
     # "Borrow" links should be hidden when they have reached the threshold
