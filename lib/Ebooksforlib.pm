@@ -268,11 +268,15 @@ get '/my' => sub {
 
 get '/library/choose' => sub {
     my @libraries = rset( 'Library' )->all;
-    my $user = rset( 'User' )->find( session('logged_in_user_id') );
+    my $belongs_to_library = 0;
+    if ( session('logged_in_user_id') ) {
+        my $user = rset( 'User' )->find( session('logged_in_user_id') );
+        $belongs_to_library = $user->belongs_to_library( session('chosen_library') )
+    }
     template 'chooselib', { 
         libraries          => \@libraries, 
         return_url         => params->{return_url}, 
-        belongs_to_library => $user->belongs_to_library( session('chosen_library') ),
+        belongs_to_library => $belongs_to_library,
     };
 };
 
