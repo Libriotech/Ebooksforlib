@@ -6,9 +6,10 @@
 
 [% IF user.loans.size %]
     <table>
-    <tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Time left</th></tr>
+    <tr><th>Library</th><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Time left</th></tr>
     [% FOREACH loan IN user.loans %]
         <tr>
+            <td>[% loan.item.library.name %]</td>
             <td><a href="/book/[% loan.item.book.id %]">[% loan.item.book.title %]</a></td>
             <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
             <td>[% loan.item.loan_period %]</td>
