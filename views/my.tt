@@ -79,7 +79,7 @@
     <p>Here are the libraries you are connected to:</p>
     <ul>
     [% FOREACH l IN user.libraries %]
-    <li>[% l.name %]. Concurrent loans: [% l.concurrent_loans %]</li>
+    <li>[% l.name %]. Concurrent loans: [% l.concurrent_loans %]. You have: [% user.number_of_loans_from_library( l.id ) %].</li>
     [% END %]
     </ul>
 [% ELSE %]
