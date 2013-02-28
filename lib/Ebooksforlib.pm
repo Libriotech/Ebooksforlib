@@ -101,6 +101,7 @@ get '/borrow/:item_id' => require_login sub {
     my $library = rset('Library')->find( session('chosen_library') );
     if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
         flash error => "You have already reached the number of concurrent loans for your library!";
+        debug '!!! User ' . $user->id . ' tried to borrow too many books';
         return redirect '/book/' . $item->book_id;
     }
     
