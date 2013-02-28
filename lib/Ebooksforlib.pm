@@ -60,6 +60,8 @@ get '/book/:id' => sub {
     
     }
     
+    # FIXME Check that the user belongs to the chosen library
+    
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
@@ -81,6 +83,8 @@ get '/borrow/:item_id' => require_login sub {
     }
     
     # TODO Check the number of concurrent loans
+    
+    # FIXME Check that the user belongs to the same library as the item
 
     # Calculate the due date/time
     my $dt = DateTime->now( time_zone => setting('time_zone') );
