@@ -1225,11 +1225,12 @@ get '/rest/listbooks/:id' => sub {
     foreach my $loan ( $user->loans ) {
         debug "Loan: " . $loan->loaned;
         my %loan;
-        $loan{'bookid'}  = $loan->item->book->id;
-        $loan{'loaned'}  = $loan->loaned->datetime;
-        $loan{'due'}     = $loan->due->datetime;
-        $loan{'title'}   = $loan->item->book->title;
-        $loan{'creator'} = $loan->item->book->creators_as_string;
+        $loan{'bookid'}   = $loan->item->book->id;
+        $loan{'loaned'}   = $loan->loaned->datetime;
+        $loan{'due'}      = $loan->due->datetime;
+        $loan{'title'}    = $loan->item->book->title;
+        $loan{'language'} = 'no'; # FIXME Make this part of the schema
+        $loan{'creator'}  = $loan->item->book->creators_as_string;
         push @loans, \%loan;
     }
     return \@loans;
