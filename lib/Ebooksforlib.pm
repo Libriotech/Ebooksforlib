@@ -1225,6 +1225,7 @@ get '/rest/listbooks/:id' => sub {
     foreach my $loan ( $user->loans ) {
         debug "Loan: " . $loan->loaned;
         my %loan;
+        $loan{'bookid'} = $loan->item->book->id;
         $loan{'loaned'} = $loan->loaned->datetime;
         $loan{'due'}    = $loan->due->datetime;
         $loan{'title'}  = $loan->item->book->title;
