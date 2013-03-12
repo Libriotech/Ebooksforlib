@@ -18,8 +18,12 @@ hook 'before' => sub {
     
     # Force users to choose a library
     unless ( session('chosen_library') && session('chosen_library_name') ) {
+        # Some pages must be reachable without choosing a library 
         # To exempt the front page, include this below: || request->path eq '/'
-        unless ( request->path =~ /\/library\/.*/ || request->path =~ /\/log\/.*/ ) {
+        unless ( request->path =~ /\/library\/.*/ || # Let users choose a library
+                 request->path =~ /\/log\/.*/ ||     # Let users log in
+                 request->path =~ /\/rest\/.*/       # Don't force choosing a library for the API
+               ) {
             return redirect '/library/choose?return_url=' . request->path();
         }
     }
@@ -1212,20 +1216,21 @@ get '/rest/logout' => sub {
 
 };
 
-get '/rest/listbooks' => sub {
+get '/rest/listbooks/:id' => sub {
 
-    return [ 
-        { 
-            bid    => 1, 
-            title  => 'Three men in a boat', 
-            author => 'Jerome K. Jerome'
-        },
-        { 
-            bid    => 2, 
-            title  => 'Brand', 
-            author => 'Henrik Ibsen' 
-        },
-    ];
+    my $user_id = param 'id';
+    my $user = rset('User')->find( $user_id );
+    debug "*** /rest/listbooks for user = $user_id";
+    my @loans;
+    foreach my $loan ( $user->loans ) {
+        debug "Loan: " . $loan->loaned;
+        my %loan;
+        $loan{'loaned'} = $loan->loaned->datetime;
+        $loan{'due'}    = $loan->due->datetime;
+        $loan{'title'}  = $loan->item->book->title;
+        push @loans, \%loan;
+    }
+    return \@loans;
 
 };
 
