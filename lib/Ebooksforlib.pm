@@ -1228,6 +1228,7 @@ get '/rest/listbooks/:id' => sub {
         $loan{'bookid'}   = $loan->item->book->id;
         $loan{'loaned'}   = $loan->loaned->datetime;
         $loan{'due'}      = $loan->due->datetime;
+        $loan{'expires'}  = $loan->due->epoch; # Same as 'due', but in seconds since epoch
         $loan{'title'}    = $loan->item->book->title;
         $loan{'language'} = 'no'; # FIXME Make this part of the schema
         $loan{'creator'}  = $loan->item->book->creators_as_string;
