@@ -132,4 +132,14 @@ sub time_left {
     return $diff;
 }
 
+sub overdue {
+    my $self = shift;
+    my $now = DateTime->now( time_zone => setting('time_zone'), );
+    if ( $self->due < $now ) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 1;

@@ -15,15 +15,19 @@
             <td>[% loan.item.loan_period %]</td>
             <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
             <td>
-                [% IF loan.time_left.months %]
-                    [% loan.time_left.months %] months, 
+                [% IF loan.overdue == 1 %]
+                    overdue
+                [% ELSE %]
+                    [% IF loan.time_left.months %]
+                        [% loan.time_left.months %] months, 
+                    [% END %]
+                    [% IF loan.time_left.weeks %]
+                        [% loan.time_left.weeks %] weeks, 
+                    [% END %]
+                        [% loan.time_left.days %] days, 
+                    [% loan.time_left.hours %] hours, 
+                    [% loan.time_left.minutes %] minutes
                 [% END %]
-                [% IF loan.time_left.weeks %]
-                    [% loan.time_left.weeks %] weeks, 
-                [% END %]
-                    [% loan.time_left.days %] days, 
-                [% loan.time_left.hours %] hours, 
-                [% loan.time_left.minutes %] minutes
             </td>
         </tr>
     [% END %]
