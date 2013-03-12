@@ -115,4 +115,18 @@ __PACKAGE__->many_to_many( lists => 'list_books', 'list' );
 
 __PACKAGE__->many_to_many( libraries => 'items', 'library' );
 
+sub creators_as_string {
+    my $self = shift;
+    my $creator = '';
+    my $counter = 0;
+    foreach my $c ( $self->creators ) {
+        if ( $counter > 0 ) {
+            $creator .= '; ';
+        }
+        $creator .= $c->name;
+        $counter++;
+    }
+    return $creator;
+}
+
 1;
