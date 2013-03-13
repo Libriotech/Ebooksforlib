@@ -1233,6 +1233,7 @@ get '/rest/listbooks/:id' => sub {
         $loan{'name'}     = $loan->item->book->title;
         $loan{'language'} = 'no'; # FIXME Make this part of the schema
         $loan{'creator'}  = $loan->item->book->creators_as_string;
+        $loan{'author'}   = $loan->item->book->creators_as_string;
         push @loans, \%loan;
     }
     return \@loans;
