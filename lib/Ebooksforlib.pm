@@ -34,10 +34,12 @@ hook 'before' => sub {
 get '/' => sub {
     # Only show books that are available to the chosen library
     # Users should not see the front page without logging in or choosing a library
-    my @books = rset('Book')->search(
-        { 'items.library_id' => session('chosen_library') },
-        { join => 'items', group_by => [qw{ id }] }
-    );
+    my @books = rset('Book')->search({
+        'items.library_id' => session('chosen_library')
+    }, {
+        join     => { 'files' => 'items' },
+        group_by => [qw{ id }]
+    });
     template 'index', { books => \@books };
 };
 
