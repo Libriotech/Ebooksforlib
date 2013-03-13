@@ -75,17 +75,17 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 items
+=head2 files
 
 Type: has_many
 
-Related object: L<Ebooksforlib::Schema::Result::Item>
+Related object: L<Ebooksforlib::Schema::Result::File>
 
 =cut
 
 __PACKAGE__->has_many(
-  "items",
-  "Ebooksforlib::Schema::Result::Item",
+  "files",
+  "Ebooksforlib::Schema::Result::File",
   { "foreign.book_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -106,8 +106,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:46:34
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7vuq9hilTYdx9mFnPA5UPw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-13 14:51:31
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:74Re3h8WSBr/kFXv6rK/mg
 
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 

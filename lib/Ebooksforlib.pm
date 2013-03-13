@@ -48,9 +48,11 @@ get '/book/:id' => sub {
     
     # Get the items for this book and library, that are not deleted
     my @items = rset('Item')->search({
-        book_id    => $book->id, 
-        library_id => session('chosen_library'), 
-        deleted    => 0,
+        library_id     => session('chosen_library'),
+        'file.book_id' => $book->id,
+        deleted        => 0,
+    }, {
+        join => 'file',
     });
     
     my $user_has_borrowed = 0;
@@ -1427,7 +1429,7 @@ sub hash_pkey{
 sub _user_has_borrowed {
     my ( $user, $book ) = @_;
     foreach my $loan ( $user->loans ) {
-        if ( $loan->item->book->id == $book->id ) {
+        if ( $loan->item->file->book->id == $book->id ) {
             return 1;
         } else {
             return 0;
