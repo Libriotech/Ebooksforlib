@@ -1216,9 +1216,9 @@ get '/rest/logout' => sub {
 
 };
 
-get '/rest/listbooks/:id' => sub {
+get '/rest/listbooks' => sub {
 
-    my $user_id = param 'id';
+    my $user_id = param 'uid';
     my $user = rset('User')->find( $user_id );
     debug "*** /rest/listbooks for user = $user_id";
     my @loans;
