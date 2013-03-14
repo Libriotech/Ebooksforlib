@@ -26,7 +26,6 @@
     <table>
     <tr><th>File ID</th><th>Provider</th><th>Item ID</th><th>Loan period</th><th>Actions</th></tr>
     [% FOREACH file IN book.files %]
-    [% file.id %]
         [% FOREACH item IN file.items %]
             [% IF item.library_id == library_id %]
                 <tr>
