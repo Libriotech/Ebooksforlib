@@ -63,6 +63,8 @@ days
 <input type="submit" value="now">.
 </form>
 
+<p>(Deleted items will not be affected.)</p>
+
 <h2>Add more items</h2>
 
 <form method="POST" action="/books/items/add">

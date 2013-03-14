@@ -559,7 +559,13 @@ post '/books/items/editall' => require_role admin => sub {
     my $book_id     = param 'book_id';
     my $loan_period = param 'loan_period';
     my $library_id  = _get_library_for_admin_user();
-    my @items = rset('Item')->search({ book_id => $book_id, library_id => $library_id });
+    my @items = rset('Item')->search({
+        'file.book_id' => $book_id,
+        library_id     => $library_id,
+        deleted        => 0
+    }, {
+        join => 'file'
+    });
     
     my $edited_items_count = 0;
     foreach my $item ( @items ) {
