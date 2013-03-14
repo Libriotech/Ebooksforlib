@@ -1241,6 +1241,7 @@ get '/rest/listbooks' => sub {
 };
 
 get '/rest/getbook' => sub {
+    header 'X-Book-Package' => 'raw';
     return send_file( 
         config->{books_root} . '1/book-1.epub', 
         system_path  => 1, 
