@@ -545,11 +545,11 @@ post '/books/items/edit' => require_role admin => sub {
         $item->set_column( 'loan_period', $loan_period );
         $item->update;
         flash info => 'An item was updated!';
-        redirect '/books/items/' . $item->book_id;
+        redirect '/books/items/' . $item->file->book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
-        redirect '/books/items/' . $item->book_id;
+        redirect '/books/items/' . $item->file->book_id;
     };
 
 };
