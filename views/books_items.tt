@@ -20,28 +20,32 @@
 
 <h2>Current items</h2>
 
-[% IF book.items.size %]
+[% IF book.files.size %]
     [% SET item_count = 0 %]
     [% SET deleted_count = 0 %]
     <table>
-    <tr><th>ID</th><th>Loan period</th><th>Provider</th><th>Actions</th></tr>
-    [% FOREACH item IN book.items %]
-        [% IF item.library_id == library_id %]
-            <tr>
-                <td>[% item.id %]</td>
-                <td>[% item.loan_period %]</td>
-                <td>[% item.provider.name %]</td>
-                <td>
-                    [% IF item.deleted == 0 %]
-                        <a href="/books/items/edit/[% item.id %]"><img src="/images/clock_edit.png" height="16" width="16" alt="Change the loan period for this item" title="Change the loan period for this item"></a>
-                        <a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a>
-                    [% ELSE %]
-                        Deleted
-                        [% deleted_count = deleted_count + 1 %]
-                    [% END %]
-                </td>
-            </tr>
-            [% item_count = item_count + 1 %]
+    <tr><th>File ID</th><th>Provider</th><th>Item ID</th><th>Loan period</th><th>Actions</th></tr>
+    [% FOREACH file IN book.files %]
+    [% file.id %]
+        [% FOREACH item IN file.items %]
+            [% IF item.library_id == library_id %]
+                <tr>
+                    <td>[% file.id %]</td>
+                    <td>[% file.provider.name %]</td>
+                    <td>[% item.id %]</td>
+                    <td>[% item.loan_period %]</td>
+                    <td>
+                        [% IF item.deleted == 0 %]
+                            <a href="/books/items/edit/[% item.id %]"><img src="/images/clock_edit.png" height="16" width="16" alt="Change the loan period for this item" title="Change the loan period for this item"></a>
+                            <a href="/books/items/delete/[% item.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this item" title="Delete this item"></a>
+                        [% ELSE %]
+                            Deleted
+                            [% deleted_count = deleted_count + 1 %]
+                        [% END %]
+                    </td>
+                </tr>
+                [% item_count = item_count + 1 %]
+            [% END %]
         [% END %]
     [% END %]
     </table>
