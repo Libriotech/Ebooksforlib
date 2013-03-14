@@ -618,7 +618,7 @@ get '/books/items/delete_ok/:item_id?' => require_role admin => sub {
     
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
-    my $book = rset('Book')->find( $item->book_id );
+    my $book = rset('Book')->find( $item->file->book_id );
     try {
         $item->set_column( 'deleted', 1 );
         $item->update;
