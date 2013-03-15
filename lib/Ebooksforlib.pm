@@ -439,6 +439,35 @@ get '/superadmin' => require_role superadmin => sub {
     };
 };
 
+### Files
+
+# FIXME This only handles new files at the moment, not updating old ones
+
+post '/files/add' => require_role admin => sub {
+
+    my $book_id     = param 'book_id';
+    my $provider_id = param 'provider_id';
+    my $library_id  = _get_library_for_admin_user();
+    my $file        = upload( 'bookfile' );
+
+    try {
+        my $new_file = rset('File')->create({
+            book_id     => $book_id,
+            provider_id => $provider_id,
+            library_id  => $library_id,
+            file        => $file->content,
+        });
+        # debug "Content: " . $file->content;
+        flash info => 'A new file was added!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+    };
+    redirect '/books/items/' . $book_id;
+
+};
+
+
 ### Providers
 
 get '/providers/add' => require_role superadmin => sub {
@@ -535,7 +564,8 @@ get '/books/items/:book_id' => require_role admin => sub {
             ]
         ]
     }, {
-        group_by => [qw/ id /]
+        group_by => [qw/ id /],
+        columns => [ 'id', 'book_id', 'provider_id', 'library_id' ]
     });
     my @providers  = rset('Provider')->all;
     template 'books_items', { book => $book, library_id => $library_id, files => \@files, providers => \@providers };
@@ -1414,14 +1444,18 @@ get '/rest/:action' => sub {
         
     } elsif ( $action eq 'getbook' ) {
     
-        header 'X-Book-Package' => 'raw';
-        return send_file( 
-            config->{books_root} . '1/book-1.epub', 
-            system_path  => 1, 
-            content_type => 'application/epub+zip', 
-            filename     => 'book-1.epub'
-        );
-    
+        my $book_id = param 'bookid';
+        my $file_id = param 'file_id'; # FIXME This should not be used - use a combo of book and user instead
+
+        my $file = rset('File')->find( $file_id );
+        my $content = $file->file;
+
+        return send_file(
+            \$content,
+            content_type => 'application/epub+zip',
+            filename     => 'book-' . $file_id . '.epub'
+        );   
+ 
     }
 
 };

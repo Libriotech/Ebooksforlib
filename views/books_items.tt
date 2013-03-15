@@ -107,3 +107,34 @@ days
 <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
 <input type="submit" value="now">.
 </form>
+
+<h2>Add or replace files</h2>
+
+<form method="POST" action="/files/add" enctype="multipart/form-data">
+<input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
+Upload a file from provider
+<select name="provider_id" id="provider_id">
+[% FOREACH provider IN providers %]
+    [% already_provides_book = 0 %]
+    [% FOREACH file IN provider.files %]
+        [%# FIXME Not very efficient, but not sure how it could be done better %]
+        [% IF file.book_id == book.id %]
+            [% already_provides_book = 1 %]
+            [% LAST %]
+        [% END %]
+    [% END %]
+
+    <option value="[% provider.id %]">[% provider.name %]
+        [% IF already_provides_book == 1 %]
+            (replace)
+        [% ELSE %]
+            (new)
+        [% END %]
+    </option>
+[% END %]
+</select>
+<br />
+File: <input type="file" name="bookfile" id="bookfile"/>
+<br />
+<input type="submit" value="Upload">
+</form>
