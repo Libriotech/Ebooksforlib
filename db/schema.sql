@@ -100,9 +100,12 @@ CREATE TABLE files (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
     book_id     INTEGER NOT NULL,
     provider_id INTEGER NOT NULL,
+    library_id  INTEGER,
     file        LONGBLOB,
+    UNIQUE ( book_id, provider_id, library_id ), -- there should only be one file per book, provider and library
     CONSTRAINT files_fk_1 FOREIGN KEY (book_id)     REFERENCES books     (id) ON DELETE CASCADE,
-    CONSTRAINT files_fk_2 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE
+    CONSTRAINT files_fk_2 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE,
+    CONSTRAINT files_fk_3 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE items (
@@ -176,31 +179,27 @@ INSERT INTO providers SET id = 1, name = 'Provider A', description = 'This is ou
 INSERT INTO providers SET id = 2, name = 'Provider B', description = 'This is our second provider.';
 
 -- Files
--- Storevik
-INSERT INTO files SET id = 1,  book_id = 1, provider_id = 1;
-INSERT INTO files SET id = 2,  book_id = 1, provider_id = 1;
+-- Common files, not restricted to one library
 INSERT INTO files SET id = 3,  book_id = 1, provider_id = 2;
-INSERT INTO files SET id = 4,  book_id = 2, provider_id = 1;
-INSERT INTO files SET id = 5,  book_id = 3, provider_id = 1;
-INSERT INTO files SET id = 6,  book_id = 4, provider_id = 1;
-INSERT INTO files SET id = 7,  book_id = 5, provider_id = 1;
-INSERT INTO files SET id = 8,  book_id = 6, provider_id = 1;
+-- Storevik
+INSERT INTO files SET id = 1,  book_id = 1, provider_id = 1, library_id = 1;
+INSERT INTO files SET id = 4,  book_id = 2, provider_id = 1, library_id = 1;
+INSERT INTO files SET id = 5,  book_id = 3, provider_id = 1, library_id = 1;
+INSERT INTO files SET id = 6,  book_id = 4, provider_id = 1, library_id = 1;
+INSERT INTO files SET id = 7,  book_id = 5, provider_id = 1, library_id = 1;
+INSERT INTO files SET id = 8,  book_id = 6, provider_id = 1, library_id = 1;
 -- Lillevik
-INSERT INTO files SET id = 9,  book_id = 1, provider_id = 1;
-INSERT INTO files SET id = 10, book_id = 1, provider_id = 1;
-INSERT INTO files SET id = 11, book_id = 1, provider_id = 2;
-INSERT INTO files SET id = 12, book_id = 2, provider_id = 1;
-INSERT INTO files SET id = 13, book_id = 3, provider_id = 1;
-INSERT INTO files SET id = 14, book_id = 4, provider_id = 1;
-INSERT INTO files SET id = 15, book_id = 5, provider_id = 1;
-INSERT INTO files SET id = 16, book_id = 6, provider_id = 1;
-INSERT INTO files SET id = 17, book_id = 6, provider_id = 1;
-INSERT INTO files SET id = 18, book_id = 6, provider_id = 1;
+INSERT INTO files SET id = 9,  book_id = 1, provider_id = 1, library_id = 2;
+INSERT INTO files SET id = 12, book_id = 2, provider_id = 1, library_id = 2;
+INSERT INTO files SET id = 13, book_id = 3, provider_id = 1, library_id = 2;
+INSERT INTO files SET id = 14, book_id = 4, provider_id = 1, library_id = 2;
+INSERT INTO files SET id = 15, book_id = 5, provider_id = 1, library_id = 2;
+INSERT INTO files SET id = 16, book_id = 6, provider_id = 1, library_id = 2;
 
 -- Items
 -- Storevik
 INSERT INTO items SET id = 1,  library_id = 1, file_id = 1, loan_period = 7;
-INSERT INTO items SET id = 2,  library_id = 1, file_id = 2, loan_period = 28;
+INSERT INTO items SET id = 2,  library_id = 1, file_id = 1, loan_period = 28;
 INSERT INTO items SET id = 3,  library_id = 1, file_id = 3, loan_period = 5;
 INSERT INTO items SET id = 4,  library_id = 1, file_id = 4, loan_period = 7;
 INSERT INTO items SET id = 5,  library_id = 1, file_id = 5, loan_period = 7;
@@ -209,15 +208,15 @@ INSERT INTO items SET id = 7,  library_id = 1, file_id = 7, loan_period = 7;
 INSERT INTO items SET id = 8,  library_id = 1, file_id = 8, loan_period = 7;
 -- Lillevik
 INSERT INTO items SET id = 9,  library_id = 2, file_id = 9, loan_period = 7;
-INSERT INTO items SET id = 10, library_id = 2, file_id = 10, loan_period = 28;
-INSERT INTO items SET id = 11, library_id = 2, file_id = 11, loan_period = 5;
+INSERT INTO items SET id = 10, library_id = 2, file_id = 9, loan_period = 28;
+INSERT INTO items SET id = 11, library_id = 2, file_id = 3, loan_period = 5;
 INSERT INTO items SET id = 12, library_id = 2, file_id = 12, loan_period = 7;
 INSERT INTO items SET id = 13, library_id = 2, file_id = 13, loan_period = 7;
 INSERT INTO items SET id = 14, library_id = 2, file_id = 14, loan_period = 7;
 INSERT INTO items SET id = 15, library_id = 2, file_id = 15, loan_period = 7;
 INSERT INTO items SET id = 16, library_id = 2, file_id = 16, loan_period = 7;
-INSERT INTO items SET id = 17, library_id = 2, file_id = 17, loan_period = 7;
-INSERT INTO items SET id = 18, library_id = 2, file_id = 18, loan_period = 7;
+INSERT INTO items SET id = 17, library_id = 2, file_id = 16, loan_period = 7;
+INSERT INTO items SET id = 18, library_id = 2, file_id = 16, loan_period = 7;
 
 -- Loans
 -- User: Test 1, Library: Lillevik

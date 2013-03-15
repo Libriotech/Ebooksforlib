@@ -38,6 +38,12 @@ __PACKAGE__->table("files");
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 library_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =head2 file
 
   data_type: 'longblob'
@@ -52,10 +58,13 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "provider_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "library_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "file",
   { data_type => "longblob", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint("book_id", ["book_id", "provider_id", "library_id"]);
 
 =head1 RELATIONS
 
@@ -89,6 +98,26 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
+=head2 library
+
+Type: belongs_to
+
+Related object: L<Ebooksforlib::Schema::Result::Library>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "library",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "library_id" },
+  {
+    is_deferrable => 1,
+    join_type     => "LEFT",
+    on_delete     => "CASCADE",
+    on_update     => "CASCADE",
+  },
+);
+
 =head2 items
 
 Type: has_many
@@ -105,8 +134,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-13 14:51:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cgdwyABpi0vR7INeb5hTFA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-15 13:49:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PXOuLi7fVD4X/AyYqV/KFA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

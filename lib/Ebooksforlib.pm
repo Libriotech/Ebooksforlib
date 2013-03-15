@@ -50,9 +50,9 @@ get '/book/:id' => sub {
     
     # Get the items for this book and library, that are not deleted
     my @items = rset('Item')->search({
-        library_id     => session('chosen_library'),
-        'file.book_id' => $book->id,
-        deleted        => 0,
+        'file.library_id' => session('chosen_library'),
+        'file.book_id'    => $book->id,
+        deleted           => 0,
     }, {
         join => 'file',
     });
@@ -523,11 +523,22 @@ get '/providers/delete_ok/:id?' => require_role superadmin => sub {
 ### Items
 
 get '/books/items/:book_id' => require_role admin => sub {
-    my $book_id = param 'book_id';
-    my $book    = rset('Book')->find( $book_id );
+    my $book_id    = param 'book_id';
+    my $book       = rset('Book')->find( $book_id );
     my $library_id = _get_library_for_admin_user();
+    my @files      = rset('File')->search({
+        -and => [
+            'book_id'    => $book_id,
+            -or => [
+                'library_id' => $library_id,
+                'library_id' => { '=', undef }
+            ]
+        ]
+    }, {
+        group_by => [qw/ id /]
+    });
     my @providers  = rset('Provider')->all;
-    template 'books_items', { book => $book, library_id => $library_id, providers => \@providers };
+    template 'books_items', { book => $book, library_id => $library_id, files => \@files, providers => \@providers };
 };
 
 get '/books/items/edit/:item_id' => require_role admin => sub {
@@ -593,20 +604,19 @@ get '/books/items/delete/:item_id' => require_role admin => sub {
 
 post '/books/items/add' => require_role admin => sub {
 
-    my $book_id     = param 'book_id';
-    my $num_copies  = param 'num_copies';
-    my $loan_period = param 'loan_period';
-    my $provider_id = param 'provider_id';
     my $library_id  = _get_library_for_admin_user();
+    my $file_id     = param 'file_id';
+    my $loan_period = param 'loan_period';
+    my $num_copies  = param 'num_copies';
+    my $book_id     = param 'book_id';
     
     my $new_items_count = 0;
     for ( 1..$num_copies ) {
         try {
             my $new_item = rset('Item')->create({
-                book_id     => $book_id,
-                loan_period => $loan_period,
                 library_id  => $library_id,
-                provider_id => $provider_id
+                file_id     => $file_id,
+                loan_period => $loan_period,
             });
             $new_items_count++;
         } catch {

@@ -67,13 +67,38 @@ days
 
 <h2>Add more items</h2>
 
+<h3>Existing files for this book</h3>
+<table>
+<tr><th>File ID</th><th>Provider</th><th>Number of existing items</th></tr>
+[% FOREACH file IN files %]
+<tr>
+    <td>[% file.id %]</td>
+    <td>[% file.provider.name %]</td>
+    <td>
+        [% number_of_items = 0 %]
+        [% number_of_deleted_items = 0 %]
+        [% FOREACH item IN file.items %]
+            [% IF item.library_id == library_id %]
+                [% IF item.deleted == 0 %]
+                    [% number_of_items = number_of_items + 1 %]
+                [% ELSE %]
+                    [% number_of_deleted_items = number_of_deleted_items + 1 %]
+                [% END %]
+            [% END %]
+        [% END %]
+        [% number_of_items %][% IF number_of_deleted_items > 0 %] (and [% number_of_deleted_items %] deleted)[% END %]
+    </td>
+</tr>
+[% END %]
+</table>
+
 <form method="POST" action="/books/items/add">
 Add 
 <input type="number" id="num_copies" name="num_copies" value="1" min="1" max="1000" size="3"> 
 copies from 
-<select name="provider_id" id="provider_id">
-[% FOREACH provider IN providers %]
-<option value="[% provider.id %]">[% provider.name %]</option>
+<select name="file_id" id="file_id">
+[% FOREACH file IN files %]
+<option value="[% file.id %]">File #[% file.id %] from [% file.provider.name %]</option>
 [% END %]
 </select>
 with a loan period of 

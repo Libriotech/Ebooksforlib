@@ -62,6 +62,21 @@ __PACKAGE__->add_unique_constraint("name", ["name"]);
 
 =head1 RELATIONS
 
+=head2 files
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::File>
+
+=cut
+
+__PACKAGE__->has_many(
+  "files",
+  "Ebooksforlib::Schema::Result::File",
+  { "foreign.library_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 items
 
 Type: has_many
@@ -108,8 +123,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-27 16:18:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0DgRfdONpVJd85AF6RoN1w
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-14 15:41:27
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rSHqe7Cft8atIIBILflY7w
 
 __PACKAGE__->many_to_many( users => 'user_libraries', 'user' );
 
