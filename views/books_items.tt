@@ -53,6 +53,8 @@
     <p>No items, yet!</p>
 [% END %]
 
+<hr />
+
 <h2>Change loan period for all items</h2>
 
 <form method="POST" action="/books/items/editall">
@@ -64,6 +66,8 @@ days
 </form>
 
 <p>(Deleted items will not be affected.)</p>
+
+<hr />
 
 <h2>Add more items</h2>
 
@@ -107,6 +111,8 @@ days
 <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
 <input type="submit" value="now">.
 </form>
+
+<hr />
 
 <h2>Add or replace files</h2>
 
