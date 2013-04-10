@@ -246,17 +246,17 @@ post '/log/in' => sub {
         # Set a cookie that can be used by the reader app to check if users 
         # are logged in etc, unlesss this cookie already exists and matches the
         # user we are logging in now
-        my $set_ebib_cookie = 0;
+        my $set_ebib_cookie = 1;
         if ( cookie 'ebib' ) {
             # Should we set a new cookie? 
             debug cookie 'ebib';
             my $cookie = from_json( cookie 'ebib' );
             debug Dumper $cookie;
-            if ( $cookie->{'uid'} ne $new_user->id || $cookie->{'username'} ne $new_user->username ) {
-                $set_ebib_cookie = 1;
-                debug "*** We should set a cookie";
+            if ( $cookie->{'uid'} eq $new_user->id && $cookie->{'username'} eq $new_user->username ) {
+                $set_ebib_cookie = 0;
+                debug "*** We should NOT set a new cookie";
             } else {
-                debug "*** We should NOT set a cookie";
+                debug "*** We should set a new cookie";
             }
         }
         if ( $set_ebib_cookie ) {
