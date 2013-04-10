@@ -262,7 +262,7 @@ post '/log/in' => sub {
         if ( $set_ebib_cookie ) {
             # Set a new cookie
             my $now = DateTime->now;
-            my $hash = md5_hex( $new_user->id . $new_user->username . $new_user->name . $now->datetime() );
+            my $hash = md5_hex( $new_user->id . $new_user->username . $now->datetime() );
             my %data = (
                 'uid'      => $new_user->id,
                 'username' => $new_user->username,
