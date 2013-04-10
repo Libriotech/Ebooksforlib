@@ -5,6 +5,7 @@ use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Crypt::SaltedHash;
+use Digest::MD5 qw( md5_hex );;
 use DateTime;
 use DateTime::Duration;
 use Data::Dumper; # DEBUG 
@@ -241,6 +242,36 @@ post '/log/in' => sub {
         # Set the realm to be the local database so that further calls to 
         # logged_in_user will talk to the database, not SIP2
         session logged_in_user_realm => 'local';
+        
+        # Set a cookie that can be used by the reader app to check if users 
+        # are logged in etc, unlesss this cookie already exists and matches the
+        # user we are logging in now
+        my $set_ebib_cookie = 0;
+        if ( cookie 'ebib' ) {
+            # Should we set a new cookie? 
+            debug cookie 'ebib';
+            my $cookie = from_json( cookie 'ebib' );
+            debug Dumper $cookie;
+            if ( $cookie->{'uid'} ne $new_user->id || $cookie->{'username'} ne $new_user->username ) {
+                $set_ebib_cookie = 1;
+                debug "*** We should set a cookie";
+            } else {
+                debug "*** We should NOT set a cookie";
+            }
+        }
+        if ( $set_ebib_cookie ) {
+            # Set a new cookie
+            my $now = DateTime->now;
+            my $hash = md5_hex( $new_user->id . $new_user->username . $new_user->name . $now->datetime() );
+            my %data = (
+                'uid'      => $new_user->id,
+                'username' => $new_user->username,
+                'name'     => $new_user->name,
+                'hash'     => $hash,
+            );
+            cookie ebib => to_json( \%data );
+            debug "*** Cookie set";
+        }
         
         redirect params->{return_url} || '/';
 
