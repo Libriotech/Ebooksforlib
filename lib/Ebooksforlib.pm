@@ -269,8 +269,15 @@ post '/log/in' => sub {
                 'name'     => $new_user->name,
                 'hash'     => $hash,
             );
-            cookie ebib => to_json( \%data );
-            debug "*** Cookie set";
+            # Set a cookie with a domain
+            my $cookie = Dancer::Cookie->new(
+                name   => 'test', 
+                value  => to_json( \%data ),
+                domain => setting('session_domain'),
+            );
+            debug $cookie->to_header;
+            header 'Set-Cookie' => $cookie->to_header;
+            
         }
         
         redirect params->{return_url} || '/';
