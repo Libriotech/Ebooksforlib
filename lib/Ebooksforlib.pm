@@ -271,7 +271,7 @@ post '/log/in' => sub {
             );
             # Set a cookie with a domain
             my $cookie = Dancer::Cookie->new(
-                name   => 'test', 
+                name   => 'ebib', 
                 value  => to_json( \%data ),
                 domain => setting('session_domain'),
             );
