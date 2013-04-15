@@ -261,13 +261,13 @@ post '/log/in' => sub {
         }
         if ( $set_ebib_cookie ) {
             # Set a new cookie
-            my $now = DateTime->now;
-            my $hash = md5_hex( $new_user->id . $new_user->username . $now->datetime() );
+            # my $now = DateTime->now;
+            # my $hash = md5_hex( $new_user->id . $new_user->username . $now->datetime() );
             my %data = (
                 'uid'      => $new_user->id,
                 'username' => $new_user->username,
                 'name'     => $new_user->name,
-                'hash'     => $hash,
+                # 'hash'     => $hash,
             );
             # Set a cookie with a domain
             my $cookie = Dancer::Cookie->new(
