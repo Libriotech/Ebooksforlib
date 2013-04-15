@@ -1248,26 +1248,26 @@ get '/rest/login' => sub {
     # Check that we have the necessary info
     unless ( $username ) {
         return { 
-            error => 1,
-            msg   => 'Missing parameter: username',
+            status => 1,
+            error  => 'Missing parameter: username',
         };
     }
     unless ( $password ) {
         return { 
-            error => 1,
-            msg   => 'Missing parameter: password',
+            status => 1,
+            error  => 'Missing parameter: password',
         };
     }
     unless ( $userrealm ) {
         return { 
-            error => 1,
-            msg   => 'Missing parameter: realm',
+            status => 1,
+            error  => 'Missing parameter: realm',
         };
     }
     unless ( $pkey ) {
         return { 
-            error => 1,
-            msg   => 'Missing parameter: pkey',
+            status => 1,
+            error  => 'Missing parameter: pkey',
         };
     }
     
@@ -1277,12 +1277,13 @@ get '/rest/login' => sub {
         my $hash = md5_hex( $username . $password . $userrealm . $pkey );
         # TODO Save the hash! 
         return { 
-            hash => $hash,
+            status => 0,
+            hash   => $hash,
         };
     } else {
         return { 
-            error => 1,
-            msg   => 'Login failed',
+            status => 0,
+            error  => 'Login failed',
         };
     }
 };
