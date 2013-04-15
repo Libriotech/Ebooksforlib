@@ -1240,10 +1240,51 @@ set serializer => 'JSON';
 
 get '/rest/login' => sub {
 
-    return { 
-        hash => '0c86b9ecb91ee1e16f96363956dff7e5'
-    };
-
+    my $username  = param 'username';
+    my $password  = param 'password';
+    my $userrealm = param 'realm';
+    my $pkey      = param 'pkey';
+    
+    # Check that we have the necessary info
+    unless ( $username ) {
+        return { 
+            error => 1,
+            msg   => 'Missing parameter: username',
+        };
+    }
+    unless ( $password ) {
+        return { 
+            error => 1,
+            msg   => 'Missing parameter: password',
+        };
+    }
+    unless ( $userrealm ) {
+        return { 
+            error => 1,
+            msg   => 'Missing parameter: realm',
+        };
+    }
+    unless ( $pkey ) {
+        return { 
+            error => 1,
+            msg   => 'Missing parameter: pkey',
+        };
+    }
+    
+    # Try to log in
+    my ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
+    if ( $success ) {
+        my $hash = md5_hex( $username . $password . $userrealm . $pkey );
+        # TODO Save the hash! 
+        return { 
+            hash => $hash,
+        };
+    } else {
+        return { 
+            error => 1,
+            msg   => 'Login failed',
+        };
+    }
 };
 
 get '/rest/logout' => sub {
@@ -1286,6 +1327,19 @@ get '/rest/getbook' => sub {
         content_type => 'application/epub+zip', 
         filename     => 'book-1.epub'
     );
+};
+
+get '/rest/libraries' => sub {
+    my @libraries = rset('Library')->all;
+    my @data;
+    foreach my $lib ( @libraries ) {
+        my %libdata = (
+            name => $lib->name,
+            code => $lib->realm,
+        );
+        push @data, \%libdata;
+    }
+    return \@data;
 };
 
 ### Utility functions
