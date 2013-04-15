@@ -16,7 +16,8 @@ CREATE TABLE users (
     password  VARCHAR(64) NOT NULL,
     name      VARCHAR(255),
     email     VARCHAR(255), 
-    anonymize INTEGER(1) DEFAULT 1
+    anonymize INTEGER(1) DEFAULT 1, 
+    hash      CHAR(64)   DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS roles;

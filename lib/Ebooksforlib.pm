@@ -1275,8 +1275,21 @@ get '/rest/login' => sub {
     # Try to log in
     my ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
     if ( $success ) {
-        my $hash = md5_hex( $username . $password . $userrealm . $pkey );
-        # TODO Save the hash! 
+        # Find the user
+        my $user = rset('User')->find({ username => $username });
+        # Check if a hash has been saved already
+        if ( $user->hash eq '' ) {
+            # Create the local_hash
+            my $now = DateTime->now;
+            my $local_hash = md5_hex( $username . $now->datetime() );
+            # Save the new local_hash
+            try {
+                $user->set_column( 'hash', $local_hash );
+                $user->update;
+            }
+        }
+        # Hash the pkey with the user hash and return the result
+        my $hash = hash_pkey( $user->hash, $pkey );
         return { 
             status => 0,
             hash   => $hash,
@@ -1300,8 +1313,48 @@ get '/rest/logout' => sub {
 get '/rest/listbooks' => sub {
 
     my $user_id = param 'uid';
+    my $hash    = param 'hash';
+    my $pkey    = param 'pkey';
+    
+    # Check parameters
+    unless ( $user_id ) {
+        return { 
+            status => 1,
+            error  => 'Missing parameter: uid',
+        };
+    }
+    unless ( $hash ) {
+        return { 
+            status => 1,
+            error  => 'Missing parameter: hash',
+        };
+    }
+    unless ( $pkey ) {
+        return { 
+            status => 1,
+            error  => 'Missing parameter: pkey',
+        };
+    }
+    
     my $user = rset('User')->find( $user_id );
     debug "*** /rest/listbooks for user = $user_id";
+    
+    # Check the user has a hash set
+    if ( $user->hash eq '' ) {
+        return { 
+            status => 1,
+            error  => 'User has never logged in',
+        };
+    }
+    
+    # Check the saved hash against the supplied hash
+    unless ( check_hash( $user->hash, $hash, $pkey ) ) {
+        return { 
+            status => 1,
+            error  => 'Credentials do not match',
+        };
+    }
+    
     my @loans;
     foreach my $loan ( $user->loans ) {
         debug "Loan: " . $loan->loaned;
@@ -1346,6 +1399,21 @@ get '/rest/libraries' => sub {
 
 ### Utility functions
 # TODO Move these to a separate .pm
+# TODO Add documentation
+
+sub check_hash {
+    my ( $user_hash, $hash, $pkey ) = @_;
+    if ( md5_hex( $user_hash . $pkey ) eq $hash ) {
+        return 1;
+    } else {
+        return;
+    }
+}
+
+sub hash_pkey{
+    my ( $user_hash, $pkey ) = @_;
+    return md5_hex( $user_hash . $pkey );
+}
 
 sub _user_has_borrowed {
     my ( $user, $book ) = @_;
