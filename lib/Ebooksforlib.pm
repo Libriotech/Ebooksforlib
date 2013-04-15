@@ -1238,6 +1238,7 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
 
 set serializer => 'JSON';
 
+# FIXME Switch from GET to POST before launch, to avoid passwords in logs etc
 get '/rest/login' => sub {
 
     my $username  = param 'username';
