@@ -1389,8 +1389,8 @@ get '/rest/libraries' => sub {
     my @data;
     foreach my $lib ( @libraries ) {
         my %libdata = (
-            name => $lib->name,
-            code => $lib->realm,
+            name  => $lib->name,
+            realm => $lib->realm,
         );
         push @data, \%libdata;
     }
