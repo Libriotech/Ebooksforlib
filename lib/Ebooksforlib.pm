@@ -1238,6 +1238,19 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
 
 set serializer => 'JSON';
 
+get '/rest/libraries' => sub {
+    my @libraries = rset('Library')->all;
+    my @data;
+    foreach my $lib ( @libraries ) {
+        my %libdata = (
+            name  => $lib->name,
+            realm => $lib->realm,
+        );
+        push @data, \%libdata;
+    }
+    return \@data;
+};
+
 # FIXME Switch from GET to POST before launch, to avoid passwords in logs etc
 get '/rest/login' => sub {
 
@@ -1382,19 +1395,6 @@ get '/rest/getbook' => sub {
         content_type => 'application/epub+zip', 
         filename     => 'book-1.epub'
     );
-};
-
-get '/rest/libraries' => sub {
-    my @libraries = rset('Library')->all;
-    my @data;
-    foreach my $lib ( @libraries ) {
-        my %libdata = (
-            name  => $lib->name,
-            realm => $lib->realm,
-        );
-        push @data, \%libdata;
-    }
-    return \@data;
 };
 
 ### Utility functions
