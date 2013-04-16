@@ -1323,11 +1323,14 @@ get '/rest/logout' => sub {
 
 };
 
-get '/rest/listbooks' => sub {
+get '/rest/:action' => sub {
 
+    my $action  = param 'action';
     my $user_id = param 'uid';
     my $hash    = param 'hash';
     my $pkey    = param 'pkey';
+    
+    ## Common security checks for all actions
     
     # Check parameters
     unless ( $user_id ) {
@@ -1368,33 +1371,39 @@ get '/rest/listbooks' => sub {
         };
     }
     
-    my @loans;
-    foreach my $loan ( $user->loans ) {
-        debug "Loan: " . $loan->loaned;
-        my %loan;
-        $loan{'bookid'}   = $loan->item->book->id;
-        $loan{'loaned'}   = $loan->loaned->datetime;
-        $loan{'due'}      = $loan->due->datetime;
-        $loan{'expires'}  = $loan->due->epoch; # Same as 'due', but in seconds since epoch
-        $loan{'title'}    = $loan->item->book->title;
-        $loan{'name'}     = $loan->item->book->title;
-        $loan{'language'} = 'no'; # FIXME Make this part of the schema
-        $loan{'creator'}  = $loan->item->book->creators_as_string;
-        $loan{'author'}   = $loan->item->book->creators_as_string;
-        push @loans, \%loan;
+    ## End of common security checks
+    
+    if ( $action eq 'listbooks' ) 
+    
+        my @loans;
+        foreach my $loan ( $user->loans ) {
+            debug "Loan: " . $loan->loaned;
+            my %loan;
+            $loan{'bookid'}   = $loan->item->book->id;
+            $loan{'loaned'}   = $loan->loaned->datetime;
+            $loan{'due'}      = $loan->due->datetime;
+            $loan{'expires'}  = $loan->due->epoch; # Same as 'due', but in seconds since epoch
+            $loan{'title'}    = $loan->item->book->title;
+            $loan{'name'}     = $loan->item->book->title;
+            $loan{'language'} = 'no'; # FIXME Make this part of the schema
+            $loan{'creator'}  = $loan->item->book->creators_as_string;
+            $loan{'author'}   = $loan->item->book->creators_as_string;
+            push @loans, \%loan;
+        }
+        return \@loans;
+        
+    } elsif ( $action eq 'getbook' ) {
+    
+        header 'X-Book-Package' => 'raw';
+        return send_file( 
+            config->{books_root} . '1/book-1.epub', 
+            system_path  => 1, 
+            content_type => 'application/epub+zip', 
+            filename     => 'book-1.epub'
+        );
+    
     }
-    return \@loans;
 
-};
-
-get '/rest/getbook' => sub {
-    header 'X-Book-Package' => 'raw';
-    return send_file( 
-        config->{books_root} . '1/book-1.epub', 
-        system_path  => 1, 
-        content_type => 'application/epub+zip', 
-        filename     => 'book-1.epub'
-    );
 };
 
 ### Utility functions
