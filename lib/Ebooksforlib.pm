@@ -1373,7 +1373,7 @@ get '/rest/:action' => sub {
     
     ## End of common security checks
     
-    if ( $action eq 'listbooks' ) 
+    if ( $action eq 'listbooks' ) {
     
         my @loans;
         foreach my $loan ( $user->loans ) {
