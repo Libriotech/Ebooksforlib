@@ -1459,17 +1459,22 @@ get '/rest/:action' => sub {
     } elsif ( $action eq 'getbook' ) {
     
         my $book_id = param 'bookid';
-        my $file_id = param 'file_id'; # FIXME This should not be used - use a combo of book and user instead
+        
+        foreach my $loan ( $user->loans ) {
+            if ( $loan->item->file->book->id == $book_id ) {
+                my $content = $loan->item->file->file;
+                return send_file(
+                    \$content,
+                    content_type => 'application/epub+zip',
+                    filename     => 'book-' . $loan->item->file->id . '.epub'
+                );            
+            }
+        }
+        # If we got this far we did not find a file representing the given 
+        # book that is on loan to the given user, so return an error
+        status 500;
+        return "This book is not on loan to the given user.";
 
-        my $file = rset('File')->find( $file_id );
-        my $content = $file->file;
-
-        return send_file(
-            \$content,
-            content_type => 'application/epub+zip',
-            filename     => 'book-' . $file_id . '.epub'
-        );   
- 
     }
 
 };
