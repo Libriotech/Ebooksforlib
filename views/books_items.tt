@@ -142,5 +142,9 @@ Upload a file from provider
 <br />
 File: <input type="file" name="bookfile" id="bookfile"/>
 <br />
+Availability:<br />
+<input type="radio" name="availability" id="avail_global" value="global" checked="checked" /><label for="avail_global">Available to all libraries</label><br />
+<input type="radio" name="availability" id="avail_local"  value="local" /><label for="avail_local">Available only to my library</label>
+<br />
 <input type="submit" value="Upload">
 </form>

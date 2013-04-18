@@ -446,16 +446,22 @@ post '/files/add' => require_role admin => sub {
 
     my $book_id     = param 'book_id';
     my $provider_id = param 'provider_id';
-    my $library_id  = _get_library_for_admin_user();
     my $file        = upload( 'bookfile' );
+    my $avail       = param 'availability';
 
     try {
         my $new_file = rset('File')->create({
             book_id     => $book_id,
             provider_id => $provider_id,
-            library_id  => $library_id,
             file        => $file->content,
         });
+        # If this file is only available to the library of the currently logged
+        # in librarian we set the the library_id column, otherwise we leave it 
+        # empty and the file is available to all libraries
+        if ( $avail eq 'local' ) {
+            $new_file->set_column( 'library_id', _get_library_for_admin_user() );
+            $new_file->update;
+        }
         # debug "Content: " . $file->content;
         flash info => 'A new file was added!';
     } catch {
