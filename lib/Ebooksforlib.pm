@@ -271,6 +271,7 @@ post '/log/in' => sub {
                 'uid'      => $new_user->id,
                 'username' => $new_user->username,
                 'name'     => $new_user->name,
+                'realm'    => $realm,
                 # 'hash'     => $hash,
             );
             # Set a cookie with a domain
