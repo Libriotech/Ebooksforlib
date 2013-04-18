@@ -1463,11 +1463,16 @@ get '/rest/:action' => sub {
         foreach my $loan ( $user->loans ) {
             if ( $loan->item->file->book->id == $book_id ) {
                 my $content = $loan->item->file->file;
-                return send_file(
-                    \$content,
-                    content_type => 'application/epub+zip',
-                    filename     => 'book-' . $loan->item->file->id . '.epub'
-                );            
+                if ( $content ) {
+                    return send_file(
+                        \$content,
+                        content_type => 'application/epub+zip',
+                        filename     => 'book-' . $loan->item->file->id . '.epub'
+                    );
+                } else {
+                    status 404;
+                    return "Book not found";
+                }
             }
         }
         # If we got this far we did not find a file representing the given 
