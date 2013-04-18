@@ -253,9 +253,7 @@ post '/log/in' => sub {
         my $set_ebib_cookie = 1;
         if ( cookie 'ebib' ) {
             # Should we set a new cookie? 
-            debug cookie 'ebib';
             my $cookie = from_json( cookie 'ebib' );
-            debug Dumper $cookie;
             if ( $cookie->{'uid'} eq $new_user->id && $cookie->{'username'} eq $new_user->username ) {
                 $set_ebib_cookie = 0;
                 debug "*** We should NOT set a new cookie";
