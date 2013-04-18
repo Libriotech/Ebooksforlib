@@ -1355,8 +1355,12 @@ get '/rest/login' => sub {
         # Hash the pkey with the user hash and return the result
         my $hash = hash_pkey( $user->hash, $pkey );
         return { 
-            status => 0,
-            hash   => $hash,
+            'status'   => 0,
+            'hash'     => $hash,
+            'uid'      => $user->id,
+            'username' => $user->username,
+            'name'     => $user->name,
+            'realm'    => $realm,
         };
     } else {
         return { 
