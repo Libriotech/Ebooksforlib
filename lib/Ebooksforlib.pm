@@ -1434,7 +1434,7 @@ get '/rest/:action' => sub {
         foreach my $loan ( $user->loans ) {
             debug "Loan: " . $loan->loaned;
             my %loan;
-            $loan{'bookid'}   = $loan->item->book->id;
+            $loan{'bookid'}   = $loan->item->file->book->id;
             $loan{'loaned'}   = $loan->loaned->datetime;
             $loan{'due'}      = $loan->due->datetime;
             $loan{'expires'}  = $loan->due->epoch; # Same as 'due', but in seconds since epoch
