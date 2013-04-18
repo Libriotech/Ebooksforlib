@@ -1438,11 +1438,11 @@ get '/rest/:action' => sub {
             $loan{'loaned'}   = $loan->loaned->datetime;
             $loan{'due'}      = $loan->due->datetime;
             $loan{'expires'}  = $loan->due->epoch; # Same as 'due', but in seconds since epoch
-            $loan{'title'}    = $loan->item->book->title;
-            $loan{'name'}     = $loan->item->book->title;
+            $loan{'title'}    = $loan->item->file->book->title;
+            $loan{'name'}     = $loan->item->file->book->title;
             $loan{'language'} = 'no'; # FIXME Make this part of the schema
-            $loan{'creator'}  = $loan->item->book->creators_as_string;
-            $loan{'author'}   = $loan->item->book->creators_as_string;
+            $loan{'creator'}  = $loan->item->file->book->creators_as_string;
+            $loan{'author'}   = $loan->item->file->book->creators_as_string;
             push @loans, \%loan;
         }
         return \@loans;
