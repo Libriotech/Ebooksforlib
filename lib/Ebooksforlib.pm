@@ -1445,7 +1445,10 @@ get '/rest/:action' => sub {
             $loan{'author'}   = $loan->item->file->book->creators_as_string;
             push @loans, \%loan;
         }
-        return \@loans;
+        return { 
+            'status'   => 0, 
+            'booklist' => \@loans
+        };
         
     } elsif ( $action eq 'getbook' ) {
     
