@@ -102,6 +102,7 @@ CREATE TABLE files (
     provider_id INTEGER NOT NULL,
     library_id  INTEGER,
     file        LONGBLOB,
+    updated     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UNIQUE ( book_id, provider_id, library_id ), -- there should only be one file per book, provider and library
     CONSTRAINT files_fk_1 FOREIGN KEY (book_id)     REFERENCES books     (id) ON DELETE CASCADE,
     CONSTRAINT files_fk_2 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE,

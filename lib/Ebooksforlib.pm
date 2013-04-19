@@ -440,36 +440,82 @@ get '/superadmin' => require_role superadmin => sub {
 
 ### Files
 
-# FIXME This only handles new files at the moment, not updating old ones
-
 post '/files/add' => require_role admin => sub {
 
     my $book_id     = param 'book_id';
     my $provider_id = param 'provider_id';
-    my $file        = upload( 'bookfile' );
+    my $uploadfile  = upload( 'bookfile' );
     my $avail       = param 'availability';
+    my $library_id  = _get_library_for_admin_user();
 
-    try {
-        my $new_file = rset('File')->create({
+    my $file = undef;
+    
+    # Look for an existing file
+    if ( $avail eq 'local' ) {
+
+        # Local file 
+        debug '*** Looking for a local file';   
+        my @files = rset('File')->search({
             book_id     => $book_id,
             provider_id => $provider_id,
-            file        => $file->content,
+            library_id  => $library_id,
         });
-        # If this file is only available to the library of the currently logged
-        # in librarian we set the the library_id column, otherwise we leave it 
-        # empty and the file is available to all libraries
-        if ( $avail eq 'local' ) {
-            $new_file->set_column( 'library_id', _get_library_for_admin_user() );
-            $new_file->update;
-        }
-        # debug "Content: " . $file->content;
-        flash info => 'A new file was added!';
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
-    };
-    redirect '/books/items/' . $book_id;
+        $file = $files[0];
 
+    } else {
+    
+        # Global file
+        debug '*** Looking for a global file';
+        my @files = rset('File')->search({
+            book_id     => $book_id,
+            provider_id => $provider_id,
+            library_id  => { '=', undef },
+        });
+        $file = $files[0];
+    
+    }
+    
+    # If we found a file, update the content
+    if ( $file && $file->id ) {
+        try {
+            debug '*** Going to replace content of file ' . $file->id;
+            $file->set_column( 'file', $uploadfile->content );
+            if ( $avail eq 'local' ) {
+                $file->set_column( 'library_id', $library_id );
+            } else {
+                $file->set_column( 'library_id', undef );
+            }
+            $file->update;
+            flash info => 'A file was updated!';
+            debug '*** Going to replace content of file ' . $file->id;
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+        };
+        return redirect '/books/items/' . $book_id;
+    } else {
+    
+        # If we got this far the file does not exist, so we add the uploaded one
+        try {
+            my $new_file = rset('File')->create({
+                book_id     => $book_id,
+                provider_id => $provider_id,
+                file        => $uploadfile->content,
+            });
+            # If this file is only available to the library of the currently logged
+            # in librarian we set the the library_id column, otherwise we leave it 
+            # empty and the file is available to all libraries
+            if ( $avail eq 'local' ) {
+                $new_file->set_column( 'library_id', $library_id );
+                $new_file->update;
+            }
+            flash info => 'A new file was added!';
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+        };
+        redirect '/books/items/' . $book_id;
+    }
 };
 
 

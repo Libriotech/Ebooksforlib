@@ -73,7 +73,7 @@ days
 
 <h3>Existing files for this book</h3>
 <table>
-<tr><th>File ID</th><th>Provider</th><th>Number of existing items</th></tr>
+<tr><th>File ID</th><th>Provider</th><th>Number of existing items</th><th>Availability</th><th>Updated</th></tr>
 [% FOREACH file IN files %]
 <tr>
     <td>[% file.id %]</td>
@@ -92,6 +92,14 @@ days
         [% END %]
         [% number_of_items %][% IF number_of_deleted_items > 0 %] (and [% number_of_deleted_items %] deleted)[% END %]
     </td>
+    <td>
+        [% IF file.library_id != '' %]
+            <span title="This file is only available to your library">local</span>
+        [% ELSE %]
+            <span title="This file is available to all libraries">global</span>
+        [% END %]
+    </td>
+    <td>[% date.format( time => file.updated, format => settings.date_format, locale => settings.locale ) %]</td>
 </tr>
 [% END %]
 </table>
