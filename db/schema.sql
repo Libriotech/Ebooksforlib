@@ -163,7 +163,7 @@ INSERT INTO user_roles SET user_id = 2, role_id = 1; -- Henrik is admin at Store
 INSERT INTO user_roles SET user_id = 3, role_id = 2; -- Sigrid is superadmin, not connected to a library
 
 -- Users and libraries
-INSERT INTO user_libraries SET user_id = 2, library_id = 1;
+INSERT INTO user_libraries SET user_id = 2, library_id = 2;
 INSERT INTO user_libraries SET user_id = 4, library_id = 2; 
 INSERT INTO user_libraries SET user_id = 5, library_id = 2;
 
