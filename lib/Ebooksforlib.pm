@@ -1517,7 +1517,10 @@ get '/rest/:action' => sub {
                     );
                 } else {
                     status 404;
-                    return "Book not found";
+                    return { 
+                        'status' => 1, 
+                        'error'  => 'Book not found',
+                    };
                 }
             }
         }
