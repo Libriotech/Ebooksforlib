@@ -1508,6 +1508,7 @@ get '/rest/:action' => sub {
         debug "*** /rest/getbook for user = $user_id";
     
         my $book_id = param 'bookid';
+        # FIXME Check that we got a book_id
         debug "*** /rest/getbook for book_id = $book_id";
         
         foreach my $loan ( $user->loans ) {
