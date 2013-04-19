@@ -1460,7 +1460,6 @@ get '/rest/:action' => sub {
     }
     
     my $user = rset('User')->find( $user_id );
-    debug "*** /rest/listbooks for user = $user_id";
     
     # Check the user has a hash set
     if ( $user->hash eq '' ) {
@@ -1481,6 +1480,8 @@ get '/rest/:action' => sub {
     ## End of common security checks
     
     if ( $action eq 'listbooks' ) {
+
+        debug "*** /rest/listbooks for user = $user_id";
     
         my @loans;
         foreach my $loan ( $user->loans ) {
@@ -1504,10 +1505,16 @@ get '/rest/:action' => sub {
         
     } elsif ( $action eq 'getbook' ) {
     
+        debug "*** /rest/getbook for user = $user_id";
+    
         my $book_id = param 'bookid';
+        debug "*** /rest/getbook for book_id = $book_id";
         
         foreach my $loan ( $user->loans ) {
             if ( $loan->item->file->book->id == $book_id ) {
+                debug "*** /rest/getbook for loan with item_id = " . $loan->item_id . " user_id = " . $loan->user_id . " loaned = " . $loan->loaned;
+                debug "*** /rest/getbook for item = " . $loan->item->id . " library_id = " . $loan->item->library_id . " file_id = " . $loan->item->file_id;
+                debug "*** /rest/getbook for file = " . $loan->item->file->id;
                 my $content = $loan->item->file->file;
                 if ( $content ) {
                     return send_file(
