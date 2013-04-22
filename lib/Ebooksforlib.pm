@@ -1403,7 +1403,7 @@ get '/rest/login' => sub {
             }
         }
         # Hash the pkey with the user hash and return the result
-        my $hash = hash_pkey( $user->hash, $pkey );
+        my $hash = hash_pkey( $user->hash, $user->id, $pkey );
         return { 
             'status'   => 0,
             'userdata' => {
@@ -1471,7 +1471,7 @@ get '/rest/:action' => sub {
     }
     
     # Check the saved hash against the supplied hash
-    unless ( check_hash( $user->hash, $hash, $pkey ) ) {
+    unless ( check_hash( $user->hash, $user->id, $hash, $pkey ) ) {
         return { 
             status => 1,
             error  => 'Credentials do not match',
@@ -1547,8 +1547,8 @@ get '/rest/:action' => sub {
 # TODO Add documentation
 
 sub check_hash {
-    my ( $user_hash, $hash, $pkey ) = @_;
-    if ( md5_hex( $user_hash . $pkey ) eq $hash ) {
+    my ( $user_hash, $user_id, $hash, $pkey ) = @_;
+    if ( md5_hex( $user_hash . $user_id . $pkey ) eq $hash ) {
         return 1;
     } else {
         return;
@@ -1556,8 +1556,8 @@ sub check_hash {
 }
 
 sub hash_pkey{
-    my ( $user_hash, $pkey ) = @_;
-    return md5_hex( $user_hash . $pkey );
+    my ( $user_hash, $user_id, $pkey ) = @_;
+    return md5_hex( $user_hash . $user_id . $pkey );
 }
 
 sub _user_has_borrowed {
