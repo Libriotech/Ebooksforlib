@@ -1538,6 +1538,12 @@ get '/rest/:action' => sub {
         status 500;
         return "This book is not on loan to the given user.";
 
+    } elsif ( $action eq 'ping' ) {
+    
+        return { 
+            'status' => 0, 
+        };
+    
     }
 
 };
