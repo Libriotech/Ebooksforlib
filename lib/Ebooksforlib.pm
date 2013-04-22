@@ -1422,10 +1422,11 @@ get '/rest/login' => sub {
     }
 };
 
+# FIXME Not implemented
 get '/rest/logout' => sub {
 
     return { 
-        logout => 1
+        status => 0
     };
 
 };
