@@ -100,13 +100,13 @@ get '/borrow/:item_id' => require_login sub {
     unless ( $user->belongs_to_library( $item->library_id ) ) {
         flash error => "You are trying to borrow a book from a library you do not belong to!";
         debug '!!! User ' . $user->id . ' tried to borrow item ' . $item->id . ' which does not belong to the users library';
-        return redirect '/book/' . $item->book_id;
+        return redirect '/book/' . $item->file->book_id;
     }
     
     # Check that any item of the book this item belongs to is not already on loan to the user
-    if ( _user_has_borrowed( $user, $item->book ) ) {
+    if ( _user_has_borrowed( $user, $item->file->book ) ) {
         flash error => "You have already borrowed this book!";
-        return redirect '/book/' . $item->book_id;
+        return redirect '/book/' . $item->file->book_id;
     }
 
     # Check the number of concurrent loans
@@ -116,7 +116,7 @@ get '/borrow/:item_id' => require_login sub {
     if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
         flash error => "You have already reached the number of concurrent loans for your library!";
         debug '!!! User ' . $user->id . ' tried to borrow too many books';
-        return redirect '/book/' . $item->book_id;
+        return redirect '/book/' . $item->file->book_id;
     }
     
     # Calculate the due date/time
@@ -135,11 +135,11 @@ get '/borrow/:item_id' => require_login sub {
             due     => $dt,
         });
         flash info => "You borrowed a book!";
-        redirect '/book/' . $item->book_id;
+        redirect '/book/' . $item->file->book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
-        redirect '/book/' . $item->book_id;
+        redirect '/book/' . $item->file->book_id;
     };
 };
 
@@ -1595,9 +1595,7 @@ sub _user_has_borrowed {
     foreach my $loan ( $user->loans ) {
         if ( $loan->item->file->book->id == $book->id ) {
             return 1;
-        } else {
-            return 0;
-        }
+        } 
     }
 }
 
