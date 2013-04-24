@@ -1073,6 +1073,8 @@ sub _coverurl2base64 {
     my $req = $http->request( $coverurl ) 
         or die "Unable to get document: $!";
     # Just encode the raw image
+    # FIXME Add "data:image/gif;base64," with the right MIME type
+    # Can we get the MIME type from the HTTP response, perhaps? 
     return encode_base64( $http->body() );
 
 }
