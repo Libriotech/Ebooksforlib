@@ -49,6 +49,13 @@ __PACKAGE__->table("files");
   data_type: 'longblob'
   is_nullable: 1
 
+=head2 updated
+
+  data_type: 'timestamp'
+  datetime_undef_if_invalid: 1
+  default_value: current_timestamp
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -62,6 +69,13 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "file",
   { data_type => "longblob", is_nullable => 1 },
+  "updated",
+  {
+    data_type => "timestamp",
+    datetime_undef_if_invalid => 1,
+    default_value => \"current_timestamp",
+    is_nullable => 0,
+  },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("book_id", ["book_id", "provider_id", "library_id"]);
@@ -134,8 +148,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-15 13:49:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PXOuLi7fVD4X/AyYqV/KFA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-04-24 13:31:47
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rkt9gJ62Pui1w2XKfTW5yw
 
 use Dancer ':syntax';
 
