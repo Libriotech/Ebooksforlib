@@ -54,10 +54,11 @@ CREATE TABLE user_libraries (
 DROP TABLE IF EXISTS book_creators;
 DROP TABLE IF EXISTS books;
 CREATE TABLE books (
-    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
-    title   VARCHAR(255) NOT NULL, 
-    date    VARCHAR(32) NOT NULL, 
-    isbn    VARCHAR(64)
+    id       INTEGER AUTO_INCREMENT PRIMARY KEY,
+    title    VARCHAR(255) NOT NULL, 
+    date     VARCHAR(32) NOT NULL, 
+    isbn     VARCHAR(64), 
+    coverurl VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS creators;
@@ -168,12 +169,12 @@ INSERT INTO user_libraries SET user_id = 4, library_id = 2;
 INSERT INTO user_libraries SET user_id = 5, library_id = 2;
 
 -- Books
-INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891', isbn = '9780123456789';
-INSERT INTO books SET id = 2, title = 'Tales From The Fjeld',             date = '1892', isbn = '9780123456788';
-INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date = '1893', isbn = '9780123456787';
-INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894', isbn = '9780123456786';
-INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895', isbn = '9780123456785';
-INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895', isbn = '9780123456784';
+INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891', isbn = '8205004714',    coverurl = 'http://krydder.bib.no/0191/304730.bilde.1327468070.s.jpg';
+INSERT INTO books SET id = 2, title = 'Tales From The Fjeld',             date = '1892';
+INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date = '1893', isbn = '9788292465851', coverurl = 'http://krydder.bib.no/0783/9286428.bilde.1346774574.s.jpg';;
+INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894', isbn = '8256014369',    coverurl = 'http://krydder.bib.no/0416/827259.bilde.1327570239.s.jpg';;
+INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895', isbn = '9788202289355', coverurl = 'http://krydder.bib.no/0008/994590.bilde.1327493563.s.jpg';;
+INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895', isbn = '8205054177',    coverurl = 'http://www.bokkilden.no/SamboWeb/servlet/VisBildeServlet?produktId=1869724';;
 
 -- Providers
 INSERT INTO providers SET id = 1, name = 'Provider A', description = 'This is our first provider.';

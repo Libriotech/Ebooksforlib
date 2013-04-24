@@ -44,6 +44,12 @@ __PACKAGE__->table("books");
   is_nullable: 1
   size: 64
 
+=head2 coverurl
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 255
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -55,6 +61,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 32 },
   "isbn",
   { data_type => "varchar", is_nullable => 1, size => 64 },
+  "coverurl",
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -106,8 +114,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-13 14:51:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:74Re3h8WSBr/kFXv6rK/mg
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-04-24 13:31:47
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vsR0wimrUtJ/2BdJMGd1gg
 
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 
