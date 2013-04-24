@@ -3,6 +3,10 @@
 
 <h2>[% book.title %]</h2> 
 
+[% IF book.coverurl %]
+<p style="float: right;"><img src="[% book.coverurl %]"></p>
+[% END %]
+
 <p>by:</p>
 
 <ul>
@@ -113,7 +117,8 @@
     <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
     <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
     <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
-    <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a>
+    <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a> |
+    <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">Covers</a>
 </p>
 </div>
     [% END %]

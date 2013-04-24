@@ -1015,6 +1015,65 @@ post '/books/edit' => require_role admin => sub {
 
 };
 
+get '/books/covers/:id' => require_role admin => sub {
+
+    my $book_id = param 'id';
+    my $book = rset('Book')->find( $book_id );
+    
+    if ( $book->isbn ) {
+    
+        my $sparql = 'SELECT DISTINCT ?cover WHERE {
+            ?book <http://purl.org/ontology/bibo/isbn> "' . $book->isbn . '" .
+            ?book <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/spar/fabio/Manifestation> .
+            ?book <http://xmlns.com/foaf/0.1/depiction> ?cover .
+        }';
+        my $covers = _sparql2data( $sparql );
+        debug Dumper $covers;
+        template 'books_covers', { book => $book, covers => $covers };
+        
+    } else {
+        flash error => 'This book does not have an ISBN!';
+        redirect '/book/' . $book->id;
+    }
+
+};
+
+post '/books/covers' => require_role admin => sub {
+
+    my $book_id  = param 'id';
+    my $coverurl = param 'coverurl';
+    
+    my $book = rset('Book')->find( $book_id );
+    try {
+        $book->set_column('coverurl', $coverurl);
+        $book->update;
+        flash info => 'The cover image for this book was updated!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+    };
+    redirect '/book/' . $book->id;
+
+};
+
+use HTTP::Lite;
+use URL::Encode 'url_encode';
+
+sub _sparql2data {
+
+    my ( $sparql ) = @_;
+    my $url = config->{'sparql_endpoint'} . '?default-graph-uri=&query=' . url_encode( $sparql ) . '&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on';
+    debug "*** URL: $url";
+    my $http = HTTP::Lite->new;
+    my $req = $http->request( $url ) 
+        or die "Unable to get document: $!";
+    debug $http->body();
+    my $data = JSON::from_json( $http->body() );
+    debug $data;
+    return $data;
+    
+}
+
 ### Libraries
 
 get '/libraries/add' => require_role superadmin => sub { 
