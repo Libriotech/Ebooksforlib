@@ -1556,6 +1556,7 @@ get '/rest/:action' => sub {
             $loan{'language'} = 'no'; # FIXME Make this part of the schema
             $loan{'creator'}  = $loan->item->file->book->creators_as_string;
             $loan{'author'}   = $loan->item->file->book->creators_as_string;
+            $loan{'coverurl'} = $loan->item->file->book->coverurl;
             push @loans, \%loan;
         }
         return { 
