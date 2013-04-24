@@ -1042,10 +1042,14 @@ post '/books/covers' => require_role admin => sub {
 
     my $book_id  = param 'id';
     my $coverurl = param 'coverurl';
+
+    # Get the image and base64-encode it
+    my $img = _coverurl2base64( $coverurl );
     
     my $book = rset('Book')->find( $book_id );
     try {
-        $book->set_column('coverurl', $coverurl);
+        $book->set_column( 'coverurl', $coverurl );
+        $book->set_column( 'coverimg', $img );
         $book->update;
         flash info => 'The cover image for this book was updated!';
     } catch {
@@ -1058,6 +1062,20 @@ post '/books/covers' => require_role admin => sub {
 
 use HTTP::Lite;
 use URL::Encode 'url_encode';
+use MIME::Base64 qw(encode_base64);
+use GD;
+
+sub _coverurl2base64 {
+
+    my ( $coverurl ) = @_;
+    debug "*** coverurl: $coverurl";
+    my $http = HTTP::Lite->new;
+    my $req = $http->request( $coverurl ) 
+        or die "Unable to get document: $!";
+    # Just encode the raw image
+    return encode_base64( $http->body() );
+
+}
 
 sub _sparql2data {
 
@@ -1557,6 +1575,7 @@ get '/rest/:action' => sub {
             $loan{'creator'}  = $loan->item->file->book->creators_as_string;
             $loan{'author'}   = $loan->item->file->book->creators_as_string;
             $loan{'coverurl'} = $loan->item->file->book->coverurl;
+            $loan{'coverimg'} = $loan->item->file->book->coverimg;
             push @loans, \%loan;
         }
         return { 
