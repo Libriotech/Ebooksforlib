@@ -29,6 +29,12 @@ books_root: '/path/to/directory/'
 session: YAML
 session_dir: "/tmp/ebooksforlib-sessions"
 
+# SPARQL endpoint that we can fetch bibliographic and other data from 
+# It is assumed that this endpoint is populated by https://github.com/digibib/marc2rdf
+# or something similar. The present software is hardcoded to use the properties
+# used by marc2rdf. 
+sparql_endpoint: http://data.example.org/sparql
+
 # Config options for SIP2 auth providers, with examples:
 # host: 127.0.0.1:1965
 # If the server needs a login before it will talk to clients:
