@@ -4,7 +4,7 @@
 <h2>[% book.title %]</h2> 
 
 [% IF book.coverurl %]
-<p style="float: right;"><img src="[% book.coverurl %]"></p>
+<p style="float: right;"><img src="[% book.coverimg %]"></p>
 [% END %]
 
 <p>by:</p>
