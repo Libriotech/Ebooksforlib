@@ -1,14 +1,17 @@
 <table>
-<tr><th>Title</th><th>Author(s)</th><th>Published</th><th>ISBN</th><th>Available?</th></tr>
+<tr><th>Cover</th><th>Title, author(s), published</th><th>ISBN</th><th>Available?</th></tr>
 [% FOREACH book IN books %]
     <tr>
-    <td><a href="/book/[% book.id %]">[% book.title %]</a></td>
     <td>
-        [% FOREACH creator IN book.creators %]
-        <a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% END %]
+        [% IF book.coverimg %]
+            <img src="[% book.coverimg %]" style="max-height: 100px; max-width: 80px;">
         [% END %]
     </td>
-    <td>[% book.date %]</td>
+    <td>
+        [% FOREACH creator IN book.creators %]
+        <a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% ELSE %]:[% END %]
+        [% END %]<br><a href="/book/[% book.id %]">[% book.title %]</a> ([% book.date %])
+    </td>
     <td>[% book.isbn %]</td>
     <td>
         [% SET on_loan = 0 %]
