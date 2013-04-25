@@ -1075,7 +1075,10 @@ sub _coverurl2base64 {
     # Just encode the raw image
     # FIXME Add "data:image/gif;base64," with the right MIME type
     # Can we get the MIME type from the HTTP response, perhaps? 
-    return encode_base64( $http->body() );
+    my @content_type = $http->get_header ( 'Content-Type' );
+    debug Dumper @content_type;
+    debug $content_type[0][0];
+    return 'data:' . $content_type[0][0] . ';base64,' . encode_base64( $http->body() );
 
 }
 
