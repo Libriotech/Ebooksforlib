@@ -21,6 +21,10 @@
 <p>ISBN: [% book.isbn %].</p>
 [% END %]
 
+[% IF book.pages %]
+<p>Pages: [% book.pages %].</p>
+[% END %]
+
 [%# Collect unique books created by the same creators as the current book %]
 [% SET books = [ ] %]
 [%# Loop through the creators connected to this book %]

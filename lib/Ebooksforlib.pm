@@ -970,11 +970,13 @@ post '/books/add' => require_role admin => sub {
     my $title = param 'title';
     my $date  = param 'date';
     my $isbn  = param 'isbn'; # TODO Check the validity 
+    my $pages = param 'pages';
     try {
         my $new_book = rset('Book')->create({
             title  => $title,
             date   => $date,
             isbn   => $isbn,
+            pages  => $pages, 
         });
         flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
         redirect '/admin';
@@ -999,11 +1001,13 @@ post '/books/edit' => require_role admin => sub {
     my $title = param 'title';
     my $date  = param 'date';
     my $isbn  = param 'isbn';
+    my $pages = param 'pages';
     my $book = rset('Book')->find( $id );
     try {
         $book->set_column('title', $title);
         $book->set_column('date', $date);
         $book->set_column('isbn', $isbn);
+        $book->set_column('pages', $pages);
         $book->update;
         flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
         redirect '/book/' . $book->id;
@@ -1576,6 +1580,7 @@ get '/rest/:action' => sub {
             $loan{'author'}   = $loan->item->file->book->creators_as_string;
             $loan{'coverurl'} = $loan->item->file->book->coverurl;
             $loan{'coverimg'} = $loan->item->file->book->coverimg;
+            $loan{'pages'}    = $loan->item->file->book->pages;
             push @loans, \%loan;
         }
         return { 
