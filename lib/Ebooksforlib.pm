@@ -965,6 +965,21 @@ get '/books/add' => require_role admin => sub {
     template 'books_add';
 };
 
+get '/books/add_from_isbn' => require_role admin => sub {
+
+    my $isbn = param 'isbn';
+    $isbn =~ s/-//g;
+    my $sparql = 'SELECT DISTINCT ?graph ?uri ?title ?published ?pages WHERE { GRAPH ?graph {
+                      ?uri a <http://purl.org/ontology/bibo/Document> .
+                      ?uri <http://purl.org/ontology/bibo/isbn> "' . $isbn . '" .
+                      ?uri <http://purl.org/dc/terms/title> ?title .
+                      ?uri <http://purl.org/dc/terms/issued> ?published .
+                      ?uri <http://purl.org/ontology/bibo/numPages> ?pages .
+                  } }';
+    my $data = _sparql2data( $sparql );
+    template 'books_add', { data => $data };
+};
+
 post '/books/add' => require_role admin => sub {
 
     my $title = param 'title';
@@ -987,6 +1002,8 @@ post '/books/add' => require_role admin => sub {
     };
 
 };
+
+
 
 get '/books/edit/:id' => require_role admin => sub {
     my $book_id = param 'id';
@@ -1414,11 +1431,14 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
     
 };
 
-# Reader-app API
-# The server-side component of the reader-app will be talking to this API
-# TODO These are dummy functions with hardcoded responses, for now
+## APIs
 
+# Default serialization should be JSON
 set serializer => 'JSON';
+
+##  Reader-app API
+
+# The server-side component of the reader-app will be talking to this API
 
 get '/rest/libraries' => sub {
     my @libraries = rset('Library')->all;

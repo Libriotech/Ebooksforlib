@@ -1,5 +1,27 @@
-[% META pagetitle = 'Add book' %]
+[% META pagetitle = 'Add a new book' %]
 
+<h2>Reuse data converted from MARC records</h2>
+[% IF data %]
+    [% IF data.size > 1 %]
+        <p>We found more than one source of metadata. Please choose one of the alternatives below and edit it as necessary. If none of the alternatives are to your liking, you can enter data manually at the bottom of the page.</p>
+    [% END %]
+    [% FOREACH sparqlbook IN data.results.bindings %]
+        <h3>Alternative [% loop.count %]</h3>
+        <p>Data from [% sparqlbook.graph.value %]</p>
+        <p>URI: [% sparqlbook.uri.value %]</p>
+        <form method="POST" action="/books/add">
+        [% adding = 1 %]
+        [%# Pass sparqlbook to the form as sbook, so that the empty form
+            below does not pick up the last iteration of the bindings 
+            automatically. %]
+        [% INCLUDE books_form.tt sbook=sparqlbook %]
+        </form>
+    [% END %]
+[% END %]
+
+<hr>
+
+<h2>Enter data from scratch</h2>
 <form method="POST" action="/books/add">
 [% adding = 1 %]
 [% INCLUDE books_form.tt %]
