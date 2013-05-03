@@ -982,16 +982,19 @@ get '/books/add_from_isbn' => require_role admin => sub {
 
 post '/books/add' => require_role admin => sub {
 
-    my $title = param 'title';
-    my $date  = param 'date';
-    my $isbn  = param 'isbn'; # TODO Check the validity 
-    my $pages = param 'pages';
+    my $title   = param 'title';
+    my $date    = param 'date';
+    my $isbn    = param 'isbn'; # TODO Check the validity 
+    my $pages   = param 'pages';
+    my $dataurl = param 'dataurl';
+    
     try {
         my $new_book = rset('Book')->create({
-            title  => $title,
-            date   => $date,
-            isbn   => $isbn,
-            pages  => $pages, 
+            title   => $title,
+            date    => $date,
+            isbn    => $isbn,
+            pages   => $pages, 
+            dataurl => $dataurl,
         });
         flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
         redirect '/admin';
@@ -1019,12 +1022,15 @@ post '/books/edit' => require_role admin => sub {
     my $date  = param 'date';
     my $isbn  = param 'isbn';
     my $pages = param 'pages';
+    my $dataurl = param 'dataurl';
+    
     my $book = rset('Book')->find( $id );
     try {
         $book->set_column('title', $title);
         $book->set_column('date', $date);
         $book->set_column('isbn', $isbn);
         $book->set_column('pages', $pages);
+        $book->set_column('dataurl', $dataurl);
         $book->update;
         flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
         redirect '/book/' . $book->id;

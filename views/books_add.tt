@@ -8,7 +8,6 @@
     [% FOREACH sparqlbook IN data.results.bindings %]
         <h3>Alternative [% loop.count %]</h3>
         <p>Data from [% sparqlbook.graph.value %]</p>
-        <p>URI: [% sparqlbook.uri.value %]</p>
         <form method="POST" action="/books/add">
         [% adding = 1 %]
         [%# Pass sparqlbook to the form as sbook, so that the empty form

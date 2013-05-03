@@ -60,7 +60,8 @@ CREATE TABLE books (
     isbn     VARCHAR(64), 
     pages    VARCHAR(32),
     coverurl VARCHAR(255), 
-    coverimg BLOB
+    coverimg BLOB,
+    dataurl  VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS creators;
