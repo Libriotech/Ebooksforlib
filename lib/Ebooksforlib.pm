@@ -1107,6 +1107,7 @@ sub _coverurl2base64 {
 sub _sparql2data {
 
     my ( $sparql ) = @_;
+    debug "*** SPARQL: $sparql";
     my $url = config->{'sparql_endpoint'} . '?default-graph-uri=&query=' . url_encode( $sparql ) . '&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on';
     debug "*** URL: $url";
     my $http = HTTP::Lite->new;
