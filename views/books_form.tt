@@ -7,7 +7,7 @@
 <input type="text" name="date" id="date" value="[% params.date %][% book.date %][% sbook.published.value %]">
 <br />
 <label for="isbn">ISBN:</label>
-<input type="text" name="isbn" id="isbn" value="[% params.isbn %][% book.isbn %]">
+<input type="text" name="isbn" id="isbn" value="[% isbn %][% book.isbn %]">
 <br />
 <label for="pages">Pages:</label>
 <input type="text" name="pages" id="pages" value="[% params.pages %][% book.pages %][% sbook.pages.value %]">

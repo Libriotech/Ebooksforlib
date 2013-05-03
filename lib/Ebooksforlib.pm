@@ -6,6 +6,7 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Crypt::SaltedHash;
 use Digest::MD5 qw( md5_hex );;
+use Business::ISBN;
 use DateTime;
 use DateTime::Duration;
 use Data::Dumper; # DEBUG 
@@ -967,42 +968,59 @@ get '/books/add' => require_role admin => sub {
 
 get '/books/add_from_isbn' => require_role admin => sub {
 
-    my $isbn = param 'isbn';
-    $isbn =~ s/-//g;
-    my $sparql = 'SELECT DISTINCT ?graph ?uri ?title ?published ?pages WHERE { GRAPH ?graph {
-                      ?uri a <http://purl.org/ontology/bibo/Document> .
-                      ?uri <http://purl.org/ontology/bibo/isbn> "' . $isbn . '" .
-                      ?uri <http://purl.org/dc/terms/title> ?title .
-                      ?uri <http://purl.org/dc/terms/issued> ?published .
-                      ?uri <http://purl.org/ontology/bibo/numPages> ?pages .
-                  } }';
-    my $data = _sparql2data( $sparql );
-    template 'books_add', { data => $data };
+    my $isbn_in = param 'isbn';
+    my $isbn = Business::ISBN->new( $isbn_in );
+    if ( $isbn && $isbn->is_valid ) {
+    
+        my $sparql = 'SELECT DISTINCT ?graph ?uri ?title ?published ?pages WHERE { GRAPH ?graph {
+                          ?uri a <http://purl.org/ontology/bibo/Document> .
+                          ?uri <http://purl.org/ontology/bibo/isbn> "' . $isbn->common_data . '" .
+                          ?uri <http://purl.org/dc/terms/title> ?title .
+                          ?uri <http://purl.org/dc/terms/issued> ?published .
+                          ?uri <http://purl.org/ontology/bibo/numPages> ?pages .
+                      } }';
+        my $data = _sparql2data( $sparql );
+        template 'books_add', { data => $data, isbn => $isbn->common_data };
+    
+    } else {
+    
+        flash error => "$isbn_in is not a valid ISBN!";
+        redirect '/admin';
+    
+    }
 };
 
 post '/books/add' => require_role admin => sub {
 
     my $title   = param 'title';
     my $date    = param 'date';
-    my $isbn    = param 'isbn'; # TODO Check the validity 
+    my $isbn_in = param 'isbn';
     my $pages   = param 'pages';
     my $dataurl = param 'dataurl';
     
-    try {
-        my $new_book = rset('Book')->create({
-            title   => $title,
-            date    => $date,
-            isbn    => $isbn,
-            pages   => $pages, 
-            dataurl => $dataurl,
-        });
-        flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
-        redirect '/admin';
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
+    my $isbn = Business::ISBN->new( $isbn_in );
+    if ( $isbn && $isbn->is_valid ) {
+    
+        try {
+            my $new_book = rset('Book')->create({
+                title   => $title,
+                date    => $date,
+                isbn    => $isbn->common_data,
+                pages   => $pages, 
+                dataurl => $dataurl,
+            });
+            flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
+            redirect '/admin';
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+            template 'books_add', { title => $title, date => $date };
+        };
+        
+    } else {
+        flash error => "$isbn_in is not a valid ISBN!";
         template 'books_add', { title => $title, date => $date };
-    };
+    }
 
 };
 
@@ -1017,29 +1035,38 @@ get '/books/edit/:id' => require_role admin => sub {
 
 post '/books/edit' => require_role admin => sub {
 
-    my $id    = param 'id';
-    my $title = param 'title';
-    my $date  = param 'date';
-    my $isbn  = param 'isbn';
-    my $pages = param 'pages';
+    my $id      = param 'id';
+    my $title   = param 'title';
+    my $date    = param 'date';
+    my $isbn_in = param 'isbn';
+    my $pages   = param 'pages';
     my $dataurl = param 'dataurl';
     
     my $book = rset('Book')->find( $id );
-    try {
-        $book->set_column('title', $title);
-        $book->set_column('date', $date);
-        $book->set_column('isbn', $isbn);
-        $book->set_column('pages', $pages);
-        $book->set_column('dataurl', $dataurl);
-        $book->update;
-        flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
-        redirect '/book/' . $book->id;
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
-        template 'books_edit', { book => $book };
-    };
 
+    my $isbn = Business::ISBN->new( $isbn_in );
+    if ( $isbn && $isbn->is_valid ) {
+    
+        try {
+            $book->set_column('title', $title);
+            $book->set_column('date', $date);
+            $book->set_column('isbn', $isbn->common_data);
+            $book->set_column('pages', $pages);
+            $book->set_column('dataurl', $dataurl);
+            $book->update;
+            flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
+            redirect '/book/' . $book->id;
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+            template 'books_edit', { book => $book };
+        };
+    
+    } else {
+        flash error => "$isbn_in is not a valid ISBN!";
+        redirect '/books/edit/' . $book->id;
+    }
+    
 };
 
 get '/books/covers/:id' => require_role admin => sub {
