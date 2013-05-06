@@ -67,7 +67,8 @@ CREATE TABLE books (
 DROP TABLE IF EXISTS creators;
 CREATE TABLE creators (
     id      INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name    VARCHAR(255) NOT NULL
+    name    VARCHAR(255) NOT NULL, 
+    dataurl VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE book_creators (

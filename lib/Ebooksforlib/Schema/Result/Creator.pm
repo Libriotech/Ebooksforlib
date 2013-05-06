@@ -32,6 +32,12 @@ __PACKAGE__->table("creators");
   is_nullable: 0
   size: 255
 
+=head2 dataurl
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 255
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -39,6 +45,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
+  "dataurl",
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -60,8 +68,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:46:34
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O7SCwsxxS0mnItX4mVzIFQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-06 16:07:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7j5quPfA2VCTxG0UOq0Lyg
 
 __PACKAGE__->many_to_many( books => 'book_creators', 'book' );
 
