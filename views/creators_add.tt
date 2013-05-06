@@ -1,5 +1,14 @@
 [% META pagetitle = 'Add creator' %]
 
+<h2>Add from search</h2>
+
+<form method="GET" action="/creators/add_from_search">
+<input type="text" name="q" id="q" required>
+<input type="button" value="Search">
+</form>
+
+<h2>Add from scratch</h2>
+
 <form method="POST" action="/creators/add">
 [% adding = 1 %]
 [% INCLUDE creators_form.tt %]

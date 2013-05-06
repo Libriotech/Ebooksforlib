@@ -877,12 +877,30 @@ get '/creators/add' => require_role admin => sub {
     template 'creators_add';
 };
 
+get '/creators/add_from_search' => require_role admin => sub {
+
+    my $q = param 'q';
+    
+    my $sparql = 'SELECT DISTINCT ?person ?name WHERE { 
+            { ?person <http://xmlns.com/foaf/0.1/name> "' . $q . '" . 
+    } UNION { ?person <http://def.bibsys.no/xmlns/radatana/1.0#catalogueName> "' . $q . '" . 
+    } UNION { ?person <http://xmlns.com/foaf/0.1/lastName> "' . $q . '" . 
+    } UNION { ?person <http://xmlns.com/foaf/0.1/firstName> "' . $q . '" . }
+    ?person a <http://xmlns.com/foaf/0.1/Person> .
+    ?person <http://xmlns.com/foaf/0.1/name> ?name . }'; 
+    my $results = _sparql2data( $sparql );
+    template 'creators_add_from_search', { results => $results };
+
+};
+
 post '/creators/add' => require_role admin => sub {
 
-    my $name = param 'name';
+    my $name    = param 'name';
+    my $dataurl = param 'dataurl';
     try {
         my $new_creator = rset('Creator')->create({
-            name  => $name,
+            name    => $name,
+            dataurl => $dataurl,
         });
         flash info => 'A new creator was added! <a href="/creator/' . $new_creator->id . '">View</a>';
         redirect '/admin';
@@ -903,11 +921,13 @@ get '/creators/edit/:id' => require_role admin => sub {
 
 post '/creators/edit' => require_role admin => sub {
 
-    my $id   = param 'id';
-    my $name = param 'name';
+    my $id      = param 'id';
+    my $name    = param 'name';
+    my $dataurl = param 'dataurl';
     my $creator = rset('Creator')->find( $id );
     try {
-        $creator->set_column('name', $name);
+        $creator->set_column( 'name', $name );
+        $creator->set_column( 'dataurl', $dataurl );
         $creator->update;
         flash info => 'A creator was updated! <a href="/creator/' . $creator->id . '">View</a>';
         redirect '/creator/' . $creator->id;
@@ -1010,6 +1030,49 @@ post '/books/add' => require_role admin => sub {
                 dataurl => $dataurl,
             });
             flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
+            
+            # Check for authors/creators we need to add
+            if ( $dataurl ) {
+                my $sparql = 'SELECT DISTINCT ?creator ?name WHERE {
+                                <http://data.deichman.no/resource/tnr_1404621> <http://purl.org/dc/terms/creator> ?creator .
+                                ?creator <http://xmlns.com/foaf/0.1/name> ?name .
+                              }';
+                my $data = _sparql2data( $sparql );
+                foreach my $creator ( @{ $data->{'results'}->{'bindings'} } ) {
+                    
+                    my $dataurl = $creator->{'creator'}->{'value'};
+                    my $name    = $creator->{'name'}->{'value'};
+                    
+                    # FIXME Check if this author exists, based on the dataurl
+                    
+                    my $new_creator;
+                    try {
+                        $new_creator = rset('Creator')->create({
+                            name    => $name,
+                            dataurl => $dataurl,
+                        });
+                        flash info => 'A new creator was added! <a href="/creator/' . $new_creator->id . '">View</a>';
+                    } catch {
+                        flash error => "Oops, we got an error:<br />$_";
+                        error "$_";
+                    };
+                    
+                    my $book_id    = $new_book->id;
+                    my $creator_id = $new_creator->id;
+                    try {
+                        rset('BookCreator')->create({
+                            book_id    => $book_id, 
+                            creator_id => $creator_id, 
+                        });
+                        flash info => 'A new creator was added to a book!';
+                    } catch {
+                        flash error => "Oops, we got an error:<br />$_";
+                        error "$_";
+                    };
+                }
+                
+            }
+            
             redirect '/admin';
         } catch {
             flash error => "Oops, we got an error:<br />$_";

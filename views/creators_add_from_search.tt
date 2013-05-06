@@ -1,0 +1,22 @@
+[% META pagetitle = 'Add creator from search' %]
+
+<h2>Add from search</h2>
+
+<p>Please note! This search is case sensitive.</p>
+
+<form method="GET" action="/creators/add_from_search">
+<input type="text" name="q" id="q" value="[% params.q %]" required>
+<input type="button" value="Search">
+</form>
+
+[% IF results.results.bindings.size %]
+
+    [% FOREACH person IN results.results.bindings %]
+        <p>[% person.name.value %] [% person.person.value %]</p>
+    [% END %]
+
+[% ELSE %]
+
+    <p>Sorry, no results found.</p>
+
+[% END %]
