@@ -1022,6 +1022,10 @@ post '/books/add' => require_role admin => sub {
     if ( $isbn && $isbn->is_valid ) {
     
         try {
+            
+            my $flash_info;
+            my $flash_error;
+            
             my $new_book = rset('Book')->create({
                 title   => $title,
                 date    => $date,
@@ -1029,12 +1033,13 @@ post '/books/add' => require_role admin => sub {
                 pages   => $pages, 
                 dataurl => $dataurl,
             });
-            flash info => 'A new book was added! <a href="/book/' . $new_book->id . '">View</a>';
+            $flash_info .= '<cite>' . $new_book->title . '</cite> was added.<br>';
             
             # Check for authors/creators we need to add
             if ( $dataurl ) {
+            
                 my $sparql = 'SELECT DISTINCT ?creator ?name WHERE {
-                                <http://data.deichman.no/resource/tnr_1404621> <http://purl.org/dc/terms/creator> ?creator .
+                                <' . $dataurl . '> <http://purl.org/dc/terms/creator> ?creator .
                                 ?creator <http://xmlns.com/foaf/0.1/name> ?name .
                               }';
                 my $data = _sparql2data( $sparql );
@@ -1051,9 +1056,9 @@ post '/books/add' => require_role admin => sub {
                             name    => $name,
                             dataurl => $dataurl,
                         });
-                        flash info => 'A new creator was added! <a href="/creator/' . $new_creator->id . '">View</a>';
+                        $flash_info .= $new_creator->name . ' was added.<br>';
                     } catch {
-                        flash error => "Oops, we got an error:<br />$_";
+                        $flash_error .= "Oops, we got an error:<br />$_";
                         error "$_";
                     };
                     
@@ -1064,16 +1069,19 @@ post '/books/add' => require_role admin => sub {
                             book_id    => $book_id, 
                             creator_id => $creator_id, 
                         });
-                        flash info => 'A new creator was added to a book!';
+                        $flash_info .= $new_creator->name . ' was added as creator of <cite>' . $new_book->title . '</cite>.<br>';
                     } catch {
-                        flash error => "Oops, we got an error:<br />$_";
+                        $flash_error .= "Oops, we got an error:<br />$_";
                         error "$_";
                     };
                 }
                 
             }
             
-            redirect '/admin';
+            flash info  => $flash_info;
+            flash error => $flash_error;
+            redirect '/book/' . $new_book->id;
+            
         } catch {
             flash error => "Oops, we got an error:<br />$_";
             error "$_";
