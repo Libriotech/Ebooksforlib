@@ -1026,14 +1026,31 @@ post '/books/add' => require_role admin => sub {
             my $flash_info;
             my $flash_error;
             
-            my $new_book = rset('Book')->create({
-                title   => $title,
-                date    => $date,
-                isbn    => $isbn->common_data,
-                pages   => $pages, 
-                dataurl => $dataurl,
-            });
-            $flash_info .= '<cite>' . $new_book->title . '</cite> was added.<br>';
+            # Check if the book exists, based on dataurl or ISBN
+            my $new_book;
+            if ( $dataurl ) {
+                $new_book = rset('Book')->find_or_new({
+                    dataurl => $dataurl,
+                });
+            } else {
+                $new_book = rset('Book')->find_or_new({
+                    isbn => $isbn->common_data,
+                });
+            }
+            if( !$new_book->in_storage ) {
+                # This is a new book
+                $new_book->set_column( 'title', $title );
+                $new_book->set_column( 'date', $date );
+                $new_book->set_column( 'isbn', $isbn->common_data );
+                $new_book->set_column( 'pages', $pages );
+                $new_book->insert;
+                $flash_info .= '<cite>' . $new_book->title . '</cite> was added.<br>';
+            } else {
+                # This is an existing book
+                flash error => '<cite>' . $new_book->title . '</cite> already exists.<br>';
+                debug "*** Trying to save a book that already exists";
+                return redirect '/book/' . $new_book->id;
+            }
             
             # Check for authors/creators we need to add, if we got a dataurl
             if ( $dataurl ) {
@@ -1093,7 +1110,7 @@ post '/books/add' => require_role admin => sub {
             
             flash info  => $flash_info;
             flash error => $flash_error;
-            redirect '/book/' . $new_book->id;
+            return redirect '/book/' . $new_book->id;
             
         } catch {
             flash error => "Oops, we got an error:<br />$_";
