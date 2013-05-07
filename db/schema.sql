@@ -173,12 +173,12 @@ INSERT INTO user_libraries SET user_id = 4, library_id = 2;
 INSERT INTO user_libraries SET user_id = 5, library_id = 2;
 
 -- Books
-INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891', isbn = '8205004714',    pages = 123, coverurl = 'http://krydder.bib.no/0191/304730.bilde.1327468070.s.jpg';
+INSERT INTO books SET id = 1, title = 'Vildanden',                        date = '1891', isbn = '8205004714',    pages = 123, dataurl = 'http://data.deichman.no/resource/tnr_656917';
 INSERT INTO books SET id = 2, title = 'Tales From The Fjeld',             date = '1892', pages = 234;
-INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date = '1893', isbn = '9788292465851', pages = 235, coverurl = 'http://krydder.bib.no/0783/9286428.bilde.1346774574.s.jpg';;
-INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894', isbn = '8256014369',    pages = 236, coverurl = 'http://krydder.bib.no/0416/827259.bilde.1327570239.s.jpg';;
-INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895', isbn = '9788202289355', pages = 237, coverurl = 'http://krydder.bib.no/0008/994590.bilde.1327493563.s.jpg';;
-INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895', isbn = '8205054177',    pages = 238, coverurl = 'http://www.bokkilden.no/SamboWeb/servlet/VisBildeServlet?produktId=1869724';;
+INSERT INTO books SET id = 3, title = 'Three Men In A Boat',              date = '1893', isbn = '9788292465851', pages = 235, dataurl = 'http://data.deichman.no/resource/tnr_192097';
+INSERT INTO books SET id = 4, title = 'War And Peace',                    date = '1894', isbn = '8256014369',    pages = 236, coverurl = 'http://krydder.bib.no/0416/827259.bilde.1327570239.s.jpg';
+INSERT INTO books SET id = 5, title = 'Three In Norway (by two of them)', date = '1895', isbn = '9788202289355', pages = 237, dataurl = 'http://data.deichman.no/resource/tnr_818768';
+INSERT INTO books SET id = 6, title = 'Peer Gynt',                        date = '1895', isbn = '8205054177',    pages = 238, dataurl = 'http://data.deichman.no/resource/tnr_571672';
 
 -- Providers
 INSERT INTO providers SET id = 1, name = 'Provider A', description = 'This is our first provider.';

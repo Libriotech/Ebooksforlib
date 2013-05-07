@@ -83,12 +83,24 @@ get '/book/:id' => sub {
         
     }
     
+    # Look for descriptions
+    my $descriptions;
+    if ( $book->dataurl ) {
+        my $sparql = 'SELECT DISTINCT ?krydder ?abstract WHERE {
+                          OPTIONAL { <' . $book->dataurl . '> <http://data.deichman.no/krydder_beskrivelse> ?krydder . }
+                          OPTIONAL { <' . $book->dataurl . '> <http://purl.org/dc/terms/abstract> ?abstract . }
+                      }';
+        $descriptions = _sparql2data( $sparql );
+        debug "*** Descriptions: " . Dumper $descriptions;
+    }
+    
     template 'book', { 
-        book              => $book, 
-        user_has_borrowed => $user_has_borrowed,
-        # items             => \@items,
-        limit_reached     => $limit_reached,
+        book                    => $book, 
+        user_has_borrowed       => $user_has_borrowed,
+        # items                 => \@items,
+        limit_reached           => $limit_reached,
         user_belongs_to_library => $user_belongs_to_library,
+        descriptions            => $descriptions,
     };
 };
 

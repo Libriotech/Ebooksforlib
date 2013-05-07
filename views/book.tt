@@ -111,6 +111,18 @@
     <p>No items, yet!</p>
 [% END %]
 
+[% IF descriptions.results.bindings.size %]
+    <h2>Descriptions</h2>
+    [% IF descriptions.results.bindings.0.abstract.value %]
+        <h3>Abstract</h3>
+        <div>[% descriptions.results.bindings.0.abstract.value %]</div>
+    [% END %]
+    [% IF descriptions.results.bindings.0.krydder.value %]
+        <h3>Krydder</h3>
+        <div>[% descriptions.results.bindings.0.krydder.value %]</div>
+    [% END %]
+[% END %]
+
 [% IF books.size %]
     <h2>Other books by the same creator(s)</h2>
     [% INCLUDE 'books_table.tt' books=books %]
