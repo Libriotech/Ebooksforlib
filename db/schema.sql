@@ -229,14 +229,14 @@ INSERT INTO items SET id = 21, library_id = 2, file_id = 13, loan_period = 28;
 
 -- Loans
 -- User: Test 1, Library: Lillevik
-INSERT INTO loans SET item_id = 10, user_id = 4, loaned = NOW() - INTERVAL 21 DAY, due = NOW() + INTERVAL 7 DAY; -- borrowed 21 days ago, due in 7 days
-INSERT INTO loans SET item_id = 14, user_id = 4, loaned = NOW(), due = NOW() + INTERVAL 7 DAY; -- borrowed now, due in 7 days
-INSERT INTO loans SET item_id = 16, user_id = 4, loaned = NOW(), due = NOW() + INTERVAL 7 DAY; -- borrowed now, due in 7 days
+INSERT INTO loans SET item_id = 10, user_id = 4, loaned = NOW() - INTERVAL 21 DAY, due = NOW() + INTERVAL 128 DAY; -- borrowed 21 days ago, due in 128 days
+INSERT INTO loans SET item_id = 14, user_id = 4, loaned = NOW(), due = NOW() + INTERVAL 128 DAY; -- borrowed now, due in 128 days
+INSERT INTO loans SET item_id = 16, user_id = 4, loaned = NOW(), due = NOW() + INTERVAL 128 DAY; -- borrowed now, due in 128 days
 INSERT INTO loans SET item_id = 19, user_id = 4, loaned = NOW(), due = NOW() + INTERVAL 28 DAY; -- borrowed now, due in 28 days
 -- User: Test 2, Library: Lillevik
 INSERT INTO loans SET item_id = 9,  user_id = 5, loaned = NOW() - INTERVAL 7 DAY, due = NOW(); -- borrowed 7 days ago, due now
-INSERT INTO loans SET item_id = 13, user_id = 5, loaned = NOW(), due = NOW() + INTERVAL 7 DAY; -- borrowed now, due in 7 days
-INSERT INTO loans SET item_id = 12, user_id = 5, loaned = NOW(), due = NOW() + INTERVAL 7 DAY; -- borrowed now, due in 7 days
+INSERT INTO loans SET item_id = 13, user_id = 5, loaned = NOW(), due = NOW() + INTERVAL 128 DAY; -- borrowed now, due in 128 days
+INSERT INTO loans SET item_id = 12, user_id = 5, loaned = NOW(), due = NOW() + INTERVAL 128 DAY; -- borrowed now, due in 128 days
 INSERT INTO loans SET item_id = 20, user_id = 5, loaned = NOW(), due = NOW() + INTERVAL 28 DAY; -- borrowed now, due in 28 days
 
 -- Creators
