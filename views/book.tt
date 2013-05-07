@@ -77,24 +77,28 @@
     <p>You have already borrowed this book!</p>
 [% END %]
 
-[% IF items.size %]
+[% IF book.files.size %]
     <table>
     <tr><th>ID</th><th>Loan period</th><th>Loan status</th></tr>
-    [% FOREACH item IN items %]
-        <tr>
-            <td>[% item.id %]</td>
-            <td>[% item.loan_period %]</td>
-            <td>
-                [% IF item.loan.due %]
-                    Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
-                [% ELSE %]
-                    Not on loan
-                    [% IF session.logged_in_user_id && user_belongs_to_library == 1 && user_has_borrowed != 1 && limit_reached != 1 %]
-                        <a href="/borrow/[% item.id %]">Borrow</a>
-                    [% END %]
-                [% END %]
-            </td>
-        </tr>
+    [% FOREACH file IN book.files %]
+        [% FOREACH item IN file.items %]
+            [% IF item.library_id == session.chosen_library %]
+                <tr>
+                    <td>[% item.id %]</td>
+                    <td>[% item.loan_period %]</td>
+                    <td>
+                        [% IF item.loan.due %]
+                            Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
+                        [% ELSE %]
+                            Not on loan
+                            [% IF session.logged_in_user_id && user_belongs_to_library == 1 && user_has_borrowed != 1 && limit_reached != 1 %]
+                                <a href="/borrow/[% item.id %]">Borrow</a>
+                            [% END %]
+                        [% END %]
+                    </td>
+                </tr>
+            [% END %]
+        [% END %]
     [% END %]
     </table>
     [% IF limit_reached == 1 %]

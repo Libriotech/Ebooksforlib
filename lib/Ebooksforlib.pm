@@ -50,13 +50,15 @@ get '/book/:id' => sub {
     my $book = rset('Book')->find( $book_id );
     
     # Get the items for this book and library, that are not deleted
-    my @items = rset('Item')->search({
-        'file.library_id' => session('chosen_library'),
-        'file.book_id'    => $book->id,
-        deleted           => 0,
-    }, {
-        join => 'file',
-    });
+    # We get the items from the book, for now, but leave this here in case it
+    # turns out to be a bad idea
+    # my @items = rset('Item')->search({
+    #     'file.library_id' => session('chosen_library'),
+    #     'file.book_id'    => $book->id,
+    #     deleted           => 0,
+    # }, {
+    #     join => 'file',
+    # });
     
     my $user_has_borrowed = 0;
     my $limit_reached = 0;
