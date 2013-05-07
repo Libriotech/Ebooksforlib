@@ -82,7 +82,7 @@
     <tr><th>ID</th><th>Loan period</th><th>Loan status</th></tr>
     [% FOREACH file IN book.files %]
         [% FOREACH item IN file.items %]
-            [% IF item.library_id == session.chosen_library %]
+            [% IF item.library_id == session.chosen_library && item.deleted != 1 %]
                 <tr>
                     <td>[% item.id %]</td>
                     <td>[% item.loan_period %]</td>
