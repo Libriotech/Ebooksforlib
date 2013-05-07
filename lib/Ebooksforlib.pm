@@ -1035,33 +1035,46 @@ post '/books/add' => require_role admin => sub {
             });
             $flash_info .= '<cite>' . $new_book->title . '</cite> was added.<br>';
             
-            # Check for authors/creators we need to add
+            # Check for authors/creators we need to add, if we got a dataurl
             if ( $dataurl ) {
             
+                # Request the URIs of all creators for this book
                 my $sparql = 'SELECT DISTINCT ?creator ?name WHERE {
                                 <' . $dataurl . '> <http://purl.org/dc/terms/creator> ?creator .
                                 ?creator <http://xmlns.com/foaf/0.1/name> ?name .
                               }';
                 my $data = _sparql2data( $sparql );
+                
+                # Loop through the creators
                 foreach my $creator ( @{ $data->{'results'}->{'bindings'} } ) {
                     
                     my $dataurl = $creator->{'creator'}->{'value'};
                     my $name    = $creator->{'name'}->{'value'};
                     
-                    # FIXME Check if this author exists, based on the dataurl
-                    
+                    # Check if this author exists, based on the dataurl
+                    # If it does exist, tie it to the new book
+                    # If it does not exist, create it before tying it to the new book
                     my $new_creator;
                     try {
-                        $new_creator = rset('Creator')->create({
-                            name    => $name,
+                        $new_creator = rset('Creator')->find_or_new({
                             dataurl => $dataurl,
                         });
-                        $flash_info .= $new_creator->name . ' was added.<br>';
+                        if( !$new_creator->in_storage ) {
+                            # This is a new creator
+                            $new_creator->set_column( 'name', $name );
+                            $new_creator->insert;
+                            $flash_info .= $name . ' was added.<br>';
+                        } else {
+                            # This is an existing creator
+                            $flash_info .= $new_creator->name . ' already existed.<br>';
+                        }
                     } catch {
                         $flash_error .= "Oops, we got an error:<br />$_";
                         error "$_";
                     };
                     
+                    # Now tie the creator to the book. When we have got this far
+                    # we do not have to worry about it being an old or new creator
                     my $book_id    = $new_book->id;
                     my $creator_id = $new_creator->id;
                     try {
