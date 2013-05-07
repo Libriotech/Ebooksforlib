@@ -86,7 +86,7 @@ get '/book/:id' => sub {
     template 'book', { 
         book              => $book, 
         user_has_borrowed => $user_has_borrowed,
-        items             => \@items,
+        # items             => \@items,
         limit_reached     => $limit_reached,
         user_belongs_to_library => $user_belongs_to_library,
     };
