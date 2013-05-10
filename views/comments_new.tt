@@ -10,6 +10,9 @@
     <td>[% date.format( time => comment.time.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
     <td>
         <p>[% comment.comment %]</p>
+        [% IF comment.user_id == session.logged_in_user_id %]
+            <p><a href="/comments/edit/[% comment.id %]">Edit</a></p>
+        [% END %]
     </td>
     </tr>
 [% END %]

@@ -1,0 +1,22 @@
+[% IF book.id %]
+    <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
+[% END %]
+
+[% IF comment.id %]
+    <input type="hidden" name="comment_id" id="comment_id" value="[% comment.id %]">
+[% END %]
+
+<fieldset>
+[% IF comment.id %]
+    <legend>Edit an existing comment</legend>
+[% ELSE %]
+    <legend>Add a new comment</legend>
+[% END %]
+<label for="comment">Comment text</label>
+<br>
+<textarea name="comment" id="comment" rows="10" cols="100">[% comment.comment %]</textarea>
+<br>
+(No HTML or other markup is allowed.)
+<br>
+<input type="submit" value="Save comment">
+</fieldset>

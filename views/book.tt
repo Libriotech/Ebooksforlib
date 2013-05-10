@@ -134,17 +134,7 @@
 
 [% IF session.logged_in_user %]
     <form method="POST" action="/comments/add">
-    <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
-    <fieldset>
-    <legend>Add a new comment</legend>
-    <label for="comment">Comment text</label>
-    <br>
-    <textarea name="comment" id="comment" rows="10" cols="100"></textarea>
-    <br>
-    (No HTML or other markup is allowed.)
-    <br>
-    <input type="submit" value="Save new comment">
-    </fieldset>
+    [% INCLUDE 'comments_form.tt' %]
     </form>
 [% END %]
 
@@ -154,6 +144,9 @@
         <div style="border: 1px dotted black; padding-bottom: 0.5em;">
         <p>[% comment.user.name %] ([% date.format( time => comment.time.epoch, format => settings.date_format, locale => settings.locale ) %]):</p>
         <p>[% comment.comment %]</p>
+        [% IF comment.user_id == session.logged_in_user_id %]
+            <p><a href="/comments/edit/[% comment.id %]">Edit</a></p>
+        [% END %]
         </div>
     [% END %]
 [% END %]

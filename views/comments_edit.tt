@@ -1,0 +1,7 @@
+[% META pagetitle = 'Edit a comment' %]
+
+<p>This is a comment on <a href="/book/[% comment.book.id %]"><cite>[% comment.book.title %]</cite></a>.</p>
+
+<form method="POST" action="/comments/edit">
+[% INCLUDE 'comments_form.tt' %]
+</form>
