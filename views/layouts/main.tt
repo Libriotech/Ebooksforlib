@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>[% IF template.pagetitle %][% template.pagetitle %] > [% END %][% vars.appname %]</title>
 <link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
+[% library.detail_head %]
 </head>
 <body>
 

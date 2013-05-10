@@ -111,6 +111,8 @@
     <p>No items, yet!</p>
 [% END %]
 
+[% library.soc_links %]
+
 [% IF descriptions.results.bindings.size %]
     <h2>Descriptions</h2>
     [% IF descriptions.results.bindings.0.abstract.value %]

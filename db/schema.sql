@@ -32,7 +32,9 @@ CREATE TABLE libraries (
     id    INTEGER AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(255) UNIQUE KEY NOT NULL,
     realm varchar(32)  UNIQUE KEY, 
-    concurrent_loans INTEGER NOT NULL DEFAULT 1
+    concurrent_loans INTEGER NOT NULL DEFAULT 1, 
+    detail_head TEXT, 
+    soc_links TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_roles (
@@ -280,3 +282,18 @@ INSERT INTO list_book SET list_id = 4, book_id = 3;
 INSERT INTO list_book SET list_id = 5, book_id = 3;
 INSERT INTO list_book SET list_id = 5, book_id = 5;
 INSERT INTO list_book SET list_id = 6, book_id = 5;
+
+-- Social links
+UPDATE libraries SET detail_head = 
+'<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-fc58719c-4d7e-55a8-f36d-4395783944d1", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>'
+WHERE id = 2;
+UPDATE libraries SET soc_links = 
+"<span class='st_sharethis_hcount' displayText='ShareThis'></span>
+<span class='st_facebook_hcount' displayText='Facebook'></span>
+<span class='st_twitter_hcount' displayText='Tweet'></span>
+<span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+<span class='st_pinterest_hcount' displayText='Pinterest'></span>
+<span class='st_email_hcount' displayText='Email'></span>"
+WHERE id = 2;

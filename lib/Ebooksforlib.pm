@@ -63,6 +63,7 @@ get '/book/:id' => sub {
     my $user_has_borrowed = 0;
     my $limit_reached = 0;
     my $user_belongs_to_library = 0;
+    my $library = rset('Library')->find( session('chosen_library') );
     if ( session('logged_in_user_id') ) {
     
         my $user = rset('User')->find( session('logged_in_user_id') );
@@ -76,7 +77,6 @@ get '/book/:id' => sub {
         $user_has_borrowed = _user_has_borrowed( $user, $book );
 
         # Check the number of concurrent loans
-        my $library = rset('Library')->find( session('chosen_library') );
         if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
             $limit_reached = 1;
         }
@@ -101,6 +101,7 @@ get '/book/:id' => sub {
         limit_reached           => $limit_reached,
         user_belongs_to_library => $user_belongs_to_library,
         descriptions            => $descriptions,
+        library                 => $library,
     };
 };
 
@@ -451,6 +452,29 @@ get '/superadmin' => require_role superadmin => sub {
         'libraries' => \@libraries,
         'providers' => \@providers,
     };
+};
+
+### Detail view
+
+get '/detailview' => require_role admin => sub { 
+    my $library = rset('Library')->find( _get_library_for_admin_user() );
+    template 'detailview', { library => $library };
+};
+
+post '/detailview' => require_role admin => sub { 
+    my $detail_head = param 'detail_head';
+    my $soc_links   = param 'soc_links';
+    my $library = rset('Library')->find( _get_library_for_admin_user() );
+    try {
+        $library->set_column( 'detail_head', $detail_head );
+        $library->set_column( 'soc_links', $soc_links );
+        $library->update;
+        flash info => 'The detail view was updated!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+    };
+    redirect '/admin';
 };
 
 ### Files
