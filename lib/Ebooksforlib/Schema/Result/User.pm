@@ -86,6 +86,21 @@ __PACKAGE__->add_unique_constraint("username", ["username"]);
 
 =head1 RELATIONS
 
+=head2 comments
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Comment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comments",
+  "Ebooksforlib::Schema::Result::Comment",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 loans
 
 Type: has_many
@@ -147,8 +162,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-04-15 13:32:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gt0qqjJlWhp3MzunTlUGMw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-10 13:27:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+sDDaa2GcL5Mk7GavXjXYw
 
 __PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
 

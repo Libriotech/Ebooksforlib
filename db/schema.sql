@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS old_loans;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS files;
 DROP TABLE IF EXISTS providers;
+DROP TABLE IF EXISTS comments;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -147,6 +148,16 @@ CREATE TABLE old_loans (
     CONSTRAINT old_loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE comments (
+    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    book_id INTEGER NOT NULL,
+    comment TEXT NOT NULL,
+    time    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT comments_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
+    CONSTRAINT comments_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Sample data
 -- TODO Split this out into a separate file
 
@@ -158,8 +169,8 @@ INSERT INTO roles SET id = 2, role = 'superadmin';
 INSERT INTO users SET id = 1, username = 'anon', name = 'anon';
 INSERT INTO users SET id = 2, username = 'henrik', password = '{SSHA}naJx7DlkVcnRkTUm2sOzg5IsaYPfm76H', name = 'Henrik Ibsen', email = 'henrik@example.org';  -- password = pass
 INSERT INTO users SET id = 3, username = 'sigrid', password = '{SSHA}qf4CXx0V8668B8QzYGcGpHdyBWEhCv55', name = 'Sigrid Undset', email = 'sigrid@example.org'; -- password = pass
-INSERT INTO users SET id = 4, username = 'test1',  name = 'Test 1', email = 'test1@example.org'; -- password = pass
-INSERT INTO users SET id = 5, username = 'test2',  name = 'Test 2', email = 'test2@example.org'; -- password = pass
+INSERT INTO users SET id = 4, username = 'test1',  name = 'Test Testsønn', email = 'test1@example.org'; -- password = pass
+INSERT INTO users SET id = 5, username = 'test2',  name = 'Test Testdatter', email = 'test2@example.org'; -- password = pass
 
 -- Libraries
 INSERT INTO libraries SET id = 1, name = 'Storevik', realm = 'storevik', concurrent_loans = 3;
@@ -282,6 +293,13 @@ INSERT INTO list_book SET list_id = 4, book_id = 3;
 INSERT INTO list_book SET list_id = 5, book_id = 3;
 INSERT INTO list_book SET list_id = 5, book_id = 5;
 INSERT INTO list_book SET list_id = 6, book_id = 5;
+
+-- Comments
+INSERT INTO comments SET id = 1, book_id = 1, user_id = 2, time = NOW() - INTERVAL 4 DAY, comment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare sem eu diam dictum commodo. Nulla in egestas nunc. Nulla et auctor erat. Integer vestibulum posuere pellentesque. Aenean ornare pellentesque lectus, eget dictum est elementum eu. Duis lacinia nulla quis libero bibendum a auctor nunc ultricies. Vestibulum viverra magna vitae quam luctus rutrum. Pellentesque ac metus orci. Morbi vestibulum diam quis ligula luctus ut porta libero pharetra. Aenean eu sapien ac orci tempor sagittis. Vestibulum eget sagittis leo. Vivamus magna felis, rutrum et adipiscing id, aliquam in velit. Suspendisse sed lorem quam. Etiam orci tellus, aliquet quis sollicitudin vitae, dictum nec arcu. Nulla interdum, risus eu lacinia sollicitudin, lorem magna rhoncus mauris, ac aliquet turpis orci eu est. Quisque justo risus, vehicula nec bibendum et, pellentesque eget nisi.';
+INSERT INTO comments SET id = 2, book_id = 1, user_id = 3, time = NOW() - INTERVAL 3 DAY, comment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ';
+INSERT INTO comments SET id = 3, book_id = 1, user_id = 4, time = NOW() - INTERVAL 2 DAY, comment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare sem eu diam dictum commodo. Nulla in egestas nunc. Nulla et auctor erat. Integer vestibulum posuere pellentesque. Aenean ornare pellentesque lectus, eget dictum est elementum eu. Duis lacinia nulla quis libero bibendum a auctor nunc ultricies. Vestibulum viverra magna vitae quam luctus rutrum. Pellentesque ac metus orci. Morbi vestibulum diam quis ligula luctus ut porta libero pharetra. Aenean eu sapien ac orci tempor sagittis. Vestibulum eget sagittis leo. Vivamus magna felis, rutrum et adipiscing id, aliquam in velit. Suspendisse sed lorem quam. Etiam orci tellus, aliquet quis sollicitudin vitae, dictum nec arcu. ';
+INSERT INTO comments SET id = 4, book_id = 1, user_id = 2, time = NOW() - INTERVAL 1 DAY, comment = 'Nulla interdum, risus eu lacinia sollicitudin, lorem magna rhoncus mauris, ac aliquet turpis orci eu est. Quisque justo risus, vehicula nec bibendum et, pellentesque eget nisi.';
+
 
 -- Social links
 UPDATE libraries SET detail_head = 

@@ -7,6 +7,7 @@ use Dancer::Exception qw(:all);
 use Crypt::SaltedHash;
 use Digest::MD5 qw( md5_hex );;
 use Business::ISBN;
+use HTML::Strip;
 use DateTime;
 use DateTime::Duration;
 use Data::Dumper; # DEBUG 
@@ -104,6 +105,37 @@ get '/book/:id' => sub {
         library                 => $library,
     };
 };
+
+### Comments
+
+post '/comment/add' => require_login sub {
+
+    my $comment_raw = param 'comment';
+    my $book_id     = param 'book_id';
+    my $user_id     = session( 'logged_in_user_id' );
+    
+    # Make sure the user-submitted comment is safe
+    my $hs = HTML::Strip->new();
+    my $comment_safe = $hs->parse( $comment_raw );
+    
+    # Save the comment
+    try {
+        my $new_comment = rset('Comment')->create({
+            user_id => $user_id,
+            book_id => $book_id,
+            comment => $comment_safe,
+        });
+        flash info => 'Your comment was added!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_"; # FIXME Don't show the raw error to end users
+        error "$_";
+    };
+    
+    redirect '/book/' . $book_id;
+
+};
+
+### Borrowing books
 
 get '/borrow/:item_id' => require_login sub {
 

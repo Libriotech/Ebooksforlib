@@ -130,6 +130,34 @@
     [% INCLUDE 'books_table.tt' books=books %]
 [% END %]
 
+<h2>Comments</h2>
+
+[% IF session.logged_in_user %]
+    <form method="POST" action="/comment/add">
+    <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
+    <fieldset>
+    <legend>Add a new comment</legend>
+    <label for="comment">Comment text</label>
+    <br>
+    <textarea name="comment" id="comment" rows="10" cols="100"></textarea>
+    <br>
+    (No HTML or other markup is allowed.)
+    <br>
+    <input type="submit" value="Save new comment">
+    </fieldset>
+    </form>
+[% END %]
+
+[% IF book.comments.size %]
+    <p>[% book.comments.size || 0 %] existing comments:</p>
+    [% FOREACH comment IN book.comments.reverse %]
+        <div style="border: 1px dotted black; padding-bottom: 0.5em;">
+        <p>[% comment.user.name %] ([% date.format( time => comment.time.epoch, format => settings.date_format, locale => settings.locale ) %]):</p>
+        <p>[% comment.comment %]</p>
+        </div>
+    [% END %]
+[% END %]
+
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]
     [% IF role == 'admin' %]

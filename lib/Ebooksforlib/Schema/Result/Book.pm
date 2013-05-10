@@ -106,6 +106,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 comments
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Comment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comments",
+  "Ebooksforlib::Schema::Result::Comment",
+  { "foreign.book_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 files
 
 Type: has_many
@@ -137,8 +152,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-03 11:11:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8YsFsVIgot1kFO7i3uamhg
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-10 13:27:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VUbINKKY7HNH0mxU8R+Ziw
 
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 
