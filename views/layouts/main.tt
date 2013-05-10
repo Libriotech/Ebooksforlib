@@ -32,6 +32,7 @@
 <div class="logo">
 <a href="/">[% vars.appname %]</a>
 <a href="/lists">Genres &amp; lists</a>
+<a href="/comments/new">Recent comments</a>
 </div>
 
 <h1>[% IF template.pagetitle %][% template.pagetitle %][% ELSE %][% vars.appname %][% END %]</h1>

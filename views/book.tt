@@ -3,7 +3,7 @@
 
 <h2>[% book.title %]</h2> 
 
-[% IF book.coverurl %]
+[% IF book.coverimg %]
 <p style="float: right;"><img src="[% book.coverimg %]"></p>
 [% END %]
 
@@ -133,7 +133,7 @@
 <h2>Comments</h2>
 
 [% IF session.logged_in_user %]
-    <form method="POST" action="/comment/add">
+    <form method="POST" action="/comments/add">
     <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
     <fieldset>
     <legend>Add a new comment</legend>

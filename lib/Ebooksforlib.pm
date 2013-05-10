@@ -108,7 +108,7 @@ get '/book/:id' => sub {
 
 ### Comments
 
-post '/comment/add' => require_login sub {
+post '/comments/add' => require_login sub {
 
     my $comment_raw = param 'comment';
     my $book_id     = param 'book_id';
@@ -132,6 +132,16 @@ post '/comment/add' => require_login sub {
     };
     
     redirect '/book/' . $book_id;
+
+};
+
+get '/comments/new' => sub {
+
+    my @comments = rset('Comment')->search( {}, {
+      order_by => { -desc => 'id' }, 
+      rows     => 10
+    } );
+    template 'comments_new', { comments => \@comments };
 
 };
 
