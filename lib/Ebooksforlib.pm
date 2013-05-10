@@ -171,6 +171,7 @@ post '/comments/edit' => sub {
     
         try {
             $comment->set_column( 'comment', $comment_safe );
+            $comment->set_column( 'edited', DateTime->now );
             $comment->update;
             flash info => 'The comment was updated!';
         } catch {

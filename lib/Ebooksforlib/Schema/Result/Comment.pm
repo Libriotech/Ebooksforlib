@@ -50,6 +50,12 @@ __PACKAGE__->table("comments");
   default_value: current_timestamp
   is_nullable: 0
 
+=head2 edited
+
+  data_type: 'datetime'
+  datetime_undef_if_invalid: 1
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -66,6 +72,12 @@ __PACKAGE__->add_columns(
     data_type => "timestamp",
     datetime_undef_if_invalid => 1,
     default_value => \"current_timestamp",
+    is_nullable => 0,
+  },
+  "edited",
+  {
+    data_type => "datetime",
+    datetime_undef_if_invalid => 1,
     is_nullable => 0,
   },
 );
@@ -104,8 +116,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-10 13:27:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YyPSUq9NnJyTCrC9hgu7eA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-10 17:00:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FOU9ldLK9wHDGiz0h8A+4g
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

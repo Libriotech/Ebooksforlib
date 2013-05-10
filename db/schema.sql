@@ -154,6 +154,7 @@ CREATE TABLE comments (
     book_id INTEGER NOT NULL,
     comment TEXT NOT NULL,
     time    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    edited  DATETIME  NOT NULL, -- ON UPDATE CURRENT_TIMESTAMP would be nice, but is not available in the MySQL versions we are using
     CONSTRAINT comments_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
     CONSTRAINT comments_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -7,7 +7,12 @@
     <td><a href="/book/[% comment.book.id %]">[% comment.book.title %]</a></td>
     <td><img src="[% comment.book.coverimg %]" style="max-height: 100px; max-width: 80px;"></td>
     <td>[% comment.user.name %]</td>
-    <td>[% date.format( time => comment.time.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
+    <td>
+        [% date.format( time => comment.time.epoch, format => settings.date_format, locale => settings.locale ) %]
+        [% IF comment.edited %]
+            , redigert [% date.format( time => comment.edited.epoch, format => settings.date_format, locale => settings.locale ) %]
+        [% END %]
+    </td>
     <td>
         <p>[% comment.comment %]</p>
         [% IF comment.user_id == session.logged_in_user_id %]
