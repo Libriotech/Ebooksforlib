@@ -17,8 +17,10 @@
 [% END %]
 </ul>
 
-[% IF belongs_to_library == 1 %]
-    <p>You belong to the library you have chosen, and can borrow books from it.</p>    
-[% ELSE %]
-    <p>You do not belong to the library you have chosen, and can not borrow books from it.</p>
+[% IF session.chosen_library %]
+    [% IF belongs_to_library == 1 %]
+        <p>You belong to the library you have chosen, and can borrow books from it.</p>    
+    [% ELSE %]
+        <p>You do not belong to the library you have chosen, and can not borrow books from it.</p>
+    [% END %]
 [% END %]
