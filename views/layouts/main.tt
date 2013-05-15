@@ -52,11 +52,17 @@ resizeclean=1;
 	<nav>
 		<div class="navbar navbar-inverse">
 			<div class="navbar-inner">
-				<a class="brand hidden-phone" href="#"><i class="icon-building"></i> Buskerud Fylkesbibliotek</a>
+				<a class="brand hidden-phone" href="/"><i class="icon-building"></i> [% session.chosen_library_name %]</a>
 				<ul class="nav pull-right">
-				<li><a href="" src="" data="Hjem"><i class="icon-home"></i></a></li>
+				<li><a href="/" src="" data="Hjem"><i class="icon-home"></i></a></li>
 				<li class="active"><a href="" src="" data="Søk"><i class="icon-search"></i></a></li>
-				<li><a href="http://reader.digitalt.org/" src="" data="Logg inn"><i class="icon-signin"></i></a></li>
+				<li>
+				    [% IF session.logged_in_user %]
+                        <a href="/log/out" src="" data="Log out"><i class="icon-signout"></i></a>
+                    [% ELSE %]
+                        <a href="/log/in" src="" data="Log in"><i class="icon-signin"></i></a>
+                    [% END %]
+				</li>
 				<li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li>
 				<li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li>
 				</ul>
@@ -67,39 +73,52 @@ resizeclean=1;
 </header>
 </div>
 </div>
+
+</div> <!-- end container -->
+</div> <!-- end header-wrapper -->
+
+<!-- SJANGER, utlistingER OG SØK
+************************************* -->
+
+<div class="container hidden-phone">
+<div class="row add-top">
+	<div class="span4">
+	<div class="dropdown">
+	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Sjanger</a>
+	<ul class="dropdown-menu">
+		<li><a href="#">Action</a></li>
+		<li><a href="#">Another action</a></li>
+		<li><a href="#">Something else here</a></li>
+		<li class="divider"></li>
+		<li><a tabindex="-1" href="#">Separated link</a></li>
+	</ul>
+    </div>
+	</div>
+
+	<div class="span4">
+	<div class="dropdown">
+	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Topputlistinger</a>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		<li><a tabindex="-1" href="#">Action</a></li>
+		<li><a tabindex="-1" href="#">Another action</a></li>
+		<li><a tabindex="-1" href="#">Something else here</a></li>
+		<li class="divider"></li>
+		<li><a tabindex="-1" href="#">Separated link</a></li>
+	</ul>
+	</div>
+	</div>
+
+	<div class="span4">
+	    <form class="navbar-search pull-left" style="width:100%;">
+	<input type="text" class="search-query" placeholder="Søk" style="width:90%">
+	</form>
+	</div>
 </div>
 
 </div> <!-- end container -->
 </div> <!-- end header-wrapper -->
 
-<div class="userbar">
-[% IF session.logged_in_user %]
-    Hiya, <a href="/my">[% IF session.logged_in_user_name %][% session.logged_in_user_name %][% ELSE %][% session.logged_in_user %][% END %]</a>! 
-    [% FOREACH role IN session.logged_in_user_roles %]
-        [% IF role == 'admin' %]
-            <a href="/admin">admin</a>
-        [% ELSIF role == 'superadmin' %]
-            <a href="/superadmin">superadmin</a>
-        [% END %]
-    [% END %]
-    <a href="/log/out">Log out</a>
-[% ELSE %]
-    <a href="/log/in">Log in</a>
-[% END %]
-[% IF session.chosen_library %]
-    <a href="/library/choose" title="Choose another library">[% session.chosen_library_name %]</a>
-[% ELSE %]
-    <a href="/library/choose">Choose library</a>
-[% END %]
-</div>
-
-<div class="logo">
-<a href="/">[% vars.appname %]</a>
-<a href="/lists">Genres &amp; lists</a>
-<a href="/comments/new">Recent comments</a>
-</div>
-
-<h1>[% IF template.pagetitle %][% template.pagetitle %][% ELSE %][% vars.appname %][% END %]</h1>
+<!-- h1>[% IF template.pagetitle %][% template.pagetitle %][% ELSE %][% vars.appname %][% END %]</h1 -->
 
 [% IF flash.error %]
     <div class="flash error">[% flash.error %]</div>
@@ -109,10 +128,6 @@ resizeclean=1;
 [% END %]
 
 [% content %]
-
-<div id="footer">
-<p>Powered by <a href="http://perldancer.org/">Dancer</a> [% dancer_version %]</p>
-</div>
 
 </body>
 </html>

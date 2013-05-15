@@ -1,6 +1,104 @@
 [% META pagetitle = 'Book page' %]
 [% USE date %]
 
+<!-- STINAVIGERING
+************************************* -->
+
+<div class="container content-container">
+<div class="row">
+	<div class="span12">
+	  <ul class="path">
+	  <li class="back-btn"><a href="#">Sjanger</a></li>
+	  <li><span>Lett blanding</span></li>
+	  </ul>
+	</div>
+</div>
+
+<!-- BOK
+************************************* -->
+
+<section id="bok">
+<div class="row add-top">
+	<div class="span3">
+	    [% IF book.coverimg %]
+		<img src="[% book.coverimg %]" />
+		[% END %]
+	</div>
+	<div class="span9 book-details">
+		<h3 class="title">[% book.title %]</h3>
+		<div class="author">
+		[% FOREACH creator IN book.creators %]
+            <a href="/creator/[% creator.id %]">[% creator.name %]</a>
+        [% END %]
+		</div>
+		<p class="details">
+		    [% IF book.date %]
+		    Published: [% book.date %]<br>
+		[% END %]
+            [% IF book.isbn %]
+                ISBN: [% book.isbn %]<br>
+            [% END %]
+            [% IF book.pages %]
+                Pages: [% book.pages %]<br>
+            [% END %]
+		</p>
+		<div class="span3 add-top add-bottom" style="margin-left:0;">
+			<a class="btn btn-large btn-block btn-primary laaneknapp" href="#">Lån boken</a>
+		</div>
+		<div class="share-this">
+		    [% library.soc_links %]
+		</div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="span12">
+		<div class="description">
+		   <h4>Description</h4>
+            [% IF descriptions.results.bindings.size %]
+                [% IF descriptions.results.bindings.0.abstract.value %]
+                    <h5>Abstract</h5>
+                    <div>[% descriptions.results.bindings.0.abstract.value %]</div>
+                [% END %]
+                [% IF descriptions.results.bindings.0.krydder.value %]
+                    <h5>Krydder</h5>
+                    <div>[% descriptions.results.bindings.0.krydder.value %]</div>
+                [% END %]
+            [% END %]
+		</div>
+	</div>
+</div>
+</section>
+
+[%# Collect unique books created by the same creators as the current book %]
+[% SET books = [ ] %]
+[%# Loop through the creators connected to this book %]
+[% FOREACH creator IN book.creators %]
+    [%# Loop through the books connected to this creator %]
+    [% FOREACH cbook IN creator.books %]
+        [%# Do not include the book we are currently looking at %]
+        [% IF cbook.id != book.id %]
+            [% SET already_added = 0 %]
+            [% FOREACH b IN books %]
+                [%# Do not include books we have already added %]
+                [% IF cbook.id == b.id %]
+                    [% SET already_added = 1 %]
+                [% END %]
+            [% END %]
+            [%# Save the book for later if it has not been added already %]
+            [% IF already_added == 0 %]
+                [% books.push( cbook ) %]
+            [% END %]
+        [% END %]
+    [% END %]
+[% END %]
+[% IF books.size %]
+    <h2>Other books by the same creator(s)</h2>
+    [% INCLUDE 'books_table.tt' books=books %]
+[% END %]
+
+<hr><hr><hr>
+
 <h2>[% book.title %]</h2> 
 
 [% IF book.coverimg %]

@@ -1,36 +1,36 @@
-<table>
-<tr><th>Cover</th><th>Title, author(s), published</th><th>ISBN</th><th>Available?</th></tr>
-[% FOREACH book IN books %]
-    <tr>
-    <td>
-        [% IF book.coverimg %]
-            <img src="[% book.coverimg %]" style="max-height: 100px; max-width: 80px;">
-        [% END %]
-    </td>
-    <td>
-        [% FOREACH creator IN book.creators %]
-        <a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% ELSE %]:[% END %]
-        [% END %]<br><a href="/book/[% book.id %]">[% book.title %]</a> ([% book.date %])
-    </td>
-    <td>[% book.isbn %]</td>
-    <td>
-        [% SET on_loan = 0 %]
-        [% SET available = 0 %]
-        [% SET total = 0 %]
-        [% FOREACH file IN book.files %]
-            [% FOREACH item IN file.items %]
-                [% IF item.library_id == session.chosen_library %]
-                    [% total = total + 1 %]
-                    [% IF item.loan.due != '' %]
-                        [% on_loan = on_loan + 1 %]
+<!-- RESPONSIV UTutlistingING MED THUMBNAILS OG ELLIPSIS
+************************************* -->
+
+<section id="utlisting">
+<div class="row">
+<div class="span12">
+
+	<ul class="utlisting">
+	    [% FOREACH book IN books %]
+			<li>
+				<a href="/book/[% book.id %]" class="book-block">
+					[% IF book.coverimg %]
+                        <img src="[% book.coverimg %]" style="max-height: 100px; max-width: 80px;">
                     [% ELSE %]
-                        [% available = available + 1 %]
+                        <img src="/img/bg-white-paper.jpg" style="max-height: 100px; max-width: 80px;">
                     [% END %]
-                [% END %]
-            [% END %]
+					<div class="li-text-portal">
+						<h4 class="title">[% book.title %]</h4>
+						<p class="author">
+						    [% FOREACH creator IN book.creators %]
+                                [% creator.name %][% UNLESS loop.last() %],[% END %]
+                            [% END %]
+                        </p>
+					</div>
+					<div class="li-i-portal">
+						<i class="icon-angle-right"></i>
+					</div>
+				</a>
+			</li>
         [% END %]
-        [% available %] available
-    </td>
-    </tr>
-[% END%]
-</table>
+    </ul>
+
+
+</div>
+</div>
+</section>

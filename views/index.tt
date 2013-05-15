@@ -1,1 +1,30 @@
+<!-- RESULTAT HEADER MED SORTERING
+************************************* -->
+
+<div class="row">
+	<div class="span12">
+		<div class="sortering dropdown pull-right">
+			<span class="hidden-phone">Sortering</span> <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" role="button" href="#"><i class="icon-sort"></i></a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<li><a tabindex="-1" href="#">Forfatter A-Å</a></li>
+			<li><a tabindex="-1" href="#">Tittel A-Å</a></li>
+			<li><a tabindex="-1" href="#">Nyest - eldst</a></li>
+			<li><a tabindex="-1" href="#">Eldst - nyest</a></li>
+		</ul>
+		</div>
+		<div class="resultat-meta">Resultat – 2843 titler<br>
+		<form class="remove-bottom">
+			<label class="checkbox">
+			<input type="checkbox"> Vis kun tilgjengelige
+			</label>
+		</form>
+		</div>
+	</div>
+</div>
+
 [% INCLUDE 'books_table.tt' books=books %]
+
+<div class="span6 offset3 center">
+	<button id="loadbut" onclick="jQuery(&quot;#loadbut&quot;).button(&quot;loading&quot;); setTimeout(function () { jQuery(&quot;#loadbut&quot;).button(&quot;reset&quot;)}, 2000)" type="button" class="btn btn-large btn-block btn-loader" data-loading-text="Laster..."> Last flere bøker</button>
+	<br>
+</div>
