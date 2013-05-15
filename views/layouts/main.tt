@@ -3,11 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>[% IF template.pagetitle %][% template.pagetitle %] > [% END %][% vars.appname %]</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="/javascripts/jquery-1.9.1.min.js"></script>
 <script src="/stars/jquery.MetaData.js"></script>
 <script src="/stars/jquery.rating.pack.js"></script>
 <link href="/stars/jquery.rating.css" rel="stylesheet">
-<link href="/css/style.css" rel="stylesheet">
+<script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
+<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="http://reader.digitalt.org/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lawnchair.js"></script>
+<script>
+jQuery(document).ready(function () {
+ jQuery('.ellipsis').dotdotdot();
+});
+
+window.addEventListener('resize', resizeDelayed, false);
+window.addEventListener('orientationChanged', resizeEvent, false);
+var resizeclean=1;
+function resizeDelayed(e) {
+if (resizeclean) {
+resizeclean=0;
+setTimeout(function() { resizeEvent(e)}, 2000);
+}
+}
+function resizeEvent(e) {
+jQuery('.ellipsis').dotdotdot()
+resizeclean=1;
+}
+</script>
+<link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
 [% library.detail_head %]
 </head>
 <body>
