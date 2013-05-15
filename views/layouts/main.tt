@@ -37,7 +37,40 @@ resizeclean=1;
 <link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
 [% library.detail_head %]
 </head>
-<body>
+
+<body id="portal">
+<div class="header-wrapper">
+<div class="container-fluid header-container">
+
+<!-- BRANDING OG TOPPNAVIGERING
+************************************* -->
+
+<div class="row-fluid">
+<div class="span12">
+<header>
+
+	<nav>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<a class="brand hidden-phone" href="#"><i class="icon-building"></i> Buskerud Fylkesbibliotek</a>
+				<ul class="nav pull-right">
+				<li><a href="" src="" data="Hjem"><i class="icon-home"></i></a></li>
+				<li class="active"><a href="" src="" data="Søk"><i class="icon-search"></i></a></li>
+				<li><a href="http://reader.digitalt.org/" src="" data="Logg inn"><i class="icon-signin"></i></a></li>
+				<li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li>
+				<li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+</header>
+</div>
+</div>
+</div>
+
+</div> <!-- end container -->
+</div> <!-- end header-wrapper -->
 
 <div class="userbar">
 [% IF session.logged_in_user %]
