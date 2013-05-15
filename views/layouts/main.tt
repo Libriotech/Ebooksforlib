@@ -40,11 +40,11 @@ resizeclean=1;
 
 <body id="portal">
 <div class="header-wrapper">
-<div class="container-fluid header-container">
 
 <!-- BRANDING OG TOPPNAVIGERING
 ************************************* -->
 
+<div class="container-fluid header-container">
 <div class="row-fluid">
 <div class="span12">
 <header>
@@ -73,9 +73,7 @@ resizeclean=1;
 </header>
 </div>
 </div>
-
 </div> <!-- end container -->
-</div> <!-- end header-wrapper -->
 
 <!-- SJANGER, utlistingER OG SØK
 ************************************* -->
@@ -114,8 +112,8 @@ resizeclean=1;
 	</form>
 	</div>
 </div>
-
 </div> <!-- end container -->
+
 </div> <!-- end header-wrapper -->
 
 <!-- h1>[% IF template.pagetitle %][% template.pagetitle %][% ELSE %][% vars.appname %][% END %]</h1 -->
