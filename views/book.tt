@@ -113,6 +113,19 @@
 
 [% library.soc_links %]
 
+<h2>Ratings</h2>
+<div>
+<form>
+    <input name="star1" type="radio" class="star" value="1">
+    <input name="star1" type="radio" class="star" value="2">
+    <input name="star1" type="radio" class="star" value="3">
+    <input name="star1" type="radio" class="star" value="4">
+    <input name="star1" type="radio" class="star" value="5">
+    <input type="hidden" name="book_id" value="[% book.id %]">
+    <input type="submit" value="Save">
+</form>
+</div>
+
 [% IF descriptions.results.bindings.size %]
     <h2>Descriptions</h2>
     [% IF descriptions.results.bindings.0.abstract.value %]

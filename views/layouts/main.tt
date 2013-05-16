@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>[% IF template.pagetitle %][% template.pagetitle %] > [% END %][% vars.appname %]</title>
-<link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
+<script src="/javascripts/jquery-1.9.1.min.js"></script>
+<script src="/stars/jquery.MetaData.js"></script>
+<script src="/stars/jquery.rating.pack.js"></script>
+<link href="/stars/jquery.rating.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
 [% library.detail_head %]
 </head>
 <body>
