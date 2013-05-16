@@ -83,6 +83,7 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint("user_id", ["user_id", "book_id"]);
 
 =head1 RELATIONS
 
@@ -117,8 +118,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-16 13:25:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DS9cWZ+ik5HlQD2ViyubsA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-16 14:26:47
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ui7EgBDkVybgsd5V4TitIg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

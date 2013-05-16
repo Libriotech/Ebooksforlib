@@ -114,16 +114,29 @@
 [% library.soc_links %]
 
 <h2>Ratings</h2>
+[% SET user_rating = book.get_rating_from_user( session.logged_in_user_id ) %]
 <div>
-<form>
-    <input name="star1" type="radio" class="star" value="1">
-    <input name="star1" type="radio" class="star" value="2">
-    <input name="star1" type="radio" class="star" value="3">
-    <input name="star1" type="radio" class="star" value="4">
-    <input name="star1" type="radio" class="star" value="5">
+<form method="POST" action="/ratings/add">
+    <input name="rating" type="radio" class="star" value="1"[% IF user_rating == 1 %] checked[% END %]>
+    <input name="rating" type="radio" class="star" value="2"[% IF user_rating == 2 %] checked[% END %]>
+    <input name="rating" type="radio" class="star" value="3"[% IF user_rating == 3 %] checked[% END %]>
+    <input name="rating" type="radio" class="star" value="4"[% IF user_rating == 4 %] checked[% END %]>
+    <input name="rating" type="radio" class="star" value="5"[% IF user_rating == 5 %] checked[% END %]>
     <input type="hidden" name="book_id" value="[% book.id %]">
     <input type="submit" value="Save">
 </form>
+<p>
+    [% IF book.get_avg_rating.votes > 0 %]
+        [% IF user_rating > 0 %]    
+            Your rating: [% user_rating %].
+        [% ELSE %] 
+            You have not rated this book.
+        [% END %]
+        Average rating: [% book.get_avg_rating.average %] ([% book.get_avg_rating.votes %] votes).
+    [% ELSE %]
+        Be the first to rate this book!
+    [% END %]
+</p>
 </div>
 
 [% IF descriptions.results.bindings.size %]

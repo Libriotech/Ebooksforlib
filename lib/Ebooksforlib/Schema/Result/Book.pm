@@ -190,4 +190,44 @@ sub creators_as_string {
     return $creator;
 }
 
+sub get_rating_from_user {
+    my ( $self, $user_id ) = @_;
+    foreach my $rating ( $self->ratings ) {
+        if ( $rating->user_id == $user_id ) {
+            return $rating->rating;
+        }
+    }
+    return 0;
+}
+
+sub get_avg_rating {
+
+    my ( $self ) = @_;
+    
+    # http://search.cpan.org/~ribasushi/DBIx-Class-0.08250/lib/DBIx/Class/ResultSetColumn.pm
+    # http://search.cpan.org/~ribasushi/DBIx-Class-0.08250/lib/DBIx/Class/Manual/Cookbook.pod#Getting_Columns_Of_Data
+    # FIXME This gives an error that rset is unknown 
+    # my $rs = rset('Rating')->search({ book_id => $self->id });
+    # my $rs_column = $rs->get_column('rating');
+    # return $rs_column->func('AVG'); 
+    
+    my $sum = 0;
+    my $count = 0;
+    my $average = 0;
+    
+    foreach my $rating ( $self->ratings ) {
+        $sum = $sum + $rating->rating;
+        if ( $rating->rating > 0 ) {
+            $count++;
+        }
+    }
+
+    if ( $count > 0 ) {
+        $average = sprintf "%.1f", $sum / $count;
+    }
+
+    return { 'average' => $average, 'votes' => $count };
+
+}
+
 1;

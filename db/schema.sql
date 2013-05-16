@@ -167,6 +167,7 @@ CREATE TABLE ratings (
     rating  TINYINT NOT NULL DEFAULT 0,
     time    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     edited  DATETIME  NOT NULL, -- ON UPDATE CURRENT_TIMESTAMP would be nice, but is not available in the MySQL versions we are using
+    UNIQUE ( user_id, book_id ), 
     CONSTRAINT ratings_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
     CONSTRAINT ratings_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
