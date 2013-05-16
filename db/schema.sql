@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS files;
 DROP TABLE IF EXISTS providers;
 DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS ratings;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -157,6 +158,17 @@ CREATE TABLE comments (
     edited  DATETIME  NOT NULL, -- ON UPDATE CURRENT_TIMESTAMP would be nice, but is not available in the MySQL versions we are using
     CONSTRAINT comments_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
     CONSTRAINT comments_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE ratings (
+    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    book_id INTEGER NOT NULL,
+    rating  TINYINT NOT NULL DEFAULT 0,
+    time    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    edited  DATETIME  NOT NULL, -- ON UPDATE CURRENT_TIMESTAMP would be nice, but is not available in the MySQL versions we are using
+    CONSTRAINT ratings_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
+    CONSTRAINT ratings_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data

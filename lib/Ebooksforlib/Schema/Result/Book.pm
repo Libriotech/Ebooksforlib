@@ -151,9 +151,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 ratings
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-10 13:27:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VUbINKKY7HNH0mxU8R+Ziw
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Rating>
+
+=cut
+
+__PACKAGE__->has_many(
+  "ratings",
+  "Ebooksforlib::Schema::Result::Rating",
+  { "foreign.book_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-16 13:25:37
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gWseznh1CYJBfA68fXz7fw
 
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 
