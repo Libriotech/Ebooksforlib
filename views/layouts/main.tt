@@ -55,7 +55,7 @@ resizeclean=1;
 				<a class="brand hidden-phone" href="/"><i class="icon-building"></i> [% session.chosen_library_name %]</a>
 				<ul class="nav pull-right">
 				<li><a href="/" src="" data="Hjem"><i class="icon-home"></i></a></li>
-				<li class="active"><a href="" src="" data="Søk"><i class="icon-search"></i></a></li>
+				<li class="active"><a href="/search" src="" data="Søk"><i class="icon-search"></i></a></li>
 				<li>
 				    [% IF session.logged_in_user %]
                         <a href="/log/out" src="" data="Log out"><i class="icon-signout"></i></a>
@@ -107,8 +107,8 @@ resizeclean=1;
 	</div>
 
 	<div class="span4">
-	    <form class="navbar-search pull-left" style="width:100%;">
-	<input type="text" class="search-query" placeholder="Søk" style="width:90%">
+	    <form method="GET" action="/search" class="navbar-search pull-left" style="width:100%;">
+	<input type="text" name="q" id="q" value="[% params.q | html_entity %]" class="search-query" placeholder="Søk" style="width:90%">
 	</form>
 	</div>
 </div>

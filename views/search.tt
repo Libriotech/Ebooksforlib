@@ -1,9 +1,11 @@
 [% META pagetitle = 'Search' %]
 
+[%#
 <form method="GET" action="/search">
-<input type="text" name="q" id="q" value="[% params.q | html_entity %]">
+<input type="text" name="q" id="q" value="">
 <input type="submit" value="Search">
 </form>
+%]
 
 [% IF params.q %]
 
