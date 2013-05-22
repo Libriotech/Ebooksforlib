@@ -142,13 +142,15 @@
     </div>
 [% ELSE %]
     [% SET avg_rating = book.get_avg_rating.average %]
+    [% USE Math %]
+    [% SET abs_avg_rating = Math.abs( avg_rating ) %]
     <div>
     <form method="POST" action="/ratings/add">
-        <input name="rating" type="radio" class="star" value="1"[% IF avg_rating == 1 %] checked[% END %]>
-        <input name="rating" type="radio" class="star" value="2"[% IF avg_rating == 2 %] checked[% END %]>
-        <input name="rating" type="radio" class="star" value="3"[% IF avg_rating == 3 %] checked[% END %]>
-        <input name="rating" type="radio" class="star" value="4"[% IF avg_rating == 4 %] checked[% END %]>
-        <input name="rating" type="radio" class="star" value="5"[% IF avg_rating == 5 %] checked[% END %]>
+        <input name="rating" type="radio" class="star" value="1"[% IF abs_avg_rating == 1 %] checked[% END %]>
+        <input name="rating" type="radio" class="star" value="2"[% IF abs_avg_rating == 2 %] checked[% END %]>
+        <input name="rating" type="radio" class="star" value="3"[% IF abs_avg_rating == 3 %] checked[% END %]>
+        <input name="rating" type="radio" class="star" value="4"[% IF abs_avg_rating == 4 %] checked[% END %]>
+        <input name="rating" type="radio" class="star" value="5"[% IF abs_avg_rating == 5 %] checked[% END %]>
     </form>
     <p>Average rating: [% avg_rating %] ([% book.get_avg_rating.votes %] votes).</p>
     </div>
