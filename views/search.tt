@@ -1,0 +1,31 @@
+[% META pagetitle = 'Search' %]
+
+<form method="GET" action="/search">
+<input type="text" name="q" id="q" value="[% params.q | html_entity %]">
+<input type="submit" value="Search">
+</form>
+
+[% IF params.q %]
+
+    [% IF books.size || creators.size %]
+
+        [% IF books.size %]
+            <h2>Books</h2>
+            [% INCLUDE 'books_table.tt' books=books %]
+        [% END %]
+
+        [% IF creators.size %]
+            <h2>Authors</h2>
+            [% FOREACH creator IN creators %]
+                <h3>[% creator.name %]</h3>
+                [% INCLUDE 'books_table.tt' books=creator.books %]
+            [% END %]
+        [% END %]
+        
+    [% ELSE %]
+
+        <p>Sorry, no matches found.</p>
+
+    [% END %]
+    
+[% END %]

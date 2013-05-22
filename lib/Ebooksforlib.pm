@@ -110,6 +110,33 @@ get '/book/:id' => sub {
     };
 };
 
+### Search
+
+get '/search' => sub {
+
+    my $q = param 'q';
+    
+    # Bail out if no search was specified
+    if ( $q && $q eq '' ) {
+        return template 'search';
+    }
+    
+    # Search for books
+    my @books = rset('Book')->search(
+        {},
+        { order_by => 'title desc' }
+    )->search_literal('MATCH ( title, isbn ) AGAINST( ? IN BOOLEAN MODE )', $q );
+    
+    # Search for people
+    my @creators = rset('Creator')->search(
+        {},
+        { order_by => 'name desc' }
+    )->search_literal('MATCH ( name ) AGAINST( ? IN BOOLEAN MODE )', $q );
+    
+    template 'search', { books => \@books, creators => \@creators };
+
+};
+
 ### Ratings
 
 post '/ratings/add' => require_login sub {

@@ -21,13 +21,13 @@ CREATE TABLE users (
     email     VARCHAR(255), 
     anonymize INTEGER(1) DEFAULT 1, 
     hash      CHAR(64)   DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
     id    INTEGER     AUTO_INCREMENT PRIMARY KEY,
     role  VARCHAR(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS libraries;
 CREATE TABLE libraries (
@@ -37,7 +37,7 @@ CREATE TABLE libraries (
     concurrent_loans INTEGER NOT NULL DEFAULT 1, 
     detail_head TEXT, 
     soc_links TEXT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_roles (
     user_id    INTEGER NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE user_roles (
     PRIMARY KEY user_role (user_id, role_id), 
     CONSTRAINT user_roles_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     CONSTRAINT user_roles_fk_2 FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_libraries (
     user_id    INTEGER NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE user_libraries (
     PRIMARY KEY user_library (user_id, library_id),
     CONSTRAINT user_libraries_fk_1 FOREIGN KEY (user_id)    REFERENCES users     (id) ON DELETE CASCADE,
     CONSTRAINT user_libraries_fk_2 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS book_creators;
 DROP TABLE IF EXISTS books;
@@ -65,15 +65,17 @@ CREATE TABLE books (
     pages    VARCHAR(32),
     coverurl VARCHAR(255), 
     coverimg BLOB,
-    dataurl  VARCHAR(255)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    dataurl  VARCHAR(255), 
+    FULLTEXT ( title, isbn )
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS creators;
 CREATE TABLE creators (
     id      INTEGER AUTO_INCREMENT PRIMARY KEY,
     name    VARCHAR(255) NOT NULL, 
-    dataurl VARCHAR(255)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    dataurl VARCHAR(255),
+    FULLTEXT ( name )
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE book_creators (
     book_id    INTEGER NOT NULL,
@@ -81,7 +83,7 @@ CREATE TABLE book_creators (
     PRIMARY KEY book_creator (book_id, creator_id), 
     CONSTRAINT book_creators_fk_1 FOREIGN KEY (book_id)    REFERENCES books    (id) ON DELETE CASCADE,
     CONSTRAINT book_creators_fk_2 FOREIGN KEY (creator_id) REFERENCES creators (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE lists (
     id         INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -89,7 +91,7 @@ CREATE TABLE lists (
     library_id INTEGER NOT NULL,
     is_genre   INTEGER(1) DEFAULT 0,
     CONSTRAINT lists_fk_1 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE list_book (
     book_id    INTEGER NOT NULL,
@@ -97,13 +99,13 @@ CREATE TABLE list_book (
     PRIMARY KEY list_book (book_id, list_id), 
     CONSTRAINT list_book_fk_1 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE,
     CONSTRAINT list_book_fk_2 FOREIGN KEY (list_id) REFERENCES lists (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE providers (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(255) NOT NULL, 
     description TEXT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE files (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -116,7 +118,7 @@ CREATE TABLE files (
     CONSTRAINT files_fk_1 FOREIGN KEY (book_id)     REFERENCES books     (id) ON DELETE CASCADE,
     CONSTRAINT files_fk_2 FOREIGN KEY (provider_id) REFERENCES providers (id) ON DELETE CASCADE,
     CONSTRAINT files_fk_3 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE items (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -126,7 +128,7 @@ CREATE TABLE items (
     deleted     INTEGER DEFAULT 0,
     CONSTRAINT items_fk_1 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE,
     CONSTRAINT items_fk_2 FOREIGN KEY (file_id)     REFERENCES files (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE loans (
     item_id INTEGER NOT NULL UNIQUE KEY, -- item_id should only occur once in this table at any one time
@@ -136,7 +138,7 @@ CREATE TABLE loans (
     PRIMARY KEY item_loan (item_id, user_id),
     CONSTRAINT loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
     CONSTRAINT loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE old_loans (
     id       INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -147,7 +149,7 @@ CREATE TABLE old_loans (
     returned DATETIME NOT NULL,
     CONSTRAINT old_loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
     CONSTRAINT old_loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE comments (
     id      INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -158,7 +160,7 @@ CREATE TABLE comments (
     edited  DATETIME  NOT NULL, -- ON UPDATE CURRENT_TIMESTAMP would be nice, but is not available in the MySQL versions we are using
     CONSTRAINT comments_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
     CONSTRAINT comments_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE ratings (
     id      INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -170,7 +172,7 @@ CREATE TABLE ratings (
     UNIQUE ( user_id, book_id ), 
     CONSTRAINT ratings_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
     CONSTRAINT ratings_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Sample data
 -- TODO Split this out into a separate file
