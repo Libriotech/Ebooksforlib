@@ -93,6 +93,10 @@ get '/book/:id' => sub {
                       }';
         $descriptions = _sparql2data( $sparql );
         debug "*** Descriptions: " . Dumper $descriptions;
+        if ( $descriptions->{'error'} ) {
+            error $descriptions->{'error'};
+            flash error => "Sorry, unable to display descriptions (" . $descriptions->{'error'} . ")";
+        }
     }
     
     template 'book', { 
@@ -1394,7 +1398,7 @@ sub _sparql2data {
     debug "*** URL: $url";
     my $http = HTTP::Lite->new;
     my $req = $http->request( $url ) 
-        or die "Unable to get document: $!";
+        or return { 'error' => "Unable to get document: $!" };
     debug $http->body();
     my $data = JSON::from_json( $http->body() );
     debug $data;

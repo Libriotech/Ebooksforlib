@@ -192,9 +192,13 @@ sub creators_as_string {
 
 sub get_rating_from_user {
     my ( $self, $user_id ) = @_;
-    foreach my $rating ( $self->ratings ) {
-        if ( $rating->user_id == $user_id ) {
-            return $rating->rating;
+    my @ratings = $self->ratings;
+    my $num_ratings = @ratings;
+    if ( $num_ratings > 0 ) {
+        foreach my $rating ( $self->ratings ) {
+            if ( $rating && $rating->user_id == $user_id ) {
+                return $rating->rating;
+            }
         }
     }
     return 0;
