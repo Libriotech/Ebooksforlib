@@ -315,6 +315,19 @@ INSERT INTO comments SET id = 3, book_id = 3, user_id = 3, time = NOW() - INTERV
 INSERT INTO comments SET id = 4, book_id = 1, user_id = 4, time = NOW() - INTERVAL 2 DAY, comment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare sem eu diam dictum commodo. Nulla in egestas nunc. Nulla et auctor erat. Integer vestibulum posuere pellentesque. Aenean ornare pellentesque lectus, eget dictum est elementum eu. Duis lacinia nulla quis libero bibendum a auctor nunc ultricies. Vestibulum viverra magna vitae quam luctus rutrum. Pellentesque ac metus orci. Morbi vestibulum diam quis ligula luctus ut porta libero pharetra. Aenean eu sapien ac orci tempor sagittis. Vestibulum eget sagittis leo. Vivamus magna felis, rutrum et adipiscing id, aliquam in velit. Suspendisse sed lorem quam. Etiam orci tellus, aliquet quis sollicitudin vitae, dictum nec arcu.';
 INSERT INTO comments SET id = 5, book_id = 1, user_id = 2, time = NOW() - INTERVAL 1 DAY, comment = 'Nulla interdum, risus eu lacinia sollicitudin, lorem magna rhoncus mauris, ac aliquet turpis orci eu est. Quisque justo risus, vehicula nec bibendum et, pellentesque eget nisi.';
 
+-- Ratings
+-- test1
+INSERT INTO ratings SET user_id = 4, book_id = 1, rating = 1;
+INSERT INTO ratings SET user_id = 4, book_id = 2, rating = 2;
+INSERT INTO ratings SET user_id = 4, book_id = 3, rating = 3;
+INSERT INTO ratings SET user_id = 4, book_id = 4, rating = 4;
+INSERT INTO ratings SET user_id = 4, book_id = 5, rating = 5;
+-- test2
+INSERT INTO ratings SET user_id = 5, book_id = 1, rating = 1;
+INSERT INTO ratings SET user_id = 5, book_id = 2, rating = 2;
+INSERT INTO ratings SET user_id = 5, book_id = 3, rating = 5;
+INSERT INTO ratings SET user_id = 5, book_id = 4, rating = 3;
+INSERT INTO ratings SET user_id = 5, book_id = 5, rating = 5;
 
 -- Social links
 UPDATE libraries SET detail_head = 
