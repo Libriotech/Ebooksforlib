@@ -10,9 +10,9 @@
 			<li>
 				<a href="/book/[% book.id %]" class="book-block">
 					[% IF book.coverimg %]
-                        <img src="[% book.coverimg %]" style="max-height: 100px; max-width: 80px;">
+                        <img src="[% book.coverimg %]">
                     [% ELSE %]
-                        <img src="/img/bg-white-paper.jpg" style="max-height: 100px; max-width: 80px;">
+                        <img src="/img/bg-white-paper.jpg">
                     [% END %]
 					<div class="li-text-portal">
 						<h4 class="title">[% book.title %]</h4>
