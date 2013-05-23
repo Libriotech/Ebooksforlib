@@ -33,13 +33,29 @@
 		</div>
 		<p class="details">
 		    [% IF book.date %]
-		    Published: [% book.date %]<br>
-		[% END %]
+		        Published: [% book.date %]<br>
+    		[% END %]
             [% IF book.isbn %]
                 ISBN: [% book.isbn %]<br>
             [% END %]
             [% IF book.pages %]
                 Pages: [% book.pages %]<br>
+            [% END %]
+            [% IF book.lists.size %]
+                Genres: 
+                [% FOREACH list IN book.lists %]
+                    [% IF list.is_genre == 1 && list.library.id == session.chosen_library %]
+                        <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
+                    [% END %]
+                [% END %]
+                <br>
+                Lists: 
+                [% FOREACH list IN book.lists %]
+                    [% IF list.is_genre == 0 && list.library.id == session.chosen_library %]
+                        <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
+                    [% END %]
+                [% END %]
+                <br>
             [% END %]
 		</p>
 		<div class="span3 add-top add-bottom" style="margin-left:0;">
