@@ -59,9 +59,9 @@ get '/' => sub {
     # my @lists = rset('List')->search({
     #     'library_id' => session('chosen_library')
     # });
-    # var hide_dropdowns => 1;
     # template 'index', { lists => \@lists };
-    
+
+    var hide_dropdowns => 1;    
     template 'index';
     
 };
