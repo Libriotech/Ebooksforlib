@@ -1,4 +1,4 @@
-<!-- RESPONSIV UTutlistingING MED THUMBNAILS OG ELLIPSIS
+<!-- RESPONSIV UTLISTING MED THUMBNAILS OG ELLIPSIS
 ************************************* -->
 
 <section id="utlisting">
@@ -9,11 +9,13 @@
 	    [% FOREACH book IN books %]
 			<li>
 				<a href="/book/[% book.id %]" class="book-block">
+					<div class="utlisting-img">
 					[% IF book.coverimg %]
                         <img src="[% book.coverimg %]">
                     [% ELSE %]
                         <img src="/img/bg-white-paper.jpg">
                     [% END %]
+                    </div>
 					<div class="li-text-portal">
 						<h4 class="title">[% book.title %]</h4>
 						<p class="author">

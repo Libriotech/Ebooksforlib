@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-
 <html lang="no"><head>
+  <meta charset="UTF-8">
   <title>EBIB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-   <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
-   <script src="/js/jquery.bxslider.min.js"></script>
-   <link href="/css/jquery.bxslider.css" rel="stylesheet" />
+  <script src="/js/jquery-1.9.1.min.js"></script>   
+<script src="/stars/jquery.MetaData.js"></script>
+<script src="/stars/jquery.rating.pack.js"></script>
+<link href="/stars/jquery.rating.css" rel="stylesheet">
+  <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
+  <script src="/js/jquery.bxslider.min.js"></script>
+  <link href="/css/jquery.bxslider.css" rel="stylesheet" />
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/lawnchair.js"></script>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link href="http://reader.digitalt.org/css/style.css" rel="stylesheet" />
   <script type="text/javascript" src="//use.typekit.net/lrk7anq.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <script>
-   var bkore = '<?echo $bkore ?>';
    jQuery(document).ready(function () {
      jQuery('.bxslider').bxSlider({
-  minSlides: 8,
-  maxSlides: 8,
-  slideWidth: 146,
-  slideMargin: 0
-});
+       minSlides: 8,
+       maxSlides: 8,
+       slideWidth: 146,
+       slideMargin: 0
+     });
      jQuery('.ellipsis').dotdotdot();
    });
 
@@ -66,6 +68,8 @@ a:hover {color:#900;} */
     <div class="row-fluid">
     <div class="span12">
     <header>
+<!-- SJANGER, LISTER OG SØK
+************************************* -->
 
 	    <nav>
 		    <div class="navbar navbar-inverse">
