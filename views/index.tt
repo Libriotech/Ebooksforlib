@@ -24,7 +24,11 @@
 			    <li>
 				    <a href="/book/[% list.books.0.id %]" class="book-block">
 					    <div class="utvalgte-img">
-						    <img src="[% list.books.0.coverimg %]">
+						    [% IF list.books.0.coverimg %]
+                                <img src="[% list.books.0.coverimg %]">
+                            [% ELSE %]
+                                <img src="/img/bg-white-paper.jpg">
+                            [% END %]
 					    </div>
 					    <div class="li-text-portal">
 						    <h4 class="title max-1l ellipsis">[% list.books.0.title %]</h4>
@@ -51,7 +55,11 @@
 			    <li>
 				    <a href="#" class="book-block">
 					    <div class="utvalgte-img">
-						    <img src="[% list.books.1.coverimg %]">
+						    [% IF list.books.1.coverimg %]
+                                <img src="[% list.books.1.coverimg %]">
+                            [% ELSE %]
+                                <img src="/img/bg-white-paper.jpg">
+                            [% END %]
 					    </div>
 					    <div class="li-text-portal">
 						    <h4 class="title max-1l ellipsis">[% list.books.1.title %]</h4>
@@ -89,7 +97,11 @@
 			<li>
 				<a href="/book/[% book.id %]" class="book-block-alt">
 					<div class="block-list-img">
-						<img src="[% book.coverimg %]">
+					    [% IF book.coverimg %]
+                            <img src="[% book.coverimg %]">
+                        [% ELSE %]
+                            <img src="/img/bg-white-paper.jpg">
+                        [% END %]
 						<div class="li-text">
 							<h4 class="title max-1l ellipsis">[% book.title %]</h4>
 							<p class="author max-1l ellipsis">[% book.creators_as_string %]</p>

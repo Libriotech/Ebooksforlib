@@ -21,7 +21,9 @@
 <div class="row add-top">
 	<div class="span3">
 	    [% IF book.coverimg %]
-		<img src="[% book.coverimg %]" />
+    		<img src="[% book.coverimg %]" />
+		[% ELSE %]
+            <img src="/img/bg-white-paper.jpg">
 		[% END %]
 	</div>
 	<div class="span9 book-details">
