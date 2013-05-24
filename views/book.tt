@@ -74,7 +74,7 @@
                 [% SET selected_item       = 0 %]
                 [% FOREACH file IN book.files %]
                     [% FOREACH item IN file.items %]
-                        [% IF item.library_id == session.chosen_library && item.deleted != 1 %]
+                        [% IF item.library_id == session.chosen_library && item.deleted != 1 && !item.loan.due %]
                             [%# Look for the item with the longest loan period %]
                             [% IF item.loan_period > longest_loan_period %]
                                 [% longest_loan_period = item.loan_period %]
