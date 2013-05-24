@@ -61,7 +61,9 @@
             [% END %]
 		</p>
 		<div class="span3 add-top add-bottom" style="margin-left:0;">
-            [% IF user_belongs_to_library == 0 %]
+		    [% IF !session.logged_in_user %]
+		        <p>You must be logged in to borrow books.</p>
+            [% ELSIF user_belongs_to_library == 0 %]
                 <p>You do not have permission to borrow books from this library.</p>
             [% ELSIF user_has_borrowed == 1 %]
                 <p>You have already borrowed this book.</p>
