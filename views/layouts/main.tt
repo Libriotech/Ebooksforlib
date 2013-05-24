@@ -1,122 +1,181 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>[% IF template.pagetitle %][% template.pagetitle %] > [% END %][% vars.appname %]</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/js/jquery-1.9.1.min.js"></script>
-<script src="/stars/jquery.MetaData.js"></script>
-<script src="/stars/jquery.rating.pack.js"></script>
-<link href="/stars/jquery.rating.css" rel="stylesheet">
-<script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
-<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="http://reader.digitalt.org/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/lawnchair.js"></script>
-<script>
-jQuery(document).ready(function () {
- jQuery('.ellipsis').dotdotdot();
+
+<html lang="no"><head>
+  <title>EBIB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+   <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
+   <script src="/js/jquery.bxslider.min.js"></script>
+   <link href="/css/jquery.bxslider.css" rel="stylesheet" />
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/lawnchair.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link href="http://reader.digitalt.org/css/style.css" rel="stylesheet" />
+  <script type="text/javascript" src="//use.typekit.net/lrk7anq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script>
+   var bkore = '<?echo $bkore ?>';
+   jQuery(document).ready(function () {
+     jQuery('.bxslider').bxSlider({
+  minSlides: 8,
+  maxSlides: 8,
+  slideWidth: 146,
+  slideMargin: 0
 });
+     jQuery('.ellipsis').dotdotdot();
+   });
 
 window.addEventListener('resize', resizeDelayed, false);
 window.addEventListener('orientationChanged', resizeEvent, false);
 var resizeclean=1;
 function resizeDelayed(e) {
-if (resizeclean) {
-resizeclean=0;
-setTimeout(function() { resizeEvent(e)}, 2000);
-}
+ if (resizeclean) {
+   resizeclean=0;
+   setTimeout(function() { resizeEvent(e)}, 2000);
+ }
 }
 function resizeEvent(e) {
-jQuery('.ellipsis').dotdotdot()
-resizeclean=1;
+ jQuery('.ellipsis').dotdotdot()
+ resizeclean=1;
 }
-</script>
+
+  </script>
+<style type="text/css">
+
+/* a {color:#c12121;}
+a:hover {color:#900;} */
+
+</style>
+
 <link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
 [% library.detail_head %]
 </head>
 
 <body id="portal">
 <div class="header-wrapper">
-
-<!-- BRANDING OG TOPPNAVIGERING
-************************************* -->
-
 <div class="container-fluid header-container">
-<div class="row-fluid">
-<div class="span12">
-<header>
 
-	<nav>
-		<div class="navbar navbar-inverse">
-			<div class="navbar-inner">
-				<a class="brand hidden-phone" href="/"><i class="icon-building"></i> [% session.chosen_library_name %]</a>
-				<ul class="nav pull-right">
-				<li><a href="/" src="" data="Hjem"><i class="icon-home"></i></a></li>
-				<li class="active"><a href="/search" src="" data="Søk"><i class="icon-search"></i></a></li>
-				<li>
-				    [% IF session.logged_in_user %]
-                        <a href="/log/out" src="" data="Log out"><i class="icon-signout"></i></a>
-                    [% ELSE %]
-                        <a href="/log/in" src="" data="Log in"><i class="icon-signin"></i></a>
-                    [% END %]
-				</li>
-				<li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li>
-				<li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+[% IF session.logged_in_user %]
 
-</header>
-</div>
-</div>
-</div> <!-- end container -->
+    <!-- BRANDING OG TOPPNAVIGERING
+    ************************************* -->
 
-<!-- SJANGER, utlistingER OG SØK
-************************************* -->
+    <div class="container-fluid header-container">
+    <div class="row-fluid">
+    <div class="span12">
+    <header>
 
-<div class="container hidden-phone">
-<div class="row add-top">
-	<div class="span4">
-	<div class="dropdown">
-	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Sjanger</a>
-	<ul class="dropdown-menu">
-		<li><a href="#">Action</a></li>
-		<li><a href="#">Another action</a></li>
-		<li><a href="#">Something else here</a></li>
-		<li class="divider"></li>
-		<li><a tabindex="-1" href="#">Separated link</a></li>
-	</ul>
+	    <nav>
+		    <div class="navbar navbar-inverse">
+			    <div class="navbar-inner">
+				    <a class="brand hidden-phone" href="/"><i class="icon-building"></i> [% session.chosen_library_name %]</a>
+				    <ul class="nav pull-right">
+				    <li><a href="/" src="" data="Hjem"><i class="icon-home"></i></a></li>
+				    <li class="active"><a href="/search" src="" data="Søk"><i class="icon-search"></i></a></li>
+				    <li><a href="/log/out" src="" data="Log out"><i class="icon-signout"></i></a></li>
+				    <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li>
+				    <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li>
+				    </ul>
+			    </div>
+		    </div>
+	    </nav>
+
+    </header>
     </div>
-	</div>
+    </div>
+    </div> <!-- end container -->
 
-	<div class="span4">
-	<div class="dropdown">
-	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Topputlistinger</a>
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		<li><a tabindex="-1" href="#">Action</a></li>
-		<li><a tabindex="-1" href="#">Another action</a></li>
-		<li><a tabindex="-1" href="#">Something else here</a></li>
-		<li class="divider"></li>
-		<li><a tabindex="-1" href="#">Separated link</a></li>
-	</ul>
-	</div>
-	</div>
+    [% IF vars.hide_dropdowns != 1 %]
+    <!-- SJANGER, utlistingER OG SØK
+    ************************************* -->
 
-	<div class="span4">
-	    <form method="GET" action="/search" class="navbar-search pull-left" style="width:100%;">
-	<input type="text" name="q" id="q" value="[% params.q | html_entity %]" class="search-query" placeholder="Søk" style="width:90%">
-	</form>
-	</div>
-</div>
-</div> <!-- end container -->
+    <div class="container hidden-phone">
+    <div class="row add-top">
+	    <div class="span4">
+	    <div class="dropdown">
+	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Sjanger</a>
+	    <ul class="dropdown-menu">
+		    <li><a href="#">Action</a></li>
+		    <li><a href="#">Another action</a></li>
+		    <li><a href="#">Something else here</a></li>
+		    <li class="divider"></li>
+		    <li><a tabindex="-1" href="#">Separated link</a></li>
+	    </ul>
+        </div>
+	    </div>
 
+	    <div class="span4">
+	    <div class="dropdown">
+	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Topputlistinger</a>
+	    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		    <li><a tabindex="-1" href="#">Action</a></li>
+		    <li><a tabindex="-1" href="#">Another action</a></li>
+		    <li><a tabindex="-1" href="#">Something else here</a></li>
+		    <li class="divider"></li>
+		    <li><a tabindex="-1" href="#">Separated link</a></li>
+	    </ul>
+	    </div>
+	    </div>
+
+	    <div class="span4">
+	        <form method="GET" action="/search" class="navbar-search pull-left" style="width:100%;">
+	    <input type="text" name="q" id="q" value="[% params.q | html_entity %]" class="search-query" placeholder="Søk" style="width:90%">
+	    </form>
+	    </div>
+    </div>
+    </div> <!-- end container -->
+    [% END %]
+
+[% ELSE %]
+
+    <!-- LOGG INN BANNER
+    ************************************* -->
+
+    <div class="logginn-wrapper">
+    <div class="container content-container">
+    <div class="row">
+	    <div class="span8">
+		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
+		    <!-- <img src="img/laan-gratis-txt.png" /> -->
+		    <p class="lead-list hidden-phone">
+		    <i class="icon-ok" style="font-size:15px;"></i> Hundrevis av ebøker til din telefon, nettbrett og pc<br />
+		    <i class="icon-ok" style="font-size:15px;"></i> Ny norsk litteratur fra ditt lokale bibliotek<br />
+		    <i class="icon-ok" style="font-size:15px;"></i> Ingen purregebyr eller tunge turer til biblioteket<br />
+		    </p>
+        </div>
+	
+	    <div class="span3">
+	    <form>
+        	<div class="login-container">
+        		<div class="login-row1">
+        			<input class="span3" type="text" placeholder="Lånenummer">
+        		</div>
+        		<div class="login-row2">
+        			<input class="span3" type="text" placeholder="PIN-kode">
+        		</div>
+        	</div>
+        	<div class="center half-top half-bottom">
+        		<label class="checkbox" style="display:inline-block;">
+        			<input type="checkbox" checked="checked"> Husk meg | <a class="glemt-pinkode" href="#">Glemt PIN?</a>
+        		</label>
+        	</div>
+        	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
+
+        </form>
+        </div>
+    </div>
+    </div> <!-- end container -->
+    </div> <!-- end logginn-wrapper -->
+    
+    <div class="hanging-alert2 span4 offset4"><a href="#"><strong>Ny Bruker?</strong> Dette trenger du for å låne <i class="icon-angle-right"></i></a></div>
+
+
+[% END %]
+
+</div> <!-- end container-fluid header-container -->
 </div> <!-- end header-wrapper -->
-
-<!-- h1>[% IF template.pagetitle %][% template.pagetitle %][% ELSE %][% vars.appname %][% END %]</h1 -->
 
 [% IF flash.error %]
     <div class="flash error">[% flash.error %]</div>
@@ -126,6 +185,46 @@ resizeclean=1;
 [% END %]
 
 [% content %]
+
+<!-- FOOTER
+************************************* -->
+
+<section id="footer">
+<div class="footer-wrapper">
+<div class="container">
+<div class="row">
+<div class="span12">
+	<h4 class="genre-title" style="padding:20px 0 150px;color:#fff;">Footer</h4>
+	</div>
+<!--
+	<div class="span4">
+		<ul>
+		  <li><a href="#">Lenke 1</a></li>
+		  <li><a href="#">Lenke 2</a></li>
+		  <li><a href="#">Lenke 3</a></li>
+		  <li><a href="#">Lenke 4</a></li>
+		</ul>
+	</div>
+	<div class="span4">
+		<ul>
+		  <li><a href="#">Lenke 1</a></li>
+		  <li><a href="#">Lenke 2</a></li>
+		  <li><a href="#">Lenke 3</a></li>
+		  <li><a href="#">Lenke 4</a></li>
+		</ul>
+	</div>
+	<div class="span4">
+		<ul>
+		  <li><a href="#">Lenke 1</a></li>
+		  <li><a href="#">Lenke 2</a></li>
+		  <li><a href="#">Lenke 3</a></li>
+		  <li><a href="#">Lenke 4</a></li>
+		</ul>
+	</div> -->
+</div>
+</div>
+</div>
+</section>
 
 </body>
 </html>

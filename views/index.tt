@@ -1,30 +1,113 @@
-<!-- RESULTAT HEADER MED SORTERING
+[% USE HTML.Strip %]
+
+[% FOREACH list IN lists %]
+    
+<!-- UTVALGTE ROMANER
 ************************************* -->
 
-<div class="row">
-	<div class="span12">
-		<div class="sortering dropdown pull-right">
-			<span class="hidden-phone">Sortering</span> <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" role="button" href="#"><i class="icon-sort"></i></a>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<li><a tabindex="-1" href="#">Forfatter A-Å</a></li>
-			<li><a tabindex="-1" href="#">Tittel A-Å</a></li>
-			<li><a tabindex="-1" href="#">Nyest - eldst</a></li>
-			<li><a tabindex="-1" href="#">Eldst - nyest</a></li>
-		</ul>
-		</div>
-		<div class="resultat-meta">Resultat – 2843 titler<br>
-		<form class="remove-bottom">
-			<label class="checkbox">
-			<input type="checkbox"> Vis kun tilgjengelige
-			</label>
-		</form>
-		</div>
-	</div>
+<div class="article">
+<div class="layer">
+<div class="container content-container">
+
+<section id="romaner">
+
+    <div class="row">
+    <div class="span12" style="margin-top:-12px;">
+	    <a class="btn pull-right" href="/list/[% list.id %]"><strong>[% list.name %] A-Å ></strong></a>
+	    <h4 class="genre-title">[% list.name %]</h4>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="span12">
+      	<ul class="utvalgte">
+			    <li>
+				    <a href="/book/[% list.books.0.id %]" class="book-block">
+					    <div class="utvalgte-img">
+						    <img src="[% list.books.0.coverimg %]">
+					    </div>
+					    <div class="li-text-portal">
+						    <h4 class="title max-1l ellipsis">[% list.books.0.title %]</h4>
+						    <p class="author">[% list.books.0.creators_as_string %]</p>
+						    [% SET descriptions = list.books.0.get_descriptions %]
+						    <p class="intro max-5l ellipsis">
+				                [% IF descriptions.results.bindings.size %]
+                                    [% IF descriptions.results.bindings.0.krydder.value %]
+                                        [% descriptions.results.bindings.0.krydder.value | html_strip %]
+                                        [%# FIXME It looks like norwegian wovels are double encoded after html_strip has been applied. %]
+                                    [% ELSIF descriptions.results.bindings.0.abstract.value %]
+                                        [% descriptions.results.bindings.0.abstract.value | html_strip %]
+                                    [% ELSE %]
+                                        Sorry, no description available.
+                                    [% END %]
+                                [% END %]
+						    </p>
+					    </div>
+					    <div class="li-i-portal">
+						    <i class="icon-angle-right"></i>
+					    </div>
+				    </a>
+			    </li>
+			    <li>
+				    <a href="#" class="book-block">
+					    <div class="utvalgte-img">
+						    <img src="[% list.books.1.coverimg %]">
+					    </div>
+					    <div class="li-text-portal">
+						    <h4 class="title max-1l ellipsis">[% list.books.1.title %]</h4>
+						    <p class="author">[% list.books.1.creators_as_string %]</p>
+						    [% SET descriptions = list.books.1.get_descriptions %]
+						    <p class="intro max-5l ellipsis">
+				                [% IF descriptions.results.bindings.size %]
+                                    [% IF descriptions.results.bindings.0.krydder.value %]
+                                        [% descriptions.results.bindings.0.krydder.value | html_strip %]
+                                    [% ELSIF descriptions.results.bindings.0.abstract.value %]
+                                        [% descriptions.results.bindings.0.abstract.value | html_strip %]
+                                    [% ELSE %]
+                                        Sorry, no description available.
+                                    [% END %]
+                                [% END %]
+						    </p>
+					    </div>
+					    <div class="li-i-portal">
+						    <i class="icon-angle-right"></i>
+					    </div>
+				    </a>
+			    </li>
+	    </ul>
+    </div>
+    </div>
+
+<!-- ANBEFALTE ROMANER
+************************************* -->
+
+
+<div class="row add-top">
+<div class="span12">
+    <h5 class="center genre-subhead">Nyeste</h5>
+	<ul class="block-list bxslider">
+        [% FOREACH book IN list.books %]
+			<li>
+				<a href="/book/[% book.id %]" class="book-block-alt">
+					<div class="block-list-img">
+						<img src="[% book.coverimg %]">
+						<div class="li-text">
+							<h4 class="title max-1l ellipsis">[% book.title %]</h4>
+							<p class="author max-1l ellipsis">[% book.creators_as_string %]</p>
+						</div>
+					</div>
+				</a>
+			</li>
+		[% END %]
+	</ul>
+</div>
 </div>
 
-[% INCLUDE 'books_table.tt' books=books %]
+</section>
+</div> <!-- end container -->
+</div> <!-- end layer -->
+</div> <!-- end article -->
+    
+[% END %]
 
-<div class="span6 offset3 center">
-	<button id="loadbut" onclick="jQuery(&quot;#loadbut&quot;).button(&quot;loading&quot;); setTimeout(function () { jQuery(&quot;#loadbut&quot;).button(&quot;reset&quot;)}, 2000)" type="button" class="btn btn-large btn-block btn-loader" data-loading-text="Laster..."> Last flere bøker</button>
-	<br>
-</div>
+[%# INCLUDE 'books_table.tt' books=books %]

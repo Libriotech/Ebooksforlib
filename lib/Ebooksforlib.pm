@@ -18,7 +18,7 @@ our $VERSION = '0.1';
 hook 'before' => sub {
 
     var appname  => config->{appname};
-    var min_pass => config->{min_pass};
+    var min_pass => config->{min_pass}; # FIXME Is there a better way to do this? 
     
     # Force users to choose a library
     unless ( session('chosen_library') && session('chosen_library_name') ) {
@@ -35,15 +35,24 @@ hook 'before' => sub {
 };
 
 get '/' => sub {
+    
     # Only show books that are available to the chosen library
     # Users should not see the front page without logging in or choosing a library
-    my @books = rset('Book')->search({
-        'items.library_id' => session('chosen_library')
-    }, {
-        join     => { 'files' => 'items' },
-        group_by => [qw{ id }]
+    # my @books = rset('Book')->search({
+    #     'items.library_id' => session('chosen_library')
+    # }, {
+    #     join     => { 'files' => 'items' },
+    #     group_by => [qw{ id }]
+    # });
+    # template 'index', { books => \@books };
+    
+    # Show lists and genres from the chosen library
+    my @lists = rset('List')->search({
+        'library_id' => session('chosen_library')
     });
-    template 'index', { books => \@books };
+    var hide_dropdowns => 1;
+    template 'index', { lists => \@lists };
+    
 };
 
 get '/book/:id' => sub {
@@ -501,7 +510,7 @@ get '/library/set/:library_id' => sub {
     if ( $library ) {
         session chosen_library => $library->id;
         session chosen_library_name => $library->name;
-        flash info => "A library was chosen.";
+        # flash info => "A library was chosen.";
         if (params->{return_url}) {
            return redirect params->{return_url};
         }

@@ -28,7 +28,7 @@
 		<h3 class="title">[% book.title %]</h3>
 		<div class="author">
 		[% FOREACH creator IN book.creators %]
-            <a href="/creator/[% creator.id %]">[% creator.name %]</a>
+            <a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% END %]
         [% END %]
 		</div>
 		<p class="details">
@@ -115,30 +115,6 @@
 
 <hr><hr><hr>
 
-<h2>[% book.title %]</h2> 
-
-[% IF book.coverimg %]
-<p style="float: right;"><img src="[% book.coverimg %]"></p>
-[% END %]
-
-<p>by:</p>
-
-<ul>
-[% FOREACH creator IN book.creators %]
-<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
-[% END %]
-</ul>
-
-<p>Published [% book.date %].</p>
-
-[% IF book.isbn %]
-<p>ISBN: [% book.isbn %].</p>
-[% END %]
-
-[% IF book.pages %]
-<p>Pages: [% book.pages %].</p>
-[% END %]
-
 [%# Collect unique books created by the same creators as the current book %]
 [% SET books = [ ] %]
 [%# Loop through the creators connected to this book %]
@@ -160,28 +136,6 @@
             [% END %]
         [% END %]
     [% END %]
-[% END %]
-
-[% IF book.lists.size %]
-
-    <h2>Genres</h2>
-    <ul>
-    [% FOREACH list IN book.lists %]
-        [% IF list.is_genre == 1 && list.library.id == session.chosen_library %]
-            <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
-        [% END %]
-    [% END %]
-    </ul>
-
-    <h2>Lists</h2>
-    <ul>
-    [% FOREACH list IN book.lists %]
-        [% IF list.is_genre == 0 && list.library.id == session.chosen_library %]
-            <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
-        [% END %]
-    [% END %]
-    </ul>
-
 [% END %]
 
 <h2>Items</h2>
@@ -225,8 +179,6 @@
     <p>No items, yet!</p>
 [% END %]
 
-[% library.soc_links %]
-
 <h2>Ratings</h2>
 [%# Check if the user viewing this is logged in or not %]
 [% IF session.logged_in_user_id %]
@@ -268,18 +220,6 @@
     </form>
     <p>Average rating: [% avg_rating %] ([% book.get_avg_rating.votes %] votes).</p>
     </div>
-[% END %]
-
-[% IF descriptions.results.bindings.size %]
-    <h2>Descriptions</h2>
-    [% IF descriptions.results.bindings.0.abstract.value %]
-        <h3>Abstract</h3>
-        <div>[% descriptions.results.bindings.0.abstract.value %]</div>
-    [% END %]
-    [% IF descriptions.results.bindings.0.krydder.value %]
-        <h3>Krydder</h3>
-        <div>[% descriptions.results.bindings.0.krydder.value %]</div>
-    [% END %]
 [% END %]
 
 [% IF books.size %]
