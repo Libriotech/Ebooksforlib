@@ -4,6 +4,7 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
+use Ebooksforlib::Util;
 use Crypt::SaltedHash;
 use Digest::MD5 qw( md5_hex );;
 use Business::ISBN;
@@ -85,19 +86,19 @@ get '/book/:id' => sub {
     }
     
     # Look for descriptions
-    my $descriptions;
-    if ( $book->dataurl ) {
-        my $sparql = 'SELECT DISTINCT ?krydder ?abstract WHERE {
-                          OPTIONAL { <' . $book->dataurl . '> <http://data.deichman.no/krydder_beskrivelse> ?krydder . }
-                          OPTIONAL { <' . $book->dataurl . '> <http://purl.org/dc/terms/abstract> ?abstract . }
-                      }';
-        $descriptions = _sparql2data( $sparql );
-        debug "*** Descriptions: " . Dumper $descriptions;
-        if ( $descriptions->{'error'} ) {
-            error $descriptions->{'error'};
-            flash error => "Sorry, unable to display descriptions (" . $descriptions->{'error'} . ")";
-        }
-    }
+    my $descriptions = $book->get_descriptions;
+    # if ( $book->dataurl ) {
+    #     my $sparql = 'SELECT DISTINCT ?krydder ?abstract WHERE {
+    #                       OPTIONAL { <' . $book->dataurl . '> <http://data.deichman.no/krydder_beskrivelse> ?krydder . }
+    #                       OPTIONAL { <' . $book->dataurl . '> <http://purl.org/dc/terms/abstract> ?abstract . }
+    #                   }';
+    #     $descriptions = _sparql2data( $sparql );
+    #     debug "*** Descriptions: " . Dumper $descriptions;
+    #     if ( $descriptions->{'error'} ) {
+    #         error $descriptions->{'error'};
+    #         flash error => "Sorry, unable to display descriptions (" . $descriptions->{'error'} . ")";
+    #     }
+    # }
     
     template 'book', { 
         book                    => $book, 
@@ -1399,39 +1400,6 @@ post '/books/covers' => require_role admin => sub {
     redirect '/book/' . $book->id;
 
 };
-
-use HTTP::Lite;
-use URL::Encode 'url_encode';
-use MIME::Base64 qw(encode_base64);
-use GD;
-
-sub _coverurl2base64 {
-
-    my ( $coverurl ) = @_;
-    debug "*** coverurl: $coverurl";
-    my $http = HTTP::Lite->new;
-    my $req = $http->request( $coverurl ) 
-        or die "Unable to get document: $!";
-    my @content_type = $http->get_header ( 'Content-Type' );
-    return 'data:' . $content_type[0][0] . ';base64,' . encode_base64( $http->body() );
-
-}
-
-sub _sparql2data {
-
-    my ( $sparql ) = @_;
-    debug "*** SPARQL: $sparql";
-    my $url = config->{'sparql_endpoint'} . '?default-graph-uri=&query=' . url_encode( $sparql ) . '&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on';
-    debug "*** URL: $url";
-    my $http = HTTP::Lite->new;
-    my $req = $http->request( $url ) 
-        or return { 'error' => "Unable to get document: $!" };
-    debug $http->body();
-    my $data = JSON::from_json( $http->body() );
-    debug $data;
-    return $data;
-    
-}
 
 ### Libraries
 

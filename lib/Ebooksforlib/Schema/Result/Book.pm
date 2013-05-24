@@ -170,6 +170,8 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-16 13:25:37
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gWseznh1CYJBfA68fXz7fw
 
+use Ebooksforlib::Util;
+
 __PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
 
 __PACKAGE__->many_to_many( lists => 'list_books', 'list' );
@@ -231,6 +233,27 @@ sub get_avg_rating {
     }
 
     return { 'average' => $average, 'votes' => $count };
+
+}
+
+sub get_descriptions {
+
+    my ( $self ) = @_;
+
+    if ( $self->dataurl ) {
+        my $sparql = 'SELECT DISTINCT ?krydder ?abstract WHERE {
+                          OPTIONAL { <' . $self->dataurl . '> <http://data.deichman.no/krydder_beskrivelse> ?krydder . }
+                          OPTIONAL { <' . $self->dataurl . '> <http://purl.org/dc/terms/abstract> ?abstract . }
+                      }';
+        my $descriptions = _sparql2data( $sparql );
+        # debug "*** Descriptions: " . Dumper $descriptions;
+        # if ( $descriptions->{'error'} ) {
+        #     error $descriptions->{'error'};
+        #     flash error => "Sorry, unable to display descriptions (" . $descriptions->{'error'} . ")";
+        # }
+        return $descriptions;
+    }
+    return;
 
 }
 
