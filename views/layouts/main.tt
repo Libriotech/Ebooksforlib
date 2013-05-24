@@ -99,26 +99,26 @@ a:hover {color:#900;} */
     <div class="row add-top">
 	    <div class="span4">
 	    <div class="dropdown">
-	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Sjanger</a>
+	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Genre</a>
 	    <ul class="dropdown-menu">
-		    <li><a href="#">Action</a></li>
-		    <li><a href="#">Another action</a></li>
-		    <li><a href="#">Something else here</a></li>
-		    <li class="divider"></li>
-		    <li><a tabindex="-1" href="#">Separated link</a></li>
+	        [% FOREACH list IN vars.lists %]
+	            [% IF list.is_genre == 1 %]
+        		    <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+    		    [% END %]
+		    [% END %]
 	    </ul>
         </div>
 	    </div>
 
 	    <div class="span4">
 	    <div class="dropdown">
-	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Topputlistinger</a>
+	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Lists</a>
 	    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		    <li><a tabindex="-1" href="#">Action</a></li>
-		    <li><a tabindex="-1" href="#">Another action</a></li>
-		    <li><a tabindex="-1" href="#">Something else here</a></li>
-		    <li class="divider"></li>
-		    <li><a tabindex="-1" href="#">Separated link</a></li>
+	        [% FOREACH list IN vars.lists %]
+	            [% IF list.is_genre == 0 %]
+        		    <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
+    		    [% END %]
+		    [% END %]
 	    </ul>
 	    </div>
 	    </div>

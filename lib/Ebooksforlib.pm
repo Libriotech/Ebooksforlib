@@ -31,6 +31,15 @@ hook 'before' => sub {
             return redirect '/library/choose?return_url=' . request->path();
         }
     }
+    
+    # We need to show lists and genres on a lot of pages, so we might as well 
+    # make the data available from here
+    # TODO Perhaps have a list of pages that need the data here, to check
+    # against? 
+    my @lists = rset('List')->search({
+        'library_id' => session('chosen_library')
+    });
+    var lists => \@lists;
 
 };
 
