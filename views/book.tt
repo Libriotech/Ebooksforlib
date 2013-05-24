@@ -61,7 +61,32 @@
             [% END %]
 		</p>
 		<div class="span3 add-top add-bottom" style="margin-left:0;">
-			<a class="btn btn-large btn-block btn-primary laaneknapp" href="#">Lån boken</a>
+            [% IF user_belongs_to_library == 0 %]
+                <p>You do not have permission to borrow books from this library.</p>
+            [% ELSIF user_has_borrowed == 1 %]
+                <p>You have already borrowed this book.</p>
+            [% ELSIF limit_reached == 1 %]
+                <p>You have reached the maximum number of concurrent loans for this library.</p>
+            [% ELSIF book.files.size %]
+                [% SET longest_loan_period = 0 %]
+                [% SET selected_item       = 0 %]
+                [% FOREACH file IN book.files %]
+                    [% FOREACH item IN file.items %]
+                        [% IF item.library_id == session.chosen_library && item.deleted != 1 %]
+                            [%# Look for the item with the longest loan period %]
+                            [% IF item.loan_period > longest_loan_period %]
+                                [% longest_loan_period = item.loan_period %]
+                                [% selected_item       = item.id %]
+                            [% END %]
+                        [% END %]
+                    [% END %]
+                [% END %]
+                [% IF longest_loan_period > 0 %]
+                    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]">Borrow this book for [% longest_loan_period %] days</a>    
+                [% END %]
+            [% ELSE %]
+                <p>No items, yet!</p>
+            [% END %]
 		</div>
 		<div class="share-this">
 		    [% library.soc_links %]
@@ -118,45 +143,6 @@
 <hr><hr><hr>
 
 <h2>Items</h2>
-
-[%# Check if the logged in user has already borrowed this book %]
-[% IF user_has_borrowed == 1 %]
-    <p>You have already borrowed this book!</p>
-[% END %]
-
-[% IF book.files.size %]
-    <table>
-    <tr><th>ID</th><th>Loan period</th><th>Loan status</th></tr>
-    [% FOREACH file IN book.files %]
-        [% FOREACH item IN file.items %]
-            [% IF item.library_id == session.chosen_library && item.deleted != 1 %]
-                <tr>
-                    <td>[% item.id %]</td>
-                    <td>[% item.loan_period %]</td>
-                    <td>
-                        [% IF item.loan.due %]
-                            Due [% date.format( time => item.loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]
-                        [% ELSE %]
-                            Not on loan
-                            [% IF session.logged_in_user_id && user_belongs_to_library == 1 && user_has_borrowed != 1 && limit_reached != 1 %]
-                                <a href="/borrow/[% item.id %]">Borrow</a>
-                            [% END %]
-                        [% END %]
-                    </td>
-                </tr>
-            [% END %]
-        [% END %]
-    [% END %]
-    </table>
-    [% IF limit_reached == 1 %]
-        <p>You have reached the maximum number of concurrent loans for this library.</p>
-    [% END %]
-    [% IF user_belongs_to_library == 0 %]
-        <p>You do not have permission to borrow books from this library.</p>
-    [% END %]
-[% ELSE %]
-    <p>No items, yet!</p>
-[% END %]
 
 <h2>Ratings</h2>
 [%# Check if the user viewing this is logged in or not %]
