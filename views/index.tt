@@ -1,6 +1,6 @@
 [% USE HTML.Strip %]
 
-[% FOREACH list IN lists %]
+[% FOREACH list IN var.lists %]
     
 <!-- UTVALGTE ROMANER
 ************************************* -->

@@ -56,11 +56,13 @@ get '/' => sub {
     # template 'index', { books => \@books };
     
     # Show lists and genres from the chosen library
-    my @lists = rset('List')->search({
-        'library_id' => session('chosen_library')
-    });
-    var hide_dropdowns => 1;
-    template 'index', { lists => \@lists };
+    # my @lists = rset('List')->search({
+    #     'library_id' => session('chosen_library')
+    # });
+    # var hide_dropdowns => 1;
+    # template 'index', { lists => \@lists };
+    
+    template 'index';
     
 };
 
