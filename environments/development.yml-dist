@@ -39,7 +39,6 @@ books_root: '/path/to/directory/'
 
 session: YAML
 session_dir: "/tmp/ebooksforlib-sessions"
-session_is_http_only: 0
 
 # SPARQL endpoint that we can fetch bibliographic and other data from 
 # It is assumed that this endpoint is populated by https://github.com/digibib/marc2rdf
