@@ -75,7 +75,7 @@ a:hover {color:#900;} */
 
 [% IF chosen_realm == '' %]	
  <script>
- window.location = 'http://portal.digitalt.org/library/set/2?return_url=/';
+ window.location = '/library/set/2?return_url=/';
  </script>
 [% END %]
 
