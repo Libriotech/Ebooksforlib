@@ -480,6 +480,7 @@ post '/log/in' => sub {
 
 any ['get','post'] => '/log/out' => sub {
     session->destroy;
+    cookie 'ebib' => '', expires => "-1 hours";
     if (params->{return_url}) {
         redirect params->{return_url};
     } else {
