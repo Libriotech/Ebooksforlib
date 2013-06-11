@@ -8,7 +8,7 @@
 <script src="/stars/jquery.rating.pack.js"></script>
 <link href="/stars/jquery.rating.css" rel="stylesheet">
   <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
-  
+<link href="http://reader.digitalt.org/img/favicon.ico" rel="icon" type="image/x-icon" />  
      <script src="http://reader.digitalt.org/js/jquery.bxslider.js"></script>
    <link href="http://reader.digitalt.org/css/jquery.bxslider.css" rel="stylesheet" />
    
@@ -171,7 +171,7 @@ a:hover {color:#900;} */
     <div class="container content-container">
     <div class="row">
 	    <div class="span8">
-	    <img src="http://reader.digitalt.org/img/ebib-testlogo3.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
+	    <img src="http://reader.digitalt.org/img/ebib-logo2.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
 		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
 		    <!-- <img src="img/laan-gratis-txt.png" /> -->
 		    <p class="lead-list hidden-phone">
