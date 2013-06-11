@@ -1,3 +1,16 @@
+<div class="container">
+<div class="row">
+<div class="span12">
+
+<div class="alert alert-block">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>Logg inn mislyktes</h4>
+    Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker
+</div>
+
+
+
+<!--
 <h1>Login Required</h1>
 
 <p>You need to log in to continue.</p>
@@ -21,3 +34,8 @@
 <br />
 <input type="submit" value="Login">
 </form>
+-->
+
+</div>
+</div>
+</div>

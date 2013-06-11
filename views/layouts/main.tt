@@ -8,8 +8,13 @@
 <script src="/stars/jquery.rating.pack.js"></script>
 <link href="/stars/jquery.rating.css" rel="stylesheet">
   <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
-  <script src="/js/jquery.bxslider.min.js"></script>
-  <link href="/css/jquery.bxslider.css" rel="stylesheet" />
+  
+     <script src="http://reader.digitalt.org/js/jquery.bxslider.js"></script>
+   <link href="http://reader.digitalt.org/css/jquery.bxslider.css" rel="stylesheet" />
+   
+<!--  <script src="/js/jquery.bxslider.min.js"></script>
+  <link href="/css/jquery.bxslider.css" rel="stylesheet" /> -->
+  
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/lawnchair.js"></script>
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -51,9 +56,29 @@ a:hover {color:#900;} */
 
 </style>
 
-<link rel="stylesheet" href="[% request.uri_base %]/css/style.css" />
+<!-- <link rel="stylesheet" href="[% request.uri_base %]/css/style.css" /> -->
 [% library.detail_head %]
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-beb289ee-59c0-ab4c-3b99-ec5cf86755a0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
 </head>
+
+<!-- Ensure library defaults to lillevik; and enable the two-part login-field by setting 'chosen realm'. IOK 2013-05-31 -->
+
+        [% SET chosen_realm='' %]
+	[% IF session.chosen_library == 2 %]
+	[% SET chosen_realm='lillevik' %]
+	[% ELSIF session.chosen_library == 1 %]
+	[% SET chosen_realm='storevik' %]
+	[% END %]
+
+[% IF chosen_realm == '' %]	
+ <script>
+ window.location = 'http://portal.digitalt.org/library/set/2?return_url=/';
+ </script>
+[% END %]
+
 
 <body id="portal">
 <div class="header-wrapper">
@@ -74,13 +99,15 @@ a:hover {color:#900;} */
 	    <nav>
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
-				    <a class="brand hidden-phone" href="/"><i class="icon-building"></i> [% session.chosen_library_name %]</a>
+				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone">[% session.chosen_library_name %]</span></a>
+				        <form class="navbar-search pull-left" style="margin-top:5px;">
+							<input type="text" class="search-query" placeholder="Søk">
+    					</form>
 				    <ul class="nav pull-right">
-				    <li><a href="/" src="" data="Hjem"><i class="icon-home"></i></a></li>
-				    <li class="active"><a href="/search" src="" data="Søk"><i class="icon-search"></i></a></li>
+				    <li><a href="http://reader.digitalt.org/"><i class='icon-book'></i></a></li>
 				    <li><a href="/log/out" src="" data="Log out"><i class="icon-signout"></i></a></li>
-				    <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li>
-				    <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li>
+				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
+				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
 				    </ul>
 			    </div>
 		    </div>
@@ -91,9 +118,11 @@ a:hover {color:#900;} */
     </div>
     </div> <!-- end container -->
 
+<!-- SJANGER, utlistingER OG SØK
+*************************************
+   
     [% IF vars.hide_dropdowns != 1 %]
-    <!-- SJANGER, utlistingER OG SØK
-    ************************************* -->
+
 
     <div class="container hidden-phone">
     <div class="row add-top">
@@ -129,8 +158,9 @@ a:hover {color:#900;} */
 	    </form>
 	    </div>
     </div>
-    </div> <!-- end container -->
+    </div> 
     [% END %]
+-->
 
 [% ELSE %]
 
@@ -141,6 +171,7 @@ a:hover {color:#900;} */
     <div class="container content-container">
     <div class="row">
 	    <div class="span8">
+	    <img src="http://reader.digitalt.org/img/ebib-testlogo3.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
 		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
 		    <!-- <img src="img/laan-gratis-txt.png" /> -->
 		    <p class="lead-list hidden-phone">
@@ -151,31 +182,46 @@ a:hover {color:#900;} */
         </div>
 	
 	    <div class="span3">
-	    <form>
+	    <form method='post' action="/log/in">
+		 <input type=hidden name=realm value='[%chosen_realm%]' />
         	<div class="login-container">
         		<div class="login-row1">
-        			<input class="span3" type="text" placeholder="Lånenummer">
+        			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer">
         		</div>
         		<div class="login-row2">
-        			<input class="span3" type="text" placeholder="PIN-kode">
+        			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
         		</div>
         	</div>
-        	<div class="center half-top half-bottom">
-        		<label class="checkbox" style="display:inline-block;">
-        			<input type="checkbox" checked="checked"> Husk meg | <a class="glemt-pinkode" href="#">Glemt PIN?</a>
-        		</label>
-        	</div>
-        	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
+        	
+<!--    	
+    	<div class="center half-top half-bottom">
+    		<label class="checkbox" style="display:inline-block;">
+    			<input type="checkbox" checked="checked"> Husk meg | <a class="glemt-pinkode" href="#">Glemt PIN?</a>
+    		</label>
+    	</div>
+    	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
+-->
+    	<button type="submit" class="btn btn-success btn-login pull-right half-top" style="width:50%;">Logg inn</button>
+    	<a class="glemt-pinkode half-top" href="#">Hjelp til<br />innloggingen?</a>
 
         </form>
         </div>
     </div>
     </div> <!-- end container -->
     </div> <!-- end logginn-wrapper -->
-    
-    <div class="hanging-alert2 span4 offset4"><a href="#"><strong>Ny Bruker?</strong> Dette trenger du for å låne <i class="icon-angle-right"></i></a></div>
 
+<!-- NY BRUKER? BANNER
+************************************* -->
 
+	[% IF !session.logged_in_user %]
+
+	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-178px;">
+		<a href="#"><strong>Ny Bruker?</strong> Dette trenger du for å låne <i class="icon-angle-right"></i></a>
+	</div>
+
+	[% END %]
+
+ 
 [% END %]
 
 </div> <!-- end container-fluid header-container -->
@@ -198,7 +244,12 @@ a:hover {color:#900;} */
 <div class="container">
 <div class="row">
 <div class="span12">
-	<h4 class="genre-title" style="padding:20px 0 150px;color:#fff;">Footer</h4>
+	<p class="genre-title" style="padding:20px 0 150px;color:#fff;text-shadow:none;"><strong>eBib 2.0</strong> <span style="color:#999;font-weight:200;">Beta</span></p>
+<div id=sessiondump style="color:#999">
+[% USE Dumper %]
+[% Dumper.dump(session) %]
+</div>
+
 	</div>
 <!--
 	<div class="span4">

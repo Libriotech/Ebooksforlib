@@ -1,9 +1,13 @@
 [% META pagetitle = 'Creator page' %]
 
-<h2>[% creator.name %]</h2> 
+<div class="container content-container">
+<div class="row add-top">
+<div class="span12">
+
+<h4>Bøker av [% creator.name %]:</h4> 
 
 [% IF creator.books.size %]
-<p>Creator of:</p>
+
 [% INCLUDE 'books_table.tt' books=creator.books %]
 [% END %]
 
@@ -18,3 +22,7 @@
 </div>
     [% END %]
 [% END %]
+
+</div>
+</div>
+</div>

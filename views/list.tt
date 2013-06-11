@@ -1,12 +1,31 @@
 [% META pagetitle = 'List contents' %]
 
-<h2>[% list.name %]</h2>
+<!-- Bootstrap og stinavigering lagt til 30/5/2013 /Helge -->
+
+<!-- STINAVIGERING
+************************************* -->
+
+<div class="container content-container">
+<div class="row add-top half-bottom"> <!-- .half-bottom bør antakelig fjernes når resultatfilter/sortering legges til /Helge -->
+	<div class="span12">
+	  <ul class="path">
+	  <li class="back-btn">
+            <a href="/">Forsiden</a>
+      </li>
+	  <li><span>[% list.name %]</span></li>
+	  </ul>
+	</div>
+</div>
+
+
 
 [% IF list.books.size %]
     [% INCLUDE 'books_table.tt' books=list.books %]
 [% ELSE %]
     <p>Sorry, there are not title in this list yet.</p>
 [% END %]
+
+</div>
 
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]

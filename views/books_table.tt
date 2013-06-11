@@ -2,7 +2,7 @@
 ************************************* -->
 
 <section id="utlisting">
-<div class="row">
+<div class="row add-bottom">
 <div class="span12">
 
 	<ul class="utlisting">
@@ -31,7 +31,6 @@
 			</li>
         [% END %]
     </ul>
-
 
 </div>
 </div>

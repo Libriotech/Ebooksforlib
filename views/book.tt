@@ -4,18 +4,25 @@
 <!-- STINAVIGERING
 ************************************* -->
 
-<div class="container content-container">
+<div class="container content-container add-top">
 <div class="row">
 	<div class="span12">
 	  <ul class="path">
-	  <li class="back-btn"><a href="#">Sjanger</a></li>
-	  <li><span>Lett blanding</span></li>
+	  <li class="back-btn">
+	  	[% FOREACH list IN book.lists %]
+            <a href="/list/[% list.id %]">[% list.name %][% UNLESS loop.last() %],[% END %]</a>
+		[% END %]
+      </li>
+	  <li><span>[% book.title %]</span></li>
 	  </ul>
 	</div>
 </div>
 
 <!-- BOK
 ************************************* -->
+
+
+<!-- Feilmeldinger Bootstrapifisert og oversatt 30/5/2013 /Helge -->
 
 <section id="bok">
 <div class="row add-top">
@@ -26,7 +33,7 @@
             <img src="/img/bg-white-paper.jpg">
 		[% END %]
 	</div>
-	<div class="span9 book-details">
+	<div class="span3 book-details">
 		<h3 class="title">[% book.title %]</h3>
 		<div class="author">
 		[% FOREACH creator IN book.creators %]
@@ -35,13 +42,13 @@
 		</div>
 		<p class="details">
 		    [% IF book.date %]
-		        Published: [% book.date %]<br>
+		        Published: [% book.date %]<br />
     		[% END %]
             [% IF book.isbn %]
-                ISBN: [% book.isbn %]<br>
+                ISBN: [% book.isbn %]<br />
             [% END %]
             [% IF book.pages %]
-                Pages: [% book.pages %]<br>
+                Pages: [% book.pages %]<br />
             [% END %]
             [% IF book.lists.size %]
                 Genres: 
@@ -50,25 +57,37 @@
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
                 [% END %]
-                <br>
+                <br />
                 Lists: 
                 [% FOREACH list IN book.lists %]
                     [% IF list.is_genre == 0 && list.library.id == session.chosen_library %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
                 [% END %]
-                <br>
+                <br />
             [% END %]
 		</p>
-		<div class="span3 add-top add-bottom" style="margin-left:0;">
+		<div class="add-top add-bottom">
 		    [% IF !session.logged_in_user %]
-		        <p>You must be logged in to borrow books.</p>
+		        <div class="alert alert-info" style="display:inline-block;">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-info-sign"></i> Du må være logget inn for å låne bøker.
+    			</div>
             [% ELSIF user_belongs_to_library == 0 %]
-                <p>You do not have permission to borrow books from this library.</p>
+                <div class="alert" style="display:inline-block;">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-exclamation-sign"></i> Du har ikke muligheter til å låne bøker fra dette biblioteket.
+    			</div>
             [% ELSIF user_has_borrowed == 1 %]
-                <p>You have already borrowed this book.</p>
+                <div class="alert alert-success" style="display:inline-block;">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-ok"></i> Du låner denne boken.
+    			</div>
             [% ELSIF limit_reached == 1 %]
-                <p>You have reached the maximum number of concurrent loans for this library.</p>
+                <div class="alert" style="display:inline-block;">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-exclamation-sign"></i> Du låner allerede maksimalt antall bøker.
+    			</div>
             [% ELSIF book.files.size %]
                 [% SET longest_loan_period = 0 %]
                 [% SET selected_item       = 0 %]
@@ -84,36 +103,48 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]">Borrow this book for [% longest_loan_period %] days</a>    
+                <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken</a>
+                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
-                <p>No items, yet!</p>
+                <div class="alert" style="display:inline-block;">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-exclamation-sign"></i> Alle våre eksemplarer er desverre utlånt.
+    			</div>
             [% END %]
 		</div>
+
+<!-- DELING - MIDLERTIDIG. Her hadde det vært fint med de minimale versjonen av knappene /Helge
+************************************* -->		
+
+<div class='st_twitter' displayText='Tweet' style="float:left;margin-right:5px;"></div>
+<div class='st_fbrec' displayText='Facebook Recommend' style="float:left;"></div>
+<!--		
 		<div class="share-this">
 		    [% library.soc_links %]
 		</div>
+-->
    </div>
 </div>
 
 <div class="row">
-   <div class="span12">
+   <div class="span6">
 		<div class="description">
-		   <h4>Description</h4>
+		   <h4>Beskrivelse</h4>
             [% IF descriptions.results.bindings.size %]
                 [% IF descriptions.results.bindings.0.abstract.value %]
-                    <h5>Abstract</h5>
-                    <div>[% descriptions.results.bindings.0.abstract.value %]</div>
+                    <p>[% descriptions.results.bindings.0.abstract.value %]</p>
                 [% END %]
                 [% IF descriptions.results.bindings.0.krydder.value %]
-                    <h5>Krydder</h5>
-                    <div>[% descriptions.results.bindings.0.krydder.value %]</div>
+                    <p>[% descriptions.results.bindings.0.krydder.value %]</p>
                 [% END %]
             [% END %]
 		</div>
 	</div>
 </div>
 </section>
+
+<!-- caveat emptor: listen fungerer ikke optimalt med samme styling som på vanlig utlisting pga begrenset antallet/border-top issues /Helge -->
 
 [%# Collect unique books created by the same creators as the current book %]
 [% SET books = [ ] %]
@@ -138,11 +169,15 @@
     [% END %]
 [% END %]
 [% IF books.size %]
-    <h2>Other books by the same creator(s)</h2>
+	<h5>Andre bøker av [% FOREACH creator IN book.creators %]
+            <span>[% creator.name %]</span>[% UNLESS loop.last() %],[% END %]
+        [% END %]</h5>
     [% INCLUDE 'books_table.tt' books=books %]
 [% END %]
 
-<hr><hr><hr>
+
+<!--
+
 
 <h2>Items</h2>
 
@@ -177,6 +212,7 @@
     [% SET avg_rating = book.get_avg_rating.average %]
     [% USE Math %]
     [% SET abs_avg_rating = Math.abs( avg_rating ) %]
+    
     <div>
     <form method="POST" action="/ratings/add">
         <input name="rating" type="radio" class="star" value="1"[% IF abs_avg_rating == 1 %] checked[% END %]>
@@ -187,6 +223,7 @@
     </form>
     <p>Average rating: [% avg_rating %] ([% book.get_avg_rating.votes %] votes).</p>
     </div>
+    
 [% END %]
 
 <h2>Comments</h2>
@@ -217,6 +254,10 @@
         </div>
     [% END %]
 [% END %]
+
+-->
+
+</div> <!-- end container, lagt til av Helge 30/05/2013 -->
 
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]

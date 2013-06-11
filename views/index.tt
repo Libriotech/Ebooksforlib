@@ -1,5 +1,6 @@
 [% USE HTML.Strip %]
 
+
 [% FOREACH list IN vars.lists %]
     
 <!-- UTVALGTE ROMANER
@@ -11,29 +12,31 @@
 
 <section id="romaner">
 
-    <div class="row">
-    <div class="span12" style="margin-top:-12px;">
-	    <a class="btn pull-right" href="/list/[% list.id %]"><strong>[% list.name %] A-Å ></strong></a>
+    <div class="row half-top">
+    <div class="span12">
+	    <a class="btn pull-right half-top" href="/list/[% list.id %]"><strong>[% list.name %] A-Å ></strong></a>
 	    <h4 class="genre-title">[% list.name %]</h4>
     </div>
     </div>
 
-    <div class="row">
+    <div class="row half-top">
     <div class="span12">
       	<ul class="utvalgte">
 			    <li>
-				    <a href="/book/[% list.books.0.id %]" class="book-block">
-					    <div class="utvalgte-img">
+				    <div class="book-block">
+					    <a href="/book/[% list.books.0.id %]" class="utvalgte-img">
 						    [% IF list.books.0.coverimg %]
                                 <img src="[% list.books.0.coverimg %]">
                             [% ELSE %]
                                 <img src="/img/bg-white-paper.jpg">
                             [% END %]
-					    </div>
+					    </a>
 					    <div class="li-text-portal">
-						    <h4 class="title max-1l ellipsis">[% list.books.0.title %]</h4>
-						    <p class="author">[% list.books.0.creators_as_string %]</p>
-						    [% SET descriptions = list.books.0.get_descriptions %]
+					    	<a href="/book/[% list.books.0.id %]">
+						    	<h4 class="title max-1l ellipsis">[% list.books.0.title %]</h4>
+						    	<p class="author">[% list.books.0.creators_as_string %]</p>
+						    	[% SET descriptions = list.books.0.get_descriptions %]
+						    </a>
 						    <p class="intro max-5l ellipsis">
 				                [% IF descriptions.results.bindings.size %]
                                     [% IF descriptions.results.bindings.0.krydder.value %]
@@ -50,21 +53,23 @@
 					    <div class="li-i-portal">
 						    <i class="icon-angle-right"></i>
 					    </div>
-				    </a>
+				    </div>
 			    </li>
 			    <li>
-				    <a href="#" class="book-block">
-					    <div class="utvalgte-img">
+				    <div class="book-block">
+					    <a href="/book/[% list.books.1.id %]" class="utvalgte-img">
 						    [% IF list.books.1.coverimg %]
                                 <img src="[% list.books.1.coverimg %]">
                             [% ELSE %]
                                 <img src="/img/bg-white-paper.jpg">
                             [% END %]
-					    </div>
+					    </a>
 					    <div class="li-text-portal">
-						    <h4 class="title max-1l ellipsis">[% list.books.1.title %]</h4>
-						    <p class="author">[% list.books.1.creators_as_string %]</p>
-						    [% SET descriptions = list.books.1.get_descriptions %]
+					    	<a href="/book/[% list.books.1.id %]">
+						    	<h4 class="title max-1l ellipsis">[% list.books.1.title %]</h4>
+						    	<p class="author">[% list.books.1.creators_as_string %]</p>
+						    	[% SET descriptions = list.books.1.get_descriptions %]
+						    </a>
 						    <p class="intro max-5l ellipsis">
 				                [% IF descriptions.results.bindings.size %]
                                     [% IF descriptions.results.bindings.0.krydder.value %]
@@ -80,13 +85,13 @@
 					    <div class="li-i-portal">
 						    <i class="icon-angle-right"></i>
 					    </div>
-				    </a>
+				    </div>
 			    </li>
 	    </ul>
     </div>
     </div>
 
-<!-- ANBEFALTE ROMANER
+<!-- SISTE
 ************************************* -->
 
 <div class="row add-top">
