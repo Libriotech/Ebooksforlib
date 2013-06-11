@@ -480,7 +480,15 @@ post '/log/in' => sub {
 
 any ['get','post'] => '/log/out' => sub {
     session->destroy;
-    cookie 'ebib' => '', expires => "-1 hours";
+    # Get rid of the ebib cookie
+    my $cookie = Dancer::Cookie->new(
+        'name'      => 'ebib', 
+        'value'     => '',
+        'domain'    => setting('session_domain'),
+        'http_only' => 0,
+        'expires'   => '-1 year',
+    );
+    header 'Set-Cookie' => $cookie->to_header;
     if (params->{return_url}) {
         redirect params->{return_url};
     } else {
