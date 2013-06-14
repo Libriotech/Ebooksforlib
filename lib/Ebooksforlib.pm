@@ -1850,6 +1850,35 @@ get '/rest/logout' => sub {
 
 };
 
+get '/rest/whoami' => sub {
+
+    if ( logged_in_user ) {
+    
+        my $logged_in_user = logged_in_user; 
+        my $user = rset('User')->find( $logged_in_user->{'id'} );
+        # my $hash = hash_pkey( $user->hash, $pkey );
+        return { 
+            'status'   => 0,
+            'userdata' => {
+                # 'hash'     => $hash,
+                'uid'      => $user->id,
+                'username' => $user->username,
+                'name'     => $user->name,
+                'realm'    => session 'logged_in_user_real_realm',
+            }
+        };
+    
+    } else {
+    
+        return { 
+            'status' => 1,
+            'error'  => 'User is not logged in',
+        };
+    
+    }
+    
+};
+
 get '/rest/:action' => sub {
 
     my $action  = param 'action';
@@ -1965,33 +1994,9 @@ get '/rest/:action' => sub {
         return { 
             'status' => 0, 
         };
-    
-    } elsif ( $action eq 'whoami' ) {
-    
-        my $logged_in_user = logged_in_user;
-        debug Dumper $logged_in_user;
-        debug $user_id;
-        if ( $logged_in_user && $logged_in_user->{'id'} eq $user_id ) { 
-            my $user = rset('User')->find( $logged_in_user->{'id'} );
-            my $hash = hash_pkey( $user->hash, $pkey );
-            return { 
-                'status'   => 0,
-                'userdata' => {
-                    'hash'     => $hash,
-                    'uid'      => $user->id,
-                    'username' => $user->username,
-                    'name'     => $user->name,
-                    'realm'    => session 'logged_in_user_real_realm',
-                }
-            };
-        } else {
-            return { 
-                'status'   => 1,
-            };
-        }
-    
+        
     }
-
+    
 };
 
 ### Utility functions
