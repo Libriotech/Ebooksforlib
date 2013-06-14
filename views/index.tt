@@ -41,7 +41,7 @@
     	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
 -->
     	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
-    	<a class="glemt-pinkode half-top" href="#">Hjelp til<br />innloggingen?</a>
+    	<a class="glemt-pinkode" href="#">Hjelp til<br />innloggingen?</a>
 
         </form>
         </div>
