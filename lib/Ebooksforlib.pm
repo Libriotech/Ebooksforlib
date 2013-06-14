@@ -147,12 +147,22 @@ get '/search' => sub {
         {},
         { order_by => 'title desc' }
     )->search_literal('MATCH ( title, isbn ) AGAINST( ? IN BOOLEAN MODE )', $q );
+    my $num_books = @books;
     
     # Search for people
     my @creators = rset('Creator')->search(
         {},
         { order_by => 'name desc' }
     )->search_literal('MATCH ( name ) AGAINST( ? IN BOOLEAN MODE )', $q );
+    my $num_creators = @creators;
+    
+    # If we just got one hit for either book or person then redirect to that
+    if ( $num_books == 1 && $num_creators == 0 ) {
+        return redirect '/book/' . $books[0]->id;
+    }
+    if ( $num_books == 0 && $num_creators == 1 ) {
+        return redirect '/creator/' . $creators[0]->id;
+    }
     
     template 'search', { books => \@books, creators => \@creators };
 
