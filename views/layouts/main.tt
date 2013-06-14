@@ -75,7 +75,7 @@ a:hover {color:#900;} */
 
 [% IF chosen_realm == '' %]	
  <script>
- window.location = 'http://portal.digitalt.org/library/set/2?return_url=/';
+ window.location = '/library/set/2?return_url=/';
  </script>
 [% END %]
 
@@ -97,8 +97,8 @@ a:hover {color:#900;} */
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
 				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span></a>
-				        <form class="navbar-search pull-left" style="margin-top:5px;">
-							<input type="text" class="search-query" placeholder="Tittel / Forfatter / ISBN">
+				        <form class="navbar-search pull-left" style="margin-top:5px;" action="/search" method="GET">
+							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
 				    <li><a href="http://reader.digitalt.org/"><i class='icon-book'></i></a></li>
@@ -172,8 +172,8 @@ a:hover {color:#900;} */
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
 				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span></a>
-				        <form class="navbar-search pull-left" style="margin-top:5px;">
-							<input type="text" class="search-query" placeholder="Tittel / Forfatter / ISBN">
+				        <form class="navbar-search pull-left" style="margin-top:5px;" action="/search" method="GET">
+							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
 				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/index.php">Logg inn</a> eller finn ut mer <a href="">om eBib</a>.</li>
