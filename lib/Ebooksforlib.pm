@@ -450,10 +450,11 @@ post '/log/in' => sub {
             # my $now = DateTime->now;
             # my $hash = md5_hex( $new_user->id . $new_user->username . $now->datetime() );
             my %data = (
-                'uid'      => $new_user->id,
-                'username' => $new_user->username,
-                'name'     => $new_user->name,
-                'realm'    => $realm,
+                'uid'             => $new_user->id,
+                'username'        => $new_user->username,
+                'name'            => $new_user->name,
+                'realm'           => $realm,
+                'realmprettyname' => session( 'chosen_library_name' ),
                 # 'hash'     => $hash,
             );
             # Set a cookie with a domain
@@ -1882,11 +1883,12 @@ get '/rest/whoami' => sub {
         return { 
             'status'   => 0,
             'userdata' => {
-                'hash'     => $hash,
-                'uid'      => $user->id,
-                'username' => $user->username,
-                'name'     => $user->name,
-                'realm'    => session 'logged_in_user_real_realm',
+                'hash'            => $hash,
+                'uid'             => $user->id,
+                'username'        => $user->username,
+                'name'            => $user->name,
+                'realm'           => session('logged_in_user_real_realm'),
+                'realmprettyname' => session('chosen_library_name'),
             }
         };
     
