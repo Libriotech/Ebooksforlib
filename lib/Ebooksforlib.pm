@@ -1854,13 +1854,35 @@ get '/rest/whoami' => sub {
 
     if ( logged_in_user ) {
     
+        my $pkey           = param 'pkey';
         my $logged_in_user = logged_in_user; 
+
+        # Find the user
         my $user = rset('User')->find( $logged_in_user->{'id'} );
-        # my $hash = hash_pkey( $user->hash, $pkey );
+        
+        my $hash;
+        if ( $pkey ) {
+        
+            # Check if a hash has been saved already
+            if ( $user->hash eq '' ) {
+                # Create the local_hash
+                my $now = DateTime->now;
+                my $local_hash = md5_hex( $user->username . $now->datetime() );
+                # Save the new local_hash
+                try {
+                    $user->set_column( 'hash', $local_hash );
+                    $user->update;
+                }
+            }
+            # Hash the pkey with the user hash and return the result
+            $hash = hash_pkey( $user->hash, $pkey );
+        
+        }
+
         return { 
             'status'   => 0,
             'userdata' => {
-                # 'hash'     => $hash,
+                'hash'     => $hash,
                 'uid'      => $user->id,
                 'username' => $user->username,
                 'name'     => $user->name,
