@@ -75,7 +75,7 @@ a:hover {color:#900;} */
 
 [% IF chosen_realm == '' %]	
  <script>
- window.location = '/library/set/2?return_url=/';
+ window.location = 'http://portal.digitalt.org/library/set/2?return_url=/';
  </script>
 [% END %]
 
@@ -86,22 +86,19 @@ a:hover {color:#900;} */
 
 [% IF session.logged_in_user %]
 
-    <!-- BRANDING OG TOPPNAVIGERING
+    <!-- BRANDING, SØK OG TOPPNAVIGERING
     ************************************* -->
 
     <div class="container-fluid header-container">
     <div class="row-fluid">
     <div class="span12">
     <header>
-<!-- SJANGER, LISTER OG SØK
-************************************* -->
-
 	    <nav>
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
-				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone">[% session.chosen_library_name %]</span></a>
+				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span></a>
 				        <form class="navbar-search pull-left" style="margin-top:5px;">
-							<input type="text" class="search-query" placeholder="Søk">
+							<input type="text" class="search-query" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
 				    <li><a href="http://reader.digitalt.org/"><i class='icon-book'></i></a></li>
@@ -118,7 +115,7 @@ a:hover {color:#900;} */
     </div>
     </div> <!-- end container -->
 
-<!-- SJANGER, utlistingER OG SØK
+<!-- SJANGER OG LISTER
 *************************************
    
     [% IF vars.hide_dropdowns != 1 %]
@@ -164,62 +161,34 @@ a:hover {color:#900;} */
 
 [% ELSE %]
 
-    <!-- LOGG INN BANNER
-    ************************************* -->
-
-    <div class="logginn-wrapper">
-    <div class="container content-container">
-    <div class="row">
-	    <div class="span8">
-	    <img src="http://reader.digitalt.org/img/ebib-logo2.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
-		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
-		    <!-- <img src="img/laan-gratis-txt.png" /> -->
-		    <p class="lead-list hidden-phone">
-		    <i class="icon-ok" style="font-size:15px;"></i> Hundrevis av ebøker til din telefon, nettbrett og pc<br />
-		    <i class="icon-ok" style="font-size:15px;"></i> Ny norsk litteratur fra ditt lokale bibliotek<br />
-		    <i class="icon-ok" style="font-size:15px;"></i> Ingen purregebyr eller tunge turer til biblioteket<br />
-		    </p>
-        </div>
-	
-	    <div class="span3">
-	    <form method='post' action="/log/in">
-		 <input type=hidden name=realm value='[%chosen_realm%]' />
-        	<div class="login-container">
-        		<div class="login-row1">
-        			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer">
-        		</div>
-        		<div class="login-row2">
-        			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
-        		</div>
-        	</div>
-        	
-<!--    	
-    	<div class="center half-top half-bottom">
-    		<label class="checkbox" style="display:inline-block;">
-    			<input type="checkbox" checked="checked"> Husk meg | <a class="glemt-pinkode" href="#">Glemt PIN?</a>
-    		</label>
-    	</div>
-    	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
--->
-    	<button type="submit" class="btn btn-success btn-login pull-right half-top" style="width:50%;">Logg inn</button>
-    	<a class="glemt-pinkode half-top" href="#">Hjelp til<br />innloggingen?</a>
-
-        </form>
-        </div>
-    </div>
-    </div> <!-- end container -->
-    </div> <!-- end logginn-wrapper -->
-
-<!-- NY BRUKER? BANNER
+<!-- BRANDING, SØK OG TOPPNAVIGERING
 ************************************* -->
 
-	[% IF !session.logged_in_user %]
+    <div class="container-fluid header-container">
+    <div class="row-fluid">
+    <div class="span12">
+    <header>
+	    <nav>
+		    <div class="navbar navbar-inverse">
+			    <div class="navbar-inner">
+				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span></a>
+				        <form class="navbar-search pull-left" style="margin-top:5px;">
+							<input type="text" class="search-query" placeholder="Tittel / Forfatter / ISBN">
+    					</form>
+				    <ul class="nav pull-right">
+				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/index.php">Logg inn</a> eller finn ut mer <a href="">om eBib</a>.</li>
+				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
+				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
+				    </ul>
+			    </div>
+		    </div>
+	    </nav>
 
-	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-178px;">
-		<a href="#"><strong>Ny Bruker?</strong> Dette trenger du for å låne <i class="icon-angle-right"></i></a>
-	</div>
+    </header>
+    </div>
+    </div>
+    </div> <!-- end container -->
 
-	[% END %]
 
  
 [% END %]
@@ -242,41 +211,19 @@ a:hover {color:#900;} */
 <section id="footer">
 <div class="footer-wrapper">
 <div class="container">
-<div class="row">
-<div class="span12">
-	<p class="genre-title" style="padding:20px 0 150px;color:#fff;text-shadow:none;"><strong>eBib 2.0</strong> <span style="color:#999;font-weight:200;">Beta</span></p>
-<div id=sessiondump style="color:#999">
+	<div class="row">
+		<div class="span12 center">
+			<p class="genre-title" style="padding:80px 0 60px;color:#fff;text-shadow:none;">
+				<img src="http://reader.digitalt.org/img/ebib-logo-neg.png" style="padding-bottom:4px;" /><br />
+				<span style="font-family:'brandon-grotesque';font-size:17px;font-weight:300;">eBib
+			</p>
+
+			<div id=sessiondump style="color:#999">
 [% USE Dumper %]
 [% Dumper.dump(session) %]
-</div>
-
+			</div>			
+		</div>
 	</div>
-<!--
-	<div class="span4">
-		<ul>
-		  <li><a href="#">Lenke 1</a></li>
-		  <li><a href="#">Lenke 2</a></li>
-		  <li><a href="#">Lenke 3</a></li>
-		  <li><a href="#">Lenke 4</a></li>
-		</ul>
-	</div>
-	<div class="span4">
-		<ul>
-		  <li><a href="#">Lenke 1</a></li>
-		  <li><a href="#">Lenke 2</a></li>
-		  <li><a href="#">Lenke 3</a></li>
-		  <li><a href="#">Lenke 4</a></li>
-		</ul>
-	</div>
-	<div class="span4">
-		<ul>
-		  <li><a href="#">Lenke 1</a></li>
-		  <li><a href="#">Lenke 2</a></li>
-		  <li><a href="#">Lenke 3</a></li>
-		  <li><a href="#">Lenke 4</a></li>
-		</ul>
-	</div> -->
-</div>
 </div>
 </div>
 </section>

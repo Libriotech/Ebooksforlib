@@ -5,7 +5,7 @@
 ************************************* -->
 
 <div class="container content-container add-top">
-<div class="row">
+<div class="row add-top half-bottom">
 	<div class="span12">
 	  <ul class="path">
 	  <li class="back-btn">
@@ -42,16 +42,16 @@
 		</div>
 		<p class="details">
 		    [% IF book.date %]
-		        Published: [% book.date %]<br />
+		        Utgivelsesår: [% book.date %]<br />
     		[% END %]
             [% IF book.isbn %]
                 ISBN: [% book.isbn %]<br />
             [% END %]
             [% IF book.pages %]
-                Pages: [% book.pages %]<br />
+                Sider: [% book.pages %]<br />
             [% END %]
             [% IF book.lists.size %]
-                Genres: 
+                Sjanger: 
                 [% FOREACH list IN book.lists %]
                     [% IF list.is_genre == 1 && list.library.id == session.chosen_library %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]

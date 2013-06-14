@@ -1,5 +1,66 @@
 [% USE HTML.Strip %]
 
+[% IF !session.logged_in_user %]
+
+
+    <!-- LOGG INN BANNER
+    ************************************* -->
+
+    <div class="logginn-wrapper">
+    <div class="container content-container">
+    <div class="row">
+	    <div class="span8">
+	    <img src="http://reader.digitalt.org/img/ebib-logo2.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
+		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
+		    <!-- <img src="img/laan-gratis-txt.png" /> -->
+		    <p class="lead-list hidden-phone">
+		    <i class="icon-ok" style="font-size:15px;"></i> Hundrevis av ebøker til din telefon, nettbrett og pc<br />
+		    <i class="icon-ok" style="font-size:15px;"></i> Ny norsk litteratur fra ditt lokale bibliotek<br />
+		    <i class="icon-ok" style="font-size:15px;"></i> Ingen purregebyr eller tunge turer til biblioteket<br />
+		    </p>
+        </div>
+	
+	    <div class="span3">
+	    <form method='post' action="/log/in">
+		 <input type=hidden name=realm value='[%chosen_realm%]' />
+        	<div class="login-container2">
+        		<div class="login-row1">
+        			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer">
+        		</div>
+        		<div class="login-row2">
+        			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
+        		</div>
+        	</div>
+        	
+<!--    	
+    	<div class="center half-top half-bottom">
+    		<label class="checkbox" style="display:inline-block;">
+    			<input type="checkbox" checked="checked"> Husk meg | <a class="glemt-pinkode" href="#">Glemt PIN?</a>
+    		</label>
+    	</div>
+    	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
+-->
+    	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
+    	<a class="glemt-pinkode half-top" href="#">Hjelp til<br />innloggingen?</a>
+
+        </form>
+        </div>
+    </div>
+    </div> <!-- end container -->
+    </div> <!-- end logginn-wrapper -->
+
+<!-- NY BRUKER? BANNER
+************************************* -->
+
+
+	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
+		<a href="#"><span style="color:#fff;font-weight:500;">Ny Bruker?</span> Dette trenger du for å låne ></a>
+	</div>
+
+
+ 
+[% END %]
+
 
 [% FOREACH list IN vars.lists %]
     
@@ -12,14 +73,17 @@
 
 <section id="romaner">
 
-    <div class="row half-top">
-    <div class="span12">
-	    <a class="btn pull-right half-top" href="/list/[% list.id %]"><strong>[% list.name %] A-Å ></strong></a>
-	    <h4 class="genre-title">[% list.name %]</h4>
+    <div class="row">
+    <div class="span12 center">
+    <h1 class="genre-head"><a href="/list/[% list.id %]">[% list.name %]<i class="icon-angle-right" style="margin-left:10px;"></i></a></h1>
+    <!--
+	    <a class="btn pull-right half-top" href="/list/[% list.id %]">[% list.name %] A-Å ></a>
+	    <h4 class="genre-title">[% list.name %]</h4> -->
+	    
     </div>
     </div>
 
-    <div class="row half-top">
+    <div class="row">
     <div class="span12">
       	<ul class="utvalgte">
 			    <li>
@@ -51,7 +115,7 @@
 						    </p>
 					    </div>
 					    <div class="li-i-portal">
-						    <i class="icon-angle-right"></i>
+						    <!-- <i class="icon-angle-right"></i> -->
 					    </div>
 				    </div>
 			    </li>
@@ -83,7 +147,7 @@
 						    </p>
 					    </div>
 					    <div class="li-i-portal">
-						    <i class="icon-angle-right"></i>
+						    <!-- <i class="icon-angle-right"></i> -->
 					    </div>
 				    </div>
 			    </li>
@@ -95,8 +159,8 @@
 ************************************* -->
 
 <div class="row add-top">
-<div class="span12">
-    <h5 class="center genre-subhead">Nyeste</h5>
+<div class="span12 add-top">
+   <!-- <h5 class="center genre-subhead">Nyeste</h5> -->
 	<ul class="block-list bxslider">
         [% FOREACH book IN list.books %]
 			<li>
