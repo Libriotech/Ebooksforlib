@@ -54,3 +54,14 @@
     [% END %]
 [% END %]
 </ul>
+
+<h2>Front page order</h2>
+
+<ul id="frontpage_sort" class="ui-sortable">
+[% sorted_lists = lists.sort('frontpage_order') %]
+[% FOREACH list IN sorted_lists %]
+    [% IF list.frontpage == 1 %]
+         <li class="ui-state-default" id="[% list.id %]"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>[% list.name %]</li>
+    [% END %]
+[% END %]
+</ul>

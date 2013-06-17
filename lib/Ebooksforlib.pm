@@ -67,6 +67,8 @@ get '/' => sub {
     my @lists = rset('List')->search({
         'library_id' => session('chosen_library'),
         'frontpage'  => 1,
+    }, {
+        'order_by' => 'frontpage_order',
     });
     
     # Get the ListBook's for each list
@@ -1092,6 +1094,44 @@ get '/lists/promo/:action/:list_id/:book_id' => require_role admin => sub {
         error "$_";
     };
     redirect '/lists/edit/' . $list_id;
+
+};
+
+get '/lists/order' => require_role admin => sub { 
+    
+    my $frontpage_order = param 'frontpage_order';
+    debug "*** frontpage_order: $frontpage_order";
+
+    # Set all frontpage_order = 0 for the active library
+    my @lists = rset('List')->search({ library_id => _get_library_for_admin_user() });
+    foreach my $list ( @lists ) {
+        try {
+            $list->set_column( 'frontpage_order', 0 );
+            $list->update;
+            debug "** frontpage_order = 0 for list with id = " . $list->id;
+        } catch {
+            error "$_";
+            return 0;
+        };
+    }
+    
+    # Set a new frontpage_order for the lists we were given
+    my @ids = split( /,/, $frontpage_order );
+    my $position = 1;
+    foreach my $id ( @ids ) {
+        my $list = rset('List')->find( $id );
+        try {
+            $list->set_column( 'frontpage_order', $position );
+            $list->update;
+            debug "** frontpage_order = $position for list with id = " . $id;
+            $position++;
+        } catch {
+            error "$_";
+            return 0;
+        };
+    }    
+    
+    return 1;
 
 };
 

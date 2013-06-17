@@ -100,6 +100,8 @@ __PACKAGE__->many_to_many( books => 'list_books', 'book' );
 __PACKAGE__->add_columns(
   "frontpage",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
+  "frontpage_order",
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
 );
 
 
