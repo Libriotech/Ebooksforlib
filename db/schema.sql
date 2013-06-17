@@ -97,6 +97,7 @@ CREATE TABLE lists (
 CREATE TABLE list_book (
     book_id    INTEGER NOT NULL,
     list_id    INTEGER NOT NULL,
+    promoted   INTEGER(1) DEFAULT 0,
     PRIMARY KEY list_book (book_id, list_id), 
     CONSTRAINT list_book_fk_1 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE,
     CONSTRAINT list_book_fk_2 FOREIGN KEY (list_id) REFERENCES lists (id) ON DELETE CASCADE

@@ -78,6 +78,10 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:46:34
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9wr+uCoD1cbb2DuKg0ll1w
 
+# FIXME Add this manually as long as we can't update automatically
+__PACKAGE__->add_columns(
+  "promoted",
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
+);
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;

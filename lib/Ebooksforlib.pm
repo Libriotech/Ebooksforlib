@@ -998,7 +998,9 @@ post '/lists/add' => require_role admin => sub {
 get '/lists/edit/:id' => require_role admin => sub {
     my $list_id = param 'id';
     my $list = rset('List')->find( $list_id );
-    template 'lists_edit', { list => $list };
+    my $library_id = _get_library_for_admin_user();
+    my @booklist = rset('ListBook')->search({ list_id => $list_id });
+    template 'lists_edit', { list => $list, booklist => \@booklist };
 };
 
 post '/lists/edit' => require_role admin => sub {
@@ -1053,6 +1055,32 @@ get '/lists/delete_ok/:id?' => require_role admin => sub {
     };
     
 };
+
+get '/lists/promo/:action/:list_id/:book_id' => require_role admin => sub { 
+    
+    # Do the actual delete
+    my $action  = param 'action';
+    my $list_id = param 'list_id';
+    my $book_id = param 'book_id';
+    my $listbook = rset('ListBook')->find({ list_id => $list_id, book_id => $book_id });
+    my $value = 0;
+    if ( $action eq 'promote' ) {
+        $value = 1;
+    }
+    debug "Going to do action = $action and set promoted = $value for book_id = $book_id in list_id = $list_id";
+    
+    try {
+        $listbook->set_column( 'promoted', $value );
+        $listbook->update;
+        flash info => 'The list was updated!';
+    } catch {
+        flash error => "Oops, we got an error:<br />$_";
+        error "$_";
+    };
+    redirect '/lists/edit/' . $list_id;
+
+};
+
 
 ### Lists and books
 

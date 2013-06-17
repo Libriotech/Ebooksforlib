@@ -1,5 +1,35 @@
 [% META pagetitle = 'Edit list' %]
+[% USE Dumper %]
 
 <form method="POST" action="/lists/edit">
 [% INCLUDE lists_form.tt %]
 </form>
+
+<h2>Promoted books</h2>
+
+<h3>Already promoted</h3>
+
+[% SET num_promoted = 0 %]
+<ul>
+[% FOREACH booklistitem IN booklist %]
+    [% IF booklistitem.promoted == 1 %]
+        <li><a href="/lists/promo/demote/[% list.id %]/[% booklistitem.book_id %]"><img src="/images/arrow_down.png" height="16" width="16" alt="Demote" title="Demote"> [% booklistitem.book.creators_as_string %]: [% booklistitem.book.title %]</a></li>
+        [% num_promoted = num_promoted + 1 %]
+    [% END  %]
+[% END %]
+</ul>
+[% IF num_promoted == 0 %]
+    <p>No books have been promoted, yet.</p>
+[% END %]
+
+<p>(Currently, only 2 books are highlighted on the front page. If you promote more than 2 books, only the first 2 will be shown.)</p>
+
+<h3>Choose another book to promote</h3>
+
+<ul>
+[% FOREACH booklistitem IN booklist %]
+    [% IF booklistitem.promoted != 1 %]
+        <li><a href="/lists/promo/promote/[% list.id %]/[% booklistitem.book_id %]"><img src="/images/arrow_up.png" height="16" width="16" alt="Promote" title="Promote"> [% booklistitem.book.creators_as_string %]: [% booklistitem.book.title %]</a></li>
+    [% END  %]
+[% END %]
+</ul>
