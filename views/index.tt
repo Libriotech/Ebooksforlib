@@ -10,13 +10,13 @@
     <div class="container content-container">
     <div class="row">
 	    <div class="span8">
-	    <img src="http://reader.digitalt.org/img/ebib-logo2.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
+	    <img src="http://reader.digitalt.org/img/ebib-logo-64x64.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
 		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
 		    <!-- <img src="img/laan-gratis-txt.png" /> -->
 		    <p class="lead-list hidden-phone">
-		    <i class="icon-ok" style="font-size:15px;"></i> Hundrevis av ebøker til din telefon, nettbrett og pc<br />
-		    <i class="icon-ok" style="font-size:15px;"></i> Ny norsk litteratur fra ditt lokale bibliotek<br />
-		    <i class="icon-ok" style="font-size:15px;"></i> Ingen purregebyr eller tunge turer til biblioteket<br />
+		    &ndash; Hundrevis av ebøker til din telefon, nettbrett og pc<br />
+		    &ndash; Ny norsk litteratur fra ditt lokale bibliotek<br />
+		    &ndash; Ingen purregebyr eller tunge turer til biblioteket<br />
 		    </p>
         </div>
 	
@@ -54,7 +54,7 @@
 
 
 	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
-		<a href="#"><span style="color:#fff;font-weight:500;">Ny Bruker?</span> Dette trenger du for å låne ></a>
+		<a href="#"><span style=";font-weight:500;">Ny Bruker?</span> Dette trenger du for å låne ></a>
 	</div>
 
 
@@ -75,7 +75,7 @@
 
     <div class="row">
     <div class="span12 center">
-    <h1 class="genre-head"><a href="/list/[% list.id %]">[% list.name %]<i class="icon-angle-right" style="margin-left:10px;"></i></a></h1>
+    <h1 class="genre-head-alt"><a href="/list/[% list.id %]">[% list.name %]<i class="icon-angle-right" style="margin-left:10px;"></i></a></h1>
     <!--
 	    <a class="btn pull-right half-top" href="/list/[% list.id %]">[% list.name %] A-Å ></a>
 	    <h4 class="genre-title">[% list.name %]</h4> -->
@@ -97,8 +97,8 @@
 					    </a>
 					    <div class="li-text-portal">
 					    	<a href="/book/[% list.books.0.id %]">
-						    	<h4 class="title max-1l ellipsis">[% list.books.0.title %]</h4>
-						    	<p class="author">[% list.books.0.creators_as_string %]</p>
+						    	<h4 class="title-alt max-1l ellipsis">[% list.books.0.title %]</h4>
+						    	<p class="author-alt">[% list.books.0.creators_as_string %]</p>
 						    	[% SET descriptions = list.books.0.get_descriptions %]
 						    </a>
 						    <p class="intro max-5l ellipsis">
@@ -130,8 +130,8 @@
 					    </a>
 					    <div class="li-text-portal">
 					    	<a href="/book/[% list.books.1.id %]">
-						    	<h4 class="title max-1l ellipsis">[% list.books.1.title %]</h4>
-						    	<p class="author">[% list.books.1.creators_as_string %]</p>
+						    	<h4 class="title-alt max-1l ellipsis">[% list.books.1.title %]</h4>
+						    	<p class="author-alt">[% list.books.1.creators_as_string %]</p>
 						    	[% SET descriptions = list.books.1.get_descriptions %]
 						    </a>
 						    <p class="intro max-5l ellipsis">
