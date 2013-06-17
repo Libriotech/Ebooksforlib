@@ -106,7 +106,7 @@ get '/book/:id' => sub {
     }
     
     # Look for descriptions
-    my $descriptions = $book->get_descriptions;
+    # my $descriptions = $book->get_descriptions;
     # if ( $book->dataurl ) {
     #     my $sparql = 'SELECT DISTINCT ?krydder ?abstract WHERE {
     #                       OPTIONAL { <' . $book->dataurl . '> <http://data.deichman.no/krydder_beskrivelse> ?krydder . }
@@ -126,7 +126,7 @@ get '/book/:id' => sub {
         # items                 => \@items,
         limit_reached           => $limit_reached,
         user_belongs_to_library => $user_belongs_to_library,
-        descriptions            => $descriptions,
+        # descriptions            => $descriptions,
         library                 => $library,
     };
 };
