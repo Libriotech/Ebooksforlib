@@ -114,16 +114,9 @@
             [% END %]
 		</div>
 
-<!-- DELING - MIDLERTIDIG. Her hadde det vært fint med de minimale versjonen av knappene /Helge
-************************************* -->		
-
-<div class='st_twitter' displayText='Tweet' style="float:left;margin-right:5px;"></div>
-<div class='st_fbrec' displayText='Facebook Recommend' style="float:left;"></div>
-<!--		
 		<div class="share-this">
 		    [% library.soc_links %]
 		</div>
--->
    </div>
 </div>
 
