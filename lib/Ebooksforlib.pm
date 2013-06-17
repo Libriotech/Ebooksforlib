@@ -60,9 +60,23 @@ get '/' => sub {
     #     'library_id' => session('chosen_library')
     # });
     # template 'index', { lists => \@lists };
+    
+    my @booklists;
+
+    # Find all the lists for this library, that should be shown on the front page
+    my @lists = rset('List')->search({
+        'library_id' => session('chosen_library'),
+        'frontpage'  => 1,
+    });
+    
+    # Get the ListBook's for each list
+    foreach my $list ( @lists ) {
+        my @booklist = rset('ListBook')->search({ list_id => $list->id });
+        push @booklists, { booklist => \@booklist, list => $list };
+    }
 
     var hide_dropdowns => 1;    
-    template 'index';
+    template 'index', { booklists => \@booklists };
     
 };
 

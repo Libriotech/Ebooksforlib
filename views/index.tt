@@ -57,18 +57,12 @@
 		<a href="#"><span style=";font-weight:500;">Ny Bruker?</span> Dette trenger du for å låne ></a>
 	</div>
 
-
- 
 [% END %]
 
-
-[% FOREACH list IN vars.lists %]
-    
-    [%# Only display lists that are meant for the front page %]
-    [% NEXT IF list.frontpage != 1 %]
-    
 <!-- UTVALGTE ROMANER
 ************************************* -->
+
+[% FOREACH booklist IN booklists %]
 
 <div class="article">
 <div class="layer">
@@ -78,10 +72,10 @@
 
     <div class="row">
     <div class="span12 center">
-    <h1 class="genre-head-alt"><a href="/list/[% list.id %]">[% list.name %]<i class="icon-angle-right" style="margin-left:10px;"></i></a></h1>
+    <h1 class="genre-head-alt"><a href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right" style="margin-left:10px;"></i></a></h1>
     <!--
-	    <a class="btn pull-right half-top" href="/list/[% list.id %]">[% list.name %] A-Å ></a>
-	    <h4 class="genre-title">[% list.name %]</h4> -->
+	    <a class="btn pull-right half-top" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
+	    <h4 class="genre-title">[% booklist.list.name %]</h4> -->
 	    
     </div>
     </div>
@@ -89,70 +83,42 @@
     <div class="row">
     <div class="span12">
       	<ul class="utvalgte">
-			    <li>
-				    <div class="book-block">
-					    <a href="/book/[% list.books.0.id %]" class="utvalgte-img">
-						    [% IF list.books.0.coverimg %]
-                                <img src="[% list.books.0.coverimg %]">
-                            [% ELSE %]
-                                <img src="http://reader.digitalt.org/img/missing-cover.png">
-                            [% END %]
-					    </a>
-					    <div class="li-text-portal">
-					    	<a href="/book/[% list.books.0.id %]">
-						    	<h4 class="title-alt max-1l ellipsis">[% list.books.0.title %]</h4>
-						    	<p class="author-alt">[% list.books.0.creators_as_string %]</p>
-						    	[% SET descriptions = list.books.0.get_descriptions %]
-						    </a>
-						    <p class="intro max-5l ellipsis">
-				                [% IF descriptions.results.bindings.size %]
-                                    [% IF descriptions.results.bindings.0.krydder.value %]
-                                        [% descriptions.results.bindings.0.krydder.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
-                                    [% ELSIF descriptions.results.bindings.0.abstract.value %]
-                                        [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
-                                    [% ELSE %]
-                                        Sorry, no description available.
-                                    [% END %]
+            [% FOREACH booklistitem IN booklist.booklist %]
+                [% IF booklistitem.promoted == 1 %]
+			        <li>
+				        <div class="book-block">
+					        <a href="/book/[% booklistitem.book.id %]" class="utvalgte-img">
+						        [% IF booklistitem.book.coverimg %]
+                                    <img src="[% booklistitem.book.coverimg %]">
+                                [% ELSE %]
+                                    <img src="http://reader.digitalt.org/img/missing-cover.png">
                                 [% END %]
-						    </p>
-					    </div>
-					    <div class="li-i-portal">
-						    <!-- <i class="icon-angle-right"></i> -->
-					    </div>
-				    </div>
-			    </li>
-			    <li>
-				    <div class="book-block">
-					    <a href="/book/[% list.books.1.id %]" class="utvalgte-img">
-						    [% IF list.books.1.coverimg %]
-                                <img src="[% list.books.1.coverimg %]">
-                            [% ELSE %]
-                                <img src="http://reader.digitalt.org/img/missing-cover.png">
-                            [% END %]
-					    </a>
-					    <div class="li-text-portal">
-					    	<a href="/book/[% list.books.1.id %]">
-						    	<h4 class="title-alt max-1l ellipsis">[% list.books.1.title %]</h4>
-						    	<p class="author-alt">[% list.books.1.creators_as_string %]</p>
-						    	[% SET descriptions = list.books.1.get_descriptions %]
-						    </a>
-						    <p class="intro max-5l ellipsis">
-				                [% IF descriptions.results.bindings.size %]
-                                    [% IF descriptions.results.bindings.0.krydder.value %]
-                                        [% descriptions.results.bindings.0.krydder.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
-                                    [% ELSIF descriptions.results.bindings.0.abstract.value %]
-                                        [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
-                                    [% ELSE %]
-                                        Sorry, no description available.
+					        </a>
+					        <div class="li-text-portal">
+					        	<a href="/book/[% booklistitem.book.id %]">
+						        	<h4 class="title-alt max-1l ellipsis">[% booklistitem.book.title %]</h4>
+						        	<p class="author-alt">[% booklistitem.book.creators_as_string %]</p>
+						        	[% SET descriptions = booklistitem.book.get_descriptions %]
+						        </a>
+						        <p class="intro max-5l ellipsis">
+				                    [% IF descriptions.results.bindings.size %]
+                                        [% IF descriptions.results.bindings.0.krydder.value %]
+                                            [% descriptions.results.bindings.0.krydder.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
+                                        [% ELSIF descriptions.results.bindings.0.abstract.value %]
+                                            [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
+                                        [% ELSE %]
+                                            Sorry, no description available.
+                                        [% END %]
                                     [% END %]
-                                [% END %]
-						    </p>
-					    </div>
-					    <div class="li-i-portal">
-						    <!-- <i class="icon-angle-right"></i> -->
-					    </div>
-				    </div>
-			    </li>
+						        </p>
+					        </div>
+					        <div class="li-i-portal">
+						        <!-- <i class="icon-angle-right"></i> -->
+					        </div>
+				        </div>
+			        </li>
+			    [% END %]
+            [% END %]
 	    </ul>
     </div>
     </div>
@@ -164,22 +130,24 @@
 <div class="span12 add-top">
    <!-- <h5 class="center genre-subhead">Nyeste</h5> -->
 	<ul class="block-list bxslider">
-        [% FOREACH book IN list.books %]
-			<li>
-				<a href="/book/[% book.id %]" class="book-block-alt">
-					<div class="block-list-img">
-					    [% IF book.coverimg %]
-                            <img src="[% book.coverimg %]">
-                        [% ELSE %]
-                            <img src="http://reader.digitalt.org/img/missing-cover.png">
-                        [% END %]
-						<div class="li-text">
-							<h4 class="title max-1l ellipsis">[% book.title %]</h4>
-							<p class="author max-1l ellipsis">[% book.creators_as_string %]</p>
-						</div>
-					</div>
-				</a>
-			</li>
+        [% FOREACH booklistitem IN booklist.booklist %]
+            [% IF booklistitem.promoted != 1 %]
+			    <li>
+				    <a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
+					    <div class="block-list-img">
+					        [% IF booklistitem.book.coverimg %]
+                                <img src="[% booklistitem.book.coverimg %]">
+                            [% ELSE %]
+                                <img src="http://reader.digitalt.org/img/missing-cover.png">
+                            [% END %]
+						    <div class="li-text">
+							    <h4 class="title max-1l ellipsis">[% booklistitem.book.title %]</h4>
+							    <p class="author max-1l ellipsis">[% booklistitem.book.creators_as_string %]</p>
+						    </div>
+					    </div>
+				    </a>
+			    </li>
+		    [% END %]
 		[% END %]
 	</ul>
 </div>
@@ -191,5 +159,6 @@
 </div> <!-- end article -->
     
 [% END %]
+[%# END of FOREACH booklist IN booklists %]
 
 [%# INCLUDE 'books_table.tt' books=books %]
