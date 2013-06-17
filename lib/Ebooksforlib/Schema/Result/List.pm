@@ -96,4 +96,11 @@ __PACKAGE__->belongs_to(
 
 __PACKAGE__->many_to_many( books => 'list_books', 'book' );
 
+# FIXME Add this manually as long as we can't update automatically
+__PACKAGE__->add_columns(
+  "frontpage",
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
+);
+
+
 1;

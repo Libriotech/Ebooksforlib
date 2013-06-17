@@ -90,6 +90,7 @@ CREATE TABLE lists (
     name       VARCHAR(255) NOT NULL,
     library_id INTEGER NOT NULL,
     is_genre   INTEGER(1) DEFAULT 0,
+    frontpage  INTEGER(1) DEFAULT 0,
     CONSTRAINT lists_fk_1 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

@@ -9,6 +9,14 @@
 [% ELSE %]
 <input type="checkbox" name="is_genre" id="is_genre" value="1" />
 [% END %]
+
+<label for="is_genre">Show this list on the front page:</label>
+[% IF params.frontpage || list.frontpage %]
+<input type="checkbox" name="frontpage" id="frontpage" value="1" checked="checked" />
+[% ELSE %]
+<input type="checkbox" name="frontpage" id="frontpage" value="1" />
+[% END %]
+
 [% IF list.id %]
 <input type="hidden" name="id" id="id" value="[% list.id %]"/>
 [% END %]

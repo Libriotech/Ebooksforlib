@@ -31,6 +31,9 @@
         <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
         <a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
         <a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size or 0 %])
+        [% IF list.frontpage == 1 %]
+            frontpage
+        [% END %]
         </li>
     [% END %]
 [% END %]
@@ -44,6 +47,9 @@
         <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
         <a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
         <a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size or 0 %])
+        [% IF list.frontpage == 1 %]
+            frontpage
+        [% END %]
         </li>
     [% END %]
 [% END %]
