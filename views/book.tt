@@ -114,16 +114,9 @@
             [% END %]
 		</div>
 
-<!-- DELING - MIDLERTIDIG. Her hadde det vært fint med de minimale versjonen av knappene /Helge
-************************************* -->		
-
-<div class='st_twitter' displayText='Tweet' style="float:left;margin-right:5px;"></div>
-<div class='st_fbrec' displayText='Facebook Recommend' style="float:left;"></div>
-<!--		
 		<div class="share-this">
 		    [% library.soc_links %]
 		</div>
--->
    </div>
 </div>
 
@@ -131,14 +124,15 @@
    <div class="span6">
 		<div class="description">
 		   <h4>Beskrivelse</h4>
-            [% IF descriptions.results.bindings.size %]
-                [% IF descriptions.results.bindings.0.abstract.value %]
-                    <p>[% descriptions.results.bindings.0.abstract.value %]</p>
-                [% END %]
-                [% IF descriptions.results.bindings.0.krydder.value %]
-                    <p>[% descriptions.results.bindings.0.krydder.value %]</p>
-                [% END %]
-            [% END %]
+		   [% SET descriptions = book.get_descriptions %]
+           [% IF descriptions.results.bindings.size %]
+               [% IF descriptions.results.bindings.0.abstract.value %]
+                   <p>[% descriptions.results.bindings.0.abstract.value %]</p>
+               [% END %]
+               [% IF descriptions.results.bindings.0.krydder.value %]
+                   <p>[% descriptions.results.bindings.0.krydder.value %]</p>
+               [% END %]
+           [% END %]
 		</div>
 	</div>
 </div>

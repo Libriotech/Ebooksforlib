@@ -216,12 +216,7 @@ a:hover {color:#900;} */
 			<p class="genre-title" style="padding:80px 0 60px;color:#fff;text-shadow:none;">
 				<img src="http://reader.digitalt.org/img/ebib-logo-neg.png" style="padding-bottom:4px;" /><br />
 				<span style="font-family:'brandon-grotesque';font-size:17px;font-weight:300;">eBib
-			</p>
-
-			<div id=sessiondump style="color:#999">
-[% USE Dumper %]
-[% Dumper.dump(session) %]
-			</div>			
+			</p>		
 		</div>
 	</div>
 </div>

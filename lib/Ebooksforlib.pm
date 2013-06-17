@@ -106,7 +106,7 @@ get '/book/:id' => sub {
     }
     
     # Look for descriptions
-    my $descriptions = $book->get_descriptions;
+    # my $descriptions = $book->get_descriptions;
     # if ( $book->dataurl ) {
     #     my $sparql = 'SELECT DISTINCT ?krydder ?abstract WHERE {
     #                       OPTIONAL { <' . $book->dataurl . '> <http://data.deichman.no/krydder_beskrivelse> ?krydder . }
@@ -126,7 +126,7 @@ get '/book/:id' => sub {
         # items                 => \@items,
         limit_reached           => $limit_reached,
         user_belongs_to_library => $user_belongs_to_library,
-        descriptions            => $descriptions,
+        # descriptions            => $descriptions,
         library                 => $library,
     };
 };
@@ -966,8 +966,9 @@ get '/lists/add' => require_role admin => sub {
 
 post '/lists/add' => require_role admin => sub {
 
-    my $name     = param 'name';
-    my $is_genre = param 'is_genre';
+    my $name      = param 'name';
+    my $is_genre  = param 'is_genre';
+    my $frontpage = param 'frontpage';
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
@@ -981,6 +982,7 @@ post '/lists/add' => require_role admin => sub {
         my $new_list = rset('List')->create({
             name       => $name,
             is_genre   => $is_genre,
+            frontpage  => $frontpage,
             library_id => $library_id,
         });
         flash info => 'A new list was added! <a href="/list/' . $new_list->id . '">View</a>';
@@ -1004,6 +1006,7 @@ post '/lists/edit' => require_role admin => sub {
     my $id   = param 'id';
     my $name = param 'name';
     my $is_genre = param 'is_genre';
+    my $frontpage = param 'frontpage';
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
@@ -1011,6 +1014,7 @@ post '/lists/edit' => require_role admin => sub {
     try {
         $list->set_column('name', $name);
         $list->set_column('is_genre', $is_genre);
+        $list->set_column('frontpage', $frontpage);
         $list->update;
         flash info => 'A list was updated! <a href="/list/' . $list->id . '">View</a>';
         redirect '/admin';

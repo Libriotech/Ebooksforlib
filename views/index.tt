@@ -64,6 +64,9 @@
 
 [% FOREACH list IN vars.lists %]
     
+    [%# Only display lists that are meant for the front page %]
+    [% NEXT IF list.frontpage != 1 %]
+    
 <!-- UTVALGTE ROMANER
 ************************************* -->
 
@@ -104,10 +107,9 @@
 						    <p class="intro max-5l ellipsis">
 				                [% IF descriptions.results.bindings.size %]
                                     [% IF descriptions.results.bindings.0.krydder.value %]
-                                        [% descriptions.results.bindings.0.krydder.value | html_strip %]
-                                        [%# FIXME It looks like norwegian wovels are double encoded after html_strip has been applied. %]
+                                        [% descriptions.results.bindings.0.krydder.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
                                     [% ELSIF descriptions.results.bindings.0.abstract.value %]
-                                        [% descriptions.results.bindings.0.abstract.value | html_strip %]
+                                        [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
                                     [% ELSE %]
                                         Sorry, no description available.
                                     [% END %]
@@ -137,9 +139,9 @@
 						    <p class="intro max-5l ellipsis">
 				                [% IF descriptions.results.bindings.size %]
                                     [% IF descriptions.results.bindings.0.krydder.value %]
-                                        [% descriptions.results.bindings.0.krydder.value | html_strip %]
+                                        [% descriptions.results.bindings.0.krydder.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
                                     [% ELSIF descriptions.results.bindings.0.abstract.value %]
-                                        [% descriptions.results.bindings.0.abstract.value | html_strip %]
+                                        [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
                                     [% ELSE %]
                                         Sorry, no description available.
                                     [% END %]
