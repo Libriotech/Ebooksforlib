@@ -20,7 +20,7 @@
 		    </p>
         </div>
 	
-	    <div class="span3">
+	    <div class="span4">
 	    <form method='post' action="/log/in">
 		 <input type=hidden name=realm value='[%chosen_realm%]' />
         	<div class="login-container2">
@@ -92,7 +92,7 @@
 						    [% IF list.books.0.coverimg %]
                                 <img src="[% list.books.0.coverimg %]">
                             [% ELSE %]
-                                <img src="/img/bg-white-paper.jpg">
+                                <img src="http://reader.digitalt.org/img/missing-cover.png">
                             [% END %]
 					    </a>
 					    <div class="li-text-portal">
@@ -125,7 +125,7 @@
 						    [% IF list.books.1.coverimg %]
                                 <img src="[% list.books.1.coverimg %]">
                             [% ELSE %]
-                                <img src="/img/bg-white-paper.jpg">
+                                <img src="http://reader.digitalt.org/img/missing-cover.png">
                             [% END %]
 					    </a>
 					    <div class="li-text-portal">
@@ -169,7 +169,7 @@
 					    [% IF book.coverimg %]
                             <img src="[% book.coverimg %]">
                         [% ELSE %]
-                            <img src="/img/bg-white-paper.jpg">
+                            <img src="http://reader.digitalt.org/img/missing-cover.png">
                         [% END %]
 						<div class="li-text">
 							<h4 class="title max-1l ellipsis">[% book.title %]</h4>

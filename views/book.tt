@@ -30,7 +30,7 @@
 	    [% IF book.coverimg %]
     		<img src="[% book.coverimg %]" />
 		[% ELSE %]
-            <img src="/img/bg-white-paper.jpg">
+            <img src="http://reader.digitalt.org/img/missing-cover.png">
 		[% END %]
 	</div>
 	<div class="span3 book-details">
