@@ -64,6 +64,9 @@
 
 [% FOREACH list IN vars.lists %]
     
+    [%# Only display lists that are meant for the front page %]
+    [% NEXT IF list.frontpage != 1 %]
+    
 <!-- UTVALGTE ROMANER
 ************************************* -->
 
