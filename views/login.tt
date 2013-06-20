@@ -2,9 +2,16 @@
 <div class="row">
 <div class="span12">
 
+<!--
 <div class="alert alert-block">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <h4>Logg inn mislyktes</h4>
+    <p>Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker, eller velge et annet bibliotek i skjemaet under.</p>
+</div>
+-->
+
+<div class="alert alert-block">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
     <p>Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker, eller velge et annet bibliotek i skjemaet under.</p>
 </div>
 
@@ -18,6 +25,7 @@
 <br />
 <label for="realm">Library:</label>
 <select name="realm" id="realm">
+<option></li>
 [% FOREACH l IN libraries %]
     [% IF l.realm != '' %]
     <option value="[% l.realm %]">[% l.name %]</li>

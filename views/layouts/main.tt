@@ -173,7 +173,7 @@ a:hover {color:#900;} */
 							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
-				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/index.php">Logg inn</a> eller finn ut mer <a href="">om eBib</a>.</li>
+				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/log/in">Logg inn</a> eller finn ut mer <a href="">om eBib</a>.</li>
 				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
 				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
 				    </ul>
