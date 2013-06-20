@@ -28,7 +28,9 @@ hook 'before' => sub {
                  request->path =~ /\/log\/.*/ ||     # Let users log in
                  request->path =~ /\/rest\/.*/       # Don't force choosing a library for the API
                ) {
-            return redirect '/library/choose?return_url=' . request->path();
+            # FIXME Force users to one library, for the time being
+            # return redirect '/library/choose?return_url=' . request->path();
+            return redirect '/library/set/2?return_url=' . request->path();
         }
     }
     
