@@ -76,16 +76,6 @@ a:hover {color:#900;} */
 
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-beb289ee-59c0-ab4c-3b99-ec5cf86755a0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-<!-- Ensure library defaults to lillevik; and enable the two-part login-field by setting 'chosen realm'. IOK 2013-05-31 -->
-
-        [% SET chosen_realm='' %]
-	[% IF session.chosen_library == 2 %]
-	[% SET chosen_realm='lillevik' %]
-	[% ELSIF session.chosen_library == 1 %]
-	[% SET chosen_realm='storevik' %]
-	[% END %]
-
 </head>
 <body id="portal">
 <div class="header-wrapper">

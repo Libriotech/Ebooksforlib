@@ -22,7 +22,6 @@
 	
 	    <div class="span4">
 	    <form method='post' action="/log/in">
-		 <input type=hidden name=realm value='[%chosen_realm%]' />
         	<div class="login-container2">
         		<div class="login-row1">
         			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer">
