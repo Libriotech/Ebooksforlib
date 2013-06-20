@@ -29,8 +29,8 @@ hook 'before' => sub {
                  request->path =~ /\/rest\/.*/       # Don't force choosing a library for the API
                ) {
             # FIXME Force users to one library, for the time being
-            return redirect '/library/choose?return_url=' . request->path();
-            # return redirect '/library/set/2?return_url=' . request->path();
+            # return redirect '/library/choose?return_url=' . request->path();
+            return redirect '/library/set/2?return_url=' . request->path();
         }
     }
     
@@ -382,16 +382,23 @@ post '/log/in' => sub {
     
     my $username  = param 'username';
     my $password  = param 'password';
+    my $userrealm;
     
-    # /library/set/x (where x = library id) is run when a user chooses a library, 
-    # which she has to do to be able to do anything on the site. This route sets 
-    # to session variables:
-    #   session chosen_library => $library->id;
-    #   session chosen_library_name => $library->name;
-    # We need to find the realm, based on chosen_library:
-    my $library = rset('Library')->find( session('chosen_library') );
-    my $userrealm = $library->realm;
-    
+    if ( param 'realm' ) {
+        $userrealm = param 'realm';
+    } elsif( session('chosen_library') ) {
+        # /library/set/x (where x = library id) is run when a user chooses a library, 
+        # which she has to do to be able to do anything on the site. This route sets 
+        # to session variables:
+        #   session chosen_library => $library->id;
+        #   session chosen_library_name => $library->name;
+        # We need to find the realm, based on chosen_library:
+        my $library = rset('Library')->find( session('chosen_library') );
+        $userrealm = $library->realm;
+    } else {
+        return redirect '/';
+    }
+
     my ($success, $realm) = authenticate_user( $username, $password, $userrealm );
     if ($success) {
 
@@ -529,7 +536,7 @@ any ['get','post'] => '/log/out' => sub {
     if (params->{return_url}) {
         redirect params->{return_url};
     } else {
-        redirect '/';
+        return redirect '/';
     }
 };
 

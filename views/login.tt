@@ -5,15 +5,9 @@
 <div class="alert alert-block">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <h4>Logg inn mislyktes</h4>
-    Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker
+    <p>Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker, eller velge et annet bibliotek i skjemaet under.</p>
 </div>
 
-
-
-<!--
-<h1>Login Required</h1>
-
-<p>You need to log in to continue.</p>
 
 <form method="post" action="/log/in">
 <label for="username">Username:</label>
@@ -34,7 +28,6 @@
 <br />
 <input type="submit" value="Login">
 </form>
--->
 
 </div>
 </div>
