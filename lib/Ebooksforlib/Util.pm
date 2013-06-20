@@ -11,6 +11,7 @@ use base 'Exporter';
 our @EXPORT = qw( 
     _coverurl2base64 
     _sparql2data
+    _isbn2bokkliden_cover
 );
 
 sub _coverurl2base64 {
@@ -39,6 +40,23 @@ sub _sparql2data {
     # debug $data;
     return $data;
     
+}
+
+sub _isbn2bokkliden_cover {
+
+    my ( $isbn ) = @_;
+    my $url = "http://partner.bokkilden.no/SamboWeb/partner.do?rom=MP&format=XML&uttrekk=5&pid=0&ept=3&xslId=117&antall=3&sok=$isbn&profil=partner&order=DESC&side=0";
+    my $http = HTTP::Lite->new;
+    my $req = $http->request( $url ) 
+        or return { 'error' => "Unable to get document: $!" };
+    my $xml = $http->body();
+    debug $xml;
+    $xml =~ m/<BildeURL>(.*?)<\/BildeURL>/ig;
+    my $imgurl = $1;
+    $imgurl =~ s/&amp;width.*$//ig;
+    debug $imgurl;
+    return $imgurl;
+
 }
 
 1;

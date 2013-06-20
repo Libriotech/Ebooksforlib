@@ -1513,8 +1513,9 @@ get '/books/covers/:id' => require_role admin => sub {
             ?book <http://xmlns.com/foaf/0.1/depiction> ?cover .
         }';
         my $covers = _sparql2data( $sparql );
+        my $bokkilden = _isbn2bokkliden_cover( $book->isbn );
         debug Dumper $covers;
-        template 'books_covers', { book => $book, covers => $covers };
+        template 'books_covers', { book => $book, covers => $covers, bokkilden => $bokkilden };
         
     } else {
         flash error => 'This book does not have an ISBN!';
