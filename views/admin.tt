@@ -57,6 +57,8 @@
 
 <h2>Front page order</h2>
 
+<p>Click and drag the elements below to reorder the lists/genres shown on the front page.</p>
+
 <ul id="frontpage_sort" class="ui-sortable">
 [% sorted_lists = lists.sort('frontpage_order') %]
 [% FOREACH list IN sorted_lists %]
