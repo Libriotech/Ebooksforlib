@@ -11,11 +11,6 @@
 
     [% IF books.size || creators.size %]
 
-        [% IF books.size %]
-            <h2>Books</h2>
-            [% INCLUDE 'books_table.tt' books=books %]
-        [% END %]
-
         [% IF creators.size %]
             <h2>Authors</h2>
             [% FOREACH creator IN creators %]
@@ -23,7 +18,12 @@
                 [% INCLUDE 'books_table.tt' books=creator.books %]
             [% END %]
         [% END %]
-        
+
+        [% IF books.size %]
+            <h2>Books</h2>
+            [% INCLUDE 'books_table.tt' books=books %]
+        [% END %]
+
     [% ELSE %]
 
         <p>Sorry, no matches found.</p>
