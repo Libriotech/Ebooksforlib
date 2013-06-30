@@ -6,12 +6,13 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 use Crypt::SaltedHash;
-use Digest::MD5 qw( md5_hex );;
+use Digest::MD5 qw( md5_hex );
 use Business::ISBN;
 use HTML::Strip;
 use DateTime;
 use DateTime::Duration;
 use Data::Dumper; # DEBUG 
+use Modern::Perl;
 
 our $VERSION = '0.1';
 

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-use Test::More tests => 2;
 use Modern::Perl;
+use Test::More tests => 2;
 use lib 'lib';
 
 # the order is important

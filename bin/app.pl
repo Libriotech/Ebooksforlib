@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 use Dancer;
 use Ebooksforlib;
+use Modern::Perl;
 
 BEGIN {
     use FindBin;
