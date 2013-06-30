@@ -149,6 +149,22 @@ get '/book/:id' => sub {
     };
 };
 
+### "Static" pages
+
+get '/page/:slug' => sub {
+
+    my $slug = param 'slug';
+    
+    # Allowed pages
+    my @pages = ( 'help', 'newuser', 'about' );
+    if ( /$slug/i ~~ @pages ) {
+        template 'page', { slug => "page_$slug.tt" };
+    } else {
+        return redirect '/';
+    }
+
+};
+
 ### Search
 
 get '/search' => sub {

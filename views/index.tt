@@ -32,7 +32,7 @@
         		</div>
         	</div>
     	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
-    	<a class="glemt-pinkode" href="#">Hjelp til<br />innloggingen?</a>
+    	<a class="glemt-pinkode" href="/page/help">Hjelp til<br />innloggingen?</a>
 
         </form>
         </div>
@@ -45,7 +45,7 @@
 
 
 	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
-		<a href="#"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a>
+		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a>
 	</div>
 
 [% END %]
