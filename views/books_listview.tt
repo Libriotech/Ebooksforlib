@@ -1,0 +1,37 @@
+<!-- RESPONSIV UTLISTING MED THUMBNAILS OG ELLIPSIS
+************************************* -->
+
+<section id="utlisting">
+<div class="row add-bottom">
+<div class="span12">
+
+	<ul class="utlisting-listview">
+	    [% FOREACH book IN books %]
+			<li>
+				<a href="/book/[% book.id %]" class="book-block">
+					<div class="listview-img">
+					[% IF book.coverimg %]
+                        <img src="[% book.coverimg %]">
+                    [% ELSE %]
+                        <img src="http://reader.digitalt.org/img/missing-cover.png">
+                    [% END %]
+                    </div>
+					<div class="li-text-portal">
+						<h4 class="title">[% book.title %]</h4>
+						<p class="author">
+						    [% FOREACH creator IN book.creators %]
+                                [% creator.name %][% UNLESS loop.last() %],[% END %]
+                            [% END %]
+                        </p>
+					</div>
+					<div class="li-i-portal">
+						<i class="icon-angle-right"></i>
+					</div>
+				</a>
+			</li>
+        [% END %]
+    </ul>
+
+</div>
+</div>
+</section>

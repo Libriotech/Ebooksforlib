@@ -98,8 +98,15 @@ a:hover {color:#900;} */
 							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
-				    <li><a href="http://reader.digitalt.org/"><i class='icon-book'></i></a></li>
-				    <li><a href="/log/out" src="" data="Log out"><i class="icon-signout"></i></a></li>
+				    <li>
+				    	<a href="http://reader.digitalt.org/" class="mine-boker">
+				    	<i class='icon-book'></i></a>
+				   <!-- 	<span>Mine b&oslash;ker</span></a> -->
+				    </li>
+				    <li><a href="/log/out" src="" data="Log out" class="logg-ut">
+				    	<i class="icon-signout"></i></a>
+				    <!--	<span>Logg ut</span></a> -->
+				    	</li>
 				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
 				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
 				    </ul>
@@ -112,49 +119,6 @@ a:hover {color:#900;} */
     </div>
     </div> <!-- end container -->
 
-<!-- SJANGER OG LISTER
-*************************************
-   
-    [% IF vars.hide_dropdowns != 1 %]
-
-
-    <div class="container hidden-phone">
-    <div class="row add-top">
-	    <div class="span4">
-	    <div class="dropdown">
-	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Genre</a>
-	    <ul class="dropdown-menu">
-	        [% FOREACH list IN vars.lists %]
-	            [% IF list.is_genre == 1 %]
-        		    <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
-    		    [% END %]
-		    [% END %]
-	    </ul>
-        </div>
-	    </div>
-
-	    <div class="span4">
-	    <div class="dropdown">
-	    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="width:93%;text-align:left;"><span class="caret pull-right"></span>Lists</a>
-	    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	        [% FOREACH list IN vars.lists %]
-	            [% IF list.is_genre == 0 %]
-        		    <li><a href="/list/[% list.id %]">[% list.name %]</a></li>
-    		    [% END %]
-		    [% END %]
-	    </ul>
-	    </div>
-	    </div>
-
-	    <div class="span4">
-	        <form method="GET" action="/search" class="navbar-search pull-left" style="width:100%;">
-	    <input type="text" name="q" id="q" value="[% params.q | html_entity %]" class="search-query" placeholder="Søk" style="width:90%">
-	    </form>
-	    </div>
-    </div>
-    </div> 
-    [% END %]
--->
 
 [% ELSE %]
 

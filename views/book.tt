@@ -26,14 +26,14 @@
 
 <section id="bok">
 <div class="row add-top">
-	<div class="span3">
+	<div class="span4">
 	    [% IF book.coverimg %]
     		<img src="[% book.coverimg %]" />
 		[% ELSE %]
             <img src="http://reader.digitalt.org/img/missing-cover.png">
 		[% END %]
 	</div>
-	<div class="span3 book-details">
+	<div class="span8 book-details">
 		<h3 class="title">[% book.title %]</h3>
 		<div class="author">
 		[% FOREACH creator IN book.creators %]
@@ -121,7 +121,7 @@
 </div>
 
 <div class="row">
-   <div class="span6">
+   <div class="span8">
 		<div class="description">
 		   <h4>Beskrivelse</h4>
 		   [% SET descriptions = book.get_descriptions %]

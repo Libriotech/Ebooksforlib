@@ -1,3 +1,5 @@
+<div class="container">
+
 [% META pagetitle = 'Search' %]
 
 [%#
@@ -6,6 +8,7 @@
 <input type="submit" value="Search">
 </form>
 %]
+
 
 [% IF params.q %]
 
@@ -31,3 +34,5 @@
     [% END %]
     
 [% END %]
+
+</div>

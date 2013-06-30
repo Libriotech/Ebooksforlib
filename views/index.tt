@@ -9,10 +9,9 @@
     <div class="logginn-wrapper">
     <div class="container content-container">
     <div class="row">
-	    <div class="span8">
-	    <img src="http://reader.digitalt.org/img/ebib-logo-64x64.png" class="pull-left" style="height:64px;width:64px;margin-right:10px;" />
-		    <h1>Lån ebøker gratis!<!-- span style="font-size:34px;font-weight:300;opacity: 0.3;"> BETA</span --></h1>
-		    <!-- <img src="img/laan-gratis-txt.png" /> -->
+	    <div class="span8 clearfix">
+		    <h1>Lån ebøker gratis!</h1>
+		    <!-- <img src="http://reader.digitalt.org/img/laan-gratis-txt.png" /> -->
 		    <p class="lead-list hidden-phone">
 		    &ndash; Hundrevis av ebøker til din telefon, nettbrett og pc<br />
 		    &ndash; Ny norsk litteratur fra ditt lokale bibliotek<br />
@@ -24,21 +23,14 @@
 	    <form method='post' action="/log/in">
         	<div class="login-container2">
         		<div class="login-row1">
+        			<label for="text" style="display:none;">Lånenummer</label>
         			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer">
         		</div>
         		<div class="login-row2">
+        			<label for="password" style="display:none;">PIN-kode</label>
         			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
         		</div>
         	</div>
-        	
-<!--    	
-    	<div class="center half-top half-bottom">
-    		<label class="checkbox" style="display:inline-block;">
-    			<input type="checkbox" checked="checked"> Husk meg | <a class="glemt-pinkode" href="#">Glemt PIN?</a>
-    		</label>
-    	</div>
-    	<button type="submit" class="btn btn-success btn-large btn-block half-top btn-login">Logg inn</button>
--->
     	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
     	<a class="glemt-pinkode" href="#">Hjelp til<br />innloggingen?</a>
 
@@ -53,7 +45,7 @@
 
 
 	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
-		<a href="#"><span style=";font-weight:500;">Ny Bruker?</span> Dette trenger du for å låne ></a>
+		<a href="#"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a>
 	</div>
 
 [% END %]
