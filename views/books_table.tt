@@ -13,6 +13,7 @@
 					[% IF book.coverimg %]
                         <img src="[% book.coverimg %]">
                     [% ELSE %]
+                        [%# FIXME This URL shoul dnot be hard coded %]
                         <img src="http://reader.digitalt.org/img/missing-cover.png">
                     [% END %]
                     </div>

@@ -1,38 +1,28 @@
-<div class="container">
-
 [% META pagetitle = 'Search' %]
 
-[%#
-<form method="GET" action="/search">
-<input type="text" name="q" id="q" value="">
-<input type="submit" value="Search">
-</form>
-%]
+<div class="container">
 
+[% IF books.size || creators.size %]
 
-[% IF params.q %]
+    [% SET allbooks = [] %]
 
-    [% IF books.size || creators.size %]
-
-        [% IF creators.size %]
-            <h2>Authors</h2>
-            [% FOREACH creator IN creators %]
-                <h3>[% creator.name %]</h3>
-                [% INCLUDE 'books_table.tt' books=creator.books %]
-            [% END %]
-        [% END %]
-
-        [% IF books.size %]
-            <h2>Books</h2>
-            [% INCLUDE 'books_table.tt' books=books %]
-        [% END %]
-
-    [% ELSE %]
-
-        <p>Sorry, no matches found.</p>
-
+    [% IF books.size %]
+        [% dummy = allbooks.import( books ) %]
     [% END %]
-    
+
+    [% IF creators.size %]
+        [% FOREACH creator IN creators %]
+            [% dummy = allbooks.import( creator.books ) %]
+        [% END %]
+    [% END %]
+
+    [%# Sort the books by title %]
+    [% SET sortedbooks = allbooks.sort('title') %]
+
+    [% INCLUDE 'books_table.tt' books=sortedbooks %]
+
+[% ELSE %]
+    <p>Sorry, no matches found.</p>
 [% END %]
 
 </div>
