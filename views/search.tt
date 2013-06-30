@@ -20,7 +20,7 @@
     [% SET sortedbooks = allbooks.sort('title') %]
 
     <p>You searched for <b>[% params.q | html_entity %]</b> and got [% sortedbooks.size %] results:</p>
-    [% INCLUDE 'books_table.tt' books=sortedbooks %]
+    [% INCLUDE 'books_listview.tt' books=sortedbooks %]
 
 [% ELSE %]
     <p>Sorry, no matches found.</p>
