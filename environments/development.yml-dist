@@ -29,6 +29,12 @@ auto_reload: 0
 # Minimum password length
 min_pass: 4
 
+# This setting determins what to do if a search returns 1 hit (either one title
+# or one person). 
+# 0 = display the one hit as a result list
+# 1 = redirect directly to the one hit (be it a book or an author)
+one_hit_redirect: 0
+
 date_format: "%d-%b-%Y %H:%M:%S"
 locale: "en_US"
 time_zone: 'Europe/Oslo'

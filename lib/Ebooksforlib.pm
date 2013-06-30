@@ -191,10 +191,10 @@ get '/search' => sub {
     my $num_creators = @creators;
     
     # If we just got one hit for either book or person then redirect to that
-    if ( $num_books == 1 && $num_creators == 0 ) {
+    if ( config->{one_hit_redirect} && $num_books == 1 && $num_creators == 0 ) {
         return redirect '/book/' . $books[0]->id;
     }
-    if ( $num_books == 0 && $num_creators == 1 ) {
+    if ( config->{one_hit_redirect} && $num_books == 0 && $num_creators == 1 ) {
         return redirect '/creator/' . $creators[0]->id;
     }
     
