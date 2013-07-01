@@ -397,7 +397,7 @@ get '/log/in' => sub {
 
 post '/log/in' => sub {
     
-    my $username  = param 'username';
+    my $username  = lc( param 'username' );
     my $password  = param 'password';
     my $userrealm;
     
