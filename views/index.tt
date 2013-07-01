@@ -24,7 +24,7 @@
         	<div class="login-container2">
         		<div class="login-row1">
         			<label for="text" style="display:none;">Lånenummer</label>
-        			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer">
+        			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer" autocapitalize="off">
         		</div>
         		<div class="login-row2">
         			<label for="password" style="display:none;">PIN-kode</label>
