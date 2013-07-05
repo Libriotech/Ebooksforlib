@@ -4,7 +4,7 @@ use Dancer ':syntax';
 use HTTP::Lite;
 use URL::Encode 'url_encode';
 use MIME::Base64 qw(encode_base64);
-use GD;
+# use GD;
 use Modern::Perl;
 use base 'Exporter';
 

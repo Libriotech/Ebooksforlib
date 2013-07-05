@@ -97,26 +97,18 @@ a:hover {color:#900;} */
 				        <form class="navbar-search pull-left" style="margin-top:5px;" action="/search" method="GET">
 							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
-    					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</a>
-						<div class="nav-collapse">
-				    		<ul class="nav pull-right">
-				    			<li>
-				    				<a href="http://reader.digitalt.org/" class="mine-boker">
-				    				<i class='icon-book'></i></a>
-				   			 	</li>
-						    	<li><a href="/log/out" src="" data="Log out" class="logg-ut">
-				   			 		<i class="icon-signout"></i></a>
-				 			   	</li>
-						 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
-				 					<i class="icon-question-sign"></i></a>
-						 		</li>
-				  		  </ul>
-				    </div>
+				    <ul class="nav pull-right">
+				    	<li>
+				    		<a href="http://reader.digitalt.org/" class="mine-boker">
+				    		<i class='icon-book'></i></a>
+				    	</li>
+				    	<li><a href="/log/out" src="" data="Log out" class="logg-ut">
+				    		<i class="icon-signout"></i></a>
+				    	</li>
+				 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
+				 			<i class="icon-question-sign"></i></a>
+				 		</li>
+				    </ul>
 			    </div>
 		    </div>
 	    </nav>
