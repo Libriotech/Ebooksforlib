@@ -100,6 +100,8 @@
                                         [% ELSE %]
                                             Sorry, no description available.
                                         [% END %]
+                                    [% ELSE %]
+                                        (Beklager, feil ved henting av omtaler.)
                                     [% END %]
 						        </p>
 					        </div>

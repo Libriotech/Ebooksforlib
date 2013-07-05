@@ -29,16 +29,18 @@ sub _coverurl2base64 {
 sub _sparql2data {
 
     my ( $sparql ) = @_;
-    # debug "*** SPARQL: $sparql";
     my $url = config->{'sparql_endpoint'} . '?default-graph-uri=&query=' . url_encode( $sparql ) . '&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on';
-    # debug "*** URL: $url";
     my $http = HTTP::Lite->new;
     my $req = $http->request( $url ) 
         or return { 'error' => "Unable to get document: $!" };
-    # debug $http->body();
-    my $data = JSON::from_json( $http->body() );
-    # debug $data;
-    return $data;
+    my $http_body = $http->body();
+    
+    # Check for possible errors
+    if ( $http_body =~ m/DOCTYPE HTML/i ) {
+        return;
+    } else {
+        return JSON::from_json( $http_body );
+    }
     
 }
 
