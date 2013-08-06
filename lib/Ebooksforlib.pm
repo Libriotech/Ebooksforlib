@@ -2066,6 +2066,12 @@ get '/rest/:action' => sub {
     }
     
     my $user = rset('User')->find( $user_id );
+    unless ( $user ) {
+        return { 
+            status => 1,
+            error  => 'Unknown user',
+        };
+    }
     
     # Check the user has a hash set
     if ( $user->hash eq '' ) {

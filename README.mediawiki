@@ -16,12 +16,22 @@ Search is based on MySQL FULLTEXT indexing, and this probably works better if yo
 
 On Debian, add the following to /etc/mysql/my.cnf:
 
-# Disable stopwords
-ft_stopword_file=""
-# Make it possible to search for 3 letter words
-ft_min_word_len=3
+ # Disable stopwords
+ ft_stopword_file=""
+ # Make it possible to search for 3 letter words
+ ft_min_word_len=3
 
-Then restart MySQL. 
+Then restart MySQL.
+
+==Running tests==
+
+The code uses Modern::Perl, so in order for Test::Perl::Critic tests to pass, you should include this in your ~/.perlcriticrc file:
+
+ [TestingAndDebugging::RequireUseStrict]
+ equivalent_modules = Modern::Perl
+ 
+ [TestingAndDebugging::RequireUseWarnings]
+ equivalent_modules = Modern::Perl
 
 ==License==
 
