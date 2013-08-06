@@ -119,7 +119,7 @@
 <!-- SISTE
 ************************************* -->
 
-<div class="row add-top">
+<div class="row add-top hidden-phone">
 <div class="span12 add-top">
    <!-- <h5 class="center genre-subhead">Nyeste</h5> -->
 	<ul class="block-list bxslider">
