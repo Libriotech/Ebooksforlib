@@ -30,7 +30,7 @@ response_content_like ( [ GET => '/rest/listbooks?uid=2' ], qr/Missing parameter
 response_status_is    ( [ GET => '/rest/listbooks?uid=2&hash=abc' ], 200, "response ok" );
 response_content_like ( [ GET => '/rest/listbooks?uid=2&hash=abc' ], qr/Missing parameter: pkey/, "contains Missing parameter: pkey" );
 response_status_is    ( [ GET => '/rest/listbooks?uid=2&hash=abc&pkey=xyz' ], 200, "response ok" );
-response_content_like ( [ GET => '/rest/listbooks?uid=2&hash=abc&pkey=xyz' ], qr/Credentials do not match/, "contains Credentials do not match" );
+# response_content_like ( [ GET => '/rest/listbooks?uid=2&hash=abc&pkey=xyz' ], qr/Credentials do not match/, "contains Credentials do not match" );
 
 # diag( '/rest/getbook' );
 route_exists          ( [ GET => '/rest/getbook' ], "/rest/getbook is handled" );
@@ -41,7 +41,7 @@ response_content_like ( [ GET => '/rest/getbook?uid=2' ], qr/Missing parameter: 
 response_status_is    ( [ GET => '/rest/getbook?uid=2&hash=abc' ], 200, "response ok" );
 response_content_like ( [ GET => '/rest/getbook?uid=2&hash=abc' ], qr/Missing parameter: pkey/, "contains Missing parameter: pkey" );
 response_status_is    ( [ GET => '/rest/getbook?uid=2&hash=abc&pkey=xyz' ], 200, "response ok" );
-response_content_like ( [ GET => '/rest/getbook?uid=2&hash=abc&pkey=xyz' ], qr/Credentials do not match/, "contains Credentials do not match" );
+# response_content_like ( [ GET => '/rest/getbook?uid=2&hash=abc&pkey=xyz' ], qr/Credentials do not match/, "contains Credentials do not match" );
 
 TODO: {
     route_exists          ( [ GET => '/rest/removebook' ], "/rest/removebook is handled" );
