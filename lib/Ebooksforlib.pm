@@ -2036,6 +2036,10 @@ get '/rest/whoami' => sub {
     
 };
 
+# This route handles:
+# /rest/listbooks
+# /rest/getbook
+# /rest/ping
 get '/rest/:action' => sub {
 
     my $action  = param 'action';
