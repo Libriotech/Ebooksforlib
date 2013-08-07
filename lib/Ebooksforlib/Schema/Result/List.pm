@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::List;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::List
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::List
+=head1 TABLE: C<lists>
 
 =cut
 
@@ -44,6 +59,18 @@ __PACKAGE__->table("lists");
   default_value: 0
   is_nullable: 1
 
+=head2 frontpage
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 1
+
+=head2 frontpage_order
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -55,10 +82,40 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_genre",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
+  "frontpage",
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
+  "frontpage_order",
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
+
+=head2 library
+
+Type: belongs_to
+
+Related object: L<Ebooksforlib::Schema::Result::Library>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "library",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "library_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
+);
 
 =head2 list_books
 
@@ -75,34 +132,10 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 library
 
-Type: belongs_to
-
-Related object: L<Ebooksforlib::Schema::Result::Library>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "library",
-  "Ebooksforlib::Schema::Result::Library",
-  { id => "library_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:46:34
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wkYYHozteyq5bUndBn/BsA
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:08
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pNwa0ZfGDcyBM0/mCGIdDg
 
 __PACKAGE__->many_to_many( books => 'list_books', 'book' );
-
-# FIXME Add this manually as long as we can't update automatically
-__PACKAGE__->add_columns(
-  "frontpage",
-  { data_type => "integer", default_value => 0, is_nullable => 1 },
-  "frontpage_order",
-  { data_type => "integer", default_value => 0, is_nullable => 1 },
-);
-
 
 1;

@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::Book;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::Book
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::Book
+=head1 TABLE: C<books>
 
 =cut
 
@@ -87,6 +102,17 @@ __PACKAGE__->add_columns(
   "dataurl",
   { data_type => "varchar", is_nullable => 1, size => 255 },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
@@ -121,6 +147,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 downloads
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Download>
+
+=cut
+
+__PACKAGE__->has_many(
+  "downloads",
+  "Ebooksforlib::Schema::Result::Download",
+  { "foreign.book_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 files
 
 Type: has_many
@@ -151,6 +192,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 old_downloads
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::OldDownload>
+
+=cut
+
+__PACKAGE__->has_many(
+  "old_downloads",
+  "Ebooksforlib::Schema::Result::OldDownload",
+  { "foreign.book_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 ratings
 
 Type: has_many
@@ -166,9 +222,19 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 creators
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-16 13:25:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gWseznh1CYJBfA68fXz7fw
+Type: many_to_many
+
+Composing rels: L</book_creators> -> creator
+
+=cut
+
+__PACKAGE__->many_to_many("creators", "book_creators", "creator");
+
+
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FvAQS9+PZfcUti1wo56o9w
 
 use Ebooksforlib::Util;
 

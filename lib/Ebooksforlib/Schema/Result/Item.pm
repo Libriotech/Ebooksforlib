@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::Item;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::Item
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::Item
+=head1 TABLE: C<items>
 
 =cut
 
@@ -64,24 +79,20 @@ __PACKAGE__->add_columns(
   "deleted",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
 );
-__PACKAGE__->set_primary_key("id");
 
-=head1 RELATIONS
+=head1 PRIMARY KEY
 
-=head2 library
+=over 4
 
-Type: belongs_to
+=item * L</id>
 
-Related object: L<Ebooksforlib::Schema::Result::Library>
+=back
 
 =cut
 
-__PACKAGE__->belongs_to(
-  "library",
-  "Ebooksforlib::Schema::Result::Library",
-  { id => "library_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
-);
+__PACKAGE__->set_primary_key("id");
+
+=head1 RELATIONS
 
 =head2 file
 
@@ -95,7 +106,22 @@ __PACKAGE__->belongs_to(
   "file",
   "Ebooksforlib::Schema::Result::File",
   { id => "file_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
+);
+
+=head2 library
+
+Type: belongs_to
+
+Related object: L<Ebooksforlib::Schema::Result::Library>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "library",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "library_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
 =head2 loan
@@ -129,7 +155,7 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-13 14:51:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1e1FK5EWwukH5oqeD8ylQw
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:07
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Z9Vydd/U/KNFRupnwkShnA
 
 1;

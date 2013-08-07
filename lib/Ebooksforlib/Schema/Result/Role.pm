@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::Role;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::Role
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::Role
+=head1 TABLE: C<roles>
 
 =cut
 
@@ -40,6 +55,17 @@ __PACKAGE__->add_columns(
   "role",
   { data_type => "varchar", is_nullable => 0, size => 32 },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
@@ -59,9 +85,19 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 users
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:47:21
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:o2sOWvbP9PcjhHQNLOMJPw
+Type: many_to_many
+
+Composing rels: L</user_roles> -> user
+
+=cut
+
+__PACKAGE__->many_to_many("users", "user_roles", "user");
+
+
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xtct4bCMtsUsA9bkxUMQKA
 
 __PACKAGE__->many_to_many( users => 'user_roles', 'role' );
 

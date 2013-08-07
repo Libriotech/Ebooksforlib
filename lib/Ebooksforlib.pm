@@ -2036,10 +2036,91 @@ get '/rest/whoami' => sub {
     
 };
 
+get '/rest/removebook' => sub {
+
+    my $user_id = param 'uid';
+    my $book_id = param 'bookid';
+    my $pkey    = param 'pkey';
+    
+    # Check parameters
+    unless ( $user_id ) {
+        return { 
+            status => 1,
+            error  => 'Missing parameter: uid',
+        };
+    }
+    unless ( $book_id ) {
+        return { 
+            status => 1,
+            error  => 'Missing parameter: bookid',
+        };
+    }
+    unless ( $pkey ) {
+        return { 
+            status => 1,
+            error  => 'Missing parameter: pkey',
+        };
+    }
+
+    # Check that the user is valid    
+    my $user = rset('User')->find( $user_id );
+    unless ( $user ) {
+        return { 
+            status => 1,
+            error  => 'Unknown user',
+        };
+    }
+    
+    debug "*** /rest/removebook for user = $user_id";
+
+    # TODO Check that the book_id is for a valid book
+    # TODO Check that the book_id is on loan for the user
+    debug "*** /rest/removebook for book_id = $book_id";
+    
+    my $download = rset('Download')->find({ user_id => $user_id, book_id => $book_id, pkeyhash => md5_hex( $pkey ) });
+    if ( $download ) {
+        try {
+            # Remove the book from the table that tracks downloads 
+            $download->delete;
+            debug '*** Download deleted with id = ' . $download->id;
+            # Add the download to the old_downloads table
+            try {
+                my $old_download = rset('OldDownload')->create({
+                    id       => $download->id,
+                    user_id  => $download->user_id,
+                    book_id  => $download->book_id,
+                    pkeyhash => $download->pkeyhash,
+                    time     => $download->time,
+                });
+                debug "*** old_download was created";
+            } catch {
+                debug "*** Oops, we got an error when trying to create an old_download: $_";
+            };
+            return { 
+                'status'   => 0, 
+                'booklist' => "The book was removed"
+            };
+        } catch {
+            debug "*** Oops, we got an error when trying to delete a download: $_";
+            return { 
+                status => 1,
+                error  => 'An error occured while trying to remove the book',
+            };
+        };
+    } else {
+        return { 
+                status => 1,
+                error  => 'Book not found',
+        };
+    }    
+
+};
+
 # This route handles:
 # /rest/listbooks
 # /rest/getbook
 # /rest/ping
+
 get '/rest/:action' => sub {
 
     my $action  = param 'action';
@@ -2127,7 +2208,13 @@ get '/rest/:action' => sub {
         debug "*** /rest/getbook for user = $user_id";
     
         my $book_id = param 'bookid';
-        # FIXME Check that we got a book_id
+        my $book_id = param 'bookid';
+        unless ( $book_id ) {
+            return { 
+                status => 1,
+                error  => 'Missing parameter: bookid',
+            };
+        }
         debug "*** /rest/getbook for book_id = $book_id";
         
         foreach my $loan ( $user->loans ) {
@@ -2137,6 +2224,18 @@ get '/rest/:action' => sub {
                 debug "*** /rest/getbook for file = " . $loan->item->file->id;
                 my $content = $loan->item->file->file;
                 if ( $content ) {
+                    # Keep track of this download in the downloads table
+                    try {
+                        rset('Download')->create({
+                            user_id  => $user_id,
+                            book_id  => $book_id,
+                            pkeyhash => md5_hex( $pkey ),
+                        });
+                        debug "*** The download was recorded"
+                    } catch {
+                        debug "Oops, the download was NOT recorded: $_";
+                    }; 
+                    # Send the actual file
                     return send_file(
                         \$content,
                         content_type => 'application/epub+zip',

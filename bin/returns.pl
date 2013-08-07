@@ -69,6 +69,8 @@ foreach my $odue ( @overdues ) {
             say "Oops, we got an error:\n$_";
         };
         
+        # TODO Move data from the downloads to the old_downloads table
+        
         # Delete the loan
         try {
             $odue->delete;

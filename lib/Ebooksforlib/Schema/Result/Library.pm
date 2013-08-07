@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::Library;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::Library
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::Library
+=head1 TABLE: C<libraries>
 
 =cut
 
@@ -70,9 +85,44 @@ __PACKAGE__->add_columns(
   "soc_links",
   { data_type => "text", is_nullable => 1 },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->add_unique_constraint("realm", ["realm"]);
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<name>
+
+=over 4
+
+=item * L</name>
+
+=back
+
+=cut
+
 __PACKAGE__->add_unique_constraint("name", ["name"]);
+
+=head2 C<realm>
+
+=over 4
+
+=item * L</realm>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("realm", ["realm"]);
 
 =head1 RELATIONS
 
@@ -136,9 +186,19 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 users
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-10 10:37:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8FXmDrca2tq3NRgRKg/N6w
+Type: many_to_many
+
+Composing rels: L</user_libraries> -> user
+
+=cut
+
+__PACKAGE__->many_to_many("users", "user_libraries", "user");
+
+
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LtJbGH8LgpueCTUYKAQZow
 
 __PACKAGE__->many_to_many( users => 'user_libraries', 'user' );
 

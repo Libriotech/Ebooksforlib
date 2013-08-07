@@ -1,12 +1,12 @@
 use utf8;
-package Ebooksforlib::Schema::Result::Rating;
+package Ebooksforlib::Schema::Result::Download;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-Ebooksforlib::Schema::Result::Rating
+Ebooksforlib::Schema::Result::Download
 
 =cut
 
@@ -27,11 +27,11 @@ use base 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 TABLE: C<ratings>
+=head1 TABLE: C<downloads>
 
 =cut
 
-__PACKAGE__->table("ratings");
+__PACKAGE__->table("downloads");
 
 =head1 ACCESSORS
 
@@ -53,23 +53,17 @@ __PACKAGE__->table("ratings");
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 rating
+=head2 pkeyhash
 
-  data_type: 'tinyint'
-  default_value: 0
+  data_type: 'char'
   is_nullable: 0
+  size: 32
 
 =head2 time
 
   data_type: 'timestamp'
   datetime_undef_if_invalid: 1
   default_value: current_timestamp
-  is_nullable: 0
-
-=head2 edited
-
-  data_type: 'datetime'
-  datetime_undef_if_invalid: 1
   is_nullable: 0
 
 =cut
@@ -81,19 +75,13 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "book_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-  "rating",
-  { data_type => "tinyint", default_value => 0, is_nullable => 0 },
+  "pkeyhash",
+  { data_type => "char", is_nullable => 0, size => 32 },
   "time",
   {
     data_type => "timestamp",
     datetime_undef_if_invalid => 1,
     default_value => \"current_timestamp",
-    is_nullable => 0,
-  },
-  "edited",
-  {
-    data_type => "datetime",
-    datetime_undef_if_invalid => 1,
     is_nullable => 0,
   },
 );
@@ -120,11 +108,13 @@ __PACKAGE__->set_primary_key("id");
 
 =item * L</book_id>
 
+=item * L</pkeyhash>
+
 =back
 
 =cut
 
-__PACKAGE__->add_unique_constraint("user_id", ["user_id", "book_id"]);
+__PACKAGE__->add_unique_constraint("user_id", ["user_id", "book_id", "pkeyhash"]);
 
 =head1 RELATIONS
 
@@ -159,8 +149,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:08
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6EFyli53V2qkh64RK4b/1w
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:07
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:q84MeUCZI2SxWgnTs3QrHA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

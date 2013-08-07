@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::User;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::User
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::User
+=head1 TABLE: C<users>
 
 =cut
 
@@ -81,7 +96,31 @@ __PACKAGE__->add_columns(
   "hash",
   { data_type => "char", default_value => "", is_nullable => 1, size => 64 },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<username>
+
+=over 4
+
+=item * L</username>
+
+=back
+
+=cut
+
 __PACKAGE__->add_unique_constraint("username", ["username"]);
 
 =head1 RELATIONS
@@ -101,6 +140,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 downloads
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Download>
+
+=cut
+
+__PACKAGE__->has_many(
+  "downloads",
+  "Ebooksforlib::Schema::Result::Download",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 loans
 
 Type: has_many
@@ -112,6 +166,21 @@ Related object: L<Ebooksforlib::Schema::Result::Loan>
 __PACKAGE__->has_many(
   "loans",
   "Ebooksforlib::Schema::Result::Loan",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 old_downloads
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::OldDownload>
+
+=cut
+
+__PACKAGE__->has_many(
+  "old_downloads",
+  "Ebooksforlib::Schema::Result::OldDownload",
   { "foreign.user_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -176,9 +245,29 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 libraries
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-16 13:25:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Zf/HjirbnwKC/RIrz3HPqw
+Type: many_to_many
+
+Composing rels: L</user_libraries> -> library
+
+=cut
+
+__PACKAGE__->many_to_many("libraries", "user_libraries", "library");
+
+=head2 roles
+
+Type: many_to_many
+
+Composing rels: L</user_roles> -> role
+
+=cut
+
+__PACKAGE__->many_to_many("roles", "user_roles", "role");
+
+
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rw5ywC3+inNqbEKivurhug
 
 __PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
 

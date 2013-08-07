@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::File;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::File
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::File
+=head1 TABLE: C<files>
 
 =cut
 
@@ -77,7 +92,35 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
   },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<book_id>
+
+=over 4
+
+=item * L</book_id>
+
+=item * L</provider_id>
+
+=item * L</library_id>
+
+=back
+
+=cut
+
 __PACKAGE__->add_unique_constraint("book_id", ["book_id", "provider_id", "library_id"]);
 
 =head1 RELATIONS
@@ -94,22 +137,22 @@ __PACKAGE__->belongs_to(
   "book",
   "Ebooksforlib::Schema::Result::Book",
   { id => "book_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
-=head2 provider
+=head2 items
 
-Type: belongs_to
+Type: has_many
 
-Related object: L<Ebooksforlib::Schema::Result::Provider>
+Related object: L<Ebooksforlib::Schema::Result::Item>
 
 =cut
 
-__PACKAGE__->belongs_to(
-  "provider",
-  "Ebooksforlib::Schema::Result::Provider",
-  { id => "provider_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+__PACKAGE__->has_many(
+  "items",
+  "Ebooksforlib::Schema::Result::Item",
+  { "foreign.file_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 library
@@ -128,28 +171,28 @@ __PACKAGE__->belongs_to(
     is_deferrable => 1,
     join_type     => "LEFT",
     on_delete     => "CASCADE",
-    on_update     => "CASCADE",
+    on_update     => "RESTRICT",
   },
 );
 
-=head2 items
+=head2 provider
 
-Type: has_many
+Type: belongs_to
 
-Related object: L<Ebooksforlib::Schema::Result::Item>
+Related object: L<Ebooksforlib::Schema::Result::Provider>
 
 =cut
 
-__PACKAGE__->has_many(
-  "items",
-  "Ebooksforlib::Schema::Result::Item",
-  { "foreign.file_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+__PACKAGE__->belongs_to(
+  "provider",
+  "Ebooksforlib::Schema::Result::Provider",
+  { id => "provider_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-04-24 13:31:47
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rkt9gJ62Pui1w2XKfTW5yw
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:07
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mKA27DjvkgX8D+fms4zITg
 
 use Dancer ':syntax';
 

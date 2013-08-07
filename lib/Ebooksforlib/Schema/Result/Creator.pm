@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::Creator;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::Creator
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::Creator
+=head1 TABLE: C<creators>
 
 =cut
 
@@ -48,6 +63,17 @@ __PACKAGE__->add_columns(
   "dataurl",
   { data_type => "varchar", is_nullable => 1, size => 255 },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
@@ -67,9 +93,19 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 books
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-05-06 16:07:55
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7j5quPfA2VCTxG0UOq0Lyg
+Type: many_to_many
+
+Composing rels: L</book_creators> -> book
+
+=cut
+
+__PACKAGE__->many_to_many("books", "book_creators", "book");
+
+
+# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L+nKDtp2NEo1SSgTq2Opcg
 
 __PACKAGE__->many_to_many( books => 'book_creators', 'book' );
 

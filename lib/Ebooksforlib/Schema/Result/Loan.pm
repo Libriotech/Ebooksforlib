@@ -1,18 +1,33 @@
+use utf8;
 package Ebooksforlib::Schema::Result::Loan;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
+
+=head1 NAME
+
+Ebooksforlib::Schema::Result::Loan
+
+=cut
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 NAME
-
-Ebooksforlib::Schema::Result::Loan
+=head1 TABLE: C<loans>
 
 =cut
 
@@ -66,7 +81,33 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
   },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</item_id>
+
+=item * L</user_id>
+
+=back
+
+=cut
+
 __PACKAGE__->set_primary_key("item_id", "user_id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<item_id>
+
+=over 4
+
+=item * L</item_id>
+
+=back
+
+=cut
+
 __PACKAGE__->add_unique_constraint("item_id", ["item_id"]);
 
 =head1 RELATIONS
@@ -83,7 +124,7 @@ __PACKAGE__->belongs_to(
   "item",
   "Ebooksforlib::Schema::Result::Item",
   { id => "item_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
 =head2 user
@@ -98,12 +139,12 @@ __PACKAGE__->belongs_to(
   "user",
   "Ebooksforlib::Schema::Result::User",
   { id => "user_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-02-26 11:47:21
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JonBs2sIITRW1KZs/qCmYw
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:08
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vy//HteIyFGBRv4/u+tHfg
 
 use Dancer ':syntax';
 
