@@ -34,6 +34,8 @@ my ( $run, $verbose, $debug ) = get_options();
 
 # Find the loans that have a due date in the past
 my @overdues = rset('Loan')->search({ due => \'< NOW()' });
+# Do this if you need to return *all* loans at once. Use with caution! 
+# my @overdues = rset('Loan')->all;
 my $num_overdues = 0;
 my $num_returned = 0;
 my %overdues_per_library;
