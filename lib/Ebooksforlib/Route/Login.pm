@@ -7,6 +7,8 @@ Routes for handling login and logout.
 =cut
 
 use Dancer ':syntax';
+use Dancer::Plugin::Auth::Extensible;
+use Dancer::Plugin::FlashMessage;
 
 get '/login' => sub {
     template 'login';
