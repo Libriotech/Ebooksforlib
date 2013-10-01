@@ -365,7 +365,7 @@ get '/borrow/:item_id' => require_login sub {
             user_id => $user->id,
             due     => $dt,
         });
-        flash info => "You borrowed a book!";
+        # flash info => "You borrowed a book!";
         redirect '/book/' . $item->file->book_id;
     } catch {
         flash error => "Oops, we got an error:<br />$_";
