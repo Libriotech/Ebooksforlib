@@ -394,10 +394,6 @@ get '/list/:id' => sub {
     template 'list', { list => $list };
 };
 
-get '/about' => sub {
-    template 'about';
-};
-
 get '/my' => require_login sub {
     debug '*** Showing My Page for user with id = ' . session('logged_in_user_id');
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
