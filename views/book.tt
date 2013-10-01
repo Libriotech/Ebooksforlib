@@ -6,16 +6,18 @@
 
 <div class="container content-container add-top">
 <div class="row add-top half-bottom">
-	<div class="span12">
-	  <ul class="path">
-	  <li class="back-btn">
+    <div class="span12">
+      <ul class="path">
+      <li class="back-btn">
 	  	[% FOREACH list IN book.lists %]
-            <a href="/list/[% list.id %]">[% list.name %][% UNLESS loop.last() %],[% END %]</a>
+            [% IF list.library.id == session.chosen_library %]
+                <a href="/list/[% list.id %]">[% list.name %][% UNLESS loop.last() %],[% END %]</a>
+            [% END %]
 		[% END %]
       </li>
-	  <li><span>[% book.title %]</span></li>
-	  </ul>
-	</div>
+      <li><span>[% book.title %]</span></li>
+      </ul>
+    </div>
 </div>
 
 <!-- BOK
