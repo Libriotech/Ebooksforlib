@@ -16,26 +16,7 @@
 </div>
 
 
-<form method="post" action="/log/in">
-<label for="username">Username:</label>
-<input type="text" name="username" id="username" autocapitalize="off>
-<br />
-<label for="password">Password:</label>
-<input type="password" name="password" id="password">
-<br />
-<label for="realm">Library:</label>
-<select name="realm" id="realm">
-<option></li>
-[% FOREACH l IN libraries %]
-    [% IF l.realm != '' %]
-    <option value="[% l.realm %]">[% l.name %]</li>
-    [% END %]
-[% END %]
-<option value="local">Local</li>
-</select>
-<br />
-<input type="submit" value="Login">
-</form>
+[% INCLUDE 'login_form.tt' %]
 
 </div>
 </div>

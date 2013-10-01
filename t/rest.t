@@ -60,7 +60,7 @@ TODO: {
 }
 
 note( 'Log in' );
-my $response = dancer_response( POST => '/log/in', { params => { username => 'henrik', password => 'pass', realm => 'local' } } );
+my $response = dancer_response( POST => '/login', { params => { username => 'henrik', password => 'pass', realm => 'local' } } );
 note( $response->{status} );
 note( $response->{content} );
 response_content_like ( [ GET => '/rest/whoami' ], qr/User is not logged in/, "contains User is not logged in" );

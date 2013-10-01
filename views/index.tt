@@ -18,24 +18,7 @@
 		    &ndash; Ingen purregebyr eller tunge turer til biblioteket<br />
 		    </p>
         </div>
-	
-	    <div class="span4">
-	    <form method='post' action="/log/in">
-        	<div class="login-container2">
-        		<div class="login-row1">
-        			<label for="text" style="display:none;">Lånenummer</label>
-        			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer" autocapitalize="off">
-        		</div>
-        		<div class="login-row2">
-        			<label for="password" style="display:none;">PIN-kode</label>
-        			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
-        		</div>
-        	</div>
-    	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
-    	<a class="glemt-pinkode" href="/page/help">Hjelp til<br />innloggingen?</a>
-
-        </form>
-        </div>
+        [% INCLUDE 'login_form.tt' %]
     </div>
     </div> <!-- end container -->
     </div> <!-- end logginn-wrapper -->
