@@ -7,6 +7,8 @@ Routes for handling comments. Currently not in use.
 =cut
 
 use Dancer ':syntax';
+use Dancer::Plugin::Auth::Extensible;
+use Dancer::Plugin::FlashMessage;
 
 post '/comments/add' => require_login sub {
 
