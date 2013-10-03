@@ -1,5 +1,5 @@
 	    <div class="span4">
-	    <form method='post' action="/login">
+	    <form method='post' action="/in">
         	<div class="login-container2">
         		<div class="login-row1">
         			<label for="text" style="display:none;">Lånenummer</label>

@@ -7,14 +7,15 @@ Routes for handling login and logout.
 =cut
 
 use Dancer ':syntax';
+use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 
-get '/login' => sub {
+get '/in' => sub {
     template 'login';
 };
 
-post '/login' => sub {
+post '/in' => sub {
     
     my $username  = lc( param 'username' );
     my $password  = param 'password';
@@ -153,16 +154,16 @@ post '/login' => sub {
     } else {
 
         debug "*** Login failed for $username, $password, $realm";
-        forward '/login', { login_failed => 1 }, { method => 'GET' };
+        forward '/in', { login_failed => 1 }, { method => 'GET' };
 
     }
 };
 
 get '/login/denied' => sub {
-    redirect '/login';
+    redirect '/in';
 };
 
-any ['get','post'] => '/logout' => sub {
+any '/out' => sub {
     session->destroy;
     # Get rid of the ebib cookie
     my $cookie = Dancer::Cookie->new(

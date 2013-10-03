@@ -10,6 +10,13 @@ appname: "Ebooksforlib"
 # about unicode within your app when this setting is set (recommended).
 charset: "UTF-8"
 
+# Make sure the default login/logout routes are not used
+no_default_pages: 1
+no_login_handler: 1
+login_page:  '/in'
+logout_page: '/out'
+exit_page:   '/'
+
 # template engine
 template: "template_toolkit"
 engines:

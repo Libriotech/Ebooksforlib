@@ -28,7 +28,7 @@ hook 'before' => sub {
         # Some pages must be reachable without choosing a library 
         # To exempt the front page, include this below: || request->path eq '/'
         unless ( request->path =~ /\/library\/.*/ || # Let users choose a library
-                 request->path =~ /\/log\/.*/ ||     # Let users log in
+                 request->path =~ /\/in/ ||          # Let users log in
                  request->path =~ /\/rest\/.*/       # Don't force choosing a library for the API
                ) {
             # FIXME Force users to one library, for the time being

@@ -111,7 +111,7 @@ a:hover {color:#900;} */
 				    				<a href="http://reader.digitalt.org/" class="mine-boker">
 				    				<i class='icon-book'></i></a>
 				   			 	</li>
-						    	<li><a href="/logout" src="" data="Log out" class="logg-ut">
+						    	<li><a href="/out" src="" data="Log out" class="logg-ut">
 				   			 		<i class="icon-signout"></i></a>
 				 			   	</li>
 						 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
@@ -146,7 +146,7 @@ a:hover {color:#900;} */
 							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
-				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/login">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a>.</li>
+				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a>.</li>
 				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
 				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
 				    </ul>
