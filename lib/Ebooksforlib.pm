@@ -23,8 +23,9 @@ hook 'before' => sub {
     var appname  => config->{appname};
     var min_pass => config->{min_pass}; # FIXME Is there a better way to do this? 
     
-    # Did the user try to access /admin without being logged in? 
-    if ( request->path() eq '/admin' && !session('logged_in_user_id') ) {
+    # Did the user try to access /admin or /superadmin without being logged in? 
+    my $request_path = request->path();
+    if ( ( $request_path eq '/admin' || $request_path eq '/superadmin' ) && !session('logged_in_user_id') ) {
         return redirect '/in?admin=1';
     }
     
