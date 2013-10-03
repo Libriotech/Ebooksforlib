@@ -153,8 +153,12 @@ post '/in' => sub {
 
     } else {
 
-        debug "*** Login failed for $username, $password, $realm";
-        forward '/in', { login_failed => 1 }, { method => 'GET' };
+        debug "*** Login failed for $username, $password, $userrealm";
+        if ( $userrealm eq 'local' ) {
+            redirect '/in?admin=1';
+        } else {
+            forward '/in', { login_failed => 1 }, { method => 'GET' };
+        }
 
     }
 };

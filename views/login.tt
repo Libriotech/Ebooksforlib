@@ -12,7 +12,11 @@
 
 <div class="alert alert-block">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <p>Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker.</p>
+    [% IF params.admin == 1 %]
+        <p>Du må logge inn med en gyldig admin-bruker.</p>
+	[% ELSE %]
+        <p>Du må logge inn med en gyldig [% session.chosen_library_name %]-bruker.</p>
+    [% END %]
 </div>
 
 
