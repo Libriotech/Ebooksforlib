@@ -148,6 +148,7 @@ __PACKAGE__->belongs_to(
 
 use Dancer ':syntax';
 
+# Repeat these here to add the timezone
 __PACKAGE__->add_columns(
   "loaned",
   {

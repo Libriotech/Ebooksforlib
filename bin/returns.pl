@@ -26,6 +26,8 @@ use Data::Dumper;
 use Pod::Usage;
 use Modern::Perl;
 
+use Ebooksforlib::Util;
+
 # Get options
 my ( $run, $verbose, $debug ) = get_options();
 
@@ -52,35 +54,12 @@ foreach my $odue ( @overdues ) {
     # Do the actual return
     if ( $run ) {
         
-        # Add an old loan
-        try {
-            my $user_id = 1; # This is the hard coded anonymous user
-            if ( $odue->user->anonymize == 0 ) {
-                # Use the actual user id of the user that has had the book on loan
-                $user_id = $odue->user->id;
-            }
-            my $old_loan = rset('OldLoan')->create({
-                item_id  => $odue->item_id,
-                user_id  => $user_id,
-                loaned   => $odue->loaned,
-                due      => $odue->due,
-                returned => DateTime->now( time_zone => setting('time_zone') )
-            });
-            say "\tAdded to old loans" if $debug;
-        } catch {
-            say "Oops, we got an error:\n$_";
-        };
-        
-        # TODO Move data from the downloads to the old_downloads table
-        
-        # Delete the loan
-        try {
-            $odue->delete;
+        my $return = _return_loan( $odue );
+        if ( $return->error == 1 ) {
+            say $return->errormsg;
+        } else {
             $num_returned++;
-            say "\tRemoved from loans" if $debug;
-        } catch {
-            say "Oops, we got an error:\n$_";
-        };
+        }
         
     }
     

@@ -6,7 +6,7 @@
 
 [% IF user.loans.size %]
     <table>
-    <tr><th>Library</th><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Time left</th></tr>
+    <tr><th>Library</th><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Time left</th><th></th></tr>
     [% FOREACH loan IN user.loans %]
         <tr>
             <td>[% loan.item.library.name %]</td>
@@ -29,6 +29,7 @@
                     [% loan.time_left.minutes %] minutes
                 [% END %]
             </td>
+            <td><a href="/return/[% loan.item_id %]">Return now</a></td>
         </tr>
     [% END %]
     </table>

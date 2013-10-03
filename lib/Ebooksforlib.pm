@@ -4,7 +4,6 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
-use Ebooksforlib::Util;
 use Crypt::SaltedHash;
 use Digest::MD5 qw( md5_hex );
 use Business::ISBN;
@@ -14,7 +13,9 @@ use DateTime::Duration;
 use Data::Dumper; # DEBUG 
 use Modern::Perl;
 
+use Ebooksforlib::Util;
 use Ebooksforlib::Route::Login;
+use Ebooksforlib::Route::Circ;
 
 our $VERSION = '0.1';
 
@@ -211,62 +212,6 @@ get '/search' => sub {
     
     template 'search', { books => \@books, creators => \@creators };
 
-};
-
-### Borrowing books
-
-get '/borrow/:item_id' => require_login sub {
-
-    my $item_id = param 'item_id';
-    my $item = rset('Item')->find( $item_id );
-    my $user = rset('User')->find( session('logged_in_user_id') );
-
-    # Check that the user belongs to the same library as the item
-    # This should not happen, unless the user is trying to cheat the system
-    unless ( $user->belongs_to_library( $item->library_id ) ) {
-        flash error => "You are trying to borrow a book from a library you do not belong to!";
-        debug '!!! User ' . $user->id . ' tried to borrow item ' . $item->id . ' which does not belong to the users library';
-        return redirect '/book/' . $item->file->book_id;
-    }
-    
-    # Check that any item of the book this item belongs to is not already on loan to the user
-    if ( _user_has_borrowed( $user, $item->file->book ) ) {
-        flash error => "You have already borrowed this book!";
-        return redirect '/book/' . $item->file->book_id;
-    }
-
-    # Check the number of concurrent loans
-    # Users should not see this, unless they try to cheat the system, because the 
-    # "Borrow" links should be hidden when they have reached the threshold
-    my $library = rset('Library')->find( session('chosen_library') );
-    if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
-        flash error => "You have already reached the number of concurrent loans for your library!";
-        debug '!!! User ' . $user->id . ' tried to borrow too many books';
-        return redirect '/book/' . $item->file->book_id;
-    }
-    
-    # Calculate the due date/time
-    my $dt = DateTime->now( time_zone => setting('time_zone') );
-    debug '*** Now: ' . $dt->datetime;
-    my $loan_period = DateTime::Duration->new(
-        days    => $item->loan_period,
-    );
-    $dt->add_duration( $loan_period );
-    debug '*** Due: ' . $dt->datetime;
-
-    try {
-        my $new_loan = rset('Loan')->create({
-            item_id => $item_id,
-            user_id => $user->id,
-            due     => $dt,
-        });
-        # flash info => "You borrowed a book!";
-        redirect '/book/' . $item->file->book_id;
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
-        redirect '/book/' . $item->file->book_id;
-    };
 };
 
 get '/creator/:id' => sub {
@@ -2001,52 +1946,6 @@ sub check_hash {
 sub hash_pkey{
     my ( $user_hash, $pkey ) = @_;
     return md5_hex( $user_hash . $pkey );
-}
-
-sub _user_has_borrowed {
-    my ( $user, $book ) = @_;
-    foreach my $loan ( $user->loans ) {
-        if ( $loan->item->file->book->id == $book->id ) {
-            return 1;
-        } 
-    }
-}
-
-# Assumes that admin users are only connected to one library
-sub _get_library_for_admin_user {
-    my $user_id = session 'logged_in_user_id';
-    my $user = rset('User')->find( $user_id );
-    my @libraries = $user->libraries;
-    return $libraries[0]->id;
-}
-
-sub _check_password_length {
-    my ( $password1 ) = @_;
-    if ( length $password1 < config->{min_pass} ) {
-        error "*** Password is too short: " . length $password1;
-        flash error => 'Passwords is too short! (The minimum is ' . config->{min_pass} . '.)';
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
-sub _check_password_match {
-    my ( $password1, $password2 ) = @_;
-    if ( $password1 ne $password2 ) {
-        error "*** Passwords do not match";
-        flash error => "Passwords do not match!";
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
-sub _encrypt_password {
-    my $password = shift;
-    my $csh = Crypt::SaltedHash->new();
-    $csh->add( $password );
-    return $csh->generate;
 }
 
 true;
