@@ -269,10 +269,6 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 # Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rw5ywC3+inNqbEKivurhug
 
-__PACKAGE__->many_to_many( libraries => 'user_libraries', 'library' );
-
-__PACKAGE__->many_to_many( roles => 'user_roles', 'role' );
-
 sub number_of_loans_from_library {
     my ( $self, $library_id ) = @_;
     my $number_of_loans = 0;

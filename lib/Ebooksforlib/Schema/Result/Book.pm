@@ -238,8 +238,6 @@ __PACKAGE__->many_to_many("creators", "book_creators", "creator");
 
 use Ebooksforlib::Util;
 
-__PACKAGE__->many_to_many( creators => 'book_creators', 'creator' );
-
 __PACKAGE__->many_to_many( lists => 'list_books', 'list' );
 
 __PACKAGE__->many_to_many( libraries => 'items', 'library' );
