@@ -23,6 +23,11 @@ hook 'before' => sub {
     var appname  => config->{appname};
     var min_pass => config->{min_pass}; # FIXME Is there a better way to do this? 
     
+    # Did the user try to access /admin without being logged in? 
+    if ( request->path() eq '/admin' && !session('logged_in_user_id') ) {
+        return redirect '/in?admin=1';
+    }
+    
     # Force users to choose a library
     unless ( session('chosen_library') && session('chosen_library_name') ) {
         # Some pages must be reachable without choosing a library 

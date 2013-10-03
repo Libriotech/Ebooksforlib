@@ -8,6 +8,9 @@
         		<div class="login-row2">
         			<label for="password" style="display:none;">PIN-kode</label>
         			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
+        			[% IF params.admin == 1 %]
+        			<input type="hidden" name="realm" value="local">
+        			[% END %]
         		</div>
         	</div>
     	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
