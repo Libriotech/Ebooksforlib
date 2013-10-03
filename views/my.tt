@@ -12,7 +12,7 @@
             <td>[% loan.item.library.name %]</td>
             <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %]</a></td>
             <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-            <td>[% loan.item.loan_period %]</td>
+            <td>[% loan.item.loan_period %] days</td>
             <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
             <td>
                 [% IF loan.overdue == 1 %]
