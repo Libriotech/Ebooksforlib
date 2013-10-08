@@ -1,6 +1,5 @@
 [% META pagetitle = 'My page' %]
 [% USE date %]
-[% USE Dumper %]
 
 <h2>Current loans</h2>
 
@@ -90,14 +89,3 @@
 [% ELSE %]
     <p>Sorry, you are not connected to any libraries.</p>
 [% END %]
-
-<hr />
-
-<h2>Debug</h2>
-
-<p>Session data, purely for debug purposes:</p>
-<pre>
-[% Dumper.dump_html(session) %]
-</pre>
-
-<hr />
