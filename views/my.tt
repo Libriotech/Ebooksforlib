@@ -50,7 +50,7 @@
     <tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Returned</th><td></td></tr>
     [% FOREACH loan IN user.old_loans %]
         <tr>
-            <td><a href="/book/[% loan.item.book.id %]">[% loan.item.book.title %]</a></td>
+            <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %]</a></td>
             <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
             <td>[% loan.item.loan_period %]</td>
             <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
