@@ -73,7 +73,7 @@ get '/return/:item_id' => require_login sub {
     my $item_id = param 'item_id';
     my $user_id = session('logged_in_user_id');
     
-    my $loan = rset('Loan')->search({ item_id => $item_id, user_id => $user_id });
+    my $loan = rset('Loan')->find({ item_id => $item_id, user_id => $user_id });
     
     # DEBUG
     debug $loan->item->loan_period;
