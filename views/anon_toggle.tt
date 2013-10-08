@@ -1,5 +1,7 @@
 [% META pagetitle = 'Change anonymization setting' %]
 
+<div class="container">
+
 [% IF user.anonymize == 1 %]
 
     <p>Your returned loans <em>are</em> being anonymized.</p>
@@ -18,3 +20,5 @@
 <a href="/anon_toggle_ok"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
 <a href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>
+
+</div>

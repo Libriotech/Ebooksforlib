@@ -1,6 +1,8 @@
 [% META pagetitle = 'My page' %]
 [% USE date %]
 
+<div class="container">
+
 <h2>Current loans</h2>
 
 [% IF user.loans.size %]
@@ -75,8 +77,6 @@
 
 <p>If any of this is incorrect, you need to update it in your local library system.</p>
 
-<hr />
-
 <h2>Libraries</h2>
 
 [% IF user.libraries.size %]
@@ -89,3 +89,5 @@
 [% ELSE %]
     <p>Sorry, you are not connected to any libraries.</p>
 [% END %]
+
+</div>
