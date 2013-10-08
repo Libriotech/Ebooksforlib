@@ -17,6 +17,15 @@ login_page:  '/in'
 logout_page: '/out'
 exit_page:   '/'
 
+plugins:
+    Lexicon:
+        namespace: Ebooksforlib::Lexicon
+        func:      [l, _]
+        default:   no
+        langs:
+            en: English
+            no: Norsk bokmål
+
 # template engine
 template: "template_toolkit"
 engines:

@@ -104,7 +104,7 @@ a:hover {color:#900;} */
 				    		<ul class="nav pull-right">
 				    			<li>
 				    				<form class="navbar-search" action="/search" method="GET">
-										<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
+										<input type="text" class="search-query" name="q" placeholder="[% l('Title / Author / ISBN') %]">
     								</form>
     							</li>
 				    			<li>
@@ -147,12 +147,12 @@ a:hover {color:#900;} */
 			    <div class="navbar-inner">
 				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span></a>
 				        <form class="navbar-search pull-left" style="margin-top:5px;" action="/search" method="GET">
-							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
+							<input type="text" class="search-query" name="q" placeholder="[% l('Title / Author / ISBN') %]">
     					</form>
 				    <ul class="nav pull-right">
 				        [%# Users need to have a chosen library before they can be offered to log in. %]
 				        [% IF session.chosen_library %]
-				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a>.</li>
+				    	<li class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a>.</li>
 				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
 				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
 				        [% END %]
@@ -181,6 +181,19 @@ a:hover {color:#900;} */
 [% END %]
 
 [% content %]
+
+<!-- LANGUAGE CHOOSER
+************************************* -->
+
+<p>
+[% FOREACH key IN installed_langs.keys %]
+    [% IF key == language_tag %]
+        [% installed_langs.$key %]
+    [% ELSE %]
+        <a href="/lang?lang=[% key %]">[% installed_langs.$key %]</a>
+    [% END %]
+[% END %]
+</p>
 
 <!-- FOOTER
 ************************************* -->

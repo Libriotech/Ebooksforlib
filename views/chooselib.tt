@@ -5,9 +5,9 @@
 <h1>eBib</h1>
 
 [% UNLESS session.chosen_library %]
-    <p>You need to choose a library before you proceed.</p>
+    <p>[% l('You need to choose a library before you proceed.') %]</p>
 [% ELSE %]
-    <p>You can change your chosen library at any time.</p>
+    <p>[% l('You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with.') %]</p>
 [% END %]
 
 <ul>
@@ -23,9 +23,9 @@
 
 [% IF session.chosen_library %]
     [% IF belongs_to_library == 1 %]
-        <p>You are logged in with the library you have chosen, and can borrow books from it.</p>    
+        <p>[% l('You are logged in with the library you have chosen, and can borrow books from it.') %]</p>
     [% ELSE %]
-        <p>You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it.</p>
+        <p>[% l('You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it.') %]</p>
     [% END %]
 [% END %]
 

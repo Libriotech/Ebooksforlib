@@ -3,6 +3,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
+use Dancer::Plugin::Lexicon;
 use Dancer::Exception qw(:all);
 use Crypt::SaltedHash;
 use Digest::MD5 qw( md5_hex );
@@ -23,6 +24,8 @@ hook 'before' => sub {
 
     var appname  => config->{appname};
     var min_pass => config->{min_pass}; # FIXME Is there a better way to do this? 
+    var language_tag => language_tag;
+    var installed_langs => installed_langs;
     
     # Did the user try to access /admin or /superadmin without being logged in? 
     my $request_path = request->path();
@@ -88,9 +91,13 @@ get '/set/:library_id' => sub {
            return redirect params->{return_url};
         }
     } else {
-        flash error => "Not a valid library.";
+        flash error => localize("Not a valid library.");
     }
     redirect '/choose';
+};
+
+get '/lang' => sub {
+    redirect request->referer;
 };
 
 get '/' => sub {
