@@ -1873,7 +1873,6 @@ get '/rest/:action' => sub {
         debug "*** /rest/getbook for user = $user_id";
     
         my $book_id = param 'bookid';
-        my $book_id = param 'bookid';
         unless ( $book_id ) {
             return { 
                 status => 1,
