@@ -150,9 +150,12 @@ a:hover {color:#900;} */
 							<input type="text" class="search-query" name="q" placeholder="Tittel / Forfatter / ISBN">
     					</form>
 				    <ul class="nav pull-right">
+				        [%# Users need to have a chosen library before they can be offered to log in. %]
+				        [% IF session.chosen_library %]
 				    	<li class="logged-out-info hidden-phone">Du er ikke logget inn. <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a>.</li>
 				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
 				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
+				        [% END %]
 				    </ul>
 			    </div>
 		    </div>

@@ -1,5 +1,9 @@
 [% META pagetitle = 'Choose library' %]
 
+<div class="container">
+
+<h1>eBib</h1>
+
 [% UNLESS session.chosen_library %]
     <p>You need to choose a library before you proceed.</p>
 [% ELSE %]
@@ -9,7 +13,7 @@
 <ul>
 [% FOREACH library IN libraries %]
 <li>
-    <a href="/library/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]">[% library.name %]</a>
+    <a href="/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]">[% library.name %]</a>
     [% IF session.chosen_library == library.id %]
         <img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes">
     [% END %]
@@ -19,8 +23,10 @@
 
 [% IF session.chosen_library %]
     [% IF belongs_to_library == 1 %]
-        <p>You belong to the library you have chosen, and can borrow books from it.</p>    
+        <p>You are logged in with the library you have chosen, and can borrow books from it.</p>    
     [% ELSE %]
-        <p>You do not belong to the library you have chosen, and can not borrow books from it.</p>
+        <p>You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it.</p>
     [% END %]
 [% END %]
+
+</div>

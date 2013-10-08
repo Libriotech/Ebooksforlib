@@ -34,13 +34,14 @@ hook 'before' => sub {
     unless ( session('chosen_library') && session('chosen_library_name') ) {
         # Some pages must be reachable without choosing a library 
         # To exempt the front page, include this below: || request->path eq '/'
-        unless ( request->path =~ /\/library\/.*/ || # Let users choose a library
-                 request->path =~ /\/in/ ||          # Let users log in
-                 request->path =~ /\/rest\/.*/       # Don't force choosing a library for the API
+        unless ( request->path =~ /\/choose/  || # Let users choose a library
+                 request->path =~ /\/set\/.*/ || # Let users set a library
+                 request->path =~ /\/in/      || # Let users log in
+                 request->path =~ /\/rest\/.*/   # Don't force choosing a library for the API
                ) {
-            # FIXME Force users to one library, for the time being
-            # return redirect '/library/choose?return_url=' . request->path();
-            return redirect '/library/set/2?return_url=' . request->path();
+            return redirect '/choose?return_url=' . request->path();
+            # To force users to one library, uncomment this:
+            # return redirect '/set/2?return_url=' . request->path();
         }
     }
     
@@ -53,6 +54,43 @@ hook 'before' => sub {
     });
     var lists => \@lists;
 
+};
+
+get '/choose' => sub {
+
+    my $return_url = param 'return_url';
+
+    my @libraries = rset( 'Library' )->all;
+
+    my $belongs_to_library = 0;
+    if ( session('logged_in_user_id') ) {
+        my $user = rset( 'User' )->find( session('logged_in_user_id') );
+        $belongs_to_library = $user->belongs_to_library( session('chosen_library') )
+    }
+
+    template 'chooselib', { 
+        libraries          => \@libraries, 
+        return_url         => $return_url, 
+        belongs_to_library => $belongs_to_library,
+    };
+
+};
+
+get '/set/:library_id' => sub {
+    my $library_id = param 'library_id';
+    # cookie chosen_library => $library_id; # FIXME Expiry
+    my $library = rset('Library')->find( $library_id );
+    if ( $library ) {
+        session chosen_library => $library->id;
+        session chosen_library_name => $library->name;
+        # flash info => "A library was chosen.";
+        if (params->{return_url}) {
+           return redirect params->{return_url};
+        }
+    } else {
+        flash error => "Not a valid library.";
+    }
+    redirect '/choose';
 };
 
 get '/' => sub {
@@ -236,37 +274,6 @@ get '/my' => require_login sub {
     debug '*** Showing My Page for user with id = ' . session('logged_in_user_id');
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     template 'my', { userdata => logged_in_user, user => $user };
-};
-
-get '/library/choose' => sub {
-    my @libraries = rset( 'Library' )->all;
-    my $belongs_to_library = 0;
-    if ( session('logged_in_user_id') ) {
-        my $user = rset( 'User' )->find( session('logged_in_user_id') );
-        $belongs_to_library = $user->belongs_to_library( session('chosen_library') )
-    }
-    template 'chooselib', { 
-        libraries          => \@libraries, 
-        return_url         => params->{return_url}, 
-        belongs_to_library => $belongs_to_library,
-    };
-};
-
-get '/library/set/:library_id' => sub {
-    my $library_id = param 'library_id';
-    # cookie chosen_library => $library_id; # FIXME Expiry
-    my $library = rset('Library')->find( $library_id );
-    if ( $library ) {
-        session chosen_library => $library->id;
-        session chosen_library_name => $library->name;
-        # flash info => "A library was chosen.";
-        if (params->{return_url}) {
-           return redirect params->{return_url};
-        }
-    } else {
-        flash error => "Not a valid library.";
-    }
-    redirect '/library/choose';
 };
 
 get '/anon_toggle' => require_login sub {
