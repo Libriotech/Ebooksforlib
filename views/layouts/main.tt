@@ -111,6 +111,10 @@ a:hover {color:#900;} */
 				    				<a href="http://reader.digitalt.org/" class="mine-boker">
 				    				<i class='icon-book'></i></a>
 				   			 	</li>
+				    			<li>
+				    				<a href="/my" data="/my" class="mine-boker">
+				    				<i class='icon-bookmark'></i></a>
+				   			 	</li>
 						    	<li><a href="/out" src="" data="Log out" class="logg-ut">
 				   			 		<i class="icon-signout"></i></a>
 				 			   	</li>
