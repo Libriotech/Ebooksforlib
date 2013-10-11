@@ -52,7 +52,6 @@ sparql_endpoint: http://data.example.org/sparql
 
 plugins:
     Auth::Extensible:
-        no_default_pages: 1
         realms:
             storevik:
                 provider: 'SIP2'
