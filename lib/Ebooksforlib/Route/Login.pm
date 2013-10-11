@@ -36,7 +36,15 @@ post '/in' => sub {
         return redirect '/';
     }
 
-    my ($success, $realm) = authenticate_user( $username, $password, $userrealm );
+    my ( $success, $realm );
+    # Try Nasjonalt lånekort first
+    ( $success, $realm ) = authenticate_user( $username, $password, $userrealm . '_nl' );
+    $realm = $userrealm;
+    # Try the local ILS over SIP2 if that did not succeed
+    unless ( $success ) {
+        ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
+    }
+    # Check if any of the above worked
     if ($success) {
 
         debug "*** Successfull login for $username, $password, $realm";
@@ -72,15 +80,23 @@ post '/in' => sub {
             my $library = rset('Library')->find({ realm => $realm });
             if ( $library ) {
                 debug '*** Going to connect to library with id = ' . $library->id;
-                try {
+                # FIXME try/catch here results in an error: 
+                # Can't call method "catch" without a package or object reference
+                # And both the code in the try and the catch are executed?!? 
+                # try {
                     rset('UserLibrary')->create({
                         user_id    => $new_user->id, 
                         library_id => $library->id, 
                     });
-                } catch {
+                    debug '*** Connected: user = ' . $new_user->id . " + library = " . $library->id;
+                # } catch {
                     # This is a serious error! 
-                    error '*** Error when trying to connect user ' . $new_user->id . ' to library ' . $library->id . '. Error message: ' . $_;
-                };
+                    # debug '*** NOT connected: user = ' . $new_user->id . " + library = " . $library->id;
+                    # my $error = $_;
+                    # $error =~ s/\r//g;
+                    # debug "ERROR: $error";
+                    # error '*** Error when trying to connect user ' . $new_user->id . ' to library ' . $library->id;
+                # };
             } else {
                 error '*** Could not find library with realm = ' . $realm;
             }
