@@ -4,8 +4,8 @@
 <!-- STINAVIGERING
 ************************************* -->
 
-<div class="container content-container add-top">
-<div class="row add-top half-bottom">
+<div class="container content-container">
+<div class="row half-top half-bottom">
     <div class="span12">
       <ul class="path">
       <li class="back-btn">
@@ -23,26 +23,26 @@
 <!-- BOK
 ************************************* -->
 
-
-<!-- Feilmeldinger Bootstrapifisert og oversatt 30/5/2013 /Helge -->
-
 <section id="bok">
 <div class="row add-top">
-	<div class="span4">
-	    [% IF book.coverimg %]
-    		<img src="[% book.coverimg %]" />
-		[% ELSE %]
-            <img src="http://reader.digitalt.org/img/missing-cover.png">
-		[% END %]
-	</div>
-	<div class="span8 book-details">
-		<h3 class="title">[% book.title %]</h3>
-		<div class="author">
-		[% FOREACH creator IN book.creators %]
-            <a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% END %]
-        [% END %]
+	<div class="span12">
+		<div class="book-page-imgwrapper">
+			<a class="book-page-img" href="[% book.coverimg %]" target="_blank">
+	    		[% IF book.coverimg %]
+    			<img src="[% book.coverimg %]" />
+				[% ELSE %]
+            	<img src="http://reader.digitalt.org/img/missing-cover.png">
+				[% END %]
+			</a>
 		</div>
-		<p class="details">
+		<div class="book-details">
+			<h3 class="title">[% book.title %]</h3>
+			<div class="author">
+				[% FOREACH creator IN book.creators %]
+            		<a href="/creator/[% creator.id %]">[% creator.name %]</a>[% UNLESS loop.last() %],[% END %]
+        		[% END %]
+			</div>
+			<p class="details">
 		    [% IF book.date %]
 		        Utgivelsesår: [% book.date %]<br />
     		[% END %]
@@ -79,8 +79,8 @@
                     <br />
                 [% END %]
             [% END %]
-		</p>
-		<div class="add-top add-bottom">
+			</p>
+			<div class="add-top add-bottom hidden-phone">
 		    [% IF !session.logged_in_user %]
 		        <div class="alert alert-info" style="display:inline-block;">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -116,7 +116,7 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken</a>
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]" style="max-width:220px;">Lån boken</a>
                 <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
@@ -126,15 +126,59 @@
     			</div>
             [% END %]
 		</div>
-
-		<div class="share-this">
-		    [% library.soc_links %]
-		</div>
    </div>
+</div>
 </div>
 
 <div class="row">
    <div class="span8">
+   		<div class="half-top visible-phone">
+		    [% IF !session.logged_in_user %]
+		        <div class="alert alert-info"">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-info-sign"></i> Du må være logget inn for å låne bøker.
+    			</div>
+            [% ELSIF user_belongs_to_library == 0 %]
+                <div class="alert"">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-exclamation-sign"></i> Du har ikke muligheter til å låne bøker fra dette biblioteket.
+    			</div>
+            [% ELSIF user_has_borrowed == 1 %]
+                <div class="alert alert-success">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-ok"></i> Du låner denne boken.
+    			</div>
+            [% ELSIF limit_reached == 1 %]
+                <div class="alert">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-exclamation-sign"></i> Du låner allerede maksimalt antall bøker.
+    			</div>
+            [% ELSIF book.files.size %]
+                [% SET longest_loan_period = 0 %]
+                [% SET selected_item       = 0 %]
+                [% FOREACH file IN book.files %]
+                    [% FOREACH item IN file.items %]
+                        [% IF item.library_id == session.chosen_library && item.deleted != 1 && !item.loan.due %]
+                            [%# Look for the item with the longest loan period %]
+                            [% IF item.loan_period > longest_loan_period %]
+                                [% longest_loan_period = item.loan_period %]
+                                [% selected_item       = item.id %]
+                            [% END %]
+                        [% END %]
+                    [% END %]
+                [% END %]
+                [% IF longest_loan_period > 0 %]
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]">Lån boken</a>
+                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
+                [% END %]
+            [% ELSE %]
+                <div class="alert">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
+    				<i class="icon-exclamation-sign"></i> Alle våre eksemplarer er desverre utlånt.
+    			</div>
+            [% END %]
+		</div>
+   
 		<div class="description">
 		   <h4>Omtale</h4>
 		   [% SET descriptions = book.get_descriptions %]
@@ -146,6 +190,9 @@
                    <p>[% descriptions.results.bindings.0.krydder.value %]</p>
                [% END %]
            [% END %]
+           	<div class="share-this">
+		    	[% library.soc_links %]
+			</div>
 		</div>
 	</div>
 </div>
@@ -264,7 +311,7 @@
 
 -->
 
-</div> <!-- end container, lagt til av Helge 30/05/2013 -->
+</div> <!-- end container -->
 
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]

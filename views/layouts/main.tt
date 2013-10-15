@@ -34,6 +34,8 @@
        slideWidth: 146,
        slideMargin: 0
      });
+     jQuery('.bxspinner').addClass('bxhidden');
+     jQuery('.bxslider').removeClass('bxhidden');
      jQuery('.ellipsis').dotdotdot();
      
      $('#frontpage_sort').sortable({
@@ -85,7 +87,7 @@ a:hover {color:#900;} */
 
     <!-- BRANDING, SØK OG TOPPNAVIGERING
     ************************************* -->
-
+    
     <div class="container-fluid header-container">
     <div class="row-fluid">
     <div class="span12">
@@ -182,19 +184,6 @@ a:hover {color:#900;} */
 
 [% content %]
 
-<!-- LANGUAGE CHOOSER
-************************************* -->
-
-<p>
-[% FOREACH key IN installed_langs.keys %]
-    [% IF key == language_tag %]
-        [% installed_langs.$key %]
-    [% ELSE %]
-        <a href="/lang?lang=[% key %]">[% installed_langs.$key %]</a>
-    [% END %]
-[% END %]
-</p>
-
 <!-- FOOTER
 ************************************* -->
 
@@ -206,7 +195,16 @@ a:hover {color:#900;} */
 			<p class="genre-title" style="padding:80px 0 60px;color:#fff;text-shadow:none;">
 				<img src="http://reader.digitalt.org/img/ebib-logo-neg.png" style="padding-bottom:4px;" /><br />
 				<span style="font-family:'brandon-grotesque';font-size:17px;font-weight:300;">eBib
-			</p>		
+			</p>
+			<p> <!-- LANGUAGE CHOOSER -->
+[% FOREACH key IN installed_langs.keys %]
+    [% IF key == language_tag %]
+        [% installed_langs.$key %]
+    [% ELSE %]
+        <a href="/lang?lang=[% key %]">[% installed_langs.$key %]</a>
+    [% END %]
+[% END %]
+</p>		
 		</div>
 	</div>
 </div>

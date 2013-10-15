@@ -38,19 +38,21 @@
 
 [% FOREACH booklist IN booklists %]
 
+<section id="[% booklist.list.name %]">
 <div class="article">
 <div class="layer">
 <div class="container content-container">
-
-<section id="romaner">
-
     <div class="row">
-    <div class="span12 center">
-    <h1 class="genre-head-alt"><a href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right" style="margin-left:10px;"></i></a></h1>
-    <!--
+    <div class="span12">
+    	
+    	<div class="genre-head">
+    		<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
+    		<a class="genre-title clearfix" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right visible-phone" style="margin-left:10px;"></i></a>
+    	</div>
+    	<!--
 	    <a class="btn pull-right half-top" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
-	    <h4 class="genre-title">[% booklist.list.name %]</h4> -->
-	    
+	    <h4 class="genre-title">[% booklist.list.name %]</h4>
+	    -->
     </div>
     </div>
 
@@ -103,9 +105,12 @@
 ************************************* -->
 
 <div class="row add-top hidden-phone">
-<div class="span12 add-top">
-   <!-- <h5 class="center genre-subhead">Nyeste</h5> -->
-	<ul class="block-list bxslider">
+	<div class="span12 add-top">
+    	<div class="bxloadwrapper">
+			<div class="bxspinner">
+       			<i class="icon-spin icon-spinner"></i>
+			</div>
+	<ul class="block-list bxslider bxhidden">
         [% FOREACH booklistitem IN booklist.booklist %]
             [% IF booklistitem.promoted != 1 %]
 			    <li>
@@ -126,13 +131,16 @@
 		    [% END %]
 		[% END %]
 	</ul>
+      </div>
 </div>
 </div>
 
-</section>
+
 </div> <!-- end container -->
 </div> <!-- end layer -->
 </div> <!-- end article -->
+ </section>
+
     
 [% END %]
 [%# END of FOREACH booklist IN booklists %]

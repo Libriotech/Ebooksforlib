@@ -1,6 +1,6 @@
 	    <div class="span4">
 	    <form method='post' action="/in">
-        	<div class="login-container2">
+        	<div class="login-container">
         		<div class="login-row1">
         			<label for="text" style="display:none;">Lånenummer</label>
         			<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer" autocapitalize="off">
@@ -13,7 +13,7 @@
         			[% END %]
         		</div>
         	</div>
-    	<button type="submit" class="btn-login2 pull-right half-top">Logg inn</button>
+    	<button type="submit" class="btn-login pull-right half-top">Logg inn</button>
     	<a class="glemt-pinkode" href="/page/help">Hjelp til<br />innloggingen?</a>
 
         </form>
