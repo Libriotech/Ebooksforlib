@@ -50,6 +50,10 @@ sparql_endpoint: http://data.example.org/sparql
 # usernames and passwords, look for the given string in the AF field:
 # auth_denied: 'ikke akseptert'
 
+# Config options for talking to "Nasjonalt lånekort"
+laanekort_username: "x"
+laanekort_password: "y"
+
 plugins:
     Auth::Extensible:
         realms:
