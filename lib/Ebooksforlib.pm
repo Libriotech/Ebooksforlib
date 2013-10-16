@@ -299,7 +299,7 @@ get '/anon_toggle_ok' => require_login sub {
         $user->update;
         flash info => 'Your anonymization setting was updated!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => localize("Oops, we got an error:<br />$_");
         error "$_";
     };
     redirect '/my';

@@ -15,8 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Ebooksforlib.pm:92
+#: lib/Ebooksforlib.pm:94
 msgid "Not a valid library."
+msgstr ""
+
+#: lib/Ebooksforlib.pm:302
+msgid "Oops, we got an error:<br />$_"
+msgstr ""
+
+#: views/layouts/main.tt:107 views/layouts/main.tt:150
+msgid "Title / Author / ISBN"
 msgstr ""
 
 #: views/chooselib.tt:28
@@ -25,6 +33,10 @@ msgstr ""
 
 #: views/chooselib.tt:26
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
+msgstr ""
+
+#: views/layouts/main.tt:155
+msgid "You are not logged in."
 msgstr ""
 
 #: views/chooselib.tt:10

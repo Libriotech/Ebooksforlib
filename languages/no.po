@@ -19,6 +19,10 @@ msgstr ""
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
+#: lib/Ebooksforlib.pm:302
+msgid "Oops, we got an error:<br />$_"
+msgstr ""
+
 #: views/layouts/main.tt:107 views/layouts/main.tt:150
 msgid "Title / Author / ISBN"
 msgstr "Tittel / Forfatter / ISBN"

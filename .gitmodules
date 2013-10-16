@@ -4,3 +4,6 @@
 [submodule "vendor/Biblio-SIP2"]
 	path = vendor/Biblio-SIP2
 	url = https://github.com/MagnusEnger/Biblio-SIP2.git
+[submodule "vendor/Dancer-Plugin-Auth-Extensible-Provider-Laanekort"]
+	path = vendor/Dancer-Plugin-Auth-Extensible-Provider-Laanekort
+	url = https://github.com/MagnusEnger/Dancer-Plugin-Auth-Extensible-Provider-Laanekort.git
