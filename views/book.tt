@@ -94,7 +94,7 @@
             [% ELSIF user_has_borrowed == 1 %]
                 <div class="alert alert-success" style="display:inline-block;">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-ok"></i> Du låner denne boken.
+    				<i class="icon-ok"></i> Du låner denne boken. Gå til <a href='http://reader.digitalt.org'>bokleseren for å laste ned og lese boken</a>.
     			</div>
             [% ELSIF limit_reached == 1 %]
                 <div class="alert" style="display:inline-block;">
@@ -116,7 +116,7 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]" style="max-width:220px;">Lån boken</a>
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]" style="width:220px;"><span style="font-size:20px;font-weight:100;">+</span><i class="icon-book"></i> <div class="btn-txt">Lån boken</div></a>
                 <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
@@ -168,7 +168,7 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]">Lån boken</a>
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]"><span style="font-size:20px;font-weight:100;">+</span><i class="icon-book"></i> <div class="btn-txt">Lån boken</div></a>
                 <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
