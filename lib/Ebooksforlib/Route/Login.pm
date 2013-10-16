@@ -38,8 +38,10 @@ post '/in' => sub {
     }
 
     my ( $success, $realm );
-    # Try Nasjonalt lånekort first
-    ( $success, $realm ) = authenticate_user( $username, $password, $userrealm . '_nl' );
+    # Try Nasjonalt lånekort first, but not for admins with realm = local
+    if ( $userrealm ne 'local' ) {
+        ( $success, $realm ) = authenticate_user( $username, $password, $userrealm . '_nl' );
+    }
     # Try the local ILS over SIP2 if that did not succeed
     unless ( $success ) {
         ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
