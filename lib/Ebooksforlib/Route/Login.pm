@@ -10,6 +10,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Data::Dumper; # FIXME Debug
 
 get '/in' => sub {
     template 'login';
@@ -39,7 +40,6 @@ post '/in' => sub {
     my ( $success, $realm );
     # Try Nasjonalt lånekort first
     ( $success, $realm ) = authenticate_user( $username, $password, $userrealm . '_nl' );
-    $realm = $userrealm;
     # Try the local ILS over SIP2 if that did not succeed
     unless ( $success ) {
         ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
@@ -56,6 +56,7 @@ post '/in' => sub {
         
         # Get the data about the logged_in_user and store some of it in the session
         my $user = logged_in_user;
+        debug "??? User: " . Dumper $user;
         session logged_in_user_name => $user->{name};
 
         # Store roles in the session (will be used in the templates)
