@@ -2,92 +2,126 @@
 [% USE date %]
 
 <div class="container">
+	<div class="row">
+		<div class="span12 add-top">
+			<h1><i class="icon-user"></i> Min Side</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span6">
+			<h3>Bruker</h3>
+				<ul>
+					<li>Brukernavn:  [% userdata.username %]</li>
+					<li>Navn: [% userdata.name %]</li>
+					<li>E-post:     [% userdata.email %]</li>
+				</ul>				
+		</div>
+		<div class="span6">
+				<h3>Bibliotek</h3>
+[% IF user.libraries.size %]
+    			<ul>
+	[% FOREACH l IN user.libraries %]
+    				<li>[% l.name %].</li>
+    				<li>Maks samtidige lån: [% l.concurrent_loans %] bøker</li>
+    			<!--	<li>You have: [% user.number_of_loans_from_library( l.id ) %]</li> -->
+	[% END %]
 
-<h2>Current loans</h2>
-
+				</ul>
+[% ELSE %]
+    			<p>Du er ikke tilknyttet noen biblioteker.</p>
+[% END %]
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="span12">
+			<h3>Aktive lån</h3>
 [% IF user.loans.size %]
-    <table>
-    <tr><th>Library</th><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Time left</th><th></th></tr>
+    <table class="table table-striped table-bordered table-hover">
+	<thead>	
+    <tr>
+    	<th>Tittel</th>
+    	<th>Lånt</th>
+    	<th><a class="pop-over pull-right" href="#"><i class="icon-question-sign"></i></a>Utløper</th>
+    	<!-- <th>Tid igjen</th> -->
+    	<th>Lever</th>
+    </tr>
+    </thead>
+    <tbody>
     [% FOREACH loan IN user.loans %]
         <tr>
-            <td>[% loan.item.library.name %]</td>
-            <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %]</a></td>
+       <!--     <td>[% loan.item.library.name %]</td> -->
+            <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %], [% loan.item.file.book.creators_as_string %]</a></td>
             <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-            <td>[% loan.item.loan_period %] days</td>
+       <!--     <td>[% loan.item.loan_period %] days</td> -->
             <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-            <td>
+       <!--     <td>
                 [% IF loan.overdue == 1 %]
                     overdue
                 [% ELSE %]
                     [% IF loan.time_left.months %]
-                        [% loan.time_left.months %] months, 
+                        [% loan.time_left.months %] mnd, 
                     [% END %]
                     [% IF loan.time_left.weeks %]
-                        [% loan.time_left.weeks %] weeks, 
+                        [% loan.time_left.weeks %] uker, 
                     [% END %]
-                        [% loan.time_left.days %] days, 
-                    [% loan.time_left.hours %] hours, 
-                    [% loan.time_left.minutes %] minutes
+                        [% loan.time_left.days %] dager, 
+                    [% loan.time_left.hours %] timer, 
+                    [% loan.time_left.minutes %] minutter
                 [% END %]
-            </td>
-            <td><a href="/return/[% loan.item_id %]">Return now</a></td>
+            </td> -->
+            <td><a href="/return/[% loan.item_id %]" class="btn">Lever</a></td>
         </tr>
     [% END %]
+    </tbody>
     </table>
 [% ELSE %]
-    <p>You have no current loans.</p>
+    <p>Du låner ingen bøker.</p>
 [% END %]
 
-<h2>History</h2>
 
-[% IF user.anonymize == 1 %]
-    <p>Your returned loans <em>are</em> being anonymized. <a href="/anon_toggle">Change</a></p>
-[% ELSE %]
-    <p>Your returned loans are <em>not</em> being anonymized. <a href="/anon_toggle">Change</a></p>
-[% END %]
+
+
+<h3>Tidligere lån
+<div style="display:inline-block;margin-left:20px;font-size:13px;">
+    [% IF user.anonymize == 1 %]
+    	Privat | <a href="/anon_toggle">Offentlig</a>
+	[% ELSE %]
+		Offentlig | <a href="/anon_toggle">Privat</a>
+	[% END %]
+</div>
+</h3>
+
+
 
 [% IF user.old_loans.size %]
-    <table>
-    <tr><th>Title</th><th>Borrowed</th><th>Loan period</th><th>Due</th><th>Returned</th><td></td></tr>
+    <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+    	<th>Tittel</th>
+    	<th>Lånt</th>
+    	<th>Levert</th>
+    </tr>
+    </thead>
+    <tbody>
     [% FOREACH loan IN user.old_loans %]
         <tr>
-            <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %]</a></td>
+            <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %], [% loan.item.file.book.creators_as_string %]</a></td>
             <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-            <td>[% loan.item.loan_period %]</td>
-            <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
+         <!--   <td>[% loan.item.loan_period %]</td> -->
+         <!--   <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td> -->
             <td>[% date.format( time => loan.returned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-            <td><a href="/anon/[% loan.id %]">Anonymize</a></td>
+         <!--  <td><a href="/anon/[% loan.id %]">Anonymize</a></td> -->
         </tr>
     [% END %]
+    </tbody>
     </table>
-    <p><a href="/anon_all">Anonymize all returned loans listed above</a></p>
 [% ELSE %]
-    <p>You have no old loans (that have not been anonymized).</p>
+    <p>Du har foreløpig ikke levert noen bøker.</p>
 [% END %]
 
-<h2>Basic information</h2>
-
-<p>Here is the information we have about you:</p>
-
-<ul>
-<li>Username:  [% userdata.username %]</li>
-<li>Real name: [% userdata.name %]</li>
-<li>Email:     [% userdata.email %]</li>
-</ul>
-
-<p>If any of this is incorrect, you need to update it in your local library system.</p>
-
-<h2>Libraries</h2>
-
-[% IF user.libraries.size %]
-    <p>Here are the libraries you are connected to:</p>
-    <ul>
-    [% FOREACH l IN user.libraries %]
-    <li>[% l.name %]. Concurrent loans: [% l.concurrent_loans %]. You have: [% user.number_of_loans_from_library( l.id ) %].</li>
-    [% END %]
-    </ul>
-[% ELSE %]
-    <p>Sorry, you are not connected to any libraries.</p>
-[% END %]
-
+	<div class="alert alert-info">
+		<i class="icon-info-sign"></i> Informasjonen på denne siden kommer fra ditt lokale bibliotek. Hvis informasjonen ikke stemmer vennligst kontakt biblioteket. Takk for at du bruker eBib!</div>
+	</div>
+	</div>	
 </div>

@@ -113,12 +113,11 @@ a:hover {color:#900;} */
 				    				<a href="http://reader.digitalt.org/" class="mine-boker">
 				    				<i class='icon-book'></i></a>
 				   			 	</li>
-				    			<li>
-				    				<a href="/my" data="/my" class="mine-boker">
-				    				<i class='icon-bookmark'></i></a>
-				   			 	</li>
-						    	<li><a href="/out" src="" data="Log out" class="logg-ut">
-				   			 		<i class="icon-signout"></i></a>
+						    	<li><a class="dropdown-toggle min-side" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i></a>
+						    		<ul class="dropdown-menu" role="menu">
+						    			<li><a href="/my" src="" data="Log out">Min side</a></li>
+						    			<li><a href="/out" src="" data="Log out">Logg ut</a></li>
+						    		</ul>
 				 			   	</li>
 						 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
 				 					<i class="icon-question-sign"></i></a>
@@ -191,20 +190,60 @@ a:hover {color:#900;} */
 <div class="footer-wrapper">
 <div class="container">
 	<div class="row">
-		<div class="span12 center">
-			<p class="genre-title" style="padding:80px 0 60px;color:#fff;text-shadow:none;">
+		<div class="span3">
+			<p class="center" style="display:inline-block;color:#fff;padding:30px 0 60px;text-shadow:none;">
 				<img src="http://reader.digitalt.org/img/ebib-logo-neg.png" style="padding-bottom:4px;" /><br />
-				<span style="font-family:'brandon-grotesque';font-size:17px;font-weight:300;">eBib
+				<span style="font-family:'brandon-grotesque';font-size:17px;font-weight:300;margin:0 auto;">eBib</span>
 			</p>
-			<p> <!-- LANGUAGE CHOOSER -->
+		</div>
+[% IF session.logged_in_user %]
+		<div class="span3">
+			<h5>(Footer meny)</h5>
+				<ul class="footer-menu-list">
+				<li><a href="#">Om eBib</a></li>
+				<li><a href="#">Dette trenger du for å låne</a></li>
+				<li><a href="/page/help" src="" data="Hjelp">Hjelp</a></li>
+				<li><a href="#">Kontakt</a></li>
+			</ul>
+		</div>
+		<div class="span3">
+			<h5>(Innlogget meny)</h5>
+			<ul class="footer-menu-list">
+				<li><a href="http://reader.digitalt.org/">Mine bøker</a></li>
+				<li><a href="/my">Min side</a></li>
+				<li><a href="/out" src="" data="Log out">Logg ut</a></li>
+			</ul>
+		</div>
+[% ELSE %]	
+		<div class="span3 offset3">
+			<h5>(Footer meny)</h5>
+			<ul class="footer-menu-list">
+				<li><a href="#">Om eBib</a></li>
+				<li><a href="#">Dette trenger du for å låne</a></li>
+				<li><a href="/page/help" src="" data="Hjelp">Hjelp</a></li>
+				<li><a href="#">Kontakt</a></li>
+			</ul>
+		</div>
+[% END %]
+		<div class="span3">
+		<h5>(Sosialt og språk)</h5>
+		<ul class="footer-menu-list">
+				<li><a href="#">fb</a></li>
+				<li><a href="#"><!-- LANGUAGE CHOOSER -->
 [% FOREACH key IN installed_langs.keys %]
     [% IF key == language_tag %]
         [% installed_langs.$key %]
     [% ELSE %]
         <a href="/lang?lang=[% key %]">[% installed_langs.$key %]</a>
     [% END %]
-[% END %]
-</p>		
+[% END %]</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="span12 center">
+					
 		</div>
 	</div>
 </div>

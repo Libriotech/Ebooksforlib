@@ -1,0 +1,147 @@
+[% USE HTML.Strip %]
+
+[% IF !session.logged_in_user %]
+
+
+    <!-- LOGG INN BANNER
+    ************************************* -->
+
+    <div class="logginn-wrapper">
+    <div class="container content-container">
+    <div class="row">
+	    <div class="span8 clearfix">
+		    <h1>Lån ebøker gratis!</h1>
+		    <!-- <img src="http://reader.digitalt.org/img/laan-gratis-txt.png" /> -->
+		    <p class="lead-list hidden-phone">
+		    &ndash; Hundrevis av ebøker til din telefon, nettbrett og pc<br />
+		    &ndash; Ny norsk litteratur fra ditt lokale bibliotek<br />
+		    &ndash; Ingen purregebyr eller tunge turer til biblioteket<br />
+		    </p>
+        </div>
+        [% INCLUDE 'login_form.tt' %]
+    </div>
+    </div> <!-- end container -->
+    </div> <!-- end logginn-wrapper -->
+
+<!-- NY BRUKER? BANNER
+************************************* -->
+
+
+	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
+		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a>
+	</div>
+
+[% END %]
+
+<!-- UTVALGTE ROMANER
+************************************* -->
+
+[% FOREACH booklist IN booklists %]
+
+<div class="article">
+<div class="layer">
+<div class="container content-container">
+
+<section id="romaner">
+
+    <div class="row">
+    <div class="span12">
+    	
+    	<div class="genre-head">
+    		<a class="genre-btn pull-right" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
+    		<a class="genre-title clearfix" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right" style="margin-left:10px;"></i></a>
+    	</div>
+    	<!--
+	    <a class="btn pull-right half-top" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
+	    <h4 class="genre-title">[% booklist.list.name %]</h4>
+	    -->
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="span12">
+      	<ul class="utvalgte">
+            [% FOREACH booklistitem IN booklist.booklist %]
+                [% IF booklistitem.promoted == 1 %]
+			        <li>
+				        <div class="book-block">
+					        <a href="/book/[% booklistitem.book.id %]" class="utvalgte-img">
+						        [% IF booklistitem.book.coverimg %]
+                                    <img src="[% booklistitem.book.coverimg %]">
+                                [% ELSE %]
+                                    <img src="http://reader.digitalt.org/img/missing-cover.png">
+                                [% END %]
+					        </a>
+					        <div class="li-text-portal">
+					        	<a href="/book/[% booklistitem.book.id %]">
+						        	<h4 class="title-alt max-1l ellipsis">[% booklistitem.book.title %]</h4>
+						        	<p class="author-alt">[% booklistitem.book.creators_as_string %]</p>
+						        	[% SET descriptions = booklistitem.book.get_descriptions %]
+						        </a>
+						        <p class="intro max-5l ellipsis">
+				                    [% IF descriptions.results.bindings.size %]
+                                        [% IF descriptions.results.bindings.0.krydder.value %]
+                                            [% descriptions.results.bindings.0.krydder.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
+                                        [% ELSIF descriptions.results.bindings.0.abstract.value %]
+                                            [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
+                                        [% ELSE %]
+                                            Sorry, no description available.
+                                        [% END %]
+                                    [% ELSE %]
+                                        (Beklager, feil ved henting av omtaler.)
+                                    [% END %]
+						        </p>
+					        </div>
+					        <div class="li-i-portal">
+						        <!-- <i class="icon-angle-right"></i> -->
+					        </div>
+				        </div>
+			        </li>
+			    [% END %]
+            [% END %]
+	    </ul>
+    </div>
+    </div>
+
+<!-- SISTE
+************************************* -->
+
+<div class="row add-top hidden-phone">
+<div class="span12 add-top">
+   <!-- <h5 class="center genre-subhead">Nyeste</h5> -->
+      <div class='bxloadwrapper'>
+       <div class='bxspinner'><li class='icon-spin icon-refresh'>&nbsp;</li></div>
+	<ul class="block-list bxslider bxhidden">
+        [% FOREACH booklistitem IN booklist.booklist %]
+            [% IF booklistitem.promoted != 1 %]
+			    <li>
+				    <a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
+					    <div class="block-list-img">
+					        [% IF booklistitem.book.coverimg %]
+                                <img src="[% booklistitem.book.coverimg %]">
+                            [% ELSE %]
+                                <img src="http://reader.digitalt.org/img/missing-cover.png">
+                            [% END %]
+						    <div class="li-text">
+							    <h4 class="title max-1l ellipsis">[% booklistitem.book.title %]</h4>
+							    <p class="author max-1l ellipsis">[% booklistitem.book.creators_as_string %]</p>
+						    </div>
+					    </div>
+				    </a>
+			    </li>
+		    [% END %]
+		[% END %]
+	</ul>
+      </div>
+</div>
+</div>
+
+</section>
+</div> <!-- end container -->
+</div> <!-- end layer -->
+</div> <!-- end article -->
+    
+[% END %]
+[%# END of FOREACH booklist IN booklists %]
+
+[%# INCLUDE 'books_table.tt' books=books %]
