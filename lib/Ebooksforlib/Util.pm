@@ -8,7 +8,8 @@ use Dancer::Exception qw(:all);
 use HTTP::Lite;
 use URL::Encode 'url_encode';
 use MIME::Base64 qw(encode_base64);
-# use GD;
+use Crypt::SaltedHash;
+use Digest::MD5 qw( md5_hex );
 use Modern::Perl;
 use base 'Exporter';
 

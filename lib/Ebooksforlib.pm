@@ -5,8 +5,6 @@ use Dancer::Plugin::DBIC;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Plugin::Lexicon;
 use Dancer::Exception qw(:all);
-use Crypt::SaltedHash;
-use Digest::MD5 qw( md5_hex );
 use Business::ISBN;
 use HTML::Strip;
 use DateTime;
