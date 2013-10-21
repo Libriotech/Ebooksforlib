@@ -10,6 +10,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Ebooksforlib::Util;
 
 # Default serialization should be JSON
 set serializer => 'JSON';
