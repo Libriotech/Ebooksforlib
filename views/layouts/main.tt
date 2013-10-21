@@ -146,18 +146,16 @@ a:hover {color:#900;} */
 	    <nav>
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
-				    <a class="brand" href="/"><i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span></a>
-				        <form class="navbar-search pull-left" style="margin-top:5px;" action="/search" method="GET">
-							<input type="text" class="search-query" name="q" placeholder="[% l('Title / Author / ISBN') %]">
-    					</form>
-				    <ul class="nav pull-right">
-				        [%# Users need to have a chosen library before they can be offered to log in. %]
-				        [% IF session.chosen_library %]
-				    	<li class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a>.</li>
-				 <!--   <li><a href="" src="" data="Kontakt"><i class="icon-envelope-alt"></i></a></li> -->
-				 <!--   <li><a href="" src="" data="Hjelp"><i class="icon-question-sign"></i></a></li> -->
-				        [% END %]
-				    </ul>
+				    <a class="brand" href="/">
+				    	<i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
+				    </a>
+				    <form class="navbar-search pull-left" style="margin-top:5px;" action="/search" method="GET">
+						<input type="text" class="search-query" name="q" placeholder="[% l('Title / Author / ISBN') %]">
+    				</form>
+				    [%# Users need to have a chosen library before they can be offered to log in. %]
+				    [% IF session.chosen_library %]
+				    <div class="logged-out-info pull-right hidden-phone">[% l('Du er ikke logget inn.') %] <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a></div>
+				    [% END %]
 			    </div>
 		    </div>
 	    </nav>
