@@ -369,6 +369,7 @@ get '/rest/:action' => sub {
                         'error'  => 'Book not found',
                     };
                 }
+                undef $content;
             }
         }
         # If we got this far we did not find a file representing the given 
