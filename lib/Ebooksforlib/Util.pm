@@ -22,6 +22,8 @@ our @EXPORT = qw(
     _check_password_length
     _check_password_match
     _encrypt_password
+    check_hash
+    hash_pkey
 );
 
 sub _coverurl2base64 {
@@ -154,6 +156,20 @@ sub _encrypt_password {
     my $csh = Crypt::SaltedHash->new();
     $csh->add( $password );
     return $csh->generate;
+}
+
+sub check_hash {
+    my ( $user_hash, $hash, $pkey ) = @_;
+    if ( md5_hex( $user_hash . $pkey ) eq $hash ) {
+        return 1;
+    } else {
+        return;
+    }
+}
+
+sub hash_pkey {
+    my ( $user_hash, $pkey ) = @_;
+    return md5_hex( $user_hash . $pkey );
 }
 
 1;

@@ -1563,22 +1563,4 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
     
 };
 
-### Utility functions
-# TODO Move these to a separate .pm
-# TODO Add documentation
-
-sub check_hash {
-    my ( $user_hash, $hash, $pkey ) = @_;
-    if ( md5_hex( $user_hash . $pkey ) eq $hash ) {
-        return 1;
-    } else {
-        return;
-    }
-}
-
-sub hash_pkey{
-    my ( $user_hash, $pkey ) = @_;
-    return md5_hex( $user_hash . $pkey );
-}
-
 true;
