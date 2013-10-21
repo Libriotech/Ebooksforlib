@@ -37,26 +37,33 @@ post '/in' => sub {
     } else {
         return redirect '/';
     }
+    debug "=== Userrealm: $userrealm";
 
     # Try Nasjonalt lånekort first, but not for admins with realm = local
     # Also check that realms are defined before we try to authenticate against 
     # them. An undefined realm could happen for a library that has not configured
     # either Nasjonalt lånekort or SIP2
     my ( $success, $realm );
-    my %realms = config->{'plugins'}->{'Auth::Extensible'}->{'realms'};
+    my $realms = config->{'plugins'}->{'Auth::Extensible'}->{'realms'};
     # Try Nasjonalt lånekort
     my $nl_realm = $userrealm . '_nl';
-    if ( $userrealm ne 'local' && defined $realms{ $nl_realm } ) {
+    if ( $userrealm ne 'local' && defined $realms->{ $nl_realm } ) {
+        debug "=== Trying Nasjonalt lånekort: $username, x, $nl_realm";
         ( $success, $realm ) = authenticate_user( $username, $password, $nl_realm );
+    } else {
+        debug "=== Skipping Nasjonalt lånekort: $username, x, $nl_realm";
     }
-    # Try the local ILS over SIP2 if that did not succeed
-    if ( !$success && defined $realms{ $userrealm } ) {
+    # Try the fallback (probably local ILS over SIP2) if that did not succeed
+    if ( !$success && defined $realms->{ $userrealm } ) {
+        debug "=== Trying fallback: $username, x, $userrealm";
         ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
+    } else {
+        debug "=== Skipping fallback: $username, x, $userrealm";
     }
     # Check if any of the above worked
     if ($success) {
 
-        debug "*** Successfull login for $username, $password, $realm";
+        debug "=== Successfull login for $username, x, $realm";
         session logged_in_user => $username;
         # Set the realm to be the real realm temporarily, we will change this later
         session logged_in_user_realm => $realm;
@@ -179,7 +186,7 @@ post '/in' => sub {
 
     } else {
 
-        debug "*** Login failed for $username, $password, $userrealm";
+        debug "=== Login failed for $username, $password, $userrealm";
         if ( $userrealm eq 'local' ) {
             redirect '/in?admin=1';
         } else {
