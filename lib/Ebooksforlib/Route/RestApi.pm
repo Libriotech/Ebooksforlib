@@ -11,6 +11,7 @@ use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Ebooksforlib::Util;
+use Digest::MD5 qw( md5_hex );
 
 # Default serialization should be JSON
 set serializer => 'JSON';
