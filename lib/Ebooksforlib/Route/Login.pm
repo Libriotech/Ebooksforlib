@@ -22,6 +22,7 @@ post '/in' => sub {
     my $password  = param 'password';
     my $userrealm;
     
+    # Find the realm we should try to athenticate against
     if ( param 'realm' ) {
         $userrealm = param 'realm';
     } elsif( session('chosen_library') ) {
@@ -37,13 +38,19 @@ post '/in' => sub {
         return redirect '/';
     }
 
-    my ( $success, $realm );
     # Try Nasjonalt lånekort first, but not for admins with realm = local
-    if ( $userrealm ne 'local' ) {
-        ( $success, $realm ) = authenticate_user( $username, $password, $userrealm . '_nl' );
+    # Also check that realms are defined before we try to authenticate against 
+    # them. An undefined realm could happen for a library that has not configured
+    # either Nasjonalt lånekort or SIP2
+    my ( $success, $realm );
+    my %realms = config->{'plugins'}->{'Auth::Extensible'}->{'realms'};
+    # Try Nasjonalt lånekort
+    my $nl_realm = $userrealm . '_nl';
+    if ( $userrealm ne 'local' && defined $realms{ $nl_realm } ) {
+        ( $success, $realm ) = authenticate_user( $username, $password, $nl_realm );
     }
     # Try the local ILS over SIP2 if that did not succeed
-    unless ( $success ) {
+    if ( !$success && defined $realms{ $userrealm } ) {
         ( $success, $realm ) = authenticate_user( $username, $password, $userrealm );
     }
     # Check if any of the above worked
