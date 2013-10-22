@@ -182,7 +182,14 @@ post '/in' => sub {
             
         }
         
-        redirect params->{return_url} || '/';
+        # Redirect based on roles
+        if ( user_has_role('admin') ) { 
+            redirect '/admin';
+        } elsif ( user_has_role('superadmin') ) {
+            redirect '/superadmin';
+        } else {
+            redirect params->{return_url} || '/';
+        }
 
     } else {
 
