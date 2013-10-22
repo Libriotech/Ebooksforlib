@@ -1,7 +1,9 @@
 [% META pagetitle = 'Add a new book' %]
 
-<h2>Reuse data converted from MARC records</h2>
+<div class="container">
+
 [% IF data %]
+    <h2>Reuse data converted from MARC records</h2>
     [% IF data.size > 1 %]
         <p>We found more than one source of metadata. Please choose one of the alternatives below and edit it as necessary. If none of the alternatives are to your liking, you can enter data manually at the bottom of the page.</p>
     [% END %]
@@ -18,10 +20,10 @@
     [% END %]
 [% END %]
 
-<hr>
-
 <h2>Enter data from scratch</h2>
 <form method="POST" action="/books/add">
 [% adding = 1 %]
 [% INCLUDE books_form.tt %]
 </form>
+
+</div>
