@@ -369,29 +369,6 @@ get '/superadmin' => require_role superadmin => sub {
     };
 };
 
-### Detail view
-
-get '/detailview' => require_role admin => sub { 
-    my $library = rset('Library')->find( _get_library_for_admin_user() );
-    template 'detailview', { library => $library };
-};
-
-post '/detailview' => require_role admin => sub { 
-    my $detail_head = param 'detail_head';
-    my $soc_links   = param 'soc_links';
-    my $library = rset('Library')->find( _get_library_for_admin_user() );
-    try {
-        $library->set_column( 'detail_head', $detail_head );
-        $library->set_column( 'soc_links', $soc_links );
-        $library->update;
-        flash info => 'The detail view was updated!';
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
-    };
-    redirect '/admin';
-};
-
 ### Files
 
 post '/files/add' => require_role admin => sub {

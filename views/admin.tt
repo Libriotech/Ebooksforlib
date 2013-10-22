@@ -1,11 +1,20 @@
 [% META pagetitle = 'Admin' %]
 
+<div class="container">
+
+<h2>Admin</h2>
+
+<ul class="nav nav-list">
+    <li><a href="/admin/settings/">Settings</a></li>
+</ul>
+
+</div>
+
 <h2>Actions</h2>
 <ul>
 <li><a href="/books/add">Add a new book from scratch</a></li>
 <li>Add a new book based on ISBN: <form method="GET" action="/books/add_from_isbn"><input type="text" name="isbn"><input type="submit" value="Go!"></form></li>
 <li><a href="/creators/add">Add a new creator</a></li>
-<li><a href="/detailview">Detail view</a></li>
 </ul>
 
 <h2>Lists</h2>

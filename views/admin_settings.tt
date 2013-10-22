@@ -10,4 +10,28 @@
 <input type="submit" value="Save">
 </form>
 
+<h2>Ebook detail view</h2>
+
+<p>You can change the detail view of individual books by including things like buttons for social networks etc.</p>
+
+<form method="POST" action="/admin/settings/detailview">
+
+<fieldset>
+<legend>Detail HEAD-section</legend>
+<label for="detail_head">Enter HTML that will be included in the HEAD section on every detail page. This is suitable for including links to JavaScript and/or CSS.</label>
+<br />
+<textarea name="detail_head" id="detail_head" rows="10" cols="100">[% library.detail_head %]</textarea>
+</fieldset>
+
+<fieldset>
+<legend>Social links</legend>
+<label for="soc_links">Enter HTML that will be included alongside the detail view of books</label>
+<br />
+<textarea name="soc_links" id="soc_links" rows="10" cols="100">[% library.soc_links %]</textarea>
+</fieldset>
+
+<br>
+<input type="submit" id="save" value="Save" />
+</form>
+
 </div>
