@@ -15,6 +15,11 @@ use Ebooksforlib::Util;
 
 ### Lists
 
+get '/admin/lists' => require_role admin => sub { 
+    my @lists = rset('List')->search({ library_id => _get_library_for_admin_user() });
+    template 'admin_lists', { lists => \@lists };
+};
+
 get '/lists/add' => require_role admin => sub {
     template 'lists_add';
 };
@@ -41,7 +46,7 @@ post '/lists/add' => require_role admin => sub {
             library_id => $library_id,
         });
         flash info => 'A new list was added! <a href="/list/' . $new_list->id . '">View</a>';
-        redirect '/admin';
+        redirect '/admin/lists';
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
@@ -74,7 +79,7 @@ post '/lists/edit' => require_role admin => sub {
         $list->set_column('frontpage', $frontpage);
         $list->update;
         flash info => 'A list was updated! <a href="/list/' . $list->id . '">View</a>';
-        redirect '/admin';
+        redirect '/admin/lists';
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";
@@ -102,7 +107,7 @@ get '/lists/delete_ok/:id?' => require_role admin => sub {
         $list->delete;
         flash info => 'A list was deleted!';
         info "Deleted list with ID = $id";
-        redirect '/admin';
+        redirect '/admin/lists';
     } catch {
         flash error => "Oops, we got an error:<br />$_";
         error "$_";

@@ -1,6 +1,10 @@
 [% META pagetitle = 'Add list' %]
 
+<div class="container">
+
 <form method="POST" action="/lists/add">
 [% adding = 1 %]
 [% INCLUDE lists_form.tt %]
 </form>
+
+</div>

@@ -1,6 +1,8 @@
 [% META pagetitle = 'Edit list' %]
 [% USE Dumper %]
 
+<div class="container">
+
 <form method="POST" action="/lists/edit">
 [% INCLUDE lists_form.tt %]
 </form>
@@ -33,3 +35,5 @@
     [% END  %]
 [% END %]
 </ul>
+
+</div>
