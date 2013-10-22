@@ -4,20 +4,15 @@
 
 <!-- STINAVIGERING
 ************************************* -->
-<div class="article-bg-white">
-<div class="container content-container">
-<div class="row add-top half-bottom"> <!-- .half-bottom bør antakelig fjernes når resultatfilter/sortering legges til /Helge -->
-	<div class="span12">
-	  <ul class="path">
+
+<ul class="path">
 	  <li class="back-btn">
             <a href="/">Forsiden</a>
       </li>
 	  <li><span>[% list.name %]</span></li>
 	  </ul>
-	</div>
-</div>
-
-
+<div class="article-bg-white">
+<div class="container content-container">
 
 [% IF list.books.size %]
     [% INCLUDE 'books_table.tt' books=list.books %]

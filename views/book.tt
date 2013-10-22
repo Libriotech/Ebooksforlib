@@ -3,11 +3,7 @@
 
 <!-- STINAVIGERING
 ************************************* -->
-<div class="article-bg-white">
-<div class="container content-container">
-<div class="row half-top half-bottom">
-    <div class="span12">
-      <ul class="path">
+<ul class="path">
       <li class="back-btn">
 	  	[% FOREACH list IN book.lists %]
             [% IF list.library.id == session.chosen_library %]
@@ -17,15 +13,22 @@
       </li>
       <li><span>[% book.title %]</span></li>
       </ul>
+
+
+<div class="article-bg-white">
+<div class="container content-container">
+<!-- <div class="row half-top half-bottom">
+    <div class="span12">
+      
     </div>
-</div>
+</div> -->
 
 <!-- BOK
 ************************************* -->
 
 <section id="bok">
 <div class="row add-top">
-	<div class="span12">
+	<div class="span6 offset3 center">
 		<div class="book-page-imgwrapper">
 			<a class="book-page-img" href="[% book.coverimg %]" target="_blank">
 	    		[% IF book.coverimg %]
@@ -35,7 +38,8 @@
 				[% END %]
 			</a>
 		</div>
-		<div class="book-details">
+		<br />
+		<div class="book-details center">
 			<h3 class="title">[% book.title %]</h3>
 			<div class="author">
 				[% FOREACH creator IN book.creators %]
@@ -44,13 +48,13 @@
 			</div>
 			<p class="details">
 		    [% IF book.date %]
-		        Utgivelsesår: [% book.date %]<br />
+		        Utgivelsesår: [% book.date %] /
     		[% END %]
             [% IF book.isbn %]
-                ISBN: [% book.isbn %]<br />
+                ISBN: [% book.isbn %] /
             [% END %]
             [% IF book.pages %]
-                Sider: [% book.pages %]<br />
+                Sider: [% book.pages %] /
             [% END %]
             [% IF book.lists.size %]
                 [%# Build separate arrays for lists and genres %]
@@ -69,18 +73,18 @@
                     [% FOREACH list IN lists %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
-                    <br />
+                    
                 [% END %]
                 [% IF lists.size %]
                     Lister: 
                     [% FOREACH list IN genres %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
-                    <br />
+                    
                 [% END %]
             [% END %]
 			</p>
-			<div class="add-top add-bottom hidden-phone">
+		<!--	<div class="add-top add-bottom hidden-phone">
 		    [% IF !session.logged_in_user %]
 		        <div class="alert alert-info" style="display:inline-block;">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -117,7 +121,6 @@
                 [% END %]
                 [% IF longest_loan_period > 0 %]
                 <a class="laan-btn btn-block" href="/borrow/[% selected_item %]" style="width:220px;"><span style="font-size:20px;font-weight:100;">+</span><i class="icon-book"></i> <div class="btn-txt">Lån boken</div></a>
-                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
                 <div class="alert" style="display:inline-block;">
@@ -125,14 +128,24 @@
     				<i class="icon-exclamation-sign"></i> Alle våre eksemplarer er desverre utlånt.
     			</div>
             [% END %]
-		</div>
-   </div>
-</div>
-</div>
+		</div> -->
+   </div> <!-- end book details -->
 
-<div class="row">
-   <div class="span8">
-   		<div class="half-top visible-phone">
+   		
+   
+		<div class="description">
+		   <h4>Omtale</h4>
+		   [% SET descriptions = book.get_descriptions %]
+           [% IF descriptions.results.bindings.size %]
+               [% IF descriptions.results.bindings.0.abstract.value %]
+                   <p>[% descriptions.results.bindings.0.abstract.value %]</p>
+               [% END %]
+               [% IF descriptions.results.bindings.0.krydder.value %]
+                   <p>[% descriptions.results.bindings.0.krydder.value %]</p>
+               [% END %]
+           [% END %]
+         </div>  
+           <div class="half-top">
 		    [% IF !session.logged_in_user %]
 		        <div class="alert alert-info"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -177,19 +190,7 @@
     				<i class="icon-exclamation-sign"></i> Alle våre eksemplarer er desverre utlånt.
     			</div>
             [% END %]
-		</div>
-   
-		<div class="description">
-		   <h4>Omtale</h4>
-		   [% SET descriptions = book.get_descriptions %]
-           [% IF descriptions.results.bindings.size %]
-               [% IF descriptions.results.bindings.0.abstract.value %]
-                   <p>[% descriptions.results.bindings.0.abstract.value %]</p>
-               [% END %]
-               [% IF descriptions.results.bindings.0.krydder.value %]
-                   <p>[% descriptions.results.bindings.0.krydder.value %]</p>
-               [% END %]
-           [% END %]
+		
            	<div class="share-this">
 		    	[% library.soc_links %]
 			</div>
