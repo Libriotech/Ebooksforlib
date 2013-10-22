@@ -1,4 +1,4 @@
-	    <div class="span4">
+	    <div class="span4 offset4">
 	    <form method='post' action="/in">
         	<div class="login-container">
         		<div class="login-row1">

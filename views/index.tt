@@ -9,14 +9,15 @@
     <div class="logginn-wrapper">
     <div class="container content-container">
     <div class="row">
-	    <div class="span8 clearfix">
-		    <h1>Lån ebøker gratis!</h1>
+	    <div class="span12 clearfix center">
+		    <h1 style="margin-bottom:0;">eBib</h1>
+		    <p style="margin-top:0;">Lån ebøker gratis</p>
 		    <!-- <img src="http://reader.digitalt.org/img/laan-gratis-txt.png" /> -->
-		    <p class="lead-list hidden-phone">
+		    <!-- <p class="lead-list hidden-phone">
 		    &ndash; Hundrevis av ebøker til din telefon, nettbrett og pc<br />
 		    &ndash; Ny norsk litteratur fra ditt lokale bibliotek<br />
 		    &ndash; Ingen purregebyr eller tunge turer til biblioteket<br />
-		    </p>
+		    </p> -->
         </div>
         [% INCLUDE 'login_form.tt' %]
     </div>
@@ -24,11 +25,11 @@
     </div> <!-- end logginn-wrapper -->
 
 <!-- NY BRUKER? BANNER
-************************************* -->
+************************************* 
 
 
 	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
-		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a>
+		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a> -->
 	</div>
 
 [% END %]
@@ -43,11 +44,11 @@
 <div class="layer">
 <div class="container content-container">
     <div class="row">
-    <div class="span12">
+    <div class="span12 center">
     	
     	<div class="genre-head">
-    		<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
-    		<a class="genre-title clearfix" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right visible-phone" style="margin-left:10px;"></i></a>
+    	    <a class="genre-title" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right visible-phone" style="margin-left:10px;"></i></a>
+    		<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">Se alle ></a>
     	</div>
     	<!--
 	    <a class="btn pull-right half-top" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>

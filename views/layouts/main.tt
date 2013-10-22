@@ -189,10 +189,7 @@ a:hover {color:#900;} */
 <div class="container">
 	<div class="row">
 		<div class="span3">
-			<p class="center" style="display:inline-block;color:#fff;padding:30px 0 60px;text-shadow:none;">
-				<img src="http://reader.digitalt.org/img/ebib-logo-neg.png" style="padding-bottom:4px;" /><br />
-				<span style="font-family:'brandon-grotesque';font-size:17px;font-weight:300;margin:0 auto;">eBib</span>
-			</p>
+			<h1>eBib</h1>
 		</div>
 [% IF session.logged_in_user %]
 		<div class="span3">

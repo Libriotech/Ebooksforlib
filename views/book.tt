@@ -3,7 +3,7 @@
 
 <!-- STINAVIGERING
 ************************************* -->
-
+<div class="article-bg-white">
 <div class="container content-container">
 <div class="row half-top half-bottom">
     <div class="span12">
@@ -328,3 +328,4 @@
 </div>
     [% END %]
 [% END %]
+</div>

@@ -1,6 +1,6 @@
 [% META pagetitle = 'My page' %]
 [% USE date %]
-
+<div class="article-bg-white">
 <div class="container">
 	<div class="row">
 		<div class="span12 add-top">
@@ -124,4 +124,5 @@
 		<i class="icon-info-sign"></i> Informasjonen på denne siden kommer fra ditt lokale bibliotek. Hvis informasjonen ikke stemmer vennligst kontakt biblioteket. Takk for at du bruker eBib!</div>
 	</div>
 	</div>	
+</div>
 </div>
