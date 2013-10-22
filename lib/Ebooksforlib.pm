@@ -17,6 +17,7 @@ use Ebooksforlib::Route::Login;
 use Ebooksforlib::Route::Circ;
 use Ebooksforlib::Route::RestApi;
 use Ebooksforlib::Route::Admin;
+use Ebooksforlib::Route::Admin::Settings;
 
 our $VERSION = '0.1';
 
@@ -1315,22 +1316,6 @@ get '/libraries/delete_ok/:id?' => require_role superadmin => sub {
         redirect '/superadmin';
     };
     
-};
-
-post '/concurrent_loans' => require_role admin => sub { 
-    
-    my $concurrent_loans = param 'concurrent_loans';
-    my $library = rset('Library')->find( _get_library_for_admin_user() );
-    try {
-        $library->set_column( 'concurrent_loans', $concurrent_loans );
-        $library->update;
-        flash info => 'The number of concurrent loans was updated!';
-    } catch {
-        flash error => "Oops, we got an error:<br />$_";
-        error "$_";
-    };
-    redirect '/admin';
-
 };
 
 ### Local users
