@@ -102,6 +102,12 @@ a:hover {color:#900;} */
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</a>
+						[%# Determine if this user should be able to see the admin menu %]
+						[% FOREACH role IN session.logged_in_user_roles %]
+						    [% IF role == 'admin' %]
+					            [% INCLUDE 'admin_navbar.tt' %]
+                            [% END %]
+                        [% END %]
 						<div class="nav-collapse">
 				    		<ul class="nav pull-right">
 				    			<li>
