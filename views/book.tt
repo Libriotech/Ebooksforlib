@@ -14,18 +14,11 @@
       <li><span>[% book.title %]</span></li>
       </ul>
 
-
-<div class="article-bg-white">
-<div class="container content-container">
-<!-- <div class="row half-top half-bottom">
-    <div class="span12">
-      
-    </div>
-</div> -->
-
 <!-- BOK
 ************************************* -->
 
+<div class="article-bg-white">
+<div class="container content-container">
 <section id="bok">
 <div class="row add-top">
 	<div class="span6 offset3 center">
@@ -191,47 +184,11 @@
     			</div>
             [% END %]
 		
-           	<div class="share-this">
+           	<div class="share-this center">
 		    	[% library.soc_links %]
 			</div>
-		</div>
-	</div>
-</div>
-</section>
-
-<!-- caveat emptor: listen fungerer ikke optimalt med samme styling som på vanlig utlisting pga begrenset antallet/border-top issues /Helge -->
-
-[%# Collect unique books created by the same creators as the current book %]
-[% SET books = [ ] %]
-[%# Loop through the creators connected to this book %]
-[% FOREACH creator IN book.creators %]
-    [%# Loop through the books connected to this creator %]
-    [% FOREACH cbook IN creator.books %]
-        [%# Do not include the book we are currently looking at %]
-        [% IF cbook.id != book.id %]
-            [% SET already_added = 0 %]
-            [% FOREACH b IN books %]
-                [%# Do not include books we have already added %]
-                [% IF cbook.id == b.id %]
-                    [% SET already_added = 1 %]
-                [% END %]
-            [% END %]
-            [%# Save the book for later if it has not been added already %]
-            [% IF already_added == 0 %]
-                [% books.push( cbook ) %]
-            [% END %]
-        [% END %]
-    [% END %]
-[% END %]
-[% IF books.size %]
-	<h5>Andre bøker av [% FOREACH creator IN book.creators %]
-            <span>[% creator.name %]</span>[% UNLESS loop.last() %],[% END %]
-        [% END %]</h5>
-    [% INCLUDE 'books_table.tt' books=books %]
-[% END %]
-
-
-<!--
+			
+			<!--
 
 
 <h2>Items</h2>
@@ -312,21 +269,70 @@
 
 -->
 
-</div> <!-- end container -->
+		</div>
+	</div>
+</div>
+</section>
+</div>
+</div>
+
+
+
+<!-- ANDRE BØKER AV FORFATTEREN
+************************************* -->
+
+
+
+[%# Collect unique books created by the same creators as the current book %]
+[% SET books = [ ] %]
+[%# Loop through the creators connected to this book %]
+[% FOREACH creator IN book.creators %]
+    [%# Loop through the books connected to this creator %]
+    [% FOREACH cbook IN creator.books %]
+        [%# Do not include the book we are currently looking at %]
+        [% IF cbook.id != book.id %]
+            [% SET already_added = 0 %]
+            [% FOREACH b IN books %]
+                [%# Do not include books we have already added %]
+                [% IF cbook.id == b.id %]
+                    [% SET already_added = 1 %]
+                [% END %]
+            [% END %]
+            [%# Save the book for later if it has not been added already %]
+            [% IF already_added == 0 %]
+                [% books.push( cbook ) %]
+            [% END %]
+        [% END %]
+    [% END %]
+[% END %]
+[% IF books.size %]
+<section>
+<div class="article-bg-white">
+	<div class="container content-container">
+		<div class="row">
+			<div class="span12">
+				<h5 class="related-titles">Andre bøker av [% FOREACH creator IN book.creators %]
+            	<span>[% creator.name %]</span>[% UNLESS loop.last() %],[% END %]
+        [% END %]:</h5>
+    [% INCLUDE 'books_table.tt' books=books %]
+[% END %]
+			</div>
+		</div>
+	</div> <!-- end container -->
 
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]
     [% IF role == 'admin' %]
-<div class="adminactions">
-<p>Admin actions</p>
-<p>
+	<div class="adminactions">
+	<p>Admin actions</p>
+	<p>
     <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
     <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
     <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
     <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a> |
     <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">Covers</a>
-</p>
-</div>
+	</p>
+	</div>
     [% END %]
 [% END %]
-</div>
+</div> <!-- end article-bg-white -->
