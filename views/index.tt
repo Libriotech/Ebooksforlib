@@ -9,28 +9,24 @@
     <div class="logginn-wrapper">
     <div class="container content-container">
     <div class="row">
-	    <div class="span12 clearfix center">
+	    <div class="span12 center add-top">
 		    <h1 style="margin-bottom:0;">eBib</h1>
-		    <p style="margin-top:0;">Lån ebøker gratis</p>
-		    <!-- <img src="http://reader.digitalt.org/img/laan-gratis-txt.png" /> -->
-		    <!-- <p class="lead-list hidden-phone">
-		    &ndash; Hundrevis av ebøker til din telefon, nettbrett og pc<br />
-		    &ndash; Ny norsk litteratur fra ditt lokale bibliotek<br />
-		    &ndash; Ingen purregebyr eller tunge turer til biblioteket<br />
-		    </p> -->
+		    <h4 class="red" style="letter-spacing:0.5px;font-weight:500;margin-top:-10px;margin-bottom:20px;">–Lån ebøker gratis</h4>
         </div>
+        <div class="span4 offset4">
         [% INCLUDE 'login_form.tt' %]
+        </div>
     </div>
-    </div> <!-- end container -->
-    </div> <!-- end logginn-wrapper -->
+    </div> 
+    </div>
 
 <!-- NY BRUKER? BANNER
 ************************************* 
 
 
 	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
-		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a> -->
-	</div>
+		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a> 
+	</div> -->
 
 [% END %]
 
@@ -41,20 +37,14 @@
 
 <section id="[% booklist.list.name %]">
 <div class="article">
-<div class="layer">
 <div class="container content-container">
     <div class="row">
-    <div class="span12 center">
-    	
-    	<div class="genre-head">
-    	    <a class="genre-title" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right visible-phone" style="margin-left:10px;"></i></a>
-    		<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">Se alle ></a>
+    	<div class="span12 center">
+    		<div class="genre-head">
+    	    	<a class="genre-title" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right visible-phone" style="margin-left:10px;"></i></a>
+    			<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">Se alle<i class="icon-angle-right" style="margin-left:10px;"></i></a>
+    		</div>
     	</div>
-    	<!--
-	    <a class="btn pull-right half-top" href="/list/[% booklist.list.id %]">[% booklist.list.name %] A-Å ></a>
-	    <h4 class="genre-title">[% booklist.list.name %]</h4>
-	    -->
-    </div>
     </div>
 
     <div class="row">
@@ -138,7 +128,6 @@
 
 
 </div> <!-- end container -->
-</div> <!-- end layer -->
 </div> <!-- end article -->
  </section>
 

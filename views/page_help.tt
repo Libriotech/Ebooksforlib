@@ -1,9 +1,27 @@
-<div class="container">
-<div class="row add-bottom">
-<div class="span12">
-
-<h1>Hjelp</h1>
-
-</div>
-</div>
+<div class="container content-container">
+	<div class="row add-top add-bottom">
+		<div class="span9">
+			<div class="bg-white padding20">
+				<h1>H1 Hjelp</h1>
+				<h2>H2 Overskrift</h2>
+				<h3>H3 Overskrift</h3>
+				<h4>H4 Overskrift</h4>
+				<h5>H5 Overskrift</h5>
+				<h6>H6 Overskrift</h6>
+				<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec ultricies augue. Aliquam tincidunt risus vitae accumsan aliquet. Nulla elementum nulla ut est vulputate, et pretium metus venenatis. Nunc in elementum est. Fusce est leo, mattis a justo ut, vehicula facilisis massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis sodales tortor ut dictum. Cras pellentesque mattis convallis. Ut lobortis euismod turpis, et luctus enim imperdiet non. Curabitur iaculis, mi luctus vulputate laoreet, tellus eros vestibulum quam, ac venenatis turpis dolor dapibus felis. Pellentesque commodo placerat accumsan. Quisque et fermentum ligula. Nullam ultricies magna quis massa placerat tempus. Cras facilisis sollicitudin bibendum. Nullam consequat sem ac malesuada aliquet. Fusce ultricies varius egestas.</p>
+			</div>
+		</div>
+		<div class="span3">
+			<h4>Generelt</h4>
+			<h4>Lån</h4>
+			<h4>Lesing</h4>
+			<h4>Bibliotekene<h4>
+			<h4>Utvalget</h4>
+			<h4>Personvern</h4>
+			<h4>Teknisk</h4>
+			<p>Finner du ikke svaret på det du lurer på?</p>
+			<p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
+		</div>
+	</div>
+	</div>
 </div>

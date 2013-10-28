@@ -1,32 +1,46 @@
 [% META pagetitle = 'Choose library' %]
 
-<div class="container">
-
-<h1>eBib</h1>
-
-[% UNLESS session.chosen_library %]
-    <p>[% l('You need to choose a library before you proceed.') %]</p>
-[% ELSE %]
-    <p>[% l('You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with.') %]</p>
-[% END %]
-
-<ul>
-[% FOREACH library IN libraries %]
-<li>
-    <a href="/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]">[% library.name %]</a>
-    [% IF session.chosen_library == library.id %]
-        <img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes">
-    [% END %]
-</li>
-[% END %]
-</ul>
-
-[% IF session.chosen_library %]
-    [% IF belongs_to_library == 1 %]
-        <p>[% l('You are logged in with the library you have chosen, and can borrow books from it.') %]</p>
-    [% ELSE %]
-        <p>[% l('You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it.') %]</p>
-    [% END %]
-[% END %]
-
+<div class="splashpage-wrapper add-bottom" style="padding-bottom:0;">
+    <div class="container content-container">
+    	<div class="row">
+	    	<div class="span4 offset4 center add-top">
+		    	<h1>eBib</h1>
+				<h5 class="uppercase red">Velg bibliotek:<h5>
+			<!--	[% UNLESS session.chosen_library %] 
+				<h2>[% l('Velg bibliotek:') %]</h2>
+				[% ELSE %]
+				<p>[% l('You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with.') %]</p> 
+				[% END %] -->
+				<ul class="bibliotek-ul">
+				[% FOREACH library IN libraries %]
+					<li>
+						<a href="/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]"><i class="icon-angle-right""></i> [% library.name %]</a>
+    				<!--	[% IF session.chosen_library == library.id %]
+        				<img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes">
+    					[% END %] -->
+					</li>
+				[% END %]
+				</ul>
+			<!--	[% IF session.chosen_library %]
+    				[% IF belongs_to_library == 1 %]
+        			<p>[% l('You are logged in with the library you have chosen, and can borrow books from it.') %]</p>
+					[% ELSE %]
+        			<p>[% l('You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it.') %]</p>
+    				[% END %]
+				[% END %] -->
+			</div>
+		</div>
+    	<div class="row">
+	    	<div class="span8 offset2 center">
+				<div class="splashpage-intro">
+					Med eBib kan du låne gratis e-bøker fra ditt lokale bibliotek. Les mer om tjenesten <a href="/pages/newuser">her &rarr;</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">	
+			<div class="span12 center add-top">
+				<img src="http://reader.digitalt.org/img/ebib-mockup2.png" />
+			</div>
+		</div>
+	</div>
 </div>
