@@ -14,6 +14,7 @@ use Modern::Perl;
 use base 'Exporter';
 
 our @EXPORT = qw( 
+    _log2db
     _coverurl2base64 
     _sparql2data
     _isbn2bokkliden_cover
@@ -26,6 +27,22 @@ our @EXPORT = qw(
     check_hash
     hash_pkey
 );
+
+sub _log2db {
+
+    my ( $data ) = @_;
+    try {
+        my $new_logmsg = rset('Log')->create({
+            user_id    => session('logged_in_user_id'),
+            library_id => session('chosen_library'),
+            logcode    => $data->{'logcode'},
+            logmsg     => $data->{'logmsg'},
+        });
+    } catch {
+        error "*** Error while logging: $_";
+    };
+
+}
 
 sub _coverurl2base64 {
 
