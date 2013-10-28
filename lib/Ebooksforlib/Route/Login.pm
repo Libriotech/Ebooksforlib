@@ -10,6 +10,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Ebooksforlib::Util;
 use Data::Dumper; # FIXME Debug
 
 get '/in' => sub {
@@ -181,6 +182,12 @@ post '/in' => sub {
             header 'Set-Cookie' => $cookie->to_header;
             
         }
+
+        # Log
+        _log2db({
+            logcode => 'LOGIN',
+            logmsg  => "Username: $username, realm: $realm",
+        });
         
         # Redirect based on roles
         if ( user_has_role('admin') ) { 
@@ -193,7 +200,12 @@ post '/in' => sub {
 
     } else {
 
-        debug "=== Login failed for $username, $password, $userrealm";
+        # Log
+        _log2db({
+            logcode => 'LOGINFAIL',
+            logmsg  => "Username: $username, realm: $userrealm",
+        });
+        
         if ( $userrealm eq 'local' ) {
             redirect '/in?admin=1';
         } else {
@@ -208,7 +220,15 @@ get '/login/denied' => sub {
 };
 
 any '/out' => sub {
+
+    # Log
+    _log2db({
+        logcode => 'LOGOUT',
+        logmsg  => "",
+    });
+
     session->destroy;
+
     # Get rid of the ebib cookie
     my $cookie = Dancer::Cookie->new(
         'name'      => 'ebib', 
@@ -218,6 +238,7 @@ any '/out' => sub {
         'expires'   => '-1 year',
     );
     header 'Set-Cookie' => $cookie->to_header;
+
     if (params->{return_url}) {
         redirect params->{return_url};
     } else {

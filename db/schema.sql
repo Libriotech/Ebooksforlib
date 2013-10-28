@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS ratings;
 DROP TABLE IF EXISTS downloads;
 DROP TABLE IF EXISTS old_downloads;
+DROP TABLE IF EXISTS log;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -199,6 +200,15 @@ CREATE TABLE old_downloads (
     removed  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT old_downloads_fk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
     CONSTRAINT old_downloads_fk_2 FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE log (
+    id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+    time       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id    INTEGER,
+    library_id INTEGER,
+    logcode    CHAR(32) NOT NULL, 
+    logmsg     VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data
