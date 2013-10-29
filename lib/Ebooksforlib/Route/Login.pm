@@ -10,6 +10,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 use Data::Dumper; # FIXME Debug
 
@@ -94,29 +95,26 @@ post '/in' => sub {
             debug "*** User $username was added, with id = " . $new_user->id;
             # Connect this user to the correct library based on the realm
             # used to sign in
-            debug '*** Going to look up library with realm = ' . $realm;
-            my $library = rset('Library')->find({ realm => $realm });
+            debug '*** Going to look up library with realm = ' . $userrealm;
+            my $library = rset('Library')->find({ realm => $userrealm });
             if ( $library ) {
                 debug '*** Going to connect to library with id = ' . $library->id;
-                # FIXME try/catch here results in an error: 
-                # Can't call method "catch" without a package or object reference
-                # And both the code in the try and the catch are executed?!? 
-                # try {
+                try {
                     rset('UserLibrary')->create({
                         user_id    => $new_user->id, 
                         library_id => $library->id, 
                     });
                     debug '*** Connected: user = ' . $new_user->id . " + library = " . $library->id;
-                # } catch {
+                } catch {
                     # This is a serious error! 
-                    # debug '*** NOT connected: user = ' . $new_user->id . " + library = " . $library->id;
-                    # my $error = $_;
-                    # $error =~ s/\r//g;
-                    # debug "ERROR: $error";
-                    # error '*** Error when trying to connect user ' . $new_user->id . ' to library ' . $library->id;
-                # };
+                    debug '*** NOT connected: user = ' . $new_user->id . " + library = " . $library->id;
+                    my $error = $_;
+                    $error =~ s/\r//g;
+                    debug "ERROR: $error";
+                    error '*** Error when trying to connect user ' . $new_user->id . ' to library ' . $library->id;
+                };
             } else {
-                error '*** Could not find library with realm = ' . $realm;
+                error '*** Could not find library with realm = ' . $userrealm;
             }
             flash info => "Welcome, new user!";
         } else {
