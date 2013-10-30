@@ -15,17 +15,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Ebooksforlib.pm:94
+#: views/layouts/main.tt:149
+msgid "Du er ikke logget inn."
+msgstr ""
+
+#: lib/Ebooksforlib.pm:97
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
-#: lib/Ebooksforlib.pm:302
+#: lib/Ebooksforlib.pm:305
 msgid "Oops, we got an error:<br />$_"
 msgstr ""
 
-#: views/layouts/main.tt:107 views/layouts/main.tt:150
-msgid "Title / Author / ISBN"
-msgstr "Tittel / Forfatter / ISBN"
+#: views/layouts/main.tt:101 views/layouts/main.tt:145
+msgid "Search"
+msgstr "Søk"
+
+#: views/chooselib.tt:10
+msgid "Velg bibliotek:"
+msgstr ""
 
 #: views/chooselib.tt:28
 msgid "You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it."
@@ -35,14 +43,6 @@ msgstr "Du er <em>ikke</em> logget inn ved biblioteket du har valgt, og kan ikke
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr "Du er logget inn ved biblioteket du har valgt, og kan låne bøker."
 
-#: views/layouts/main.tt:155
-msgid "You are not logged in."
-msgstr "Du er ikke logget inn."
-
-#: views/chooselib.tt:10
+#: views/chooselib.tt:12
 msgid "You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with."
 msgstr "Du kan bytte bibliotek når du måtte ønske, men legg merke til at du bare kan låne bøker fra det biblioteket du er logget inn ved."
-
-#: views/chooselib.tt:8
-msgid "You need to choose a library before you proceed."
-msgstr "Du må velge et bibliotek før du kan fortsette."

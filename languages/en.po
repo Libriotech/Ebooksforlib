@@ -15,16 +15,24 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Ebooksforlib.pm:94
+#: views/layouts/main.tt:149
+msgid "Du er ikke logget inn."
+msgstr ""
+
+#: lib/Ebooksforlib.pm:97
 msgid "Not a valid library."
 msgstr ""
 
-#: lib/Ebooksforlib.pm:302
+#: lib/Ebooksforlib.pm:305
 msgid "Oops, we got an error:<br />$_"
 msgstr ""
 
-#: views/layouts/main.tt:107 views/layouts/main.tt:150
-msgid "Title / Author / ISBN"
+#: views/layouts/main.tt:101 views/layouts/main.tt:145
+msgid "Search"
+msgstr ""
+
+#: views/chooselib.tt:10
+msgid "Velg bibliotek:"
 msgstr ""
 
 #: views/chooselib.tt:28
@@ -35,14 +43,6 @@ msgstr ""
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr ""
 
-#: views/layouts/main.tt:155
-msgid "You are not logged in."
-msgstr ""
-
-#: views/chooselib.tt:10
+#: views/chooselib.tt:12
 msgid "You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with."
-msgstr ""
-
-#: views/chooselib.tt:8
-msgid "You need to choose a library before you proceed."
 msgstr ""
