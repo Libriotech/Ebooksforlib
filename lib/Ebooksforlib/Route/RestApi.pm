@@ -346,7 +346,10 @@ get '/rest/:action' => sub {
                 debug "*** /rest/getbook for loan with item_id = " . $loan->item_id . " user_id = " . $loan->user_id . " loaned = " . $loan->loaned;
                 debug "*** /rest/getbook for item = " . $loan->item->id . " library_id = " . $loan->item->library_id . " file_id = " . $loan->item->file_id;
                 debug "*** /rest/getbook for file = " . $loan->item->file->id;
-                my $content = $loan->item->file->file;
+                
+                # Get the content
+                my $fulltext = rset('Fulltext')->find( $loan->item->file->id );
+                my $content = $fulltext->file;
                 if ( $content ) {
                     # Keep track of this download in the downloads table
                     try {
