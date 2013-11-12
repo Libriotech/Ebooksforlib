@@ -59,6 +59,11 @@ get '/borrow/:item_id' => require_login sub {
             user_id => $user->id,
             due     => $dt,
         });
+        # Log
+        _log2db({
+            logcode => 'BORROW',
+            logmsg  => "item_id: $item_id, due: $dt",
+        });
         # flash info => "You borrowed a book!";
         redirect '/book/' . $item->file->book_id;
     } catch {
@@ -84,6 +89,11 @@ get '/return/:item_id' => require_login sub {
         debug $return->{'errormsg'};
         flash error => "Sorry, an error occured: " . $return->{'errormsg'};
     } else {
+        # Log
+        _log2db({
+            logcode => 'RETURN',
+            logmsg  => "item_id: $item_id",
+        });
         debug "*** Returned item for item_id = $item_id, user_id = $user_id";
     }
     return redirect '/my';
