@@ -1,0 +1,16 @@
+<div class="container">
+
+<h2>Statistics</h2>
+
+<h3>Live statistics</h3>
+
+<ul>
+<li>Users: [% simplestats.users %]</li>
+<li>Files: [% simplestats.files %]</li>
+<li>Items: [% simplestats.items %]</li>
+<li>Items on loan: [% simplestats.onloan %]</li>
+<li>Percentage on loan: [% ( ( simplestats.onloan * 100 ) / simplestats.items ) FILTER format('%02.1f') %]</li>
+<li>Returned loans: [% simplestats.oldloans %]</li>
+</ul>
+
+</div>

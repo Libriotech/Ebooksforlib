@@ -20,6 +20,7 @@ use Ebooksforlib::Route::Admin;
 use Ebooksforlib::Route::Admin::Settings;
 use Ebooksforlib::Route::Admin::Books;
 use Ebooksforlib::Route::Admin::Lists;
+use Ebooksforlib::Route::Admin::Stats;
 
 our $VERSION = '0.1';
 

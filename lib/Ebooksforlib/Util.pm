@@ -14,6 +14,7 @@ use Modern::Perl;
 use base 'Exporter';
 
 our @EXPORT = qw( 
+    _get_simplestats
     _log2db
     _coverurl2base64 
     _sparql2data
@@ -27,6 +28,32 @@ our @EXPORT = qw(
     check_hash
     hash_pkey
 );
+
+sub _get_simplestats {
+
+    my ( $library_id ) = @_;
+    my %stats = (
+        'users' => resultset('UserLibrary')->search({ library_id => $library_id })->count,
+        'files' => resultset('File')->search({ library_id => $library_id })->count,
+        'items' => resultset('Item')->search({ library_id => $library_id })->count,
+        'onloan' => resultset('Item')->search(
+            { 
+                library_id => $library_id, 
+                'loan.loaned' => { '!=', undef } 
+            },
+            { join => 'loan' }, 
+        )->count,
+        'oldloans' => resultset('Item')->search(
+            { 
+                library_id => $library_id, 
+                'old_loans.returned' => { '!=', undef } 
+            },
+            { join => 'old_loans' }, 
+        )->count,
+    );
+    return \%stats;
+
+}
 
 sub _log2db {
 
