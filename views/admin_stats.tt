@@ -2,19 +2,6 @@
 
 <h2>Statistics</h2>
 
-<h3>Live statistics</h3>
-
-<ul>
-<li>Users: [% livestats.users %]</li>
-<li>Files: [% livestats.files %]</li>
-<li>Items: [% livestats.items %]</li>
-<li>Items on loan: [% livestats.onloan %]</li>
-<li>Percentage on loan: [% ( ( livestats.onloan * 100 ) / livestats.items ) FILTER format('%02.1f') %]</li>
-<li>Returned loans: [% livestats.oldloans %]</li>
-</ul>
-
-<h3>Historical statistics</h3>
-
 <table class="table table-striped table-bordered table-hover">
 <thead>
     <tr>
@@ -28,6 +15,15 @@
     <tr>
 </thead>
 <tbody>
+    <tr>
+        <td>Now</td>
+        <td>[% livestats.users %]</td>
+        <td>[% livestats.files %]</td>
+        <td>[% livestats.items %]</td>
+        <td>[% livestats.onloan %]</td>
+        <td>[% ( ( livestats.onloan * 100 ) / livestats.items ) FILTER format('%02.1f') %]</td>
+        <td>[% livestats.oldloans %]</td>
+    </tr>
     [% FOREACH stat IN oldstats %]
         <tr>
         <td>[% stat.time %]</td>
