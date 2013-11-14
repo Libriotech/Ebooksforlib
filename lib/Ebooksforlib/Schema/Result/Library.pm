@@ -171,6 +171,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 stats
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Stat>
+
+=cut
+
+__PACKAGE__->has_many(
+  "stats",
+  "Ebooksforlib::Schema::Result::Stat",
+  { "foreign.library_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 user_libraries
 
 Type: has_many
@@ -197,7 +212,7 @@ Composing rels: L</user_libraries> -> user
 __PACKAGE__->many_to_many("users", "user_libraries", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LtJbGH8LgpueCTUYKAQZow
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-14 21:09:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NtlPvz/89u4UAJWCXcMtDg
 
 1;

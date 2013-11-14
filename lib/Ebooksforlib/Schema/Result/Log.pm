@@ -38,6 +38,7 @@ __PACKAGE__->table("log");
 =head2 id
 
   data_type: 'integer'
+  is_auto_increment: 1
   is_nullable: 0
 
 =head2 time
@@ -50,12 +51,12 @@ __PACKAGE__->table("log");
 =head2 user_id
 
   data_type: 'integer'
-  is_nullable: 0
+  is_nullable: 1
 
 =head2 library_id
 
   data_type: 'integer'
-  is_nullable: 0
+  is_nullable: 1
 
 =head2 logcode
 
@@ -73,7 +74,7 @@ __PACKAGE__->table("log");
 
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "integer", is_nullable => 0 },
+  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "time",
   {
     data_type => "timestamp",
@@ -82,9 +83,9 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
   },
   "user_id",
-  { data_type => "integer", is_nullable => 0 },
+  { data_type => "integer", is_nullable => 1 },
   "library_id",
-  { data_type => "integer", is_nullable => 0 },
+  { data_type => "integer", is_nullable => 1 },
   "logcode",
   { data_type => "char", is_nullable => 0, size => 32 },
   "logmsg",
@@ -104,8 +105,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-10-28 11:13:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iEI6jr52zxzaHpUcCTKbpQ
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-14 21:09:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xsB1wG1myjbicdNn9cdpKw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

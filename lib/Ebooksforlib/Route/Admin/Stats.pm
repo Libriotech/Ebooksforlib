@@ -18,8 +18,19 @@ use Ebooksforlib::Util;
 get '/admin/stats' => require_role admin => sub { 
     
     my $library_id = _get_library_for_admin_user();
-    my $simplestats = _get_simplestats( $library_id );
-    template 'admin_stats', { simplestats => $simplestats };
+    
+    my $livestats = _get_simplestats( $library_id );
+    my @oldstats  = resultset('Stat')->search(
+        { library_id => $library_id }, 
+        {
+            order_by => { -desc => 'time' },
+            rows     => 30,
+        }
+    );
+    template 'admin_stats', { 
+        livestats => $livestats, 
+        oldstats  => \@oldstats,
+    };
 };
 
 true;

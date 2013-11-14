@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS ratings;
 DROP TABLE IF EXISTS downloads;
 DROP TABLE IF EXISTS old_downloads;
 DROP TABLE IF EXISTS log;
+DROP TABLE IF EXISTS stats;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -209,6 +210,18 @@ CREATE TABLE log (
     library_id INTEGER,
     logcode    CHAR(32) NOT NULL, 
     logmsg     VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE stats (
+    id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+    library_id INTEGER NOT NULL,
+    files      INTEGER NOT NULL,
+    users      INTEGER NOT NULL,
+    oldloans   INTEGER NOT NULL,
+    onloan     INTEGER NOT NULL,
+    items      INTEGER NOT NULL,
+    time       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT stats_fk_1 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data
