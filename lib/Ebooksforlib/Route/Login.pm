@@ -85,6 +85,10 @@ post '/in' => sub {
             username => $username,
             name     => $user->{name},
             email    => $user->{email},
+            gender   => $user->{gender},
+            birthday => $user->{birthday},
+            zipcode  => $user->{zipcode},
+            place    => $user->{place},
         }, { 
             key => 'username' 
         });

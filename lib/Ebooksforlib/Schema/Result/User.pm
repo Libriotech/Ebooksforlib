@@ -65,6 +65,33 @@ __PACKAGE__->table("users");
   is_nullable: 1
   size: 255
 
+=head2 place
+
+  data_type: 'varchar'
+  default_value: (empty string)
+  is_nullable: 1
+  size: 64
+
+=head2 zipcode
+
+  data_type: 'char'
+  default_value: (empty string)
+  is_nullable: 1
+  size: 9
+
+=head2 birthday
+
+  data_type: 'date'
+  datetime_undef_if_invalid: 1
+  is_nullable: 1
+
+=head2 gender
+
+  data_type: 'char'
+  default_value: (empty string)
+  is_nullable: 1
+  size: 1
+
 =head2 anonymize
 
   data_type: 'integer'
@@ -91,6 +118,14 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 255 },
   "email",
   { data_type => "varchar", is_nullable => 1, size => 255 },
+  "place",
+  { data_type => "varchar", default_value => "", is_nullable => 1, size => 64 },
+  "zipcode",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
+  "birthday",
+  { data_type => "date", datetime_undef_if_invalid => 1, is_nullable => 1 },
+  "gender",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 1 },
   "anonymize",
   { data_type => "integer", default_value => 1, is_nullable => 1 },
   "hash",
@@ -266,8 +301,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rw5ywC3+inNqbEKivurhug
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 12:25:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6Vjb31bYUvO2mjV7/T8V5w
 
 sub number_of_loans_from_library {
     my ( $self, $library_id ) = @_;
