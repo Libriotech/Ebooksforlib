@@ -21,6 +21,7 @@ use Ebooksforlib::Route::Admin::Settings;
 use Ebooksforlib::Route::Admin::Books;
 use Ebooksforlib::Route::Admin::Lists;
 use Ebooksforlib::Route::Admin::Stats;
+use Ebooksforlib::Route::Admin::Logs;
 
 our $VERSION = '0.1';
 

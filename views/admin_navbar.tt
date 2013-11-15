@@ -8,6 +8,7 @@
             <li><a href="/creators/add">Add creator</a></li>
             <li><a href="/admin/lists">Lists and genres</a></li>
             <li><a href="/admin/stats">Statistics</a></li>
+            <li><a href="/admin/logs">Logs</a></li>
         </ul>
     </li>
 </ul>
