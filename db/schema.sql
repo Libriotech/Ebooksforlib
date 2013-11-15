@@ -23,6 +23,10 @@ CREATE TABLE users (
     password  VARCHAR(64) NOT NULL,
     name      VARCHAR(255),
     email     VARCHAR(255), 
+    gender    CHAR(1) DEFAULT '',
+    birthday  DATE DEFAULT NULL,
+    zipcode   CHAR(9) DEFAULT '',
+    place     VARCHAR(64) DEFAULT '',
     anonymize INTEGER(1) DEFAULT 1, 
     hash      CHAR(64)   DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
