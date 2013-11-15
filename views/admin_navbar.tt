@@ -7,7 +7,13 @@
             <li><a href="/books/add">Add a new book</a></li>
             <li><a href="/creators/add">Add creator</a></li>
             <li><a href="/admin/lists">Lists and genres</a></li>
-            <li><a href="/admin/stats">Statistics</a></li>
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Statistics</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/admin/stats">Overview</a></li>
+                    <li><a href="/admin/stats/age">Age</a></li>
+                </ul>
+            </li>
             <li><a href="/admin/logs">Logs</a></li>
         </ul>
     </li>

@@ -90,6 +90,12 @@ __PACKAGE__->table("old_loans");
   data_type: 'integer'
   is_nullable: 1
 
+=head2 library_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -123,6 +129,8 @@ __PACKAGE__->add_columns(
   { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
   "age",
   { data_type => "integer", is_nullable => 1 },
+  "library_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -154,6 +162,26 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
+=head2 library
+
+Type: belongs_to
+
+Related object: L<Ebooksforlib::Schema::Result::Library>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "library",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "library_id" },
+  {
+    is_deferrable => 1,
+    join_type     => "LEFT",
+    on_delete     => "CASCADE",
+    on_update     => "RESTRICT",
+  },
+);
+
 =head2 user
 
 Type: belongs_to
@@ -170,8 +198,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 14:53:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DvQ4pK1wBYIyWCpMl8cxsg
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 17:19:33
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZwSiKi6HB1QvJjfbcQlY6A
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

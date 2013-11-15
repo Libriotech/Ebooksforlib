@@ -146,12 +146,14 @@ CREATE TABLE loans (
     user_id INTEGER NOT NULL,
     loaned  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     due     DATETIME DEFAULT NULL,
+    library_id INTEGER DEFAULT NULL,
     gender  CHAR(1) DEFAULT '',
     age     INTEGER DEFAULT NULL,
     zipcode CHAR(9) DEFAULT '',
     PRIMARY KEY item_loan (item_id, user_id),
     CONSTRAINT loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
-    CONSTRAINT loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    CONSTRAINT loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
+    CONSTRAINT loans_fk_3 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE old_loans (
@@ -161,11 +163,13 @@ CREATE TABLE old_loans (
     loaned   DATETIME NOT NULL,
     due      DATETIME NOT NULL,
     returned DATETIME NOT NULL,
+    library_id INTEGER DEFAULT NULL,
     gender  CHAR(1) DEFAULT '',
     age     INTEGER DEFAULT NULL,
     zipcode CHAR(9) DEFAULT '',
     CONSTRAINT old_loans_fk_1 FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE,
-    CONSTRAINT old_loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    CONSTRAINT old_loans_fk_2 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
+    CONSTRAINT old_loans_fk_3 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE comments (

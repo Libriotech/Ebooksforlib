@@ -171,6 +171,36 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 loans
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Loan>
+
+=cut
+
+__PACKAGE__->has_many(
+  "loans",
+  "Ebooksforlib::Schema::Result::Loan",
+  { "foreign.library_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 old_loans
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::OldLoan>
+
+=cut
+
+__PACKAGE__->has_many(
+  "old_loans",
+  "Ebooksforlib::Schema::Result::OldLoan",
+  { "foreign.library_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 stats
 
 Type: has_many
@@ -212,7 +242,7 @@ Composing rels: L</user_libraries> -> user
 __PACKAGE__->many_to_many("users", "user_libraries", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-14 21:09:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NtlPvz/89u4UAJWCXcMtDg
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 17:19:33
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:V60lUv7LfPy/T3Vc449Fbw
 
 1;

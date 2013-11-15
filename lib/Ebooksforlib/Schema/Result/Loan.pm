@@ -60,6 +60,12 @@ __PACKAGE__->table("loans");
   datetime_undef_if_invalid: 1
   is_nullable: 1
 
+=head2 library_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =head2 gender
 
   data_type: 'char'
@@ -67,17 +73,17 @@ __PACKAGE__->table("loans");
   is_nullable: 1
   size: 1
 
+=head2 age
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =head2 zipcode
 
   data_type: 'char'
   default_value: (empty string)
   is_nullable: 1
   size: 9
-
-=head2 age
-
-  data_type: 'integer'
-  is_nullable: 1
 
 =cut
 
@@ -99,12 +105,14 @@ __PACKAGE__->add_columns(
     datetime_undef_if_invalid => 1,
     is_nullable => 1,
   },
+  "library_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "gender",
   { data_type => "char", default_value => "", is_nullable => 1, size => 1 },
-  "zipcode",
-  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
   "age",
   { data_type => "integer", is_nullable => 1 },
+  "zipcode",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
 );
 
 =head1 PRIMARY KEY
@@ -152,6 +160,26 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
+=head2 library
+
+Type: belongs_to
+
+Related object: L<Ebooksforlib::Schema::Result::Library>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "library",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "library_id" },
+  {
+    is_deferrable => 1,
+    join_type     => "LEFT",
+    on_delete     => "CASCADE",
+    on_update     => "RESTRICT",
+  },
+);
+
 =head2 user
 
 Type: belongs_to
@@ -168,8 +196,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 14:53:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kJYv+sewsWzZnzRasbMrmg
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 17:19:33
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fk2h6XtToHPG3UCiRsO5eQ
 
 use Dancer ':syntax';
 

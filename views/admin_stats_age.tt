@@ -1,0 +1,43 @@
+<div class="container">
+
+<h2>Statistics: Age</h2>
+
+<h3>Active loans</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>Age</th>
+        <th>Count</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH age IN loan_ages %]
+        <tr>
+        <td>[% age.age %]</td>
+        <td>[% age.get_column('age_count') %]</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+<h3>Old loans</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>Age</th>
+        <th>Count</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH age IN old_loan_ages %]
+        <tr>
+        <td>[% age.age %]</td>
+        <td>[% age.get_column('age_count') %]</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+</div>

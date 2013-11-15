@@ -13,8 +13,6 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 
-### Lists
-
 get '/admin/stats' => require_role admin => sub { 
     
     my $library_id = _get_library_for_admin_user();
@@ -30,6 +28,40 @@ get '/admin/stats' => require_role admin => sub {
     template 'admin_stats', { 
         livestats => $livestats, 
         oldstats  => \@oldstats,
+    };
+};
+
+get '/admin/stats/age' => require_role admin => sub { 
+    
+    my $library_id = _get_library_for_admin_user();
+
+    my @loan_ages  = resultset('Loan')->search(
+        { 
+            library_id => $library_id, 
+        },
+        {
+            '+select' => [ { count => '*' } ],
+            '+as'     => [ 'age_count' ],
+            group_by  => [ 'age' ],
+            order_by  => [ 'age' ],
+        }
+    );
+    
+    my @old_loan_ages  = resultset('OldLoan')->search(
+        { 
+            library_id => $library_id, 
+        },
+        {
+            '+select' => [ { count => '*' } ],
+            '+as'     => [ 'age_count' ],
+            group_by  => [ 'age' ],
+            order_by  => [ 'age' ],
+        }
+    );
+
+    template 'admin_stats_age', { 
+        loan_ages     => \@loan_ages,
+        old_loan_ages => \@old_loan_ages,
     };
 };
 

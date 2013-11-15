@@ -55,12 +55,13 @@ get '/borrow/:item_id' => require_login sub {
 
     try {
         my $new_loan = rset('Loan')->create({
-            item_id => $item_id,
-            user_id => $user->id,
-            due     => $dt,
-            gender  => $user->gender,
-            age     => _calculate_age( $user->birthday ),
-            zipcode => _munge_zipcode( $user->zipcode ),
+            item_id    => $item_id,
+            user_id    => $user->id,
+            library_id => session('chosen_library'),
+            due        => $dt,
+            gender     => $user->gender,
+            age        => _calculate_age( $user->birthday ),
+            zipcode    => _munge_zipcode( $user->zipcode ),
         });
         # Log
         _log2db({

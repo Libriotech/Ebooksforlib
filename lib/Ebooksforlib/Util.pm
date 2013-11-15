@@ -63,14 +63,14 @@ sub _get_simplestats {
         'items' => resultset('Item')->search({ library_id => $library_id })->count,
         'onloan' => resultset('Item')->search(
             { 
-                library_id => $library_id, 
+                'me.library_id' => $library_id, 
                 'loan.loaned' => { '!=', undef } 
             },
             { join => 'loan' }, 
         )->count,
         'oldloans' => resultset('Item')->search(
             { 
-                library_id => $library_id, 
+                'me.library_id' => $library_id, 
                 'old_loans.returned' => { '!=', undef } 
             },
             { join => 'old_loans' }, 
@@ -157,14 +157,15 @@ sub _return_loan {
             $user_id = $loan->user->id;
         }
         my $old_loan = rset('OldLoan')->create({
-            item_id  => $loan->item_id,
-            user_id  => $user_id,
-            loaned   => $loan->loaned,
-            due      => $loan->due,
-            gender   => $loan->gender,
-            age      => $loan->age,
-            zipcode  => $loan->zipcode,
-            returned => DateTime->now( time_zone => setting('time_zone') )
+            item_id    => $loan->item_id,
+            user_id    => $user_id,
+            library_id => $loan->library_id,
+            loaned     => $loan->loaned,
+            due        => $loan->due,
+            gender     => $loan->gender,
+            age        => $loan->age,
+            zipcode    => $loan->zipcode,
+            returned   => DateTime->now( time_zone => setting('time_zone') )
         });
     } catch {
         debug "*** Error when returning item: " . $_;
