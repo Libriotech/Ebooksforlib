@@ -60,6 +60,25 @@ __PACKAGE__->table("loans");
   datetime_undef_if_invalid: 1
   is_nullable: 1
 
+=head2 gender
+
+  data_type: 'char'
+  default_value: (empty string)
+  is_nullable: 1
+  size: 1
+
+=head2 zipcode
+
+  data_type: 'char'
+  default_value: (empty string)
+  is_nullable: 1
+  size: 9
+
+=head2 age
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -80,6 +99,12 @@ __PACKAGE__->add_columns(
     datetime_undef_if_invalid => 1,
     is_nullable => 1,
   },
+  "gender",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 1 },
+  "zipcode",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
+  "age",
+  { data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -143,8 +168,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:08
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vy//HteIyFGBRv4/u+tHfg
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 14:53:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kJYv+sewsWzZnzRasbMrmg
 
 use Dancer ':syntax';
 

@@ -5,6 +5,8 @@ use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
+use DateTime; 
+use DateTime::Format::ISO8601;
 use HTTP::Lite;
 use URL::Encode 'url_encode';
 use MIME::Base64 qw(encode_base64);
@@ -14,6 +16,8 @@ use Modern::Perl;
 use base 'Exporter';
 
 our @EXPORT = qw( 
+    _calculate_age
+    _munge_zipcode
     _get_simplestats
     _log2db
     _coverurl2base64 
@@ -28,6 +32,27 @@ our @EXPORT = qw(
     check_hash
     hash_pkey
 );
+
+sub _calculate_age {
+    # FIXME This returns the exact age in years. It might be better to reduce
+    # the age to a range. So if the real age is 50 and we have a range 45-66, 
+    # then we return 45. 
+    my ( $birthday ) = @_;
+    my $now = DateTime->now( time_zone => setting('time_zone') );
+    my $bday = DateTime::Format::ISO8601->parse_datetime( $birthday );
+    my $diff = $now->subtract_datetime( $bday );
+    return $diff->years();
+}
+
+# Keep the two first digits, replace the rest with zeros
+# FIXME This assumes a 4 digit zipcode, the munging should probably be configurable
+sub _munge_zipcode {
+    my ( $zip ) = @_;
+    # Get the 2 first chars
+    my $stub = substr $zip, 0, 2;
+    # Pad with zeros
+    return $stub . "00";
+}
 
 sub _get_simplestats {
 
@@ -136,6 +161,9 @@ sub _return_loan {
             user_id  => $user_id,
             loaned   => $loan->loaned,
             due      => $loan->due,
+            gender   => $loan->gender,
+            age      => $loan->age,
+            zipcode  => $loan->zipcode,
             returned => DateTime->now( time_zone => setting('time_zone') )
         });
     } catch {
