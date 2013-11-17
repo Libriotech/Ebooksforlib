@@ -12,6 +12,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="/admin/stats">Overview</a></li>
                     <li><a href="/admin/stats/age">Age</a></li>
+                    <li><a href="/admin/stats/gender">Gender</a></li>
                 </ul>
             </li>
             <li><a href="/admin/logs">Logs</a></li>

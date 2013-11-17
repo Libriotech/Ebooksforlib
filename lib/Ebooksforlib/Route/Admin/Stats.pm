@@ -31,10 +31,65 @@ get '/admin/stats' => require_role admin => sub {
     };
 };
 
+get '/admin/stats/gender' => require_role admin => sub { 
+    
+    my $library_id = _get_library_for_admin_user();
+
+    # Gender for all registered users
+    my @user_gender  = resultset('User')->search(
+        { 
+            'user_libraries.library_id' => $library_id,
+        },
+        {
+            'join'      => 'user_libraries',
+            '+select'   => [ { count => '*' } ],
+            '+as'       => [ 'gender_count' ],
+            'group_by'  => [ 'gender' ],
+            'order_by'  => [ 'gender' ],
+        }
+    );
+ 
+    # Gender for current loans
+    my @loan_gender  = resultset('Loan')->search(
+        { 
+            'library_id' => $library_id,
+        },
+        {
+            '+select'   => [ { count => '*' } ],
+            '+as'       => [ 'gender_count' ],
+            'group_by'  => [ 'gender' ],
+            'order_by'  => [ 'gender' ],
+        }
+    );   
+    
+    # Gender for old (returned) loans
+    my @old_loan_gender  = resultset('OldLoan')->search(
+        { 
+            'library_id' => $library_id,
+        },
+        {
+            '+select'   => [ { count => '*' } ],
+            '+as'       => [ 'gender_count' ],
+            'group_by'  => [ 'gender' ],
+            'order_by'  => [ 'gender' ],
+        }
+    );
+
+    template 'admin_stats_gender', {
+        'simplestats'     => _get_simplestats( $library_id ),
+        'user_gender'     => \@user_gender,
+        'loan_gender'     => \@loan_gender,
+        'old_loan_gender' => \@old_loan_gender,
+    };
+};
+
 get '/admin/stats/age' => require_role admin => sub { 
     
     my $library_id = _get_library_for_admin_user();
 
+    # FIXME Show distribution of ages among users
+
+    # Ages for active loans
     my @loan_ages  = resultset('Loan')->search(
         { 
             library_id => $library_id, 
@@ -47,6 +102,7 @@ get '/admin/stats/age' => require_role admin => sub {
         }
     );
     
+    # Ages for old loans
     my @old_loan_ages  = resultset('OldLoan')->search(
         { 
             library_id => $library_id, 

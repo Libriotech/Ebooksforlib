@@ -1,0 +1,68 @@
+<div class="container">
+
+<h2>[% l('Statistics: Gender') %]</h2>
+
+<h3>[% l('All users') %]</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>[% l('Gender') %]</th>
+        <th>[% l('Count') %]</th>
+        <th>[% l('Percentage') %]</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH gender IN user_gender %]
+        <tr>
+        <td>[% IF gender.gender == '' %][% l('Unknown') %][% ELSE %][% gender.gender %][% END %]</td>
+        <td>[% gender.get_column('gender_count') %]</td>
+        <td>[% ( ( gender.get_column('gender_count') * 100 ) / simplestats.users ) FILTER format('%02.1f') %]%</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+<h3>[% l('Active loans') %]</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>[% l('Gender') %]</th>
+        <th>[% l('Count') %]</th>
+        <th>[% l('Percentage') %]</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH gender IN loan_gender %]
+        <tr>
+        <td>[% IF gender.gender == '' %][% l('Unknown') %][% ELSE %][% gender.gender %][% END %]</td>
+        <td>[% gender.get_column('gender_count') %]</td>
+        <td>[% ( ( gender.get_column('gender_count') * 100 ) / simplestats.onloan ) FILTER format('%02.1f') %]%</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+<h3>[% l('Old loans') %]</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>[% l('Gender') %]</th>
+        <th>[% l('Count') %]</th>
+        <th>[% l('Percentage') %]</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH gender IN old_loan_gender %]
+        <tr>
+        <td>[% IF gender.gender == '' %][% l('Unknown') %][% ELSE %][% gender.gender %][% END %]</td>
+        <td>[% gender.get_column('gender_count') %]</td>
+        <td>[% ( ( gender.get_column('gender_count') * 100 ) / simplestats.oldloans ) FILTER format('%02.1f') %]%</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+</div>

@@ -58,23 +58,11 @@ sub _get_simplestats {
 
     my ( $library_id ) = @_;
     my %stats = (
-        'users' => resultset('UserLibrary')->search({ library_id => $library_id })->count,
-        'files' => resultset('File')->search({ library_id => $library_id })->count,
-        'items' => resultset('Item')->search({ library_id => $library_id })->count,
-        'onloan' => resultset('Item')->search(
-            { 
-                'me.library_id' => $library_id, 
-                'loan.loaned' => { '!=', undef } 
-            },
-            { join => 'loan' }, 
-        )->count,
-        'oldloans' => resultset('Item')->search(
-            { 
-                'me.library_id' => $library_id, 
-                'old_loans.returned' => { '!=', undef } 
-            },
-            { join => 'old_loans' }, 
-        )->count,
+        'users'    => resultset('UserLibrary')->search({ 'library_id' => $library_id })->count,
+        'files'    => resultset('File')->search({        'library_id' => $library_id })->count,
+        'items'    => resultset('Item')->search({        'library_id' => $library_id })->count,
+        'onloan'   => resultset('Loan')->search({        'library_id' => $library_id })->count,
+        'oldloans' => resultset('OldLoan')->search({     'library_id' => $library_id })->count,
     );
     return \%stats;
 

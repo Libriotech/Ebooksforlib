@@ -10,7 +10,12 @@
     <li>Add a new book based on ISBN: <form method="GET" action="/books/add_from_isbn" style="display: inline;"><input type="text" name="isbn"><input type="submit" value="Go!"></form></li>
     <li><a href="/creators/add">Add a new creator</a></li>
     <li><a href="/admin/lists">Lists and genres</a></li>
-    <li><a href="/admin/stats">Statistics</a></li>
+    <li><a href="/admin/stats">Statistics</a>
+        <ul>
+        <li><a href="/admin/stats/age">Age</a>
+        <li><a href="/admin/stats/gender">Gender</a>
+        </ul>
+    </li>
     <li><a href="/admin/logs">Logs</a></li>
 </ul>
 
