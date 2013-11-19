@@ -21,7 +21,7 @@
         <td>[% livestats.files %]</td>
         <td>[% livestats.items %]</td>
         <td>[% livestats.onloan %]</td>
-        <td>[% ( ( livestats.onloan * 100 ) / livestats.items ) FILTER format('%02.1f') %]</td>
+        <td>[% IF livestats.items %][% ( ( livestats.onloan * 100 ) / livestats.items ) FILTER format('%02.1f') %][% END %]</td>
         <td>[% livestats.oldloans %]</td>
     </tr>
     [% FOREACH stat IN oldstats %]
@@ -31,7 +31,7 @@
         <td>[% stat.files %]</td>
         <td>[% stat.items %]</td>
         <td>[% stat.onloan %]</td>
-        <td>[% ( ( stat.onloan * 100 ) / stat.items ) FILTER format('%02.1f') %]</td>
+        <td>[% IF stat.items %][% ( ( stat.onloan * 100 ) / stat.items ) FILTER format('%02.1f') %][% END %]</td>
         <td>[% stat.oldloans %]</td>
         </tr>
     [% END %]

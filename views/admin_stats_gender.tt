@@ -17,7 +17,7 @@
         <tr>
         <td>[% IF gender.gender == '' %][% l('Unknown') %][% ELSE %][% gender.gender %][% END %]</td>
         <td>[% gender.get_column('gender_count') %]</td>
-        <td>[% ( ( gender.get_column('gender_count') * 100 ) / simplestats.users ) FILTER format('%02.1f') %]%</td>
+        <td>[% IF simplestats.users %][% ( ( gender.get_column('gender_count') * 100 ) / simplestats.users ) FILTER format('%02.1f') %]%[% END %]</td>
         </tr>
     [% END %]
 </tbody>
@@ -38,7 +38,7 @@
         <tr>
         <td>[% IF gender.gender == '' %][% l('Unknown') %][% ELSE %][% gender.gender %][% END %]</td>
         <td>[% gender.get_column('gender_count') %]</td>
-        <td>[% ( ( gender.get_column('gender_count') * 100 ) / simplestats.onloan ) FILTER format('%02.1f') %]%</td>
+        <td>[% IF simplestats.onloan %][% ( ( gender.get_column('gender_count') * 100 ) / simplestats.onloan ) FILTER format('%02.1f') %]%[% END %]</td>
         </tr>
     [% END %]
 </tbody>
@@ -59,7 +59,7 @@
         <tr>
         <td>[% IF gender.gender == '' %][% l('Unknown') %][% ELSE %][% gender.gender %][% END %]</td>
         <td>[% gender.get_column('gender_count') %]</td>
-        <td>[% ( ( gender.get_column('gender_count') * 100 ) / simplestats.oldloans ) FILTER format('%02.1f') %]%</td>
+        <td>[% simplestats.oldloans %][% ( ( gender.get_column('gender_count') * 100 ) / simplestats.oldloans ) FILTER format('%02.1f') %]%[% END %]</td>
         </tr>
     [% END %]
 </tbody>
