@@ -24,6 +24,10 @@ post '/in' => sub {
     my $password  = param 'password';
     my $userrealm;
     
+    # Remove whitespace around username
+    $username =~ s/^ {1,}//;
+    $username =~ s/ {1,}$//;
+    
     # Find the realm we should try to athenticate against
     if ( param 'realm' ) {
         $userrealm = param 'realm';
