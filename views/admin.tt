@@ -2,21 +2,21 @@
 
 <div class="container">
 
-<h2>Admin</h2>
+<h2>[% l('Admin') %]</h2>
 
 <ul class="nav nav-list">
-    <li><a href="/admin/settings">Settings</a></li>
-    <li><a href="/books/add">Add a new book from scratch</a></li>
-    <li>Add a new book based on ISBN: <form method="GET" action="/books/add_from_isbn" style="display: inline;"><input type="text" name="isbn"><input type="submit" value="Go!"></form></li>
-    <li><a href="/creators/add">Add a new creator</a></li>
-    <li><a href="/admin/lists">Lists and genres</a></li>
-    <li><a href="/admin/stats">Statistics</a>
+    <li><a href="/admin/settings">[% l('Settings') %]</a></li>
+    <li><a href="/books/add">[% l('Add a new book from scratch') %]</a></li>
+    <li>[% l('Add a new book based on ISBN') %]: <form method="GET" action="/books/add_from_isbn" style="display: inline;"><input type="text" name="isbn"><input type="submit" value="[% l('Send') %]"></form></li>
+    <li><a href="/creators/add">[% l('Add a new creator') %]</a></li>
+    <li><a href="/admin/lists">[% l('Lists and genres') %]</a></li>
+    <li><a href="/admin/stats">[% l('Statistics') %]</a>
         <ul>
-        <li><a href="/admin/stats/age">Age</a>
-        <li><a href="/admin/stats/gender">Gender</a>
+        <li><a href="/admin/stats/age">[% l('Age') %]</a>
+        <li><a href="/admin/stats/gender">[% l('Gender') %]</a>
         </ul>
     </li>
-    <li><a href="/admin/logs">Logs</a></li>
+    <li><a href="/admin/logs">[% l('Logs') %]</a></li>
 </ul>
 
 </div>

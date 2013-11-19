@@ -15,24 +15,124 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views/layouts/main.tt:149
-msgid "Du er ikke logget inn."
+#: views/layouts/main.tt:198 views/layouts/main.tt:214
+msgid "About eBib"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:97
+#: views/admin_stats_gender.tt:26
+msgid "Active loans"
+msgstr ""
+
+#: views/admin.tt:10
+msgid "Add a new book based on ISBN"
+msgstr ""
+
+#: views/admin.tt:9
+msgid "Add a new book from scratch"
+msgstr ""
+
+#: views/admin.tt:11
+msgid "Add a new creator"
+msgstr ""
+
+#: views/admin.tt:5
+msgid "Admin"
+msgstr ""
+
+#: views/admin.tt:15
+msgid "Age"
+msgstr ""
+
+#: views/admin_stats_gender.tt:5
+msgid "All users"
+msgstr ""
+
+#: views/layouts/main.tt:200 views/layouts/main.tt:216
+msgid "Contact"
+msgstr ""
+
+#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53
+msgid "Count"
+msgstr ""
+
+#: views/admin.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
+msgid "Gender"
+msgstr ""
+
+#: views/layouts/main.tt:207 views/layouts/main.tt:222
+msgid "Help"
+msgstr ""
+
+#: views/admin.tt:12
+msgid "Lists and genres"
+msgstr ""
+
+#: views/layouts/main.tt:155 views/layouts/main.tt:221
+msgid "Log in"
+msgstr ""
+
+#: views/layouts/main.tt:117 views/layouts/main.tt:208
+msgid "Log out"
+msgstr ""
+
+#: views/admin.tt:19
+msgid "Logs"
+msgstr ""
+
+#: views/layouts/main.tt:205
+msgid "My books"
+msgstr ""
+
+#: views/layouts/main.tt:116 views/layouts/main.tt:206
+msgid "My page"
+msgstr ""
+
+#: lib/Ebooksforlib.pm:99
 msgid "Not a valid library."
 msgstr ""
 
-#: lib/Ebooksforlib.pm:305
+#: views/admin_stats_gender.tt:47
+msgid "Old loans"
+msgstr ""
+
+#: lib/Ebooksforlib.pm:307
 msgid "Oops, we got an error:<br />$_"
 msgstr ""
 
-#: views/layouts/main.tt:101 views/layouts/main.tt:145
+#: views/admin_stats_gender.tt:12 views/admin_stats_gender.tt:33 views/admin_stats_gender.tt:54
+msgid "Percentage"
+msgstr ""
+
+#: views/layouts/main.tt:107 views/layouts/main.tt:151
 msgid "Search"
+msgstr ""
+
+#: views/admin.tt:10
+msgid "Send"
+msgstr ""
+
+#: views/admin.tt:8
+msgid "Settings"
+msgstr ""
+
+#: views/admin.tt:13
+msgid "Statistics"
+msgstr ""
+
+#: views/admin_stats_gender.tt:3
+msgid "Statistics: Gender"
+msgstr ""
+
+#: views/admin_stats_gender.tt:18 views/admin_stats_gender.tt:39 views/admin_stats_gender.tt:60
+msgid "Unknown"
 msgstr ""
 
 #: views/chooselib.tt:10
 msgid "Velg bibliotek:"
+msgstr ""
+
+#: views/layouts/main.tt:199 views/layouts/main.tt:215
+msgid "What you need to borrow"
 msgstr ""
 
 #: views/chooselib.tt:28
@@ -43,6 +143,18 @@ msgstr ""
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr ""
 
+#: views/layouts/main.tt:155
+msgid "You are not logged in."
+msgstr ""
+
 #: views/chooselib.tt:12
 msgid "You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with."
+msgstr ""
+
+#: views/layouts/main.tt:155
+msgid "about eBib"
+msgstr ""
+
+#: views/layouts/main.tt:155
+msgid "or find out more"
 msgstr ""

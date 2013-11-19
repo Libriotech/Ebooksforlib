@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="no"><head>
   <meta charset="UTF-8">
-  <title>EBIB</title>
+  <title>eBib[% IF template.pagetitle %] - [% template.pagetitle %][% END %]</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/jquery-ui-1.10.3.custom.min.css" />
   <script src="/js/jquery-1.9.1.min.js"></script>   
@@ -113,8 +113,8 @@ function resizeEvent(e) {
 				   			 	</li>
 						    	<li><a class="dropdown-toggle min-side" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i></a>
 						    		<ul class="dropdown-menu" role="menu">
-						    			<li><a href="/my" src="" data="Log out">Min side</a></li>
-						    			<li><a href="/out" src="" data="Log out">Logg ut</a></li>
+						    			<li><a href="/my" src="" data="Log out">[% l('My page') %]</a></li>
+						    			<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
 						    		</ul>
 				 			   	</li>
 						 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
@@ -152,7 +152,7 @@ function resizeEvent(e) {
     				</form>
 				    [%# Users need to have a chosen library before they can be offered to log in. %]
 				    [% IF session.chosen_library %]
-				    <div class="logged-out-info hidden-phone">[% l('Du er ikke logget inn.') %] <a href="/in">Logg inn</a> eller finn ut mer <a href="/page/about">om eBib</a></div>
+				    <div class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about eBib') %]</a></div>
 				    [% END %]
 			    </div>
 		    </div>
@@ -195,31 +195,31 @@ function resizeEvent(e) {
 [% IF session.logged_in_user %]
 		<div class="span3">
 				<ul class="footer-menu-list">
-				<li><a href="/page/about">Om eBib</a></li>
-				<li><a href="/page/newuser">Dette trenger du for å låne</a></li>
-				<li><a href="#">Kontakt</a></li>
+				<li><a href="/page/about">[% l('About eBib') %]</a></li>
+				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
+				<li><a href="#">[% l('Contact') %]</a></li>
 			</ul>
 		</div>
 		<div class="span2">
 			<ul class="footer-menu-list">
-				<li><a href="http://reader.digitalt.org/">Mine bøker</a></li>
-				<li><a href="/my">Min side</a></li>
-				<li><a href="/page/help" src="" data="Hjelp">Hjelp</a></li>
-				<li><a href="/out" src="" data="Log out">Logg ut</a></li>
+				<li><a href="http://reader.digitalt.org/">[% l('My books') %]</a></li>
+				<li><a href="/my">[% l('My page') %]</a></li>
+				<li><a href="/page/help" src="" data="Hjelp">[% l('Help') %]</a></li>
+				<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
 			</ul>
 		</div>
 [% ELSE %]	
 		<div class="span3">
 			<ul class="footer-menu-list">
-				<li><a href="/page/about">Om eBib</a></li>
-				<li><a href="/page/newuser">Dette trenger du for å låne</a></li>
-				<li><a href="#">Kontakt</a></li>
+				<li><a href="/page/about">[% l('About eBib') %]</a></li>
+				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
+				<li><a href="#">[% l('Contact') %]</a></li>
 			</ul>
 		</div>
 		<div class="span2">
 			<ul class="footer-menu-list">
-				<li><a href="/in">Logg inn</a></li>
-				<li><a href="/page/help" src="" data="Hjelp">Hjelp</a></li>
+				<li><a href="/in">[% l('Log in') %]</a></li>
+				<li><a href="/page/help" src="" data="Hjelp">[% l('Help') %]</a></li>
 			</ul>
 		</div>
 [% END %]

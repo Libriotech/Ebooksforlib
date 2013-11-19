@@ -15,25 +15,125 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views/layouts/main.tt:149
-msgid "Du er ikke logget inn."
-msgstr ""
+#: views/layouts/main.tt:198 views/layouts/main.tt:214
+msgid "About eBib"
+msgstr "Om eBib"
 
-#: lib/Ebooksforlib.pm:97
+#: views/admin_stats_gender.tt:26
+msgid "Active loans"
+msgstr "Aktive lån"
+
+#: views/admin.tt:10
+msgid "Add a new book based on ISBN"
+msgstr "Legg til en ny bok basert på ISBN"
+
+#: views/admin.tt:9
+msgid "Add a new book from scratch"
+msgstr "Legg til en ny bok fra grunnen av"
+
+#: views/admin.tt:11
+msgid "Add a new creator"
+msgstr "Legg til forfatter"
+
+#: views/admin.tt:5
+msgid "Admin"
+msgstr "Admin"
+
+#: views/admin.tt:15
+msgid "Age"
+msgstr "Alder"
+
+#: views/admin_stats_gender.tt:5
+msgid "All users"
+msgstr "Alle brukere"
+
+#: views/layouts/main.tt:200 views/layouts/main.tt:216
+msgid "Contact"
+msgstr "Kontakt oss"
+
+#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53
+msgid "Count"
+msgstr "Antall"
+
+#: views/admin.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
+msgid "Gender"
+msgstr "Kjønn"
+
+#: views/layouts/main.tt:207 views/layouts/main.tt:222
+msgid "Help"
+msgstr "Hjelp"
+
+#: views/admin.tt:12
+msgid "Lists and genres"
+msgstr "Lister og sjangre"
+
+#: views/layouts/main.tt:155 views/layouts/main.tt:221
+msgid "Log in"
+msgstr "Logg inn"
+
+#: views/layouts/main.tt:117 views/layouts/main.tt:208
+msgid "Log out"
+msgstr "Logg ut"
+
+#: views/admin.tt:19
+msgid "Logs"
+msgstr "Logger"
+
+#: views/layouts/main.tt:205
+msgid "My books"
+msgstr "Mine bøker"
+
+#: views/layouts/main.tt:116 views/layouts/main.tt:206
+msgid "My page"
+msgstr "Min side"
+
+#: lib/Ebooksforlib.pm:99
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
-#: lib/Ebooksforlib.pm:305
-msgid "Oops, we got an error:<br />$_"
-msgstr ""
+#: views/admin_stats_gender.tt:47
+msgid "Old loans"
+msgstr "Gamle lån"
 
-#: views/layouts/main.tt:101 views/layouts/main.tt:145
+#: lib/Ebooksforlib.pm:307
+msgid "Oops, we got an error:<br />$_"
+msgstr "Oops, vi fikk en feil:<br />$_"
+
+#: views/admin_stats_gender.tt:12 views/admin_stats_gender.tt:33 views/admin_stats_gender.tt:54
+msgid "Percentage"
+msgstr "Prosent"
+
+#: views/layouts/main.tt:107 views/layouts/main.tt:151
 msgid "Search"
 msgstr "Søk"
+
+#: views/admin.tt:10
+msgid "Send"
+msgstr "Send"
+
+#: views/admin.tt:8
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: views/admin.tt:13
+msgid "Statistics"
+msgstr "Statistikk"
+
+#: views/admin_stats_gender.tt:3
+msgid "Statistics: Gender"
+msgstr "Statistikk: Kjønn"
+
+#: views/admin_stats_gender.tt:18 views/admin_stats_gender.tt:39 views/admin_stats_gender.tt:60
+msgid "Unknown"
+msgstr "Ukjent"
 
 #: views/chooselib.tt:10
 msgid "Velg bibliotek:"
 msgstr ""
+
+#: views/layouts/main.tt:199 views/layouts/main.tt:215
+msgid "What you need to borrow"
+msgstr "Dette trenger du for å låne"
 
 #: views/chooselib.tt:28
 msgid "You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it."
@@ -43,6 +143,18 @@ msgstr "Du er <em>ikke</em> logget inn ved biblioteket du har valgt, og kan ikke
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr "Du er logget inn ved biblioteket du har valgt, og kan låne bøker."
 
+#: views/layouts/main.tt:155
+msgid "You are not logged in."
+msgstr "Du er ikke logget inn"
+
 #: views/chooselib.tt:12
 msgid "You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with."
 msgstr "Du kan bytte bibliotek når du måtte ønske, men legg merke til at du bare kan låne bøker fra det biblioteket du er logget inn ved."
+
+#: views/layouts/main.tt:155
+msgid "about eBib"
+msgstr "om eBib"
+
+#: views/layouts/main.tt:155
+msgid "or find out more"
+msgstr "eller finn ut mer"
