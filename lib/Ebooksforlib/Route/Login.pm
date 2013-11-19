@@ -15,7 +15,7 @@ use Ebooksforlib::Util;
 use Data::Dumper; # FIXME Debug
 
 get '/in' => sub {
-    template 'login';
+    template 'login', { disable_search => 1, };
 };
 
 post '/in' => sub {

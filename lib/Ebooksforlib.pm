@@ -80,6 +80,7 @@ get '/choose' => sub {
         libraries          => \@libraries, 
         return_url         => $return_url, 
         belongs_to_library => $belongs_to_library,
+        disable_search     => 1,
     };
 
 };
