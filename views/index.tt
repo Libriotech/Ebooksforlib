@@ -6,7 +6,6 @@
     <!-- LOGG INN BANNER
     ************************************* -->
 
-    [% META disable_search = 1 %]
     <div class="logginn-wrapper">
     <div class="container content-container">
     <div class="row">
