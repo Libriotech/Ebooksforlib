@@ -21,7 +21,8 @@
   <script src="/js/lawnchair.js"></script>
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/font-awesome.min.css">
+<!--  <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="http://reader.digitalt.org/css/style.css" rel="stylesheet" />
   <script type="text/javascript" src="//use.typekit.net/lrk7anq.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -87,7 +88,7 @@ function resizeEvent(e) {
 	    <nav>
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
-				    <a class="brand" href="/"><i class="icon-home"></i> <span class="library-name">[% session.chosen_library_name %]</span></a>
+				    <a class="brand" href="/"><i class="fa fa-home"></i> <span class="library-name">[% session.chosen_library_name %]</span></a>
     					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 							<span class="icon-bar"></span>
@@ -109,16 +110,16 @@ function resizeEvent(e) {
     							</li>
 				    			<li>
 				    				<a href="http://reader.digitalt.org/" class="mine-boker">
-				    				<i class='icon-book'></i></a>
+				    				<i class='fa fa-book'></i></a>
 				   			 	</li>
-						    	<li><a class="dropdown-toggle min-side" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i></a>
+						    	<li><a class="dropdown-toggle min-side" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
 						    		<ul class="dropdown-menu" role="menu">
 						    			<li><a href="/my" src="" data="Log out">[% l('My page') %]</a></li>
 						    			<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
 						    		</ul>
 				 			   	</li>
 						 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
-				 					<i class="icon-question-sign"></i></a>
+				 					<i class="fa fa-question"></i></a>
 						 		</li>
 				  		  </ul>
 				    </div>
@@ -145,7 +146,7 @@ function resizeEvent(e) {
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
 				    <a class="brand" href="/">
-				    	<i class="icon-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
+				    	<i class="fa fa-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
 				    </a>
 				    [% IF ! disable_search %]
 				        <form class="navbar-search pull-right" style="margin-top:5px;" action="/search" method="GET">
@@ -191,7 +192,7 @@ function resizeEvent(e) {
 		<div class="span5">
 			<h1>eBib</h1>
 			<ul class="footer-menu-list">
-				<li><a href="#"><i class="icon-facebook-sign"></i></a></li>
+				<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
 			</ul>
 		</div>
 [% IF session.logged_in_user %]

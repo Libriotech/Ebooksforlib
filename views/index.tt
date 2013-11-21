@@ -6,43 +6,61 @@
     <!-- LOGG INN BANNER
     ************************************* -->
 
-    <div class="logginn-wrapper">
-    <div class="container content-container">
-    <div class="row">
-	    <div class="span12 center add-top">
-		    <h1 style="margin-bottom:0;">eBib</h1>
-		    <h4 class="red" style="letter-spacing:0.5px;font-weight:500;margin-top:-10px;margin-bottom:20px;">[% l('Borrow ebooks for free') %]</h4>
-        </div>
-        <div class="span4 offset4">
-        [% INCLUDE 'login_form.tt' %]
-        </div>
-    </div>
+<div class="logginn-wrapper">
+	<div class="container content-container">
+    	<div class="row">
+	    	<div class="span12 center add-top">
+		    	<h1 style="margin-bottom:0;">eBib</h1>
+				<h4 class="red" style="letter-spacing:0.5px;font-weight:500;margin-top:-10px;margin-bottom:20px;">–Lån ebøker gratis</h4>
+        	</div>
+        	<div class="span4 offset4">
+        		[% INCLUDE 'login_form.tt' %]
+        	</div>
+    	</div>
     </div> 
-    </div>
+</div>
 
 <!-- NY BRUKER? BANNER
 ************************************* 
 
-
 	<div class="hanging-alert2" style="position:absolute;left:50%;margin-bottom:-33px;margin-left:-155px;">
-		<a href="/page/newuser"><strong style="font-weight:500;">[% l('New user?') %]</strong> <span class="hidden-phone">[% l('What you need in order to borrow') %] ></span></a> 
+		<a href="/page/newuser"><strong style="font-weight:500;">Ny Bruker?</strong> <span class="hidden-phone">Dette trenger du for å låne ></span></a> 
 	</div> -->
 
 [% END %]
 
-<!-- UTVALGTE ROMANER
+<!-- UTVALGTE BØKER
 ************************************* -->
+
+<h1 class="visible-phone">Velg sjanger:</h1>
 
 [% FOREACH booklist IN booklists %]
 
-<section id="[% booklist.list.name %]">
+<!-- FOR MOBIL VIEWPORT -->
+
+<section id="[% booklist.list.name %]" class="visible-phone">
+	<div class="article">
+		<div class="container content-container">
+			<div class="row">
+				<div class="span12">
+					<a class="genre-title-mobile" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<!-- FOR NETTBRETT OG STØRRE VIEWPORTS -->
+
+<section id="[% booklist.list.name %]" class="hidden-phone">
 <div class="article">
 <div class="container content-container">
     <div class="row">
     	<div class="span12 center">
     		<div class="genre-head">
-    	    	<a class="genre-title" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="icon-angle-right visible-phone" style="margin-left:10px;"></i></a>
-    			<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">Se alle<i class="icon-angle-right" style="margin-left:10px;"></i></a>
+    	    	<a class="genre-title" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="fa fa-angle-right visible-phone" style="margin-left:10px;"></i></a>
+    			<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">Se alle<i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
     		</div>
     	</div>
     </div>
@@ -74,10 +92,10 @@
                                         [% ELSIF descriptions.results.bindings.0.abstract.value %]
                                             [% descriptions.results.bindings.0.abstract.value | html_entity | replace( '&gt;', '>' ) | replace( '&lt;', '<' ) | html_strip %]
                                         [% ELSE %]
-                                            [% l('Sorry, no description available.') %]
+                                            Sorry, no description available.
                                         [% END %]
                                     [% ELSE %]
-                                        [% l('Error while fetching descriptions.') %]
+                                        (Beklager, feil ved henting av omtaler.)
                                     [% END %]
 						        </p>
 					        </div>
@@ -90,9 +108,9 @@
             [% END %]
 	    </ul>
     </div>
-    </div>
+</div>
 
-<!-- SISTE
+<!-- KARUSELL
 ************************************* -->
 
 <div class="row add-top hidden-phone">
@@ -101,38 +119,47 @@
 			<div class="bxspinner">
        			<i class="icon-spin icon-spinner"></i>
 			</div>
-	<ul class="block-list bxslider bxhidden">
-        [% FOREACH booklistitem IN booklist.booklist %]
-            [% IF booklistitem.promoted != 1 %]
-			    <li>
-				    <a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
-					    <div class="block-list-img">
-					        [% IF booklistitem.book.coverimg %]
-                                <img src="[% booklistitem.book.coverimg %]">
-                            [% ELSE %]
-                                <img src="http://reader.digitalt.org/img/missing-cover.png">
-                            [% END %]
-						    <div class="li-text">
-							    <h4 class="title max-1l ellipsis">[% booklistitem.book.title %]</h4>
-							    <p class="author max-1l ellipsis">[% booklistitem.book.creators_as_string %]</p>
-						    </div>
-					    </div>
-				    </a>
-			    </li>
-		    [% END %]
-		[% END %]
-	</ul>
+			<ul class="block-list bxslider bxhidden">
+        		[% FOREACH booklistitem IN booklist.booklist %]
+         		   [% IF booklistitem.promoted != 1 %]
+			    		<li>
+				    		<a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
+					    		<div class="block-list-img">
+					        		[% IF booklistitem.book.coverimg %]
+                                		<img src="[% booklistitem.book.coverimg %]">
+                            		[% ELSE %]
+                                		<img src="http://reader.digitalt.org/img/missing-cover.png">
+                            		[% END %]
+						    		<div class="li-text">
+							    		<h4 class="title max-1l ellipsis">[% booklistitem.book.title %]</h4>
+							    		<p class="author max-1l ellipsis">[% booklistitem.book.creators_as_string %]</p>
+						    		</div>
+					    		</div>
+				    		</a>
+			    		</li>
+		    		[% END %]
+				[% END %]
+			</ul>
       </div>
-</div>
+	</div>
 </div>
 
 
 </div> <!-- end container -->
 </div> <!-- end article -->
  </section>
-
     
 [% END %]
 [%# END of FOREACH booklist IN booklists %]
+
+<!-- BOKLISTE MOBIL
+************************************* -->
+
+<section class="visible-phone">
+<h1>Siste</h1>
+	<div class="bokliste-mobil">
+		Kobl på utlisting med titler fra en egen mobil-bokliste her (bruk samme layout som books-table.tt).
+	</div>
+</section>
 
 [%# INCLUDE 'books_table.tt' books=books %]
