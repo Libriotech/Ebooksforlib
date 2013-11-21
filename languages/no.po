@@ -139,6 +139,10 @@ msgstr "Sjanger"
 msgid "Genres"
 msgstr "Sjangre"
 
+#: views/book.tt:155
+msgid "Go to"
+msgstr "Gå til"
+
 #: views/layouts/main.tt:209 views/layouts/main.tt:224
 msgid "Help"
 msgstr "Hjelp"
@@ -438,6 +442,10 @@ msgstr "forfalt"
 #: views/search.tt:22
 msgid "results"
 msgstr "treff"
+
+#: views/book.tt:155
+msgid "the reader to download and read the book"
+msgstr "bokleseren for å laste ned og lese boken"
 
 #: views/login.tt:14 views/login.tt:25
 msgid "user"
