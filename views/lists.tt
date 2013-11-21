@@ -1,7 +1,7 @@
 [% META pagetitle = 'Genres &amp; lists' %]
 
 [% IF genres.size %]
-    <h2>Genres</h2>
+    <h2>[% l('Genres') %]</h2>
     <ul>
     [% FOREACH genre IN genres %]
         <li><a href="/list/[% genre.id %]">[% genre.name %]</a></li>
@@ -10,7 +10,7 @@
 [% END %]
 
 [% IF lists.size %]
-    <h2>Lists</h2>
+    <h2>[% l('Lists') %]</h2>
     <ul>
     [% FOREACH list IN lists %]
         <li><a href="/list/[% list.id %]">[% list.name %]</a></li>

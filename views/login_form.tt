@@ -1,18 +1,18 @@
 <form method='post' action="/in">
     <div class="login-container">
         <div class="login-row1">
-        	<label for="text" style="display:none;">Lånenummer</label>
-        	<input class="span3" type="text" id='username' name='username' placeholder="Lånenummer" autocapitalize="off">
+        	<label for="text" style="display:none;">[% l('Patron number') %]</label>
+        	<input class="span3" type="text" id='username' name='username' placeholder="[% l('Patron number') %]" autocapitalize="off">
     	</div>
 		<div class="login-row2">
-   			<label for="password" style="display:none;">PIN-kode</label>
-   			<input class="span3" type="password" id='password' name='password' placeholder="PIN-kode">
+   			<label for="password" style="display:none;">[% l('PIN code') %]</label>
+   			<input class="span3" type="password" id='password' name='password' placeholder="[% l('PIN code') %]">
        		[% IF params.admin == 1 %]
       		<input type="hidden" name="realm" value="local">
       		[% END %]
        	</div>
       </div>
-	  <button type="submit" class="btn-login">Logg inn</button>
-	  <a class="glemt-pinkode" href="/page/help">Hjelp til innloggingen?</a>
+	  <button type="submit" class="btn-login">[% l('Log in') %]</button>
+	  <a class="glemt-pinkode" href="/page/help">[% l('Need help logging in?') %]</a>
 </form>   
 

@@ -7,7 +7,7 @@
 
 <ul class="path">
 	  <li class="back-btn">
-            <a href="/">Forsiden</a>
+            <a href="/">[% l('Home') %]</a>
       </li>
 	  <li><span>[% list.name %]</span></li>
 	  </ul>
@@ -17,7 +17,7 @@
 [% IF list.books.size %]
     [% INCLUDE 'books_table.tt' books=list.books %]
 [% ELSE %]
-    <p>Sorry, there are not title in this list yet.</p>
+    <p>[% l('Sorry, there are no titles in this list yet.') %]</p>
 [% END %]
 
 </div>
@@ -28,8 +28,8 @@
 <div class="adminactions">
 <p>Admin actions</p>
 <p>
-    <a href="/lists/edit/[% list.id %]" title="Edit this list">Edit</a> |
-    <a href="/lists/books/[% list.id %]" title="Delete books from this list">Delete books</a>
+    <a href="/lists/edit/[% list.id %]" title="[% l('Edit this list') %]">[% l('Edit') %]</a> |
+    <a href="/lists/books/[% list.id %]" title="[% l('Delete books from this list') %]">[% l('Delete books') %]</a>
 </p>
 </div>
     [% END %]
