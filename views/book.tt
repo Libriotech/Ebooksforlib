@@ -152,7 +152,7 @@
             [% ELSIF user_has_borrowed == 1 %]
                 <div class="alert alert-success">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-ok"></i> Du låner denne boken.
+    				<i class="icon-ok"></i> Du låner denne boken. Gå til <a href='http://reader.digitalt.org'>bokleseren for å laste ned og lese boken</a>.
     			</div>
             [% ELSIF limit_reached == 1 %]
                 <div class="alert">
