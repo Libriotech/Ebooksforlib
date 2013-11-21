@@ -41,13 +41,13 @@
 			</div>
 			<p class="details">
 		    [% IF book.date %]
-		        Utgivelsesår: [% book.date %] /
+		        [% l('Published') %]: [% book.date %] /
     		[% END %]
             [% IF book.isbn %]
-                ISBN: [% book.isbn %] /
+                [% l('ISBN') %]: [% book.isbn %] /
             [% END %]
             [% IF book.pages %]
-                Sider: [% book.pages %] /
+                [% l('Pages') %]: [% book.pages %] /
             [% END %]
             [% IF book.lists.size %]
                 [%# Build separate arrays for lists and genres %]
@@ -62,14 +62,14 @@
                     [% END %]
                 [% END %]
                 [% IF genres.size %]
-                    Sjanger: 
+                    [% l('Genre') %]: 
                     [% FOREACH list IN lists %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
                     
                 [% END %]
                 [% IF lists.size %]
-                    Lister: 
+                    [% l('Lists') %]: 
                     [% FOREACH list IN genres %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
@@ -127,7 +127,7 @@
    		
    
 		<div class="description">
-		   <h4>Omtale</h4>
+		   <h4>[% l('Description') %]</h4>
 		   [% SET descriptions = book.get_descriptions %]
            [% IF descriptions.results.bindings.size %]
                [% IF descriptions.results.bindings.0.abstract.value %]
@@ -142,22 +142,22 @@
 		    [% IF !session.logged_in_user %]
 		        <div class="alert alert-info"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-info-sign"></i> Du må være logget inn for å låne bøker.
+    				<i class="icon-info-sign"></i> [% l('You must be logged in to borrow books.') %]
     			</div>
             [% ELSIF user_belongs_to_library == 0 %]
                 <div class="alert"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-exclamation-sign"></i> Du har ikke muligheter til å låne bøker fra dette biblioteket.
+    				<i class="icon-exclamation-sign"></i> [% l('You do not have access to borrow books from this library.') %]
     			</div>
             [% ELSIF user_has_borrowed == 1 %]
                 <div class="alert alert-success">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-ok"></i> Du låner denne boken.
+    				<i class="icon-ok"></i> [% l('You already borrow this book.') %]
     			</div>
             [% ELSIF limit_reached == 1 %]
                 <div class="alert">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-exclamation-sign"></i> Du låner allerede maksimalt antall bøker.
+    				<i class="icon-exclamation-sign"></i> [% l('You have checked out the maximum number of concurrent books.') %]
     			</div>
             [% ELSIF book.files.size %]
                 [% SET longest_loan_period = 0 %]
@@ -174,13 +174,13 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]"><span style="font-size:20px;font-weight:100;">+</span><i class="icon-book"></i> <div class="btn-txt">Lån boken</div></a>
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]"><span style="font-size:20px;font-weight:100;">+</span><i class="icon-book"></i> <div class="btn-txt">[% l('Borrow this book') %]</div></a>
                 <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
                 <div class="alert">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="icon-exclamation-sign"></i> Alle våre eksemplarer er desverre utlånt.
+    				<i class="icon-exclamation-sign"></i> [% l('Sorry, all our copies of this book are on loan.') %]
     			</div>
             [% END %]
 		
@@ -311,7 +311,7 @@
 	<div class="container content-container">
 		<div class="row">
 			<div class="span12">
-				<h5 class="related-titles">Andre bøker av [% FOREACH creator IN book.creators %]
+				<h5 class="related-titles">[% l('Other books by') %] [% FOREACH creator IN book.creators %]
             	<span>[% creator.name %]</span>[% UNLESS loop.last() %],[% END %]
         [% END %]:</h5>
     [% INCLUDE 'books_table.tt' books=books %]
@@ -326,11 +326,11 @@
 	<div class="adminactions">
 	<p>Admin actions</p>
 	<p>
-    <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
-    <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
-    <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
-    <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a> |
-    <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">Covers</a>
+    <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">[% l('Edit') %]</a> |
+    <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">[% l('Creators') %]</a> |
+    <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">[% l('Lists') %]</a> |
+    <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">[% l('Items') %]</a> |
+    <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">[% l('Covers') %]</a>
 	</p>
 	</div>
     [% END %]

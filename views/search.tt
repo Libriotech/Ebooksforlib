@@ -19,11 +19,11 @@
     [%# Sort the books by title %]
     [% SET sortedbooks = allbooks.sort('title') %]
 
-    <p>You searched for <b>[% params.q | html_entity %]</b> and got [% sortedbooks.size %] results:</p>
+    <p>[% l('You searched for') %] <b>[% params.q | html_entity %]</b> [% l('and got') %] [% sortedbooks.size %] [% l('results') %]:</p>
     [% INCLUDE 'books_listview.tt' books=sortedbooks %]
 
 [% ELSE %]
-    <p>Sorry, no matches found.</p>
+    <p>[% l('Sorry, no matches found.') %]</p>
 [% END %]
 
 </div>

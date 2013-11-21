@@ -4,7 +4,7 @@
 <div class="row add-top">
 <div class="span12">
 
-<h4>Bøker av [% creator.name %]:</h4> 
+<h4>[% l('Books by') %] [% creator.name %]:</h4> 
 
 [% IF creator.books.size %]
 
@@ -17,7 +17,7 @@
 <div class="adminactions">
 <p>Admin actions</p>
 <p>
-    <a href="/creators/edit/[% creator.id %]" title="Edit this creaor">Edit</a>
+    <a href="/creators/edit/[% creator.id %]" title="[% l('Edit this creator') %]">[% l('Edit') %]</a>
 </p>
 </div>
     [% END %]
