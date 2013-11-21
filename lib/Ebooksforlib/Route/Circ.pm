@@ -53,6 +53,16 @@ get '/borrow/:item_id' => require_login sub {
     $dt->add_duration( $loan_period );
     debug '*** Due: ' . $dt->datetime;
 
+    my $age = '';
+    if ( $user->birthday ) {
+        $age = _calculate_age( $user->birthday );
+    }
+    
+    my $zipcode = '';
+    if ( $user->zipcode ) {
+        $zipcode = _munge_zipcode( $user->zipcode );
+    }
+
     try {
         my $new_loan = rset('Loan')->create({
             item_id    => $item_id,
@@ -60,8 +70,8 @@ get '/borrow/:item_id' => require_login sub {
             library_id => session('chosen_library'),
             due        => $dt,
             gender     => $user->gender,
-            age        => _calculate_age( $user->birthday ),
-            zipcode    => _munge_zipcode( $user->zipcode ),
+            age        => $age,
+            zipcode    => $zipcode,
         });
         # Log
         _log2db({
