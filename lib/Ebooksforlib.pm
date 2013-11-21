@@ -57,6 +57,7 @@ hook 'before' => sub {
     # make the data available from here
     # TODO Perhaps have a list of pages that need the data here, to check
     # against? 
+    # FIXME Not sure this is a good idea anymore...
     my @lists = rset('List')->search({
         'library_id' => session('chosen_library')
     });
@@ -133,15 +134,27 @@ get '/' => sub {
     }, {
         'order_by' => 'frontpage_order',
     });
-    
     # Get the ListBook's for each list
+    # FIXME Why do I do this? Can't I get the books from the lists themselves?!? 
     foreach my $list ( @lists ) {
         my @booklist = rset('ListBook')->search({ list_id => $list->id });
         push @booklists, { booklist => \@booklist, list => $list };
     }
-
+        
+    my @mobile = rset('List')->search({
+        'library_id' => session('chosen_library'),
+        'mobile'     => 1,
+    });
+    my @mobilebooklist;
+    if ( $mobile[0] ) {
+        @mobilebooklist = rset('ListBook')->search({ list_id => $mobile[0]->id });
+    }
+    
     var hide_dropdowns => 1;    
-    template 'index', { booklists => \@booklists };
+    template 'index', { 
+        booklists      => \@booklists, 
+        mobilebooklist => \@mobilebooklist, 
+    };
     
 };
 

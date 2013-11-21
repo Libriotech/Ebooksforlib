@@ -17,6 +17,13 @@
 <input type="checkbox" name="frontpage" id="frontpage" value="1" />
 [% END %]
 
+<label for="is_mobile">Use this list for the mobile view of the front page:</label>
+[% IF params.mobile || list.mobile %]
+<input type="checkbox" name="mobile" id="mobile" value="1" checked="checked" />
+[% ELSE %]
+<input type="checkbox" name="mobile" id="mobile" value="1" />
+[% END %]
+
 [% IF list.id %]
 <input type="hidden" name="id" id="id" value="[% list.id %]"/>
 [% END %]

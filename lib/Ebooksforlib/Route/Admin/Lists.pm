@@ -29,6 +29,7 @@ post '/lists/add' => require_role admin => sub {
     my $name      = param 'name';
     my $is_genre  = param 'is_genre';
     my $frontpage = param 'frontpage';
+    my $mobile    = param 'mobile';
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
@@ -43,6 +44,7 @@ post '/lists/add' => require_role admin => sub {
             name       => $name,
             is_genre   => $is_genre,
             frontpage  => $frontpage,
+            mobile     => $mobile,
             library_id => $library_id,
         });
         flash info => 'A new list was added! <a href="/list/' . $new_list->id . '">View</a>';
@@ -69,6 +71,7 @@ post '/lists/edit' => require_role admin => sub {
     my $name = param 'name';
     my $is_genre = param 'is_genre';
     my $frontpage = param 'frontpage';
+    my $mobile    = param 'mobile';
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
@@ -77,6 +80,7 @@ post '/lists/edit' => require_role admin => sub {
         $list->set_column('name', $name);
         $list->set_column('is_genre', $is_genre);
         $list->set_column('frontpage', $frontpage);
+        $list->set_column('mobile', $mobile);
         $list->update;
         flash info => 'A list was updated! <a href="/list/' . $list->id . '">View</a>';
         redirect '/admin/lists';

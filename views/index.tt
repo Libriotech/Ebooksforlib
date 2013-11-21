@@ -155,11 +155,11 @@
 <!-- BOKLISTE MOBIL
 ************************************* -->
 
+[% IF mobilebooklist %]
 <section class="visible-phone">
 <h1>Siste</h1>
 	<div class="bokliste-mobil">
-		Kobl på utlisting med titler fra en egen mobil-bokliste her (bruk samme layout som books-table.tt).
+        [% INCLUDE 'books_table.tt' books=mobilebooklist %]
 	</div>
 </section>
-
-[%# INCLUDE 'books_table.tt' books=books %]
+[% END %]
