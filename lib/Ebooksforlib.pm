@@ -230,7 +230,7 @@ get '/page/:slug' => sub {
     my $slug = param 'slug';
     
     # Allowed pages
-    my @pages = ( 'help', 'newuser', 'about' );
+    my @pages = qw( help help2 help3 help4 help5 newuser about contact info );
     # FIXME Apparently, ~~ is deprecated as of Perl 5.18 so replacing it here 
     # would be a good idea
     if ( /$slug/i ~~ @pages ) {

@@ -1,0 +1,43 @@
+<div class="container content-container">
+	<div class="row add-top add-bottom">
+		<div class="span9">
+			<div class="bg-white padding20">
+			<h1>Kontakt</h1>
+
+<h5>Drammensbiblioteket</h5>
+<p>Tlf: 320 45 400</p>
+<p>SMS: DRAMBIB + melding sendes til 1980</p>
+<p>Epost: bibliotek@drmk.no</p>
+<p>Besøksadresse: Grønland 58, Papirbredden, Drammen</p>
+
+<h5>Kongsberg bibliotek</h5>
+<p>Tlf: 32 86 68 50</p>
+<p>Epost: kongbib@kongsberg.folkebibl.no</p>
+<p>Besøksadresse: Chr. Augustsgate 1, Kongsberg</p>
+
+<h5>Nore og Uvdal bibliotek</h5>
+<p>Tlf: 31 02 42 20</p>
+<p>Epost: biblioteket@nore-og-uvdal.kommune.no</p>
+<p>Besøksadresse: Rødberg bibliotek, Syljerudveien 5, Rødberg</p>
+
+<h5>Buskerud fylkesbibliotek v/prosjektleder Jannicke Røgler</h5>
+<p>Tlf: 990 14 288</p>
+<p>Epost: jannicke.rogler@bfk.no</p>
+<p>Besøksadresse: Grønland 58, Papirbredden, Drammen</p>
+
+			</div>
+		</div>
+		<div class="span3">
+			<h4>Generelt</h4>
+			<h4>Lån</h4>
+			<h4>Lesing</h4>
+			<h4>Bibliotekene<h4>
+			<h4>Utvalget</h4>
+			<h4>Personvern</h4>
+			<h4>Teknisk</h4>
+			<p>Finner du ikke svaret på det du lurer på?</p>
+			<p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
+		</div>
+	</div>
+	</div>
+</div>
