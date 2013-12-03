@@ -1,4 +1,4 @@
-<form method='post' action="/in">
+<form method='post' action="/in" class="login-form">
     <div class="login-container">
         <div class="login-row1">
         	<label for="text" style="display:none;">[% l('Patron number') %]</label>

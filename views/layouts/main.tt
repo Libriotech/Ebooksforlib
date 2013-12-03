@@ -89,40 +89,42 @@ function resizeEvent(e) {
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
 				    <a class="brand" href="/"><i class="fa fa-home"></i> <span class="library-name">[% session.chosen_library_name %]</span></a>
-    					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</a>
 						[%# Determine if this user should be able to see the admin menu %]
                         [% FOREACH role IN session.logged_in_user_roles %]
                             [% IF role == 'admin' %]
                                 [% INCLUDE 'admin_navbar.tt' %]
                             [% END %]
                         [% END %]
-						<div class="nav-collapse">
+    					<!-- .btn-navbar is used as the toggle for collapsed navbar content 
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a>
+						<div class="nav-collapse"> -->
 				    		<ul class="nav pull-right">
 				    			<li>
-				    				<form class="navbar-search" action="/search" method="GET">
+				    				<form class="navbar-search hidden-phone" action="/search" method="GET">
 										<input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
     								</form>
     							</li>
-				    			<li>
-				    				<a href="http://reader.digitalt.org/" class="mine-boker">
-				    				<i class='fa fa-book'></i></a>
+				    			<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-book"></i></a>
+				    				<ul class="dropdown-menu" role="menu">
+				    					<li><a href="http://reader.digitalt.org/">Mine bøker</a></li>
+				    					<li><a href="/my">Administrer lån</a></li>
+				    				</ul>
 				   			 	</li>
-						    	<li><a class="dropdown-toggle min-side" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
+						    	<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
 						    		<ul class="dropdown-menu" role="menu">
-						    			<li><a href="/my" src="" data="Log out">[% l('My page') %]</a></li>
-						    			<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
+						    			<li><a href="/my" src="" data="Log out">Min profil</a></li>
+						    			<li><a href="/out" src="" data="Log out">Logg ut</a></li>
 						    		</ul>
 				 			   	</li>
-						 		<li><a href="/page/help" src="" data="Hjelp" class="hjelp">
+						 		<li><a href="/page/help" src="" data="Hjelp">
 				 					<i class="fa fa-question"></i></a>
 						 		</li>
 				  		  </ul>
-				    </div>
+				    <!-- </div> -->
 			    </div>
 		    </div>
 	    </nav>
@@ -200,7 +202,7 @@ function resizeEvent(e) {
 				<ul class="footer-menu-list">
 				<li><a href="/page/about">[% l('About eBib') %]</a></li>
 				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
-				<li><a href="#">[% l('Contact') %]</a></li>
+				<li><a href="/page/contact">[% l('Contact') %]</a></li>
 			</ul>
 		</div>
 		<div class="span2">
@@ -216,7 +218,7 @@ function resizeEvent(e) {
 			<ul class="footer-menu-list">
 				<li><a href="/page/about">[% l('About eBib') %]</a></li>
 				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
-				<li><a href="#">[% l('Contact') %]</a></li>
+				<li><a href="/page/contact">[% l('Contact') %]</a></li>
 			</ul>
 		</div>
 		<div class="span2">

@@ -1,9 +1,30 @@
-<div class="container">
-<div class="row add-bottom">
-<div class="span12">
-
+<div class="container content-container">
+	<div class="row add-top add-bottom">
+		<div class="span9">
+			<div class="bg-white padding20">
 <h1>Om eBib</h1>
+<p>På eBib.no kan du låne norske e-bøker gratis 24 timer i døgnet.</p>
+<p>I første omgang er det tre folkebibliotek i Buskerud som tar i bruk den nye e-lånsløsningen.</p>
+<p><a href="http://libriotech.no/" target="_blank">Libriotech</a> og <a href ="http://www.mupublishing.com/ target="_blank">MuPublishing</a> har utviklet løsningen. Libriotech står for den daglige driften av løsningen.</p>
+<p>eBib.no er en webapplikasjon utviklet i HTML5 som lar deg låne og lese e-bøker direkte i din nettleser på PC/Mac, nettbrett og smarttelefoner.</p>
+<p>E-bøkene kan også leses i frakoblet modus.</p>
+<p>De tre bibliotekene får innhold hovedsakelig fra Kulturrådets prøveordning med innkjøp av e-bøker til folkebibliotekene. Mer informasjon om prøveordningen på <a href="http://kulturradet.no/om-kulturradet/vis-artikkel/-/asset_publisher/vRV5/content/aktuelt-utvider-pr%C3%B8veprosjekt-for-e-b%C3%B8ker" target="_blank">Kulturrådets nettsider</a>.</p>
+<p>eBib.no er et samarbeidsprosjekt mellom Buskerud fylkesbibliotek og Deichmanske bibliotek. Teknisk løsning og design er utviklet av <a href="http://libriotech.no/" target="_blank">Libriotech</a> og <a href ="http://www.mupublishing.com/ target="_blank">MuPublishing</a>.</p>
 
+			</div>
+		</div>
+		<div class="span3">
+			<h4>Generelt</h4>
+			<h4>Lån</h4>
+			<h4>Lesing</h4>
+			<h4>Bibliotekene<h4>
+			<h4>Utvalget</h4>
+			<h4>Personvern</h4>
+			<h4>Teknisk</h4>
+			<p>Finner du ikke svaret på det du lurer på?</p>
+			<p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
+		</div>
+	</div>
+	</div>
 </div>
-</div>
-</div>
+

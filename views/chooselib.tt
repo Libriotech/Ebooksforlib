@@ -14,7 +14,7 @@
 				<ul class="bibliotek-ul">
 				[% FOREACH library IN libraries %]
 					<li>
-						<a href="/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]"><i class="icon-angle-right""></i> [% library.name %]</a>
+						<a href="/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]"><i class="fa fa-angle-right"></i> [% library.name %]</a>
     				<!--	[% IF session.chosen_library == library.id %]
         				<img src="/images/tick.png" height="16" width="16" alt="[% l('Yes') %]" title="[% l('Yes') %]">
     					[% END %] -->
@@ -33,7 +33,7 @@
     	<div class="row">
 	    	<div class="span8 offset2 center">
 				<div class="splashpage-intro">
-					[% l('eBib lets you borrow electronic books for free from your local library.') %] [% l('Read more about it') %] <a href="/pages/newuser">[% l('here') %] &rarr;</a>
+					[% l('eBib lets you borrow electronic books for free from your local library.') %] [% l('Read more about it') %] <a href="/pages/info">[% l('here') %] &rarr;</a>
 				</div>
 			</div>
 		</div>

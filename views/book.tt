@@ -1,18 +1,20 @@
 [% META pagetitle = 'Book page' %]
 [% USE date %]
 
+
+
 <!-- STINAVIGERING
 ************************************* -->
 <ul class="path">
-      <li class="back-btn">
+    <li class="back-btn">
 	  	[% FOREACH list IN book.lists %]
             [% IF list.library.id == session.chosen_library %]
                 <a href="/list/[% list.id %]">[% list.name %][% UNLESS loop.last() %],[% END %]</a>
             [% END %]
 		[% END %]
-      </li>
-      <li><span>[% book.title %]</span></li>
-      </ul>
+    </li>
+    <li><span>[% book.title %]</span></li>
+</ul>
 
 <!-- BOK
 ************************************* -->
@@ -78,16 +80,16 @@
             [% END %]
 			</p>
    		</div> <!-- end book details -->
-   
 		<div class="description">
-		   <h4>Omtale</h4>
+		   
+
 		   [% SET descriptions = book.get_descriptions %]
            [% IF descriptions.results.bindings.size %]
                [% IF descriptions.results.bindings.0.abstract.value %]
-                   <p>[% descriptions.results.bindings.0.abstract.value %]</p>
+            	<h4>Omtale</h4><p>[% descriptions.results.bindings.0.abstract.value %]</p>
                [% END %]
                [% IF descriptions.results.bindings.0.krydder.value %]
-                   <p>[% descriptions.results.bindings.0.krydder.value %]</p>
+               <h4>Omtale</h4><p>[% descriptions.results.bindings.0.krydder.value %]</p>
                [% END %]
            [% END %]
          </div>  
@@ -95,22 +97,22 @@
 		    [% IF !session.logged_in_user %]
 		        <div class="alert alert-info"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-info"></i> Du må være logget inn for å låne bøker.
+    				<i class="fa fa-info-circle"></i> Du må være logget inn for å låne bøker.
     			</div>
             [% ELSIF user_belongs_to_library == 0 %]
                 <div class="alert"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-exclamation"></i> Du har ikke muligheter til å låne bøker fra dette biblioteket.
+    				<i class="fa fa-exclamation-circle"></i> Du har ikke muligheter til å låne bøker fra dette biblioteket.
     			</div>
             [% ELSIF user_has_borrowed == 1 %]
                 <div class="alert alert-success">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-check"></i> Du låner denne boken. Gå til <a href='http://reader.digitalt.org'>bokleseren for å laste ned og lese boken</a>.
+    				<i class="fa fa-check-circle"></i> Du låner denne boken. Gå til <a href='http://reader.digitalt.org'>bokleseren for å laste ned og lese boken</a>.
     			</div>
             [% ELSIF limit_reached == 1 %]
-                <div class="alert">
+                <div class="alert alert-danger">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-exclamation"></i> Du låner allerede maksimalt antall bøker.
+    				<i class="fa fa-exclamation-circle"></i> Du låner allerede maksimalt antall bøker.</div>
     			</div>
             [% ELSIF book.files.size %]
                 [% SET longest_loan_period = 0 %]

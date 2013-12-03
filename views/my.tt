@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span12 add-top">
-			<h1><i class="icon-user"></i> [% l('My page') %]</h1>
+			<h1><i class="fa fa-user"></i> [% l('My page') %]</h1>
 		</div>
 	</div>
 	<div class="row">
@@ -120,8 +120,11 @@
     <p>[% l('You have no old loans.') %]</p>
 [% END %]
 
-	<div class="alert alert-info">
-		<i class="icon-info-sign"></i> [% l('Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!') %]</div>
+		<div class="alert alert-info center">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+    		<i class="fa fa-info-circle"></i> [% l('Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!') %]
+    	</div>
+    
 	</div>
 	</div>	
 </div>

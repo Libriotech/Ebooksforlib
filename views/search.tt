@@ -1,6 +1,10 @@
 [% META pagetitle = 'Search' %]
 
-<div class="container">
+
+<div class="article-bg-white">
+<div class="container content-container">
+<div class="row">
+<div class="span12">
 
 [% IF books.size || creators.size %]
 
@@ -19,11 +23,14 @@
     [%# Sort the books by title %]
     [% SET sortedbooks = allbooks.sort('title') %]
 
-    <p>[% l('You searched for') %] <b>[% params.q | html_entity %]</b> [% l('and got') %] [% sortedbooks.size %] [% l('results') %]:</p>
-    [% INCLUDE 'books_listview.tt' books=sortedbooks %]
+    <p class="half-top">[% l('You searched for') %] <b>[% params.q | html_entity %]</b> [% l('and got') %] [% sortedbooks.size %] [% l('results') %]:</p>
+    [% INCLUDE 'books_table.tt' books=sortedbooks %]
 
 [% ELSE %]
     <p>[% l('Sorry, no matches found.') %]</p>
 [% END %]
 
+</div>
+</div>
+</div>
 </div>

@@ -9,9 +9,9 @@
         		<div class="alert alert-block">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
     				[% IF params.admin == 1 %]
-        			<p>[% l('You must log in with a valid admin user.') %]</p>
+        			<i class="fa fa-info-circle"></i> [% l('You must log in with a valid admin user.') %]
 					[% ELSE %]
-        			<p>[% l('You must log in with a valid') %] [% session.chosen_library_name %]-[% l('user') %].</p>
+        			<i class="fa fa-info-circle"></i> [% l('You must log in with a valid') %] [% session.chosen_library_name %]-[% l('user') %].
     				[% END %]
     			</div>
 			</div>

@@ -11,7 +11,7 @@
     	<div class="row">
 	    	<div class="span12 center add-top">
 		    	<h1 style="margin-bottom:0;">eBib</h1>
-				<h4 class="red" style="letter-spacing:0.5px;font-weight:500;margin-top:-10px;margin-bottom:20px;">–Lån ebøker gratis</h4>
+				<h4 class="red" style="letter-spacing:1.25px;font-weight:500;margin-top:-10px;margin-bottom:20px;">Lån ebøker gratis</h4>
         	</div>
         	<div class="span4 offset4">
         		[% INCLUDE 'login_form.tt' %]
@@ -32,14 +32,16 @@
 <!-- UTVALGTE BØKER
 ************************************* -->
 
-<h1 class="visible-phone">Velg sjanger:</h1>
+<div class="body-container">
+
+<div class="velg-sjanger visible-phone center">Velg sjanger:</div>
 
 [% FOREACH booklist IN booklists %]
 
 <!-- FOR MOBIL VIEWPORT -->
 
 <section id="[% booklist.list.name %]" class="visible-phone">
-	<div class="article">
+	<div class="article-mobil">
 		<div class="container content-container">
 			<div class="row">
 				<div class="span12">
@@ -156,10 +158,44 @@
 ************************************* -->
 
 [% IF mobilebooklist %]
-<section class="visible-phone">
-<h1>Siste</h1>
-	<div class="bokliste-mobil">
-        [% INCLUDE 'books_table.tt' books=mobilebooklist %]
+<div class="siste visible-phone center">Siste:</div>
+<section id="bokliste-mobil" class="visible-phone">
+<div class="article-list-mobil">
+	<div class="container content-container">
+		<div class="row">
+			<div class="span12">
+				<ul class="utlisting">
+	    			[% FOREACH booklistitem IN mobilebooklist %]
+					<li>
+						<a href="/book/[% booklistitem.book.id %]" class="book-block">
+							<div class="utlisting-img">
+								[% IF booklistitem.book.coverimg %]
+                        			<img src="[% booklistitem.book.coverimg %]">
+                    			[% ELSE %]
+                        		[%# FIXME This URL shoul dnot be hard coded %]
+                        			<img src="http://reader.digitalt.org/img/missing-cover.png">
+                    			[% END %]
+                    		</div>
+							<div class="li-text-portal">
+								<h4 class="title">[% booklistitem.book.title %]</h4>
+								<p class="author">
+							    	[% FOREACH creator IN booklistitem.book.creators %]
+                        	        	[% creator.name %][% UNLESS loop.last() %],[% END %]
+                        	    	[% END %]
+                  		      	</p>
+							</div>
+							<div class="li-i-portal">
+								<i class="fa fa-angle-right"></i>
+							</div>
+						</a>
+					</li>
+        			[% END %]
+    			</ul>
+    		</div>
+    	</div>
 	</div>
+</div>
 </section>
+[%# INCLUDE 'books_table.tt' books=mobilebooklist %]
+
 [% END %]
