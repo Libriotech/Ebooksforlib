@@ -141,9 +141,9 @@ function resizeEvent(e) {
 ************************************* -->
 
     [%# This header can be hidden on selected pages by including this at the top of the page template:
-        [ % META hide_header = 1 % ]
+        [ % META template.hide_header = 1 % ]
     %]
-    [% IF hide_header == 1 %]
+    [% IF template.hide_header != 1 %]
 
         <div class="container-fluid header-container">
         <div class="row-fluid">
