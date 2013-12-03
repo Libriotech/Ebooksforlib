@@ -1,5 +1,6 @@
 [% META 
    hide_header = 1 
+   hide_footer = 1 
    body_class = 'body-login'
 %]
 

@@ -192,6 +192,11 @@ function resizeEvent(e) {
 <!-- FOOTER
 ************************************* -->
 
+[%# This footer can be hidden on selected pages by including this at the top of the page template:
+    [ % META template.hide_footer = 1 % ]
+%]
+[% IF template.hide_footer != 1 %]
+
 <section id="footer">
 <div class="footer-wrapper">
 <div class="container">
@@ -248,6 +253,8 @@ function resizeEvent(e) {
 </div>
 </div>
 </section>
+
+[% END %]
 
 </body>
 </html>
