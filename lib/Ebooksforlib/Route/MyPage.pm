@@ -59,6 +59,11 @@ get '/anon_toggle_ok' => require_login sub {
         $user->set_column( 'anonymize', $new_anonymize );
         $user->update;
         flash info => 'Your anonymization setting was updated!';
+        # Log
+        _log2db({
+            logcode => 'ANONTOGGLE',
+            logmsg  => "anonymize = $new_anonymize",
+        });
     } catch {
         flash error => localize("Oops, we got an error:<br />$_");
         error "$_";
@@ -95,6 +100,11 @@ get '/anon_ok/:id' => require_login sub {
             $oldloan->set_column( 'user_id', 1 );
             $oldloan->update;
             flash info => 'Your loan was anonymized!';
+            # Log
+            _log2db({
+                logcode => 'ANONYMIZE',
+                logmsg  => "",
+            });
         } catch {
             flash error => "Oops, we got an error:<br />$_";
             error "$_";
