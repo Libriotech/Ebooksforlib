@@ -140,35 +140,40 @@ function resizeEvent(e) {
 <!-- BRANDING, SØK OG TOPPNAVIGERING
 ************************************* -->
 
-    <div class="container-fluid header-container">
-    <div class="row-fluid">
-    <div class="span12">
-    <header>
-	    <nav>
-		    <div class="navbar navbar-inverse">
-			    <div class="navbar-inner">
-				    <a class="brand" href="/">
-				    	<i class="fa fa-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
-				    </a>
-				    [% IF ! disable_search %]
-				        <form class="navbar-search pull-right" style="margin-top:5px;" action="/search" method="GET">
-						    <input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
-        				</form>
-    				[% END %]
-				    [%# Users need to have a chosen library before they can be offered to log in. %]
-				    [% IF session.chosen_library %]
-				    <div class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about eBib') %]</a></div>
-				    [% END %]
-			    </div>
-		    </div>
-	    </nav>
+    [%# This header can be hidden on selected pages by including this at the top of the page template:
+        [% META hide_header = 1 %]
+    %]
+    [% IF hide_header == 1 %]
 
-    </header>
-    </div>
-    </div>
-    </div> <!-- end container -->
+        <div class="container-fluid header-container">
+        <div class="row-fluid">
+        <div class="span12">
+        <header>
+	        <nav>
+		        <div class="navbar navbar-inverse">
+			        <div class="navbar-inner">
+				        <a class="brand" href="/">
+				        	<i class="fa fa-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
+				        </a>
+				        [% IF ! disable_search %]
+				            <form class="navbar-search pull-right" style="margin-top:5px;" action="/search" method="GET">
+						        <input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
+            				</form>
+        				[% END %]
+				        [%# Users need to have a chosen library before they can be offered to log in. %]
+				        [% IF session.chosen_library %]
+				        <div class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about eBib') %]</a></div>
+				        [% END %]
+			        </div>
+		        </div>
+	        </nav>
 
+        </header>
+        </div>
+        </div>
+        </div> <!-- end container -->
 
+    [% END %]
  
 [% END %]
 
