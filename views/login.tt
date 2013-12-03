@@ -1,5 +1,5 @@
 [% META 
-   hide_header = 1 
+   hide_header = 0
    hide_footer = 1 
    body_class = 'body-login'
 %]
@@ -8,19 +8,25 @@
     <div class="row">
 	    <div class="span6 offset3 clearfix center">
 	        <div class="logginn-wrapper" style="margin-top:100px;padding:50px;border-radius:2px;">
-		    	<h1 class="add-bottom">eBib</h1>
+		    	<h1 style="margin-bottom:0;">eBib</h1>
+				<h4 class="red" style="letter-spacing:1.25px;font-weight:500;margin-top:-10px;margin-bottom:20px;">Lån ebøker gratis</h4>
         		[% INCLUDE 'login_form.tt' %]
         	</div>
+        	[% IF params.admin == 1 %]
         	<div class="alert-wrapper" style="margin-bottom:100px;">
         		<div class="alert alert-block">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				[% IF params.admin == 1 %]
         			<i class="fa fa-info-circle"></i> [% l('You must log in with a valid admin user.') %]
-					[% ELSE %]
+        		</div>
+        	</div>
+			[% ELSE %]
+			<!-- <div class="alert-wrapper" style="margin-bottom:100px;">
+        		<div class="alert alert-block">
+    				<button type="button" class="close" data-dismiss="alert">&times;</button>
         			<i class="fa fa-info-circle"></i> [% l('You must log in with a valid') %] [% session.chosen_library_name %]-[% l('user') %].
-    				[% END %]
     			</div>
-			</div>
+			</div> -->
+			[% END %]
     	</div>
     </div>
 </div>

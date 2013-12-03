@@ -104,7 +104,7 @@ function resizeEvent(e) {
 						<div class="nav-collapse"> -->
 				    		<ul class="nav pull-right">
 				    			<li>
-				    				<form class="navbar-search hidden-phone" action="/search" method="GET">
+				    				<form class="navbar-search hidden-phone pull-right" action="/search" method="GET">
 										<input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
     								</form>
     							</li>
@@ -156,7 +156,7 @@ function resizeEvent(e) {
 				        	<i class="fa fa-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
 				        </a>
 				        [% IF ! disable_search %]
-				            <form class="navbar-search pull-right" style="margin-top:5px;" action="/search" method="GET">
+				            <form class="navbar-search hidden-phone pull-right" action="/search" method="GET">
 						        <input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
             				</form>
         				[% END %]
