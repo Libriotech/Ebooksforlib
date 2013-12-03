@@ -84,10 +84,14 @@
 
 <h3>[% l('Old loans') %]
 <div style="display:inline-block;margin-left:20px;font-size:13px;">
+    [% SET toggle_target = '/anon_toggle' %]
+    [% IF settings.toggle_anon_confirm == 0 %]
+        [% toggle_target = '/anon_toggle_ok' %]
+    [% END %] 
     [% IF user.anonymize == 1 %]
-    	[% l('Anonymize') %] | <a href="/anon_toggle">[% l('Keep history') %]</a>
+    	[% l('Anonymize') %] | <a href="[% toggle_target %]">[% l('Keep history') %]</a>
 	[% ELSE %]
-		[% l('Keep history') %] | <a href="/anon_toggle">[% l('Anonymize') %]</a>
+		<a href="[% toggle_target %]">[% l('Anonymize') %]</a> | [% l('Keep history') %]
 	[% END %]
 </div>
 </h3>
@@ -101,6 +105,7 @@
     	<th>[% l('Title') %]</th>
     	<th>[% l('Borrowed') %]</th>
     	<th>[% l('Returned') %]</th>
+    	<th></th>
     </tr>
     </thead>
     <tbody>
@@ -111,7 +116,11 @@
          <!--   <td>[% loan.item.loan_period %]</td> -->
          <!--   <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td> -->
             <td>[% date.format( time => loan.returned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-         <!--  <td><a href="/anon/[% loan.id %]">[% l('Anonymize') %]</a></td> -->
+            [% SET anon_target = '/anon' %]
+            [% IF settings.toggle_anon_confirm == 0 %]
+                [% anon_target = '/anon_ok' %]
+            [% END %]
+            <td><a href="[% anon_target %]/[% loan.id %]" class="btn">[% l('Anonymize') %]</a></td>
         </tr>
     [% END %]
     </tbody>

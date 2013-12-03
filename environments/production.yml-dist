@@ -24,6 +24,13 @@ min_pass: 12
 # 1 = redirect directly to the one hit (be it a book or an author)
 one_hit_redirect: 0
 
+# Should users be asked to confirm before they can toggle their setting for 
+# anonymization as well as when they anonymize a single loan? 
+# - If this is set to 0 they will not be asked for confirmation. 
+# - If it is set to 1 they will get a screen saying "Are you sure you want to 
+#   do this? Yes/No"
+toggle_anon_confirm: 1
+
 date_format: "%d-%b-%Y %H:%M:%S"
 locale: "en_US"
 time_zone: 'Europe/Oslo'
