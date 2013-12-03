@@ -72,7 +72,7 @@ function resizeEvent(e) {
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-beb289ee-59c0-ab4c-3b99-ec5cf86755a0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 </head>
-<body id="portal">
+<body id="portal"[% IF template.body_class %] class="[% template.body_class %]"[% END %]>
 <div class="header-wrapper">
 <div class="container-fluid header-container">
 

@@ -1,4 +1,7 @@
-[% META hide_header = 1 %]
+[% META 
+   hide_header = 1 
+   body_class = 'body-login'
+%]
 
 <div class="container content-container">
     <div class="row">
