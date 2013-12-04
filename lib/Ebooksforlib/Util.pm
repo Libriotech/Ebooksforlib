@@ -177,7 +177,7 @@ sub _return_loan {
 sub _user_has_borrowed {
     my ( $user, $book ) = @_;
     foreach my $loan ( $user->loans ) {
-        if ( $loan->item->file->book->id == $book->id ) {
+        if ( $loan->item->file && $loan->item->file->book->id == $book->id ) {
             return 1;
         } 
     }
