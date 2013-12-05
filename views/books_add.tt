@@ -2,10 +2,12 @@
 
 <div class="container">
 
-[% IF data %]
+[% IF data.results.bindings.size %]
     <h2>Reuse data converted from MARC records</h2>
-    [% IF data.size > 1 %]
-        <p>We found more than one source of metadata. Please choose one of the alternatives below and edit it as necessary. If none of the alternatives are to your liking, you can enter data manually at the bottom of the page.</p>
+    [% IF data.results.bindings.size > 1 %]
+        <p>We found several sources of metadata. Please choose one of the alternatives below and edit it as necessary. If none of the alternatives are to your liking, you can enter data manually at the bottom of the page.</p>
+    [% ELSIF data.results.bindings.size == 1 %]
+        <p>We found one source of metadata. Please edit it as necessary. If it is not a good fit, please enter data manually at the bottom of the page.</p>
     [% END %]
     [% FOREACH sparqlbook IN data.results.bindings %]
         <h3>Alternative [% loop.count %]</h3>
@@ -21,6 +23,9 @@
 [% END %]
 
 <h2>Enter data from scratch</h2>
+[% IF data.results.bindings.size < 1 %]
+    <p>Sorry, we did not find any sources of metadata for that book. Please fill in data manually below, or try again later.</p>
+[% END %]
 <form method="POST" action="/books/add">
 [% adding = 1 %]
 [% INCLUDE books_form.tt %]

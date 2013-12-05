@@ -21,6 +21,7 @@ our @EXPORT = qw(
     _get_simplestats
     _log2db
     _coverurl2base64 
+    _get_data_from_isbn
     _sparql2data
     _isbn2bokkliden_cover
     _return_loan
@@ -93,6 +94,29 @@ sub _coverurl2base64 {
         or die "Unable to get document: $!";
     my @content_type = $http->get_header ( 'Content-Type' );
     return 'data:' . $content_type[0][0] . ';base64,' . encode_base64( $http->body() );
+
+}
+
+=head2 _get_data_from_isbn
+
+Takes an Business::ISBN object and queroes a triplestore for data related to it. 
+
+Returns the data as a hasref.
+
+=cut
+
+sub _get_data_from_isbn {
+
+    my ( $isbn ) = @_;
+    
+    my $sparql = 'SELECT DISTINCT ?graph ?uri ?title ?published ?pages WHERE { GRAPH ?graph {
+                      ?uri a <http://purl.org/ontology/bibo/Document> .
+                      ?uri <http://purl.org/ontology/bibo/isbn> "' . $isbn->common_data . '" .
+                      ?uri <http://purl.org/dc/terms/title> ?title .
+                      ?uri <http://purl.org/dc/terms/issued> ?published .
+                      ?uri <http://purl.org/ontology/bibo/numPages> ?pages .
+                  } }';
+    return _sparql2data( $sparql );
 
 }
 
@@ -177,7 +201,7 @@ sub _return_loan {
 sub _user_has_borrowed {
     my ( $user, $book ) = @_;
     foreach my $loan ( $user->loans ) {
-        if ( $loan->item->file->book->id == $book->id ) {
+        if ( $loan->item->file && $loan->item->file->book->id == $book->id ) {
             return 1;
         } 
     }

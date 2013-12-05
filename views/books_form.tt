@@ -22,8 +22,8 @@
     <label for="dataurl">Data URL:</label>
     <input type="text" name="dataurl" id="dataurl" value="[% book.dataurl %]" size="45">
 [% END %]
-[% IF book.id %]
-<input type="hidden" name="id" id="id" value="[% book.id %]">
+[% IF book.id || params.id %]
+<input type="hidden" name="id" id="id" value="[% book.id %][% params.id %]">
 [% END %]
 </fieldset>
 <input type="submit" id="save" value="Save">

@@ -2,7 +2,7 @@ package Ebooksforlib::Route::Admin::Books;
 
 =head1 Ebooksforlib::Route::Admin::Books
 
-Routes for adding and editing metadata about books
+Routes for adding and editing metadata about books and files
 
 =cut
 
@@ -19,20 +19,17 @@ get '/books/add' => require_role admin => sub {
     template 'books_add';
 };
 
+get '/books/imported' => require_role admin => sub {
+    my @books = resultset('Book')->search({ title => '' });
+    template 'books_imported', { books => \@books };
+};
+
 get '/books/add_from_isbn' => require_role admin => sub {
 
     my $isbn_in = param 'isbn';
     my $isbn = Business::ISBN->new( $isbn_in );
     if ( $isbn && $isbn->is_valid ) {
-    
-        my $sparql = 'SELECT DISTINCT ?graph ?uri ?title ?published ?pages WHERE { GRAPH ?graph {
-                          ?uri a <http://purl.org/ontology/bibo/Document> .
-                          ?uri <http://purl.org/ontology/bibo/isbn> "' . $isbn->common_data . '" .
-                          ?uri <http://purl.org/dc/terms/title> ?title .
-                          ?uri <http://purl.org/dc/terms/issued> ?published .
-                          ?uri <http://purl.org/ontology/bibo/numPages> ?pages .
-                      } }';
-        my $data = _sparql2data( $sparql );
+        my $data = _get_data_from_isbn( $isbn );
         template 'books_add', { data => $data, isbn => $isbn->common_data };
     
     } else {
@@ -50,6 +47,7 @@ post '/books/add' => require_role admin => sub {
     my $isbn_in = param 'isbn';
     my $pages   = param 'pages';
     my $dataurl = param 'dataurl';
+    my $book_id = param 'id';
     
     my $isbn = Business::ISBN->new( $isbn_in );
     if ( $isbn && $isbn->is_valid ) {
@@ -59,30 +57,21 @@ post '/books/add' => require_role admin => sub {
             my $flash_info;
             my $flash_error;
             
-            # Check if the book exists, based on dataurl or ISBN
-            my $new_book;
-            if ( $dataurl ) {
-                $new_book = rset('Book')->find_or_new({
-                    dataurl => $dataurl,
-                });
+            # Check if the book exists, based on ISBN
+            my $new_book = rset('Book')->find_or_new({
+                isbn => $isbn->common_data,
+            });
+            # This is a new book
+            $new_book->set_column( 'title', $title );
+            $new_book->set_column( 'date',  $date );
+            $new_book->set_column( 'isbn',  $isbn->common_data );
+            $new_book->set_column( 'pages', $pages );
+            if( $new_book->in_storage ) {
+                $new_book->update;
+                $flash_info .= '<cite>' . $new_book->title . '</cite> was updated.<br>';
             } else {
-                $new_book = rset('Book')->find_or_new({
-                    isbn => $isbn->common_data,
-                });
-            }
-            if( !$new_book->in_storage ) {
-                # This is a new book
-                $new_book->set_column( 'title', $title );
-                $new_book->set_column( 'date', $date );
-                $new_book->set_column( 'isbn', $isbn->common_data );
-                $new_book->set_column( 'pages', $pages );
                 $new_book->insert;
                 $flash_info .= '<cite>' . $new_book->title . '</cite> was added.<br>';
-            } else {
-                # This is an existing book
-                flash error => '<cite>' . $new_book->title . '</cite> already exists.<br>';
-                debug "*** Trying to save a book that already exists";
-                return redirect '/book/' . $new_book->id;
             }
             
             # Check for authors/creators we need to add, if we got a dataurl
@@ -201,6 +190,86 @@ post '/books/edit' => require_role admin => sub {
         redirect '/books/edit/' . $book->id;
     }
     
+};
+
+### Files
+
+post '/files/add' => require_role admin => sub {
+
+    my $book_id     = param 'book_id';
+    my $provider_id = param 'provider_id';
+    my $uploadfile  = upload( 'bookfile' );
+    my $avail       = param 'availability';
+    my $library_id  = _get_library_for_admin_user();
+
+    my $file = undef;
+    
+    # Look for an existing file
+    if ( $avail eq 'local' ) {
+
+        # Local file 
+        debug '*** Looking for a local file';   
+        my @files = rset('File')->search({
+            book_id     => $book_id,
+            provider_id => $provider_id,
+            library_id  => $library_id,
+        });
+        $file = $files[0];
+
+    } else {
+    
+        # Global file
+        debug '*** Looking for a global file';
+        my @files = rset('File')->search({
+            book_id     => $book_id,
+            provider_id => $provider_id,
+            library_id  => { '=', undef },
+        });
+        $file = $files[0];
+    
+    }
+    
+    # If we found a file, update the content
+    if ( $file && $file->id ) {
+        try {
+            debug '*** Going to replace content of file ' . $file->id;
+            $file->set_column( 'file', $uploadfile->content );
+            if ( $avail eq 'local' ) {
+                $file->set_column( 'library_id', $library_id );
+            } else {
+                $file->set_column( 'library_id', undef );
+            }
+            $file->update;
+            flash info => 'A file was updated!';
+            debug '*** Going to replace content of file ' . $file->id;
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+        };
+        return redirect '/books/items/' . $book_id;
+    } else {
+    
+        # If we got this far the file does not exist, so we add the uploaded one
+        try {
+            my $new_file = rset('File')->create({
+                book_id     => $book_id,
+                provider_id => $provider_id,
+                file        => $uploadfile->content,
+            });
+            # If this file is only available to the library of the currently logged
+            # in librarian we set the the library_id column, otherwise we leave it 
+            # empty and the file is available to all libraries
+            if ( $avail eq 'local' ) {
+                $new_file->set_column( 'library_id', $library_id );
+                $new_file->update;
+            }
+            flash info => 'A new file was added!';
+        } catch {
+            flash error => "Oops, we got an error:<br />$_";
+            error "$_";
+        };
+        redirect '/books/items/' . $book_id;
+    }
 };
 
 true;

@@ -43,8 +43,9 @@ __PACKAGE__->table("books");
 
 =head2 title
 
-  data_type: 'varchar'
-  is_nullable: 0
+  data_type: 'char'
+  default_value: (empty string)
+  is_nullable: 1
   size: 255
 
 =head2 date
@@ -88,7 +89,7 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "title",
-  { data_type => "varchar", is_nullable => 0, size => 255 },
+  { data_type => "char", default_value => "", is_nullable => 1, size => 255 },
   "date",
   { data_type => "varchar", is_nullable => 0, size => 32 },
   "isbn",
@@ -114,6 +115,20 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<isbn>
+
+=over 4
+
+=item * L</isbn>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("isbn", ["isbn"]);
 
 =head1 RELATIONS
 
@@ -233,8 +248,8 @@ Composing rels: L</book_creators> -> creator
 __PACKAGE__->many_to_many("creators", "book_creators", "creator");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FvAQS9+PZfcUti1wo56o9w
+# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-12-05 14:32:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DMGG3Co/sQuwHk8KOY+2+g
 
 use Ebooksforlib::Util;
 

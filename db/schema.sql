@@ -67,14 +67,15 @@ DROP TABLE IF EXISTS book_creators;
 DROP TABLE IF EXISTS books;
 CREATE TABLE books (
     id       INTEGER AUTO_INCREMENT PRIMARY KEY,
-    title    VARCHAR(255) NOT NULL, 
+    title    VARCHAR(255) DEFAULT '', 
     date     VARCHAR(32) NOT NULL, 
     isbn     VARCHAR(64), 
     pages    VARCHAR(32),
     coverurl VARCHAR(255), 
     coverimg BLOB,
-    dataurl  VARCHAR(255)
+    dataurl  VARCHAR(255),
     -- FULLTEXT ( title, isbn )
+    UNIQUE KEY isbn ( isbn )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS creators;

@@ -16,7 +16,8 @@ use Ebooksforlib::Util;
 get '/admin' => require_role admin => sub { 
     my $library = rset('Library')->find( _get_library_for_admin_user() );
     my @lists = rset('List')->search({ library_id => _get_library_for_admin_user() });
-    template 'admin', { library => $library, lists => \@lists };
+    my $imported_books = resultset('Book')->search({ title => '' })->count;
+    template 'admin', { library => $library, lists => \@lists, imported_books => $imported_books };
 };
 
 true;

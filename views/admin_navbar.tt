@@ -4,6 +4,7 @@
         <ul class="dropdown-menu">
             <li><a href="/admin">Admin</a></li>
             <li><a href="/admin/settings">Settings</a></li>
+            <li><a href="/books/imported">[% l('Imported books') %]</a></li>
             <li><a href="/books/add">Add a new book</a></li>
             <li><a href="/creators/add">Add creator</a></li>
             <li><a href="/admin/lists">Lists and genres</a></li>
