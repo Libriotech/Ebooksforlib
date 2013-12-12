@@ -253,6 +253,8 @@ This route handles:
 
 =item * /rest/ping
 
+=item * /rest/return
+
 =back
 
 Required parameters for all of these are:
@@ -267,7 +269,7 @@ Required parameters for all of these are:
 
 =back
 
-/rest/getbook also requires book_id as a parameter.
+/rest/getbook and /rest/return also requires bookid as a parameter.
 
 =cut
 
@@ -406,6 +408,52 @@ get '/rest/:action' => sub {
         # If we got this far we did not find a file representing the given 
         # book that is on loan to the given user, so return an error
         status 500;
+        return "This book is not on loan to the given user.";
+        
+    } elsif ( $action eq 'return' ) {
+    
+        debug "*** /rest/return for user = $user_id";
+    
+        my $book_id = param 'bookid';
+        unless ( $book_id ) {
+            return { 
+                status => 1,
+                error  => 'Missing parameter: bookid',
+            };
+        }
+        debug "*** /rest/return for book_id = $book_id";
+        
+        foreach my $loan ( $user->loans ) {
+            if ( $loan->item->file->book->id == $book_id ) {
+                # Do the return
+                my $return = _return_loan( $loan );
+                # Check the outcome
+                if ( $return->{'error'} == 1 ) {
+                    # We got an error
+                    debug "*** Error trying to process return from the reader API: " . $return->{'errormsg'};
+                    return { 
+                        'status' => 1, 
+                        'error'  => $return->{'errormsg'},
+                    }; 
+                } else {
+                    # Success
+                    my $item_id = $loan->item->id;
+                    # Log
+                    _log2db({
+                        logcode => 'APIRETURN',
+                        logmsg  => "item_id: $item_id",
+                    });
+                    debug "*** Returned item for item_id = $item_id, user_id = $user_id";
+                    return { 
+                        'status' => 0, 
+                    }; 
+                }
+            }
+        }
+        
+        # If we got this far we did not find a file representing the given 
+        # book that is on loan to the given user, so return an error
+        status 404;
         return "This book is not on loan to the given user.";
 
     } elsif ( $action eq 'ping' ) {
