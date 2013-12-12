@@ -127,8 +127,12 @@ function resizeEvent(e) {
 				    <!-- </div> -->
 			    </div>
 		    </div>
+		    <div id="navbar-search-mobile" class="visible-phone txt-center">
+		    <form class="navbar-search " style="width:90%;margin-left:auto;margin-right:auto;" action="/search" method="GET">
+				<input type="text" class="search-query" style="width:100%;" name="q" placeholder="[% l('Search') %]" />
+    		</form>
+    		</div>
 	    </nav>
-
     </header>
     </div>
     </div>
@@ -203,9 +207,9 @@ function resizeEvent(e) {
 	<div class="row">
 		<div class="span5">
 			<h1>eBib</h1>
-			<ul class="footer-menu-list">
+	<!--		<ul class="footer-menu-list">
 				<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-			</ul>
+			</ul> -->
 		</div>
 [% IF session.logged_in_user %]
 		<div class="span3">
@@ -239,15 +243,15 @@ function resizeEvent(e) {
 		</div>
 [% END %]
 		<div class="span2">
-			<ul class="footer-menu-list">
-				<li><a href="#"><!-- LANGUAGE CHOOSER -->
+			<ul class="footer-menu-list language-chooser">
+				<!-- LANGUAGE CHOOSER -->
 [% FOREACH key IN installed_langs.keys %]
     [% IF key == language_tag %]
-        [% installed_langs.$key %]
+        <li>[% installed_langs.$key %]</li>
     [% ELSE %]
-        <a href="/lang?lang=[% key %]">[% installed_langs.$key %]</a>
+        <li><a href="/lang?lang=[% key %]">[% installed_langs.$key %]</a></li>
     [% END %]
-[% END %]</a></li>
+[% END %]
 			</ul>
 		</div>
 </div>
