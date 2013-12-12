@@ -155,6 +155,31 @@ sub _isbn2bokkliden_cover {
 
 }
 
+=head2 _return_loan
+
+Return the given loan. 
+
+Argument: An active loan. 
+
+Creates a copy of the loan in the old_loans table, then deletes the actual 
+loan. Old loans are anonymized according to the settings of the user. 
+
+Usage:
+
+    my $item_id = param 'item_id';
+    my $user_id = session('logged_in_user_id');
+    
+    my $loan = rset('Loan')->find({ item_id => $item_id, user_id => $user_id });
+    
+    my $return = _return_loan( $loan );
+    if ( $return->{'error'} == 1 ) {
+        # Do something
+    } else {
+        # Do something else
+    }
+
+=cut
+
 sub _return_loan {
 
     my ( $loan ) = @_;
