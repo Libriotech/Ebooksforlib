@@ -241,10 +241,35 @@ get '/rest/removebook' => sub {
 
 };
 
-# This route handles:
-# /rest/listbooks
-# /rest/getbook
-# /rest/ping
+=head2 /rest/:action
+
+This route handles:
+
+=over 4
+
+=item * /rest/listbooks
+
+=item * /rest/getbook
+
+=item * /rest/ping
+
+=back
+
+Required parameters for all of these are:
+
+=over 4
+
+=item * uid
+
+=item * hash
+
+=item * pkey
+
+=back
+
+/rest/getbook also requires book_id as a parameter.
+
+=cut
 
 get '/rest/:action' => sub {
 
