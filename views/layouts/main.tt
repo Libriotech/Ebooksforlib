@@ -47,6 +47,9 @@
 	});
     $( "#frontpage_sort" ).disableSelection();
 
+handlescrolldown();
+jQuery(window).resize(handlescrolldown);
+jQuery(window).scroll(handlescrolldown);
      
    });
 
@@ -62,6 +65,24 @@ function resizeDelayed(e) {
 function resizeEvent(e) {
  jQuery('.ellipsis').dotdotdot()
  resizeclean=1;
+}
+
+function handlescrolldown(e) {
+ var offset = window.pageYOffset;
+ if (offset>0) {
+  jQuery('.scroll-down').css('opacity',0);
+  jQuery('.scroll-down').css('bottom','-100px');
+ } else {
+  jQuery('.scroll-down').css('opacity',0.8);
+  jQuery('.scroll-down').css('bottom',0);
+ }
+ if  (e) {
+  e.preventDefault();
+ }
+}
+function scrolldown() {
+ var h = window.innerHeight;
+ jQuery('html,body').animate({scrollTop: h}, 1000);
 }
 
   </script>

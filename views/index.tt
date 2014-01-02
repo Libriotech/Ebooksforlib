@@ -20,6 +20,7 @@
     </div> 
 </div>
 
+
 <!-- NY BRUKER? BANNER
 ************************************* 
 
@@ -56,6 +57,9 @@
 <!-- FOR NETTBRETT OG STØRRE VIEWPORTS -->
 
 <section id="[% booklist.list.name %]" class="hidden-phone">
+
+<a href="javascript:scrolldown();" class="scroll-down"><i class="fa fa-angle-down"></i></a> <!-- scroll ned knapp -->
+
 <div class="article">
 <div class="container content-container">
     <div class="row">
@@ -153,6 +157,8 @@
     
 [% END %]
 [%# END of FOREACH booklist IN booklists %]
+
+
 
 <!-- BOKLISTE MOBIL
 ************************************* -->

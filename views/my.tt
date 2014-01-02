@@ -79,7 +79,7 @@
     <p>[% l('You have no current loans.') %]</p>
 [% END %]
 
-
+<!-- 
 
 
 <h3>[% l('Old loans') %]
@@ -113,8 +113,8 @@
         <tr>
             <td><a href="/book/[% loan.item.file.book.id %]">[% loan.item.file.book.title %], [% loan.item.file.book.creators_as_string %]</a></td>
             <td>[% date.format( time => loan.loaned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
-         <!--   <td>[% loan.item.loan_period %]</td> -->
-         <!--   <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td> -->
+            <td>[% loan.item.loan_period %]</td>
+            <td>[% date.format( time => loan.due.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
             <td>[% date.format( time => loan.returned.epoch, format => settings.date_format, locale => settings.locale ) %]</td>
             [% SET anon_target = '/anon' %]
             [% IF settings.toggle_anon_confirm == 0 %]
@@ -128,6 +128,8 @@
 [% ELSE %]
     <p>[% l('You have no old loans.') %]</p>
 [% END %]
+
+-->
 
 		<div class="alert alert-info center">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
