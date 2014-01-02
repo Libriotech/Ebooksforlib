@@ -39,6 +39,18 @@ hook 'before' => sub {
         return redirect '/in?admin=1';
     }
     
+    # Restrict access to the REST API
+    if ( request->path =~ /\/rest\/.*/ && !config->{ 'rest_allowed_ips' }{ request->remote_address } ) {
+        debug "Denied access to the REST API for " . request->remote_address;
+        # Log
+        _log2db({
+            logcode => 'RESTDENY',
+            logmsg  => "IP: " . request->remote_address,
+        });
+        status 403;
+        halt("403 Forbidden");
+    }
+    
     # Force users to choose a library
     unless ( session('chosen_library') && session('chosen_library_name') ) {
         # Some pages must be reachable without choosing a library 

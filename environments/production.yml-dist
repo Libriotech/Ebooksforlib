@@ -31,6 +31,10 @@ one_hit_redirect: 0
 #   do this? Yes/No"
 toggle_anon_confirm: 1
 
+# List IPs that should have access to the REST API
+rest_allowed_ips:
+    127.0.0.1: 1
+
 date_format: "%d-%b-%Y %H:%M:%S"
 locale: "en_US"
 time_zone: 'Europe/Oslo'
