@@ -233,6 +233,7 @@ get '/book/:id' => sub {
         user_belongs_to_library => $user_belongs_to_library,
         # descriptions            => $descriptions,
         library                 => $library,
+        pagetitle               => $book->title,
     };
 };
 
@@ -294,7 +295,10 @@ get '/search' => sub {
 get '/creator/:id' => sub {
     my $creator_id = param 'id';
     my $creator = rset('Creator')->find( $creator_id );
-    template 'creator', { creator => $creator };
+    template 'creator', { 
+        creator   => $creator,
+        pagetitle => $creator->name,
+    };
 };
 
 get '/lists' => sub {
@@ -306,7 +310,10 @@ get '/lists' => sub {
 get '/list/:id' => sub {
     my $list_id = param 'id';
     my $list = rset('List')->find( $list_id );
-    template 'list', { list => $list };
+    template 'list', { 
+        list      => $list,
+        pagetitle => $list->name,
+    };
 };
 
 ### Routes below this point require admin/superadmin privileges

@@ -1,7 +1,4 @@
-[% META pagetitle = 'Book page' %]
 [% USE date %]
-
-
 
 <!-- STINAVIGERING
 ************************************* -->
