@@ -1,5 +1,8 @@
 # configuration file for development environment
 
+# Base url for the reader. Do not include trailing slash. 
+reader_url: http://reader.example.org
+
 # the logger engine to use
 # console: log messages to STDOUT (your console where you started the
 #          application server)

@@ -1,5 +1,8 @@
 # configuration file for production environment
 
+# Base url for the reader. Do not include trailing slash. 
+reader_url: http://reader.example.org
+
 # only log warning and error messsages
 log: "warning"
 
