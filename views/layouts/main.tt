@@ -10,9 +10,9 @@
 <link href="/stars/jquery.rating.css" rel="stylesheet">
   <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
 <script src="/js/jquery-ui-1.10.3.custom.min.js"></script>
-<link href="http://reader.digitalt.org/img/favicon.ico" rel="icon" type="image/x-icon" />  
-     <script src="http://reader.digitalt.org/js/jquery.bxslider.js"></script>
-   <link href="http://reader.digitalt.org/css/jquery.bxslider.css" rel="stylesheet" />
+<link href="[% settings.reader_url %]/img/favicon.ico" rel="icon" type="image/x-icon" />  
+     <script src="[% settings.reader_url %]/js/jquery.bxslider.js"></script>
+   <link href="[% settings.reader_url %]/css/jquery.bxslider.css" rel="stylesheet" />
    
 <!--  <script src="/js/jquery.bxslider.min.js"></script>
   <link href="/css/jquery.bxslider.css" rel="stylesheet" /> -->
@@ -23,7 +23,7 @@
   <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 <!--  <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <link href="http://reader.digitalt.org/css/style.css" rel="stylesheet" />
+  <link href="[% settings.reader_url %]/css/style.css" rel="stylesheet" />
   <script type="text/javascript" src="//use.typekit.net/lrk7anq.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <script>
@@ -131,7 +131,7 @@ function scrolldown() {
     							</li>
 				    			<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-book"></i></a>
 				    				<ul class="dropdown-menu" role="menu">
-				    					<li><a href="http://reader.digitalt.org/">Mine bøker</a></li>
+				    					<li><a href="[% settings.reader_url %]/">Mine bøker</a></li>
 				    					<li><a href="/my">Administrer lån</a></li>
 				    				</ul>
 				   			 	</li>
@@ -242,7 +242,7 @@ function scrolldown() {
 		</div>
 		<div class="span2">
 			<ul class="footer-menu-list">
-				<li><a href="http://reader.digitalt.org/">[% l('My books') %]</a></li>
+				<li><a href="[% settings.reader_url %]/">[% l('My books') %]</a></li>
 				<li><a href="/my">[% l('My page') %]</a></li>
 				<li><a href="/page/help" src="" data="Hjelp">[% l('Help') %]</a></li>
 				<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>

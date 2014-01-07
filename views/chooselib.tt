@@ -39,7 +39,7 @@
 		</div>
 		<div class="row">	
 			<div class="span12 center add-top">
-				<img src="http://reader.digitalt.org/img/ebib-mockup2.png" />
+				<img src="[% settings.reader_url %]/img/ebib-mockup2.png" />
 			</div>
 		</div>
 	</div>

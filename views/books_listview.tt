@@ -13,7 +13,7 @@
 					[% IF book.coverimg %]
                         <img src="[% book.coverimg %]">
                     [% ELSE %]
-                        <img src="http://reader.digitalt.org/img/missing-cover.png">
+                        <img src="[% settings.reader_url %]/img/missing-cover.png">
                     [% END %]
                     </div>
 					<div class="li-text-portal">

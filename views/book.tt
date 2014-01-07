@@ -26,7 +26,7 @@
 	    		[% IF book.coverimg %]
     			<img src="[% book.coverimg %]" />
 				[% ELSE %]
-            	<img src="http://reader.digitalt.org/img/missing-cover.png">
+            	<img src="[% settings.reader_url %]/img/missing-cover.png">
 				[% END %]
 			</a>
 		</div>
@@ -104,7 +104,7 @@
             [% ELSIF user_has_borrowed == 1 %]
                 <div class="alert alert-success">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-check-circle"></i> Du låner denne boken. Gå til <a href='http://reader.digitalt.org'>bokleseren for å laste ned og lese boken</a>.
+    				<i class="fa fa-check-circle"></i> Du låner denne boken. Gå til <a href='[% settings.reader_url %]'>bokleseren for å laste ned og lese boken</a>.
     			</div>
             [% ELSIF limit_reached == 1 %]
                 <div class="alert alert-danger">

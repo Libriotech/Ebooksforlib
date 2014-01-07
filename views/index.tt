@@ -82,7 +82,7 @@
 						        [% IF booklistitem.book.coverimg %]
                                     <img src="[% booklistitem.book.coverimg %]">
                                 [% ELSE %]
-                                    <img src="http://reader.digitalt.org/img/missing-cover.png">
+                                    <img src="[% settings.reader_url %]/img/missing-cover.png">
                                 [% END %]
 					        </a>
 					        <div class="li-text-portal">
@@ -134,7 +134,7 @@
 					        		[% IF booklistitem.book.coverimg %]
                                 		<img src="[% booklistitem.book.coverimg %]">
                             		[% ELSE %]
-                                		<img src="http://reader.digitalt.org/img/missing-cover.png">
+                                		<img src="[% settings.reader_url %]/img/missing-cover.png">
                             		[% END %]
 						    		<div class="li-text">
 							    		<h4 class="title max-1l ellipsis">[% booklistitem.book.title %]</h4>
@@ -179,7 +179,7 @@
                         			<img src="[% booklistitem.book.coverimg %]">
                     			[% ELSE %]
                         		[%# FIXME This URL shoul dnot be hard coded %]
-                        			<img src="http://reader.digitalt.org/img/missing-cover.png">
+                        			<img src="[% settings.reader_url %]/img/missing-cover.png">
                     			[% END %]
                     		</div>
 							<div class="li-text-portal">
