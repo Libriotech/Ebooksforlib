@@ -12,6 +12,7 @@ use DateTime;
 use DateTime::Duration;
 use Data::Dumper; # DEBUG 
 use Modern::Perl;
+use URI::Escape;
 
 use Ebooksforlib::Util;
 use Ebooksforlib::Route::Login;
@@ -86,6 +87,8 @@ hook 'before' => sub {
 get '/choose' => sub {
 
     my $return_url = param 'return_url';
+
+    $return_url = uri_escape($return_url);
 
     my @libraries = rset( 'Library' )->all;
 
@@ -330,7 +333,7 @@ get '/list/:id' => sub {
 
 get '/superadmin' => require_role superadmin => sub { 
     my @users     = rset('User')->all;
-    my @sanitized = San::sanList(@users);
+#    my @sanitized = Ebooksforlib::San::sanList(@users);
     my @libraries = rset('Library')->all;
     my @providers = rset('Provider')->all;
     template 'superadmin', { 
@@ -350,6 +353,10 @@ post '/providers/add' => require_role superadmin => sub {
 
     my $name        = param 'name';
     my $description = param 'description';
+    my $hs = HTML::Strip->new();
+    $name  = $hs->parse( $name );
+    $description = $hs->parse( $description );
+    $hs->eof;
     try {
         my $new_provider = rset('Provider')->create({
             name        => $name,
@@ -376,6 +383,10 @@ post '/providers/edit' => require_role superadmin => sub {
     my $id = param 'id';
     my $name = param 'name';
     my $description = param 'description';
+    my $hs = HTML::Strip->new();
+    $name  = $hs->parse( $name );
+    $description = $hs->parse( $description );
+    $hs->eof;
     my $provider = rset('Provider')->find( $id );
     try {
         $provider->set_column( 'name', $name );
@@ -453,6 +464,7 @@ post '/books/items/edit' => require_role admin => sub {
 
     my $item_id     = param 'item_id';
     my $loan_period = param 'loan_period';
+    # Consider html strip
     my $item = rset('Item')->find( $item_id );
     try {
         $item->set_column( 'loan_period', $loan_period );
@@ -471,6 +483,7 @@ post '/books/items/editall' => require_role admin => sub {
 
     my $book_id     = param 'book_id';
     my $loan_period = param 'loan_period';
+    # Consider html strip
     my $library_id  = _get_library_for_admin_user();
     my @items = rset('Item')->search({
         'file.book_id' => $book_id,
@@ -510,6 +523,7 @@ post '/books/items/add' => require_role admin => sub {
     my $file_id     = param 'file_id';
     my $loan_period = param 'loan_period';
     my $num_copies  = param 'num_copies';
+    # Consider html strip
     my $book_id     = param 'book_id';
     
     my $new_items_count = 0;
@@ -577,6 +591,7 @@ post '/creators/add' => require_role admin => sub {
 
     my $name    = param 'name';
     my $dataurl = param 'dataurl';
+    # html strip ?
     try {
         my $new_creator = rset('Creator')->create({
             name    => $name,
@@ -604,6 +619,7 @@ post '/creators/edit' => require_role admin => sub {
     my $id      = param 'id';
     my $name    = param 'name';
     my $dataurl = param 'dataurl';
+    # html strip
     my $creator = rset('Creator')->find( $id );
     try {
         $creator->set_column( 'name', $name );
@@ -716,6 +732,9 @@ post '/libraries/add' => require_role superadmin => sub {
 
     my $name = param 'name';
     try {
+        my $hs = HTML::Strip->new();
+        $name  = $hs->parse( $name );
+        $hs->eof;
         my $new_library = rset('Library')->create({
             name  => $name,
         });
@@ -744,6 +763,10 @@ post '/libraries/edit' => require_role superadmin => sub {
     my $realm = param 'realm';
     my $library = rset('Library')->find( $id );
     try {
+        my $hs = HTML::Strip->new();
+        $name  = $hs->parse( $name );
+        $realm = $hs->parse( $realm );
+        $hs->eof;
         $library->set_column('name', $name);
         $library->set_column('realm', $realm);
         $library->update;
@@ -807,6 +830,11 @@ post '/users/add' => require_role superadmin => sub {
     
     # Data looks good, try to save it
     try {
+        my $hs = HTML::Strip->new();
+        $name  = $hs->parse( $name );
+        $username  = $hs->parse( $username );
+        $email = $hs->parse( $email );
+        $hs->eof;
         my $new_user = rset('User')->create({
             username => $username, 
             password => _encrypt_password($password1), 
@@ -847,6 +875,11 @@ post '/users/edit' => require_role superadmin => sub {
     my $email    = param 'email';
     my $user = rset('User')->find( $id );
     try {
+        my $hs = HTML::Strip->new();
+        my $username = $hs->parse( $username );
+        my $name = $hs->parse( $name );
+        my $email = $hs->parse( $email );
+        $hs->eof;
         $user->set_column('username', $username);
         $user->set_column('name',     $name);
         $user->set_column('email',    $email);
