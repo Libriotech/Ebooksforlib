@@ -1,3 +1,4 @@
+
 package Ebooksforlib;
 use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
@@ -23,6 +24,10 @@ use Ebooksforlib::Route::Admin::Books;
 use Ebooksforlib::Route::Admin::Lists;
 use Ebooksforlib::Route::Admin::Stats;
 use Ebooksforlib::Route::Admin::Logs;
+
+use Ebooksforlib::San;
+
+use Dancer::Plugin::Auth::Basic;
 
 our $VERSION = '0.1';
 
@@ -121,6 +126,11 @@ get '/lang' => sub {
 };
 
 get '/' => sub {
+
+    # Use HTTP Basic Auth for everything but the REST API
+    # unless ( request->path =~ /\/rest\/.*/ ) {
+    #    auth_basic user => 'ebib', password => 'passord';
+    # }
     
     # Only show books that are available to the chosen library
     # Users should not see the front page without logging in or choosing a library
@@ -320,6 +330,7 @@ get '/list/:id' => sub {
 
 get '/superadmin' => require_role superadmin => sub { 
     my @users     = rset('User')->all;
+    my @sanitized = San::sanList(@users);
     my @libraries = rset('Library')->all;
     my @providers = rset('Provider')->all;
     template 'superadmin', { 

@@ -1,29 +1,1841 @@
-body {
-font-family: sans-serif;
+/*
+ * Elån ver 2.0 Beta
+ *
+ *
+ *
+ */
+
+
+/*  helpers for bxslider */
+
+.bxhidden {display: none;}
+
+.bxloadwrapper {
+height:250px;
+width:100%;
+position:relative;
 }
 
-.userbar {
-  text-align: right;
-  float: right;
+.bxspinner {
+position:absolute;
+height:60px;
+width:60px;
+top:0;
+left:0;
+bottom:0;
+right:0;
+font-size:48px;
+margin:auto;
 }
 
-.flash {
-  text-align: center;
-  border: 1px solid black;
-  padding: 1em;
-  border-radius: 0.5em;
+body {background: rgba(240, 241, 236, 1.0);}
+
+.body-login {background: rgba(66, 27, 37, 1.0);}
+ 
+ 
+/* HEADER MED LOKAL BRANDING, SØK OG MENY
+----------------------------------------------------------------------------------- */
+
+.brand {
+font-size:18px;
+font-weight:200;
+margin-top:0;
 }
 
-.error {
-  background-color: #fc5252;
+.navbar ul i {
+font-size:22px;
 }
 
-.info {
-  background-color: #b5f2a6;
+.navbar .nav li a.mine-boker, .navbar .nav li a.min-side, .navbar .nav
+li a.hjelp {
+padding:10px 0;
+font-size:16px;
+font-weight:normal;
+} /* Har annen css for større viewports */
+
+a.mine-boker:after {content: "Mine bøker";}
+a.min-side:after {content: "Min side";}
+a.hjelp:after {content: "Hjelp";}
+
+.navbar-inverse {margin-bottom:0;}
+
+.navbar-inverse .navbar-inner {
+    background-color: rgba(66, 27, 37, 1.0);
+    background-image:none;
+    border: 0;
 }
 
-.adminactions {
-  border: 1px dotted black;
-  padding: 0.5em;
-  border-radius: 0.5em;
+
+.navbar-inner {
+    background-image: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+    background-color: transparent;
+    color: #fff;
+}
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;
+    text-decoration: none;
+}
+
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+    color: rgba(255, 255, 255, 1.0);
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.navbar-inverse .brand:hover, .navbar-inverse .nav > li > a:hover,
+.navbar-inverse .brand:focus, .navbar-inverse .nav > li > a:focus {
+    color: rgba(231, 76, 60, 1.0);
+}
+
+.navbar-inverse .brand {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-inverse .navbar-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.logged-out-info {
+margin-top:10px;
+margin-left:0;
+color: rgba(239, 221, 218,1.0);
+}
+
+.logged-out-info > a {
+color: rgba(231, 76, 60, 1.0);
+}
+
+.logged-out-info > a:hover {}
+
+
+.navbar-inverse .navbar-search .search-query {
+    background-color: #fff;
+    border: 0 none;
+    box-shadow: none;
+    color: #333;
+}
+
+.navbar-inverse .navbar-search .search-query:-moz-placeholder {
+    color: #CCCCCC;
+}
+.navbar-inverse .navbar-search .search-query:focus, .navbar-inverse
+.navbar-search .search-query.focused {
+    background-color: #FFFFFF;
+    border: 0 none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset;
+    color: #333333;
+    outline: 0 none;
+    padding: 5px 15px;
+    text-shadow: 0;
+}
+
+
+.navbar-inverse .navbar-search input.search-query {
+    border-radius: 15px 15px 15px 15px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    margin:0;
+    padding: 5px 15px;
+width: 150px;
+-moz-transition: all 0.9s ease 0s;
+-o-transition: all 0.5s ease 0s;
+transition: all 0.5s ease 0s;
+-webkit-transition: none 0s none 0s;
+
+}
+
+.navbar-inverse .navbar-search input.search-query:focus {
+ width: 300px;
+ -moz-transition: all 0.5s ease 0s;
+ -webkit-transition: all 0.5s ease 0s;
+ -o-transition: all 0.5s ease 0s;
+ transition: all 0.5s ease 0s;
+  -webkit-transition: none 0s none 0s;
+       box-shadow: none;
+
+
+}
+
+.navbar-form, .navbar-search, .nav-collapse .navbar-form, .nav-collapse .navbar-search   {
+    border-bottom: 0 none;
+    border-top-width: 0;
+    box-shadow: none;
+ /*   float: none; */
+    margin: 0 10px 0 0;
+    padding: 7px 2px;
+}
+
+/* .navbar-inverse .nav-collapse .navbar-form, .navbar-inverse
+.nav-collapse .navbar-search {
+    border-bottom-color: #fff;
+    border-top-color: #fff;
+} */
+
+.nav-collapse .navbar-search:before {
+    content:'Søk ';
+    font-size:13px;
+    letter-spacing:1px;
+    color: rgba(255, 255, 255, 0.6);
+
+}
+
+.dropdown-menu > li > a {
+	color: rgba(231, 76, 60, 1.0);
+	padding:5px 20px;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  text-decoration: none;
+  color: rgba(231, 76, 60, 1.0);
+  background-color: transparent;
+  font-weight:bold;
+  background-image: none;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav
+li.dropdown.active > .dropdown-toggle, .navbar .nav
+li.dropdown.open.active > .dropdown-toggle {
+    background-color: transparent;
+    color:# fff;
+}
+
+.dropdown-menu .divider {
+    background-color: #E5E5E5;
+    border-bottom: 1px solid #FFFFFF;
+    height: 1px;
+    margin: 5px 0px;
+    width:100%;
+    overflow: hidden;
+}
+
+/* HAMBURGERMENY MED TILHØRENDE DROPDOWN */
+
+.navbar .btn-navbar {
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #fff;
+    box-shadow: none;
+    color: #fff;
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 7px 10px;
+    text-shadow: none;
+}
+
+.navbar .btn-navbar .icon-bar {
+    background-color: #fff;
+    border-radius: 1px 1px 1px 1px;
+    box-shadow: none;
+    display: block;
+    height: 2px;
+    width: 18px;
+}
+
+
+.nav-collapse .nav {
+    float: none;
+    margin: 0;
+}
+
+
+.nav-collapse .nav > li > a,
+.nav-collapse .dropdown-menu a {
+    border-radius: 0;
+    color: rgba(255, 255, 255, 1);
+    font-weight: normal;
+    padding: 10px 15px;
+    background-image:none
+}
+
+.navbar-inverse .nav li.open > .dropdown-toggle,
+.navbar-inverse .nav li.active > .dropdown-toggle,
+.navbar-inverse .nav li.open.active > .dropdown-toggle {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.navbar-inverse .nav-collapse .nav > li > a{
+    color: rgba(255, 255, 255, 1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-inverse .nav-collapse .dropdown-menu a {
+    color: #fff;
+    border-top: 0 none;
+}
+
+.navbar-inverse .btn-navbar:hover,
+.navbar-inverse .btn-navbar:focus,
+.navbar-inverse .btn-navbar:active,
+.navbar-inverse .btn-navbar.active,
+.navbar-inverse .btn-navbar.disabled,
+.navbar-inverse .btn-navbar[disabled] {
+    background-color: transparent;
+    color: #FFFFFF;
+}
+
+.navbar-inverse .nav-collapse .nav > li > a:hover,
+.navbar-inverse .nav-collapse .dropdown-menu a:hover,
+.navbar-inverse .nav-collapse .dropdown-menu a:focus {
+    background-color: transparent;
+    background-image:none;
+}
+
+.header-wrapper {padding-bottom:0;} /*  */
+.header-container {padding-left:0;padding-right:0;} /* fjerner
+sidepadding på topnav på alle skjermer unntatt mobil */
+/* .navbar {margin-bottom:0;border-radius:0;border-width:1px 0 1px;
+border-color:red;} fucker opp hamburger-dropdown men fikser
+footer-ctrls i leser */
+/* .navbar-inner {border-radius:0;border-width:1px 0;min-height:36px;} */
+.content-container {padding-left:10px;padding-right:10px;} /* innhold
+sidepadding mobil */
+
+
+
+.remove-LR-padding {padding-left:0;padding-right:0;}
+.remove-bottom {margin-bottom:0;}
+
+.path {
+  padding: 0 0 20px;
+  margin: 5px 0 0 35px;
+  list-style: none;
+}
+
+.path li {
+  display: inline-block;
+  display: inline;
+  zoom: 1;
+  font-size:13px;
+
+}
+
+.path li span {
+	display:block;
+    float: left;
+    color: rgba(66, 27, 37, 1.0);
+    padding-left:0.5em;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    text-decoration: none;
+}
+
+.back-btn a:before, .theme_button_inverted a:before {
+    border-style: solid;
+    border-width: 12px 12px 12px 0;
+    content: "";
+    height: 0;
+    position: absolute;
+    left: -12px;
+    top: 0px;
+    width: 0;
+}
+.back-btn a:before {
+    border-color: transparent rgba(205, 197, 195, 1.0) transparent transparent;
+}
+.back-btn a {
+    position: relative;
+    float: left;
+    background: rgba(205, 197, 195, 1.0);
+    margin: 0;
+    padding: 0 10px 0 0px;
+    color: #fff;
+    height: 24px;
+    line-height: 24px;
+    text-decoration: none;
+}
+
+.back-btn a:first-child {padding-left:4px;}
+.back-btn a:last-child {border-radius: 0 4px 4px 0;}
+
+
+
+/* MISC.
+----------------------------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+font-family:"brandon-grotesque";
+color:rgba(52, 73, 94, 1.0);
+}
+
+
+h1 {font-size:44.5px;line-height:1;}
+h2 {font-size:36.5px;line-height:1;}
+h3 {font-size:27px;font-weight:500;line-height:1;}
+h4 {font-size:22.5px;line-height:1;}
+h5 {font-size:20px;line-height:1;}
+h6 {font-size:18px;line-height:1;}
+
+
+
+a {
+    color:  rgba(231, 76, 60, 1.0);
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: rgba(231, 76, 60, 1.0);
+    text-decoration: none;
+}
+
+
+.max-1l { height:1.2em;}
+.max-2l { height:2.4em;}
+.max-3l { height:3.6em;}
+.max-4l { height:4.8em;}
+.max-5l { height:6em;}
+
+.li-text .max-1l { height:20px;}
+
+.uppercase {text-transform:uppercase; letter-spacing:1px;}
+
+.center {
+text-align:center;
+}
+
+.left {
+text-align:left;
+}
+
+.right {
+text-align:right;
+}
+
+.add-top {
+margin-top:20px;
+}
+
+.add-bottom {
+margin-bottom:20px;
+}
+
+.half-top {
+margin-top:10px;
+}
+
+.half-bottom {
+margin-bottom:10px;
+}
+
+.remove-top {
+margin-top:0;
+padding-top:0;
+}
+
+.remove-bottom {
+margin-bottom:0;
+padding-bottom:0;
+}
+
+.padding20 {padding:20px;}
+
+.btm-pad-20 {padding-bottom:20px;}
+
+.bg-white {background:#fff;}
+
+.red {color: rgba(231, 76, 60, 1.0);}
+
+/* SPLASHSIDE VELG BIBLIOTEK
+----------------------------------------------------------------------------------- */
+
+
+.splashpage-wrapper {
+	background: rgba(66, 27, 37, 1.0);
+	color: rgba(255, 255, 255, 1.0);
+}
+
+.splashpage-wrapper h1 {
+	font-size:100px;
+	margin-bottom:20px;
+	color: rgba(255, 255, 255, 1.0);}
+
+.splashpage-intro {
+	margin: 30px auto;
+	font-family:georgia, serif;
+	font-size:22.5px;
+	line-height:1.5;
+	font-style:italic;
+	font-weight:normal;
+}
+
+.velg-bibliotek {
+	padding:20px;
+	background: rgba(255, 255, 255, 0.1) url('/img/arrow-btn.svg') left center no-repeat;
+	background-size: 200px;
+	border:4px solid rgba(66, 27, 37, 1.0);
+	border-radius: 13px;
+}
+
+
+.bibliotek-ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+.bibliotek-ul li {
+	margin-left:0;
+	padding:10px 34.5px 10px 22px;
+	background: rgba(255, 255, 255, 1);
+	text-align:left;
+	font-size:20px;
+	border-bottom:1px solid rgba(66, 27, 37, 1.0);
+	transition: all 0.2s ease-out;
+}
+
+.bibliotek-ul li .fa {
+	margin-right:10px;
+	transition: all 0.2s ease-out;
+
+}
+
+.bibliotek-ul li a {
+	color: rgba(52, 73, 94, 1.0);
+}
+
+.bibliotek-ul li a i {
+	color: rgba(231, 76, 60, 1.0);
+}
+
+.bibliotek-ul li:hover {
+	background: rgba(255, 255, 255, 0.95)
+}
+
+.bibliotek-ul li:hover a{
+	color: rgba(231, 76, 60, 1.0);
+	transition: none 0s;
+}
+
+.bibliotek-ul li:hover .fa {
+	margin-right:17px;
+	transition: all 0s;
+}
+
+.bibliotek-ul li:first-child {
+	border-radius: 4px 4px 0 0;
+}
+
+.bibliotek-ul li:last-child {
+	border-radius: 0 0 4px 4px;
+}
+
+
+
+/* LOKAL FORSIDE
+----------------------------------------------------------------------------------- */
+
+
+.scroll-down {
+	display:block;
+	position:fixed;
+	bottom:0;
+	left:50%;
+	margin-left:-36px;
+	z-index:1000;
+	width:72px;
+	height:72px;
+	background: rgb(0, 0, 0);
+	opacity: 0.8;
+	transition: all 0.2s ease-out;
+	text-align:center;
+}
+
+.scroll-down i {
+	margin-top:7px;
+	font-size:60px;
+	color:#fff;
+}
+
+/* SJANGERBAKGRUNNER */
+
+.article {
+	background: rgba(255, 255, 255, 0.8);
+	padding-bottom:40px;
+	margin:20px;
+}
+#Skjønnlitteratur .article,
+#Faglitteratur .article {
+	background:rgba(255, 255, 255, 1.0);
+}
+
+.article-bg-white {
+	background: rgba(255, 255, 255, 1.0);
+	margin:10px 20px 20px;
+	padding-bottom:40px;
+}
+
+/* TOPBANNER MED INNLOGGING */
+
+
+.logginn-wrapper {
+ /*
+
+  GUL #e7ab41
+ANBEFALTE RØD #c12121
+GRØNN  #0d5736
+HIPP GRØNN #4da19f
+HUD #ead6d1
+BRUN #d2a47f; */
+background: rgba(66, 27, 37, 1.0);
+padding-bottom: 50px;
+color: rgba(239, 221, 218, 1.0);
+}
+
+.logginn-wrapper a {color:rgba(255, 255, 255, 1);}
+.logginn-wrapper a:hover {color: rgba(231, 76, 60,1.0);}
+
+
+.logginn-wrapper h1 {
+font-family:"brandon-grotesque";
+font-weight:700;
+font-size:65px;
+color:#fff;
+}
+
+.logginn-wrapper h4 {}
+
+.login-container {
+	background:rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    margin: 20px 0 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+
+.login-container input {
+    background: none;
+    box-shadow:0 0 0 0;
+    border: 0 none;
+    border-radius:0 0 0 0;
+    display: block;
+    font: normal 16px/1.4 "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin:0;
+    padding: 11px 10px 9px;
+    width: 100%;
+}
+
+.login-container .login-row1 {position:relative; border-top:0 none;}
+.login-container .login-row2 {position:relative; border-top:1px solid rgba(66, 27, 37, 1.0);}
+
+.btn-login {
+	display: block;
+	width:100%;
+	margin-top:10px;
+	padding:13px 20px;
+	margin-bottom: 0;
+	background: rgba(231, 76, 60, 1.0);
+	font-family:"brandon-grotesque";
+	font-size: 18px;
+	font-weight:700;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	border:0;
+	border-radius: 4px;
+	color:#fff;
+	cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-out;
+/*    vertical-align: middle; */
+}
+
+.btn-login:hover {
+	background: rgba(255, 255, 255, 1.0);
+	color: rgba(231, 76, 60, 1.0);
+	transition: all 0s ease-out;
+}
+
+.glemt-pinkode {
+	display:block;
+	margin-top:5px;
+	text-align:center;
+	font-size:15px;
+	line-height:1.2em;
+}
+
+/* FORSIDEELEMENTER MOBIL */
+
+.velg-sjanger, .siste {
+margin: 4px auto;
+font-family: "brandon-grotesque";
+font-size:14px;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:1px;
+text-align:center;
+}
+
+.genre-title-mobile {
+font-size:15px;
+line-height:1.5;
+font-weight:bold;
+}
+
+/* SJANGEREUTLISTINGER MED UTVALGTE BØKER */
+
+
+.genre-head {
+	margin: 40px 0 60px;
+	position:relative;
+}
+
+.genre-title {
+	font-family: "brandon-grotesque";
+	font-weight: 700;
+	text-transform:uppercase;
+	text-decoration:none;
+	font-size:27px;
+	letter-spacing: 0.5px;
+	color: rgba(44, 62, 80,1.0);
+	border-bottom:5px solid rgba(44, 62, 80,1.0);
+
+}
+
+.genre-btn {
+	position:absolute;
+	top:0px;
+	right:0px;
+    display: inline-block;
+    font-family: "brandon-grotesque";
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(231, 76, 60, 1.0);
+    text-align: center;
+    transition: none 0s ease 0s;
+}
+
+.li-text-portal .title-alt {
+	font-family: "brandon-grotesque";
+	color: rgba(231, 76, 60, 1.0);
+	font-size:22.5px;
+	font-weight:700;
+	margin: 0;
+	line-height:1.2em;
+}
+.li-text-portal .author-alt {
+	font-family: "brandon-grotesque";
+	font-size:22.5px;
+	font-weight:400;
+	margin: 0;
+	line-height:1.2em;
+}
+
+.intro {
+	margin-top:3px;
+	color:#666;
+	font-family:Georgia, serif;
+	font-size:16px;
+	font-style:italic;
+	text-decoration:none;
+}
+
+a.book-block:hover .intro,
+a.book-block:focus .intro {text-decoration:none;}
+
+
+
+.utvalgte {
+margin-left:0;
+}
+
+.utvalgte li {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+.utvalgte-img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 25%;
+  height: 100px;
+  padding-right: 1.25em;
+}
+
+.utvalgte-img img {
+  display: block;
+  width: 100%;
+  margin:0;
+  height: auto;
+}
+
+
+/* BLOCK LIST BX-SLIDER */
+
+.book-block-alt {
+  display: table-row;
+  overflow: hidden;
+}
+
+
+.block-list li {
+  display: table;
+  border-collapse: collapse;
+  width: 16,6667%;
+  float:left;
+}
+
+
+.block-list-img {
+    display: table-cell;
+  vertical-align: bottom;
+  padding-right: 2em;
+
+}
+
+.block-list-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom:5px;
+  box-shadow: 3px 3px 0 rgba(52, 73, 94,0.8);
+  vertical-align:bottom;
+}
+
+.li-text {
+  vertical-align: bottom; font-family:'brandon-grotesque';
+}
+
+.li-text .title {
+  margin: 0;
+  font-weight:500;
+  font-size:15px;
+  line-height:18px;
+  color:rgba(52, 73, 94, 1.0);
+}
+
+.li-text .author {
+  margin: 0;
+  font-size:15px;
+  line-height:15px;
+  font-weight:400;
+  color:rgba(52, 73, 94, 1.0);
+}
+
+a.book-block-alt:hover .li-text .title,
+a.book-block-alt:hover .li-text .author  {color: rgba(231, 76, 60, 1.0);}
+
+.bx-wrapper .bx-controls-direction a .slidernav-circle40 {/* ligger i jquery.bxslider.css */}
+
+/* .slidernav-circle40 i[class^="icon"] */ .slidernav-circle40 i[class^="fa"] {
+position:absolute;
+height:55%;
+width:30%;
+margin:auto;
+overflow:hidden;
+top:0;
+left:0;
+bottom:0;
+right:0;
+font-size:21.5px;
+}
+
+
+
+/* PORTAL FOOTER
+----------------------------------------------------------------------------------- */
+
+.footer-wrapper a {color: rgba(44, 62, 80,1.0) /* #fff */;}
+.footer-wrapper a:hover {color:  rgba(231, 76, 60, 1.0);}
+
+
+.footer-wrapper {
+margin:0 20px;
+padding:10px 0 80px;
+color: rgba(44, 62, 80,1.0);
+border-top: 5px solid rgba(44, 62, 80,1.0);
+}
+
+/* .footer-wrapper h1 {color:#fff;} */
+
+.footer-wrapper h5 {
+padding-top:10px;
+font-family:'brandon-grotesque';
+font-weight:400;
+font-size:14px;
+text-transform:uppercase;
+}
+
+/* .footer-wrapper i[class^="icon"] */ .footer-wrapper i[class^="fa"] {font-size:27px;}
+
+.footer-menu-list {margin-top:10px;}
+
+.footer-menu-list, .footer-menu-list li {
+list-style-type:none;
+margin-left:0;
+padding-left:0;
+font-family:'brandon-grotesque';
+font-weight:600;
+font-size:17.5px;
+line-height:1.2;
+}
+
+.language-chooser li {font-weight:400;}
+
+
+/* BOKSIDE
+----------------------------------------------------------------------------------- */
+
+.book-page-imgwrapper {max-width:33%;margin:auto;}
+.book-page-img {max-width:100%;}
+/* .book-details {display:inline-block;float:left;margin-left:20px;} */
+
+
+.book-details h3.title {
+font-family: "brandon-grotesque";
+margin:0;
+padding:0;
+font-size:34px;
+font-weight: 500;
+}
+
+.book-details .author {
+font-family: "brandon-grotesque";
+font-size:27px;
+line-height:27px;
+}
+
+.details {
+font-family: "brandon-grotesque";
+font-size:15px;
+line-height:1.35em;
+text-transform:uppercase;
+margin-top:10px;
+padding-top:5px;
+}
+
+.description {
+margin-top:20px;
+padding-bottom:30px
+
+}
+
+.description p {
+text-align:left;
+font-size:16px;
+line-height:1.5em;
+}
+
+.description h4 {
+font-family: "brandon-grotesque";
+text-transform:uppercase;
+font-size:16px;
+letter-spacing: 1px;
+}
+
+.laan-btn {
+    background: rgba(231, 76, 60, 1.0);
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: "brandon-grotesque";
+    text-transform:uppercase;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 18px 34.5px 18px 14px;
+    text-align: center;
+    white-space: nowrap;
+    transition: none 0s ease 0s;
+}
+
+.btn-txt {display:inline-block;margin-left:10px;}
+
+.laan-btn:hover {color:#fff;}
+
+.share-this {margin-top:30px;padding-bottom:20px;}
+
+.alert-wrapper {
+	margin-top:10px;
+    /* background-color: rgba(66, 27, 37, 1.0);
+    border: 0 none;
+    border-radius: 15px;
+    padding: 3px; */ 
+}
+
+/* .alert-circle40 {
+display:inline-block;
+position:relative;
+float:left;
+height:44px;
+width:44px;
+border-radius:50%;
+border:1px solid rgba(255, 255, 255, 1.0);
+transition: all 0.2s ease-out;
+color: rgba(255, 255, 255, 1.0);
+}
+
+.alert-circle40 i[class^="fa"] {
+position:absolute;
+height:55%;
+width:30%;
+margin:auto;
+overflow:hidden;
+top:0;
+left:0;
+bottom:0;
+right:0;
+font-size:21.5px;
+} */
+
+.alert {
+	margin-bottom:0;
+	background-color: rgba(41, 128, 185,0);
+    color: rgba(41, 128, 185,1.0);
+    border: 1px solid rgba(41, 128, 185,1.0);
+    border-radius: 25px;
+    padding: 15px 34.5px 15px 15px;
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+
+.alert-info {
+	background-color: rgba(240, 241, 236, 0);
+    color: rgba(52, 152, 219,1.0);
+    border: 1px solid rgba(52, 152, 219,1.0);
+}
+
+.alert-success {
+    background-color: rgba(223, 240, 216, 0) ;
+    border: 1px solid rgba(46, 204, 113,1.0);
+    color: rgba(46, 204, 113,1.0);
+}
+
+.alert-warning {
+    background-color: rgba(240, 173, 78,0);
+    border: 1px solid rgba(240, 173, 78,1.0);
+    color: rgba(240, 173, 78,1.0);
+}
+
+
+.alert-danger {
+    background-color: rgba(231, 76, 60, 0) ;
+    border: 1px solid rgba(231, 76, 60,1.0);
+    color: rgba(231, 76, 60,1.0);
+}
+
+.alert a {text-decoration:underline;}
+
+.alert-success a {color: rgba(46, 204, 113,1.0); text-decoration:none; border-bottom: 1px dotted rgba(46, 204, 113,1.0);}
+
+
+h5.related-titles {
+	margin-top:20px;
+	text-align:center;
+	font-family: "brandon-grotesque";
+	font-size:16px;
+	text-transform:uppercase;
+	letter-spacing: 1px;
+}
+
+/* MIN SIDE STYLING
+----------------------------------------------------------------------------------- */
+
+#min-side {
+padding-left:0;padding-right:0;
+background: /* rgba(28, 22, 22, 0.85) */ rgba(66, 27, 37, 1.0);
+}
+
+
+.min-side-padding {
+ padding-top: 20px;
+}
+
+/* NAVBAR I LESEREN */
+
+
+.navbar-inverse2 .navbar-inner {
+    background-color: /* rgba(236, 240, 241,1.0) */ #011;
+    min-height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-inverse2 .brand, .navbar-inverse2 .nav > li > a {
+    color: rgba(127, 140, 141,1.0);
+    text-shadow: none;
+}
+
+.navbar-inverse2 .brand, .navbar-inverse2 .nav > li > a {
+    color: rgba(127, 140, 141,1.0);
+    text-shadow: none;
+}
+
+.navbar-inverse2 .brand:hover {
+    color: rgba(231, 76, 60, 0.5);
+    text-shadow: none;
+}
+
+.navbar-inverse2 .navbar-text {
+    color: #666;
+}
+.navbar-inverse2 .nav > li > a:focus, .navbar-inverse2 .nav > li > a:hover {
+    background-color: transparent;
+    color: rgba(231, 76, 60, 1.0);
+}
+.navbar-inverse2 .nav .active > a, .navbar-inverse2 .nav .active >
+a:hover, .navbar-inverse .nav .active > a:focus {
+    background-color: /* #111111 */ transparent;
+    color: /* #fff */ rgba(231, 76, 60, 1.0);
+    box-shadow:0 0 0 rgba(0, 0, 0, 0);
+}
+
+.navbar-inverse2 .nav .active > a:hover, .navbar-inverse .nav .active
+> a:focus {
+    color: /* #fff */ rgba(231, 76, 60, 1.0);
+}
+
+/* vis alle eller nedlastet knapper */
+
+.local-nav {display:table;width:100%;border-collapse:collapse;}
+.local-nav-inner {display:table-row;}
+.pst15 {display: table-cell;width:15%;vertical-align:middle;}
+.pst70 {display: table-cell;width:70%;vertical-align:middle;}
+
+
+.btn-inverse {
+    width: 70px;
+    padding:7px 17px;
+    font-size:14px;
+    background-color: transparent;
+    background-image: none;
+    background-repeat: repeat-x;
+    border: 1px solid rgba(231, 76, 60, 1.0);
+    color: rgba(231, 76, 60, 1.0);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0) inset, 0 1px 2px
+rgba(0, 0, 0, 0);
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+
+.btn-inverse.active, .btn-inverse:hover {
+    background-color: rgba(231, 76, 60, 1.0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0) inset, 0 1px 2px rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 1.0);
+}
+.orange {color: rgba(231, 76, 60, 1.0);}
+
+.tilbake-link {
+display:inline-block;
+color: rgba(231, 76, 60, 1.0);
+font-size:14px;
+line-height:22px;
+font-weight:normal;
+margin-top:-4px;
+vertical-align:middle;
+}
+.removecontrol {display: none}
+.downloadlink {display: none}
+.downloadinglink {display: none}
+.oklink { display: none}
+.book-block.downloadable .downloadlink { display: inline-block}
+.book-block.downloading.downloadable .downloadlink{display: none}
+.book-block.downloading .downloadinglink {display: inline-block}
+
+#booklist.viewdownloaded .book-block.downloaded .removecontrol { display: inline-block}
+#booklist.viewdownloaded .book-block.downloaded.downloading .removecontrol { display: none}
+#booklist.viewall .book-block.downloaded .oklink { display: inline-block }
+#booklist.viewall .book-block.downloaded.downloading .oklink { display: none }
+
+#booklist.blockview { }
+#booklist.listview { }
+#booklist.viewall { }
+#booklist.viewdownloaded .book-block:not(.downloaded) { display: none}
+
+.expires {margin:0;line-height:1.2em;color: rgba(189, 195, 199, 0.8)}
+.warnexpire .expires {display:none;}
+.expiresoon {margin:0;line-height:1.2em;color:#fff;display:none;}
+.warnexpire .expiresoon {display:inline-block;}
+
+#booklist.viewdownloaded .percentagebarholder { display: block}
+
+.downloadlink, .removecontrol, .oklink, .downloadinglink {
+color: rgba(189, 195, 199, 1.0);
+transition: all 0s ease-out;
+}
+
+.circle80 {
+display:block;
+position:relative;
+height:48px;
+width:48px;
+border-radius:50%;
+border:2px solid rgba(189, 195, 199,1.0);
+transition: all 0.3s ease-out;
+}
+
+/* .circle80 i[class^="icon"] */ .circle80 i[class^="fa"] {
+position:absolute;
+height:45%;
+width:50%;
+margin:auto;
+overflow:hidden;
+top:0;
+left:0;
+bottom:0;
+right:0;
+font-size:20px;
+}
+
+.downloadlink:hover, .removelink:hover, .oklink:hover, .downloadinglink:hover {
+color: rgba(231, 76, 60, 1.0);
+text-decoration:none;
+cursor:hand;cursor:pointer;
+}
+
+.downloadlink:hover i, .removelink:hover i, .oklink:hover i,
+.downloadinglink:hover i{
+color: rgba(236, 240, 241,1.0);
+text-decoration:none;
+transition: all 0s ease-out;
+}
+
+.downloadlink:hover .circle80, .removelink:hover .circle80,
+.oklink:hover .circle80, .downloadinglink:hover .circle80 {
+background: rgba(231, 76, 60, 1.0);
+border:2px solid rgba(231, 76, 60, 1.0);
+transition: all 0s ease-out;
+}
+
+.li-i-minside .icon-txt {
+margin-top:4px;
+font-family:'Helvetica Neue', sans-serif;
+font-size:13px;
+letter-spacing:0.5px;
+width:100%;
+}
+
+a.menu-ctrls {
+color:#555;
+font-size:25px;
+text-decoration:none;
+text-shadow: -0.5px -1px 1px rgba(0, 0, 0, 0.7);
+}
+
+ a.menu-ctrls:hover i{
+color:#555;
+text-decoration:none;
+cursor:hand;cursor:pointer;
+}
+
+.progress {
+    background-color: rgba(236, 240, 241, 0.65);
+    background-image: none;
+    border-radius: 2.5px 2.5px 2.5px 2.5px;
+   /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset; */
+    height: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {}
+
+.progress .bar {
+background-color: rgba(231, 76, 60, 1.0);
+    background-image: none;
+    background-repeat: repeat-x;
+ /*   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset; */
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    height: 100%;
+    text-align: center;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0.25);
+    transition: width 0.6s ease 0s;
+    width: 0;
+}
+
+
+
+/* BOK-CONTAINER FOR MIN SIDE OG PORTAL
+----------------------------------------------------------------------------------- */
+
+
+.book-block {
+  display: table-row;
+  overflow: hidden;
+}
+
+
+/* UTLISTINGER - MIN SIDE
+----------------------------------------------------------------------------------- */
+
+.mine-boker {
+margin-left:0;
+}
+
+.mine-boker li {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mine-boker-img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 25%;
+  height: 100px;
+  padding-right: 1em;
+}
+.mine-boker-img img {
+  display: block;
+  width: 100%;
+  margin:0;
+  height: auto;
+}
+
+.li-text-minside {
+  display: table-cell;
+  vertical-align: middle;
+  width: 60%;
+}
+
+.li-i-minside {
+  display: table-cell;
+  vertical-align: middle;
+  width: 15%;
+}
+
+.li-i-minside > i {
+  font-size:17.5px;
+}
+
+.li-text-minside .titleheader {
+	font-family: 'Helvetica-neue', Helvetica, sans-serif;
+  margin: 0;
+  font-size:16px;
+  line-height:1.2em;
+  color:#fff;
+}
+a.title  { color: #fff; }
+
+.li-text-minside .author {
+  margin: 0;
+  font-size:16px;
+  line-height:1.2em;
+  color:#fff;
+}
+
+
+/* UTLISTINGER - PORTAL
+----------------------------------------------------------------------------------- */
+
+
+.utlisting, .utlisting-listview {
+margin-left:0;
+}
+
+.utlisting li, .utlisting-listview li {
+  border-bottom: 1px solid #eee;
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.utlisting-img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 25%;
+  height: 100px;
+  padding-right: 1em;
+}
+
+.listview-img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 5%;
+  height: 150px;
+  padding-right: 1em;
+}
+.utlisting-img img, .listview-img img {
+  display: block;
+  width: 100%;
+  margin:0;
+  height: auto;
+}
+
+.li-i-portal {
+  display: table-cell;
+  vertical-align: middle;
+  width: 5%;
+}
+
+.li-i-portal > i {
+  font-size:17.5px;
+  color: rgba(149, 165, 166, 1.0);
+}
+
+.li-text-portal {
+  display: table-cell;
+  vertical-align: middle;
+  width: 70%;
+  color: /* rgba(66, 27, 37, 1.0) */ rgba(52, 73, 94, 1.0);
+
+}
+
+a.book-block:hover .li-text-portal,
+a.book-block:hover .li-text-portal h4.title,
+a.book-block:hover .li-i-portal > i {
+  color: rgba(231, 76, 60, 1.0);
+}
+
+.li-text-portal .title {
+	font-family:'brandon-grotesque';
+	font-weight:700;
+  	margin: 0;
+  	font-size:18px;
+  	line-height:1.1em;
+}
+
+.li-text-portal .author {
+	font-family:'brandon-grotesque';
+	font-weight:400;
+	margin: 0;
+	font-size:18px;
+	line-height:1.2em;
+}
+
+
+
+
+.btn-loader {margin-top:20px;}
+
+/* VIEWPORTS GLOBAL NAV
+----------------------------------------------------------------------------------- */
+
+@media all  and (max-width: 479px) {
+  .navbar-inverse .navbar-search input.search-query {width:180px;transition: none 0s ease 0s;}
+  .navbar-inverse .navbar-search input.search-query:focus {width:180px; transition: none 0s ease 0s;}
+}
+
+@media all  and (max-width: 767px) {
+
+  .navbar-inner, .navbar-inverse2 .navbar-inner {padding-left:0;padding-right:0;}
+  .path {margin: 5px 0 0 25px;}
+  .article, .article-bg-white {margin:10px;}
+  .footer-wrapper {margin:0 10px;text-align:center;}
+
+}
+
+@media all  and (min-width: 980px) {
+
+/* .navbar .nav li a.mine-boker, .navbar .nav li a.min-side, .navbar .nav
+li a.hjelp {padding:5px 0;} */
+
+.navbar-inverse .nav-collapse .nav > li > a, .navbar-inverse
+.nav-collapse .dropdown-menu a {
+    border-top: 0 none;
+}
+.navbar-inverse .nav-collapse .dropdown-menu a {
+	color: rgba(231, 76, 60, 1.0);
+    padding:3px 20px;
+}
+
+.navbar-inverse .nav-collapse .dropdown-menu a:hover {
+    color:#fff;
+}
+
+.navbar-inverse .nav-collapse .nav > li > a:hover,
+.navbar-inverse .nav-collapse .dropdown-menu a:hover,
+.navbar-inverse .nav-collapse .dropdown-menu a:focus,
+.navbar-inverse2 .nav-collapse .nav > li > a:hover,
+.navbar-inverse2 .nav-collapse .dropdown-menu a:hover,
+.navbar-inverse2 .nav-collapse .dropdown-menu a:focus {
+    background-color: rgba(66, 27, 37,1.0);
+    color: rgba(231, 76, 60, 1.0);
+    background-image:none;
+}
+
+/*
+a.mine-boker:after {
+content: "Mine bøker";
+font-size:10px;
+font-weight:bold;
+position:relative;
+bottom:-13px;
+left:-50%;
+}
+
+a.min-side:after {
+content: "Min side";
+font-size:10px;
+font-weight:bold;
+position:relative;
+bottom:-13px;
+left:-50%;
+}
+
+a.hjelp:after {
+content: "Hjelp";
+font-size:10px;
+font-weight:bold;
+position:relative;
+bottom:-13px;
+left:-50%;
+}
+
+*/
+
+/* .nav-collapse .navbar-form, .nav-collapse .navbar-search {
+    border-bottom: 0 none;
+    border-top: 0;
+    box-shadow: none;
+    float: none;
+    margin-right: 30px;
+    padding: 7px 0;
+
+} */
+
+.nav-collapse .navbar-search:before {
+    content:none;
+    font-size:15px;
+    color: #fff;
+
+}
+
+}
+
+@media all  and (min-width: 1169px) {
+
+.article {padding-bottom:50px;}
+
+}
+
+/* VIEWPORTS LOKALE FORSIDER
+----------------------------------------------------------------------------------- */
+
+
+@media all  and (max-width: 767px) {
+
+  .login-container2 input {height:40px;}
+  .utvalgte-img img {margin:5px 0;}
+  .block-list-img, .bx-wrapper .bx-controls-direction a { height:160px;}
+  .block-list-img {padding-right: 1em;}
+  .logginn-wrapper {padding-bottom: 15px}
+  .logginn-wrapper h1 {font-size:48px;}
+	.bxloadwrapper {height:165px;}
+	.login-form {margin-bottom:0;}
+	.article-mobil {padding:15px 0;margin:0 3px 2px 3px;background:#fff;}
+	.article-list-mobil {padding:10px 0;margin:0 3px 10px 3px;background:#fff;}
+
+}
+
+
+
+@media all and (min-width:480px) and (max-width: 768px) and (orientation:landscape) {
+
+  .login-container2 input {height:40px;}
+  .utvalgte li {
+    float: left;
+    width: 50%;
+  }
+
+  .utvalgte-img {
+	height: 80px;
+  }
+
+  .block-list-img, .bx-wrapper .bx-controls-direction a { height:200px;}
+
+  .block-list-img {padding-right: 1em;}
+
+
+}
+
+@media  all and (min-width: 768px) and (max-width:979px) {
+	.bxloadwrapper {height:165px;}
+  .utvalgte li {
+    float: left;
+    width: 50%;
+  }
+
+  .utvalgte-img {
+	height: 150px;
+  }
+
+  .block-list-img, .bx-wrapper .bx-controls-direction a { height:165px;}
+  .lead-list {margin-left:0;font-size:17.5px;line-height:18px;}
+
+}
+
+@media  all and (min-width: 980px) and (max-width:1199px) {
+
+  .utvalgte li {
+    float: left;
+    width: 50%;
+  }
+
+  .utvalgte-img {
+  height: 150px;
+  }
+
+	.block-list-img, .bx-wrapper .bx-controls-direction a { height:210px;}
+
+	.btn-login2 {padding:7px 15px;font-size: 14px;}
+	.logginn-wrapper h1 {
+	font-size:65px;
+	}
+
+}
+
+
+@media all  and (min-width: 1200px) {
+	.utvalgte li {
+    float: left;
+    width: 50%;
+  }
+
+  .utvalgte-img {
+  height: 150px;
+  }
+
+	.block-list-img, .bx-wrapper .bx-controls-direction a { height:250px;}
+
+
+	.logginn-wrapper h1 {
+	font-size:100px;
+	}
+	
+	.genre-btn {font-size: 22.5px;}
+
+}
+
+/* VIEWPORTS UTLISTINGER
+----------------------------------------------------------------------------------- */
+
+@media all  and (max-width: 767px) {
+
+  .utlisting-img img {margin:5px 0;}
+  #portal {padding-left:0;padding-right:0;}
+  .btn-loader {margin-top:0;}
+
+
+}
+
+@media all and (min-width:480px) and (max-width: 768px) and
+(orientation:landscape) {
+  .utlisting li {
+    float: left;
+    width: 50%;
+  }
+
+  .utlisting-img {
+  height: 80px;
+  }
+
+}
+
+@media all  and (min-width: 768px) and (max-width: 979px) {
+  .utlisting li {
+    float: left;
+    width: 50%;
+  }
+
+  .utlisting-img {
+  height: 150px;
+  }
+
+}
+
+@media  all and (min-width: 980px) and (max-width:1199px) {
+  .utlisting li {
+    float: left;
+    width: 33.33333%;
+  }
+
+    .utlisting-img {
+  height: 125px;
+  }
+
+}
+
+@media all and (min-width: 1200px) {
+  .utlisting li {
+    float: left;
+    width: 25%;
+  }
+
+  .utlisting-img {
+  height: 120px;
+  }
+}
+
+/* search result - listview */
+
+
+@media all and (min-width:480px) and (max-width: 768px) and
+(orientation:landscape) {
+  .utlisting-listview li {
+    float: left;
+    width: 100%;
+  }
+
+  .listview-img {
+  height: 80px;
+  }
+
+}
+
+@media all  and (min-width: 768px) and (max-width: 979px) {
+  .utlisting-listview li {
+    float: left;
+    width: 100%;
+  }
+
+  .listview-img {
+  height: 150px;
+  }
+
+}
+
+@media  all and (min-width: 980px) and (max-width:1199px) {
+  .utlisting-listview li {
+    float: left;
+    width: 100%;
+  }
+
+    .listview-img {
+  height: 125px;
+  }
+
+}
+
+@media all and (min-width: 1200px) {
+  .utlisting-listview li {
+    float: left;
+    width: 100%;
+  }
+
+  .listview-img {
+  height: 120px;
+  }
+}
+
+/* VIEWPORTS BOKSIDE
+-----------------------------------------------------------------------------------*/
+
+@media all and (max-width: 767px) {
+
+/* .book-page-imgwrapper {max-width:25%;float:left;}
+.book-page-img {max-width:90%;}
+.book-details {max-width:66%;float:left;} */
+.book-details h3.title {
+font-size:24.5px;
+line-height:1;
+}
+
+.book-details .author {
+font-size:20px;
+line-height:1;
+}
+
+.details {
+font-size:12px;
+margin-top:5px;
+}
+
+.description {
+margin-top:15px;
+padding-bottom:30px
+
+}
+
+.description p {
+font-size:14px;
+line-height:1.5em;
+}
+
+.description h4, h5.related-titles {font-size: 14px;}
+
+.laan-btn {
+display:block;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 18px 34.5px;
+    text-align: center;
+    transition: none 0s ease 0s;
+}
+
+.share-this {clear:both;margin-top:30px;}
+
+}
+/* VIEWPORTS MIN SIDE
+-----------------------------------------------------------------------------------
+*/
+
+@media all  and (max-width: 767px) {
+.downloadlink, .removelink, .oklink, .downloadinglink {
+font-size:25px;
+
+}
+a.menu-ctrls {
+font-size:20px;
+}
+.min-side-padding {
+padding-left:20px;
+padding-right:20px;
+}
+.mine-boker-img img {
+  margin:10px 0;
+}
+#mine-boker {padding-top:10px;}
+
+}
+
+@media all  and (min-width: 768px) and (max-width: 1199px) {
+  .mine-boker li {
+    float: left;
+    width: 50%;
+  }
+
+}
+
+@media all  and (min-width: 768px) and (max-width: 979px) and
+(orientation:portrait) {
+  .mine-boker-img {
+  height: 180px;
+  }
+
+}
+
+@media all  and (min-width: 768px) and (max-width: 979px) and
+(orientation:landscape) {
+  .mine-boker-img {
+  height: 200px;
+  }
+
+}
+
+@media all  and (min-width: 980px) and (max-width: 1199px) {
+  .mine-boker-img {
+  height: 200px;
+  }
+
+  #mine-boker {padding-top:20px;}
+}
+
+@media  all and (min-width: 1200px) {
+  .mine-boker li {
+    float: left;
+    width: 50%;
+  }
+
+    .mine-boker-img {
+  height: 250px;
+  }
+    #mine-boker {padding-top:20px;}
+
 }

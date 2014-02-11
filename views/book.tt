@@ -26,7 +26,7 @@
 	    		[% IF book.coverimg %]
     			<img src="[% book.coverimg %]" />
 				[% ELSE %]
-            	<img src="[% settings.reader_url %]/img/missing-cover.png">
+            	<img src="/img/missing-cover.png">
 				[% END %]
 			</a>
 		</div>

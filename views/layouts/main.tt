@@ -10,9 +10,9 @@
 <link href="/stars/jquery.rating.css" rel="stylesheet">
   <script src="/js/jquery.dotdotdot-1.5.7-packed.js"></script>
 <script src="/js/jquery-ui-1.10.3.custom.min.js"></script>
-<link href="[% settings.reader_url %]/img/favicon.ico" rel="icon" type="image/x-icon" />  
-     <script src="[% settings.reader_url %]/js/jquery.bxslider.js"></script>
-   <link href="[% settings.reader_url %]/css/jquery.bxslider.css" rel="stylesheet" />
+<link href="/img/favicon.ico" rel="icon" type="image/x-icon" />  
+     <script src="/js/jquery.bxslider.min.js"></script>
+   <link href="/css/jquery.bxslider.css" rel="stylesheet" />
    
 <!--  <script src="/js/jquery.bxslider.min.js"></script>
   <link href="/css/jquery.bxslider.css" rel="stylesheet" /> -->
@@ -23,8 +23,8 @@
   <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 <!--  <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <link href="[% settings.reader_url %]/css/style.css" rel="stylesheet" />
-  <script type="text/javascript" src="//use.typekit.net/lrk7anq.js"></script>
+  <link href="/css/style.css" rel="stylesheet" />
+  [%# <script type="text/javascript" src="//use.typekit.net/lrk7anq.js"></script> %]
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <script>
 
@@ -90,7 +90,7 @@ function scrolldown() {
 <!-- <link rel="stylesheet" href="[% request.uri_base %]/css/style.css" /> -->
 [% library.detail_head %]
 
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "ur-beb289ee-59c0-ab4c-3b99-ec5cf86755a0", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 </head>
 <body id="portal"[% IF template.body_class %] class="[% template.body_class %]"[% END %]>
