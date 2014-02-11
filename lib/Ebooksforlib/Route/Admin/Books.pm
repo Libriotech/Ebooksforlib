@@ -53,6 +53,13 @@ post '/books/add' => require_role admin => sub {
     if ( $isbn && $isbn->is_valid ) {
     
         try {
+           my $hs = HTML::Strip->new();
+           $title = $hs->parse( $title );
+           $date  = $hs->parse( $date );
+           $isbn_in = $hs->parse( $isbn_in );
+           $pages   = $hs->parse( $pages );
+           $dataurl = $hs->parse( $dataurl );
+           $hs->eof;
             
             my $flash_info;
             my $flash_error;
@@ -171,6 +178,13 @@ post '/books/edit' => require_role admin => sub {
     if ( $isbn && $isbn->is_valid ) {
     
         try {
+            my $hs = HTML::Strip->new();
+            $title = $hs->parse( $title );
+            $date  = $hs->parse( $date );
+            $isbn_in = $hs->parse( $isbn_in );
+            $pages   = $hs->parse( $pages );
+            $dataurl = $hs->parse( $dataurl );
+            $hs->eof;
             $book->set_column('title', $title);
             $book->set_column('date', $date);
             $book->set_column('isbn', $isbn->common_data);
