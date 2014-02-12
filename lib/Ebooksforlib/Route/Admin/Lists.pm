@@ -30,6 +30,7 @@ post '/lists/add' => require_role admin => sub {
     my $is_genre  = param 'is_genre';
     my $frontpage = param 'frontpage';
     my $mobile    = param 'mobile';
+    # html strip
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
@@ -72,6 +73,7 @@ post '/lists/edit' => require_role admin => sub {
     my $is_genre = param 'is_genre';
     my $frontpage = param 'frontpage';
     my $mobile    = param 'mobile';
+    # html strip
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
