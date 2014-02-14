@@ -30,6 +30,7 @@ get '/books/add_from_isbn' => require_role admin => sub {
     my $hs = HTML::Strip->new();
     $isbn_in  = $hs->parse( $isbn_in );
     $hs->eof;
+    $isbn_in = HTML::Entities::encode($isbn_in);
     my $isbn = Business::ISBN->new( $isbn_in );
     if ( $isbn && $isbn->is_valid ) {
         my $data = _get_data_from_isbn( $isbn );
