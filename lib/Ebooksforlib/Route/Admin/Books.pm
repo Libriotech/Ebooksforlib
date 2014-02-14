@@ -27,13 +27,17 @@ get '/books/imported' => require_role admin => sub {
 get '/books/add_from_isbn' => require_role admin => sub {
 
     my $isbn_in = param 'isbn';
+    my $hs = HTML::Strip->new();
+    $isbn_in  = $hs->parse( $isbn_in );
+    $hs->eof;
     my $isbn = Business::ISBN->new( $isbn_in );
     if ( $isbn && $isbn->is_valid ) {
         my $data = _get_data_from_isbn( $isbn );
         template 'books_add', { data => $data, isbn => $isbn->common_data };
     
     } else {
-    
+
+        $isbn_in = 'This' if(!$isbn_in);
         flash error => "$isbn_in is not a valid ISBN!";
         redirect '/admin';
     
@@ -49,18 +53,18 @@ post '/books/add' => require_role admin => sub {
     my $dataurl = param 'dataurl';
     my $book_id = param 'id';
     
+    my $hs = HTML::Strip->new();
+    $title = $hs->parse( $title );
+    $date  = $hs->parse( $date );
+    $isbn_in = $hs->parse( $isbn_in );
+    $pages   = $hs->parse( $pages );
+    $dataurl = $hs->parse( $dataurl );
+    $hs->eof;
+            
     my $isbn = Business::ISBN->new( $isbn_in );
     if ( $isbn && $isbn->is_valid ) {
     
         try {
-           my $hs = HTML::Strip->new();
-           $title = $hs->parse( $title );
-           $date  = $hs->parse( $date );
-           $isbn_in = $hs->parse( $isbn_in );
-           $pages   = $hs->parse( $pages );
-           $dataurl = $hs->parse( $dataurl );
-           $hs->eof;
-            
             my $flash_info;
             my $flash_error;
             
@@ -148,6 +152,7 @@ post '/books/add' => require_role admin => sub {
         };
         
     } else {
+        $isbn_in = 'This' if(!$isbn_in);
         flash error => "$isbn_in is not a valid ISBN!";
         template 'books_add', { title => $title, date => $date };
     }
@@ -172,19 +177,20 @@ post '/books/edit' => require_role admin => sub {
     my $pages   = param 'pages';
     my $dataurl = param 'dataurl';
     
+    my $hs = HTML::Strip->new();
+    $title = $hs->parse( $title );
+    $date  = $hs->parse( $date );
+    $isbn_in = $hs->parse( $isbn_in );
+    $pages   = $hs->parse( $pages );
+    $dataurl = $hs->parse( $dataurl );
+    $hs->eof;
+
     my $book = rset('Book')->find( $id );
 
     my $isbn = Business::ISBN->new( $isbn_in );
     if ( $isbn && $isbn->is_valid ) {
     
         try {
-            my $hs = HTML::Strip->new();
-            $title = $hs->parse( $title );
-            $date  = $hs->parse( $date );
-            $isbn_in = $hs->parse( $isbn_in );
-            $pages   = $hs->parse( $pages );
-            $dataurl = $hs->parse( $dataurl );
-            $hs->eof;
             $book->set_column('title', $title);
             $book->set_column('date', $date);
             $book->set_column('isbn', $isbn->common_data);
@@ -200,6 +206,7 @@ post '/books/edit' => require_role admin => sub {
         };
     
     } else {
+        $isbn_in = 'This' if(!$isbn_in);
         flash error => "$isbn_in is not a valid ISBN!";
         redirect '/books/edit/' . $book->id;
     }
