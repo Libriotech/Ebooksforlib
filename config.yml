@@ -23,7 +23,11 @@ plugins:
         default:   no
         langs:
             en: English
-            no: Norsk bokmål
+            no: Norsk bokmal
+    EscapeHTML:
+        automatic_escaping: true
+        traverse_objects: true
+        exclude_pattern: 'settings'
 
 # template engine
 template: "template_toolkit"
@@ -33,3 +37,6 @@ engines:
     start_tag: '[%'
     end_tag:   '%]'
     WRAPPER: layouts/main.tt
+
+
+
