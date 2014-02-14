@@ -26,9 +26,8 @@ use Ebooksforlib::Route::Admin::Lists;
 use Ebooksforlib::Route::Admin::Stats;
 use Ebooksforlib::Route::Admin::Logs;
 
-use Ebooksforlib::San;
-
 use Dancer::Plugin::Auth::Basic;
+use Dancer::Plugin::EscapeHTML;
 
 our $VERSION = '0.1';
 
@@ -88,6 +87,7 @@ get '/choose' => sub {
 
     my $return_url = param 'return_url';
 
+    $return_url = '' if($return_url =~ /^[a-z]+\:/i);
     $return_url = uri_escape($return_url);
 
     my @libraries = rset( 'Library' )->all;
@@ -904,6 +904,10 @@ post '/users/password' => require_role superadmin => sub {
     my $password1 = param 'password1';
     my $password2 = param 'password2'; 
     
+    my $hs = HTML::Strip->new();
+    $id  = $hs->parse( $id );
+    $hs->eof;
+ 
     # Check the provided data
     _check_password_length( $password1 )             or return template 'users_password', { id => $id };
     _check_password_match(  $password1, $password2 ) or return template 'users_password', { id => $id };
