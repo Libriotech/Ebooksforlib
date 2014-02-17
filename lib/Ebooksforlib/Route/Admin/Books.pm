@@ -12,6 +12,7 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
+use Ebooksforlib::Err;
 
 ### Books
 
@@ -147,7 +148,7 @@ post '/books/add' => require_role admin => sub {
             return redirect '/book/' . $new_book->id;
             
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
             template 'books_add', { title => $title, date => $date };
         };
@@ -201,7 +202,7 @@ post '/books/edit' => require_role admin => sub {
             flash info => 'A book was updated! <a href="/book/' . $book->id . '">View</a>';
             redirect '/book/' . $book->id;
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
             template 'books_edit', { book => $book };
         };
@@ -265,7 +266,7 @@ post '/files/add' => require_role admin => sub {
             flash info => 'A file was updated!';
             debug '*** Going to replace content of file ' . $file->id;
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
         };
         return redirect '/books/items/' . $book_id;
@@ -287,7 +288,7 @@ post '/files/add' => require_role admin => sub {
             }
             flash info => 'A new file was added!';
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
         };
         redirect '/books/items/' . $book_id;

@@ -9,6 +9,7 @@ Routes for handling ratings. Currently not in use.
 use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Ebooksforlib::Err;
 
 post '/ratings/add' => require_login sub {
 
@@ -25,7 +26,7 @@ post '/ratings/add' => require_login sub {
         });
         flash info => 'Your rating was added!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_"; # FIXME Don't show the raw error to end users
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
     };
     

@@ -13,6 +13,7 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 
 use Ebooksforlib::Util;
+use Ebooksforlib::Err;
 
 get '/borrow/:item_id' => require_login sub {
 
@@ -81,7 +82,7 @@ get '/borrow/:item_id' => require_login sub {
         # flash info => "You borrowed a book!";
         redirect '/book/' . $item->file->book_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/book/' . $item->file->book_id;
     };
@@ -101,7 +102,7 @@ get '/return/:item_id' => require_login sub {
     my $return = _return_loan( $loan );
     if ( $return->{'error'} == 1 ) {
         debug $return->{'errormsg'};
-        flash error => "Sorry, an error occured: " . $return->{'errormsg'};
+        flash error => "Sorry, an error occured: " . errmsg($return->{'errormsg'});
     } else {
         # Log
         _log2db({

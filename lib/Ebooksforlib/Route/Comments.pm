@@ -9,6 +9,7 @@ Routes for handling comments. Currently not in use.
 use Dancer ':syntax';
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Ebooksforlib::Err;
 
 post '/comments/add' => require_login sub {
 
@@ -29,7 +30,7 @@ post '/comments/add' => require_login sub {
         });
         flash info => 'Your comment was added!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_"; # FIXME Don't show the raw error to end users
+        flash error => "Oops, we got an error:<br />".errmsg($_); 
         error "$_";
     };
     
@@ -77,7 +78,7 @@ post '/comments/edit' => sub {
             $comment->update;
             flash info => 'The comment was updated!';
         } catch {
-            flash error => "Oops, we got an error:<br />$_"; # FIXME Don't show the raw error to end users
+            flash error => "Oops, we got an error:<br />".errmsg($_); 
             error "$_";
         };
         

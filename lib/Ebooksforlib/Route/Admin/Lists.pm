@@ -12,6 +12,8 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
+use Ebooksforlib::Err;
+
 
 ### Lists
 
@@ -51,7 +53,7 @@ post '/lists/add' => require_role admin => sub {
         flash info => 'A new list was added! <a href="/list/' . $new_list->id . '">View</a>';
         redirect '/admin/lists';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'lists_add', { name => $name, is_genre => $is_genre };
     };
@@ -87,7 +89,7 @@ post '/lists/edit' => require_role admin => sub {
         flash info => 'A list was updated! <a href="/list/' . $list->id . '">View</a>';
         redirect '/admin/lists';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'lists_edit', { list => $list };
     };
@@ -115,7 +117,7 @@ get '/lists/delete_ok/:id?' => require_role admin => sub {
         info "Deleted list with ID = $id";
         redirect '/admin/lists';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/admin';
     };
@@ -140,7 +142,7 @@ get '/lists/promo/:action/:list_id/:book_id' => require_role admin => sub {
         $listbook->update;
         flash info => 'The list was updated!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
     };
     redirect '/lists/edit/' . $list_id;
@@ -207,7 +209,7 @@ post '/books/lists' => require_role admin => sub {
         flash info => 'This book was added to a list!';
         redirect '/books/lists/' . $book_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/books/lists/' . $book_id;
     };
@@ -228,7 +230,7 @@ get '/books/lists/delete/:book_id/:list_id' => require_role admin => sub {
         flash info => 'This book was deleted from a list! <a href="/lists/books/' . $list_id . '">Delete more from this list<a>';
         redirect '/books/lists/' . $book_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/books/lists/' . $book_id;
     };

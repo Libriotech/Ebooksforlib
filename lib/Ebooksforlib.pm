@@ -29,15 +29,19 @@ use Ebooksforlib::Route::Admin::Logs;
 use Dancer::Plugin::Auth::Basic;
 use Dancer::Plugin::EscapeHTML;
 
+use Ebooksforlib::Err;
+
 our $VERSION = '0.1';
 
 hook 'before' => sub {
+
+    errinit();
 
     var appname  => config->{appname};
     var min_pass => config->{min_pass}; # FIXME Is there a better way to do this? 
     var language_tag => language_tag;
     var installed_langs => installed_langs;
-    
+
     # Did the user try to access /admin or /superadmin without being logged in? 
     my $request_path = request->path();
     if ( ( $request_path eq '/admin' || $request_path eq '/superadmin' ) && !session('logged_in_user_id') ) {
@@ -81,6 +85,10 @@ hook 'before' => sub {
     });
     var lists => \@lists;
 
+};
+
+hook 'after' => sub {
+    errexit();
 };
 
 get '/choose' => sub {
@@ -365,7 +373,7 @@ post '/providers/add' => require_role superadmin => sub {
         flash info => 'A new provider was added!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/superadmin';
     };
@@ -395,7 +403,7 @@ post '/providers/edit' => require_role superadmin => sub {
         flash info => 'A provider was updated!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/superadmin';
     };
@@ -425,7 +433,7 @@ get '/providers/delete_ok/:id?' => require_role superadmin => sub {
         info "Deleted provider with ID = $id";
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/superadmin';
     };
@@ -472,7 +480,7 @@ post '/books/items/edit' => require_role admin => sub {
         flash info => 'An item was updated!';
         redirect '/books/items/' . $item->file->book_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/books/items/' . $item->file->book_id;
     };
@@ -500,7 +508,7 @@ post '/books/items/editall' => require_role admin => sub {
             $item->update;
             $edited_items_count++;
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
             return redirect '/books/items/' . $item->book_id;
         };
@@ -536,7 +544,7 @@ post '/books/items/add' => require_role admin => sub {
             });
             $new_items_count++;
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
             return redirect '/books/items/' . $book_id;
         }
@@ -558,7 +566,7 @@ get '/books/items/delete_ok/:item_id?' => require_role admin => sub {
         info "Deleted item with ID = $item_id";
         redirect '/books/items/' . $book->id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/books/items/' . $book->id;
     };
@@ -600,7 +608,7 @@ post '/creators/add' => require_role admin => sub {
         flash info => 'A new creator was added! <a href="/creator/' . $new_creator->id . '">View</a>';
         redirect '/admin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'creators_add', { name => $name };
     };
@@ -628,7 +636,7 @@ post '/creators/edit' => require_role admin => sub {
         flash info => 'A creator was updated! <a href="/creator/' . $creator->id . '">View</a>';
         redirect '/creator/' . $creator->id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/creator/' . $creator->id;
     };
@@ -655,7 +663,7 @@ post '/books/creators/add' => require_role admin => sub {
         flash info => 'A new creator was added!';
         redirect '/books/creators/add/' . $book_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/books/creators/add/' . $book_id;
     };
@@ -670,7 +678,7 @@ get '/books/creators/delete/:book_id/:creator_id' => require_role admin => sub {
         flash info => 'A creator was deleted from this book!';
         redirect '/books/creators/add/' . $book_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/books/creators/add/' . $book_id;
     };
@@ -715,7 +723,7 @@ post '/books/covers' => require_role admin => sub {
         $book->update;
         flash info => 'The cover image for this book was updated!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
     };
     redirect '/book/' . $book->id;
@@ -741,7 +749,7 @@ post '/libraries/add' => require_role superadmin => sub {
         flash info => 'A new library was added!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'libraries_add', { name => $name };
     };
@@ -773,7 +781,7 @@ post '/libraries/edit' => require_role superadmin => sub {
         flash info => 'A library was updated!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'libraries_edit', { library => $library };
     };
@@ -801,7 +809,7 @@ get '/libraries/delete_ok/:id?' => require_role superadmin => sub {
         info "Deleted library with ID = $id";
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/superadmin';
     };
@@ -852,7 +860,7 @@ post '/users/add' => require_role superadmin => sub {
         flash info => 'A new user was added!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'users_add', { name => $name };
     };
@@ -887,7 +895,7 @@ post '/users/edit' => require_role superadmin => sub {
         flash info => 'A user was updated!';
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         template 'users_edit', { user => $user };
     };
@@ -922,7 +930,7 @@ post '/users/password' => require_role superadmin => sub {
         flash info => "The password was updated for user with ID = $id!";
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, error when trying to update password:<br />$_";
+        flash error => "Oops, error when trying to update password:<br />".errmsg($_);
         error "$_";
         template 'users_password', { id => $id };
     };
@@ -950,7 +958,7 @@ get '/users/roles/add/:user_id/:role_id' => require_role superadmin => sub {
         flash info => 'A new role was added!';
         redirect '/users/roles/' . $user_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/users/roles/' . $user_id;
     };    
@@ -966,7 +974,7 @@ get '/users/roles/delete/:user_id/:role_id' => require_role superadmin => sub {
         flash info => 'A role was deleted!';
         redirect '/users/roles/' . $user_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/users/roles/' . $user_id;
     };
@@ -995,7 +1003,7 @@ get '/users/libraries/add/:user_id/:library_id' => require_role superadmin => su
         flash info => 'A new library was connected!';
         redirect '/users/libraries/' . $user_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/users/libraries/' . $user_id;
     };    
@@ -1012,7 +1020,7 @@ get '/users/libraries/delete/:user_id/:library_id' => require_role superadmin =>
         flash info => 'A connection was deleted!';
         redirect '/users/libraries/' . $user_id;
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/users/libraries/' . $user_id;
     };
@@ -1040,7 +1048,7 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
         info "Deleted user with ID = $id";
         redirect '/superadmin';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
         redirect '/superadmin';
     };

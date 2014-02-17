@@ -12,6 +12,7 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
+use Ebooksforlib::Err;
 
 get '/admin/settings' => require_role admin => sub { 
     my $library = rset('Library')->find( _get_library_for_admin_user() );
@@ -29,7 +30,7 @@ post '/admin/settings/concurrent_loans' => require_role admin => sub {
         $library->update;
         flash info => 'The number of concurrent loans was updated!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
     };
     redirect '/admin/settings';
@@ -48,7 +49,7 @@ post '/admin/settings/detailview' => require_role admin => sub {
         $library->update;
         flash info => 'The detail view was updated!';
     } catch {
-        flash error => "Oops, we got an error:<br />$_";
+        flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
     };
     redirect '/admin/settings';

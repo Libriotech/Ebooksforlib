@@ -12,6 +12,7 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
+use Ebooksforlib::Err;
 use Data::Dumper; # FIXME Debug
 
 =head2 /my
@@ -65,7 +66,7 @@ get '/anon_toggle_ok' => require_login sub {
             logmsg  => "anonymize = $new_anonymize",
         });
     } catch {
-        flash error => localize("Oops, we got an error:<br />$_");
+        flash error => localize("Oops, we got an error:<br />").errmsg($_);
         error "$_";
     };
     redirect '/my';
@@ -106,7 +107,7 @@ get '/anon_ok/:id' => require_login sub {
                 logmsg  => "",
             });
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
         };
     } else {
@@ -141,7 +142,7 @@ get '/anon_all_ok' => require_login sub {
             $oldloan->update;
             $num_anon++;
         } catch {
-            flash error => "Oops, we got an error:<br />$_";
+            flash error => "Oops, we got an error:<br />".errmsg($_);
             error "$_";
             return redirect '/my';
         };
