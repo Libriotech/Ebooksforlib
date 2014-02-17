@@ -6,7 +6,7 @@
     	</div>
 		<div class="login-row2">
    			<label for="password" style="display:none;">[% l('PIN code') %]</label>
-   			<input class="span3" type="password" id='password' name='password' placeholder="[% l('PIN code') %]">
+   			<input class="span3" type="password" id='password' name='password' placeholder="[% l('PIN code') %]" autocomplete="off" >
        		[% IF params.admin == 1 %]
       		<input type="hidden" name="realm" value="local">
       		[% END %]
