@@ -23,7 +23,7 @@ post '/in' => sub {
     my $username  = lc( param 'username' );
     my $password  = param 'password';
     my $userrealm;
-    
+
     # Remove whitespace around username
     $username =~ s/^ {1,}//;
     $username =~ s/ {1,}$//;
@@ -68,6 +68,8 @@ post '/in' => sub {
     }
     # Check if any of the above worked
     if ($success) {
+
+        session->destroy;
 
         debug "=== Successfull login for $username, x, $realm";
         session logged_in_user => $username;
@@ -190,10 +192,12 @@ post '/in' => sub {
         }
 
         # Log
+        debug " Updating db log ";
         _log2db({
             logcode => 'LOGIN',
             logmsg  => "Username: $username, realm: $realm",
         });
+        debug " Log updated ";
         
         # Redirect based on roles
         if ( user_has_role('admin') ) { 
