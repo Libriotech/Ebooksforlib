@@ -17,6 +17,7 @@
                 </ul>
             </li>
             <li><a href="/admin/logs">Logs</a></li>
+            <li><a href="/choose">Switch library</a></li>
         </ul>
     </li>
 </ul>
