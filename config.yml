@@ -10,6 +10,9 @@ appname: "Ebooksforlib"
 # about unicode within your app when this setting is set (recommended).
 charset: "UTF-8"
 
+# FIXME This should not be an absolute path, of course
+errlog: '/home/ebokdev/error.txt'
+
 plugins:
     Auth::Extensible:
         no_default_pages: 1
