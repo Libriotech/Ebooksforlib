@@ -80,6 +80,8 @@ laanekort_username: "x"
 laanekort_password: "y"
 
 plugins:
+    EscapeHTML:
+        automatic_escaping: 1
     Auth::Extensible:
         realms:
             storevik:
