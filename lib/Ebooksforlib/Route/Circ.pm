@@ -92,9 +92,21 @@ get '/return/:item_id' => require_login sub {
 
     my $item_id = param 'item_id';
     my $user_id = session('logged_in_user_id');
-    
+
     my $loan = rset('Loan')->find({ item_id => $item_id, user_id => $user_id });
-    
+
+    unless ( $loan ) { return redirect '/my'; }
+
+    # Check that the current user has the given item on loan
+    if ( $loan->user->id != $user_id ) {
+        # Log
+        _log2db({
+            logcode => 'FAILEDRETURN',
+            logmsg  => "item_id: $item_id, logged in user_id: $user_id, loan user_id: " . $loan->user->id,
+        });
+        return redirect '/';
+    }
+
     # DEBUG
     debug $loan->item->loan_period;
     debug $loan->user->name;
