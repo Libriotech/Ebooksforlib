@@ -264,8 +264,8 @@ function scrolldown() {
 		</div>
 [% END %]
 		<div class="span2">
+<!--
 			<ul class="footer-menu-list language-chooser">
-				<!-- LANGUAGE CHOOSER -->
 [% FOREACH key IN installed_langs.keys %]
     [% IF key == language_tag %]
         <li>[% installed_langs.$key %]</li>
@@ -274,6 +274,7 @@ function scrolldown() {
     [% END %]
 [% END %]
 			</ul>
+-->
 		</div>
 </div>
 </div>
