@@ -113,6 +113,7 @@ get '/choose' => sub {
         return_url         => $return_url, 
         belongs_to_library => $belongs_to_library,
         disable_search     => 1,
+        pagetitle          => l( 'Choose library' ),
     };
 
 };
