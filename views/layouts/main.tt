@@ -131,14 +131,14 @@ function scrolldown() {
     							</li>
 				    			<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-book"></i></a>
 				    				<ul class="dropdown-menu" role="menu">
-				    					<li><a href="[% settings.reader_url %]/">Mine bøker</a></li>
-				    					<li><a href="/my">Administrer lån</a></li>
+				    					<li><a href="[% settings.reader_url %]/">[% l('My books') %]</a></li>
+				    					<li><a href="/my">[% l('Administer loans') %]</a></li>
 				    				</ul>
 				   			 	</li>
 						    	<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
 						    		<ul class="dropdown-menu" role="menu">
-						    			<li><a href="/my" src="" data="Log out">Min profil</a></li>
-						    			<li><a href="/out" src="" data="Log out">Logg ut</a></li>
+						    			<li><a href="/my" src="" data="Log out">[% l('My profile') %]</a></li>
+						    			<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
 						    		</ul>
 				 			   	</li>
 						 		<li><a href="/page/help" src="" data="Hjelp">
@@ -243,7 +243,7 @@ function scrolldown() {
 		<div class="span2">
 			<ul class="footer-menu-list">
 				<li><a href="[% settings.reader_url %]/">[% l('My books') %]</a></li>
-				<li><a href="/my">[% l('My page') %]</a></li>
+				<li><a href="/my">[% l('My profile') %]</a></li>
 				<li><a href="/page/help" src="" data="Hjelp">[% l('Help') %]</a></li>
 				<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
 			</ul>

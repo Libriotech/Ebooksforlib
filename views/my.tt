@@ -1,10 +1,9 @@
-[% META pagetitle = 'My page' %]
 [% USE date %]
 <div class="article-bg-white">
 <div class="container">
 	<div class="row">
 		<div class="span12 add-top">
-			<h1><i class="fa fa-user"></i> [% l('My page') %]</h1>
+			<h1><i class="fa fa-user"></i> [% l('My profile') %]</h1>
 		</div>
 	</div>
 	<div class="row">

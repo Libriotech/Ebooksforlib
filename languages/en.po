@@ -35,11 +35,15 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
+#: views/layouts/main.tt:135
+msgid "Administer loans"
+msgstr ""
+
 #: views/admin.tt:16
 msgid "Age"
 msgstr ""
 
-#: views/my.tt:123 views/my.tt:92 views/my.tt:94
+#: views/my.tt:122 views/my.tt:91 views/my.tt:93
 msgid "Anonymize"
 msgstr ""
 
@@ -47,7 +51,7 @@ msgstr ""
 msgid "Books by"
 msgstr ""
 
-#: views/my.tt:106 views/my.tt:44
+#: views/my.tt:105 views/my.tt:43
 msgid "Borrowed"
 msgstr ""
 
@@ -63,7 +67,7 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: views/my.tt:38
+#: views/my.tt:37
 msgid "Current loans"
 msgstr ""
 
@@ -87,11 +91,11 @@ msgstr ""
 msgid "Edit this list"
 msgstr ""
 
-#: views/my.tt:16
+#: views/my.tt:15
 msgid "Email"
 msgstr ""
 
-#: views/my.tt:45
+#: views/my.tt:44
 msgid "Expires"
 msgstr ""
 
@@ -115,15 +119,15 @@ msgstr ""
 msgid "Imported books"
 msgstr ""
 
-#: views/my.tt:136
+#: views/my.tt:135
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!"
 msgstr ""
 
-#: views/my.tt:92 views/my.tt:94
+#: views/my.tt:91 views/my.tt:93
 msgid "Keep history"
 msgstr ""
 
-#: views/my.tt:20
+#: views/my.tt:19
 msgid "Library"
 msgstr ""
 
@@ -143,7 +147,7 @@ msgstr ""
 msgid "Log in failed"
 msgstr ""
 
-#: views/layouts/main.tt:248
+#: views/layouts/main.tt:141 views/layouts/main.tt:248
 msgid "Log out"
 msgstr ""
 
@@ -151,19 +155,19 @@ msgstr ""
 msgid "Logs"
 msgstr ""
 
-#: views/my.tt:25
+#: views/my.tt:24
 msgid "Maximum number of concurrent loans"
 msgstr ""
 
-#: views/layouts/main.tt:245
+#: views/layouts/main.tt:134 views/layouts/main.tt:245
 msgid "My books"
 msgstr ""
 
-#: views/layouts/main.tt:246 views/my.tt:7
-msgid "My page"
+#: lib/Ebooksforlib/Route/MyProfile.pm:30 views/layouts/main.tt:140 views/layouts/main.tt:246 views/my.tt:6
+msgid "My profile"
 msgstr ""
 
-#: views/my.tt:15
+#: views/my.tt:14
 msgid "Name"
 msgstr ""
 
@@ -175,11 +179,11 @@ msgstr ""
 msgid "Not a valid library."
 msgstr ""
 
-#: views/my.tt:85
+#: views/my.tt:84
 msgid "Old loans"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/MyPage.pm:69
+#: lib/Ebooksforlib/Route/MyProfile.pm:73
 msgid "Oops, we got an error:<br />"
 msgstr ""
 
@@ -195,11 +199,11 @@ msgstr ""
 msgid "Read more about it"
 msgstr ""
 
-#: views/my.tt:47 views/my.tt:73
+#: views/my.tt:46 views/my.tt:72
 msgid "Return"
 msgstr ""
 
-#: views/my.tt:107
+#: views/my.tt:106
 msgid "Returned"
 msgstr ""
 
@@ -235,15 +239,15 @@ msgstr ""
 msgid "These books have been automatically imported and now need to be edited manually to add metadata, covers etc."
 msgstr ""
 
-#: views/my.tt:46
+#: views/my.tt:45
 msgid "Time left"
 msgstr ""
 
-#: views/my.tt:105 views/my.tt:43
+#: views/my.tt:104 views/my.tt:42
 msgid "Title"
 msgstr ""
 
-#: views/my.tt:14
+#: views/my.tt:13
 msgid "Username"
 msgstr ""
 
@@ -263,7 +267,7 @@ msgstr ""
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr ""
 
-#: views/my.tt:31
+#: views/my.tt:30
 msgid "You are not connected to any libraries."
 msgstr ""
 
@@ -275,15 +279,15 @@ msgstr ""
 msgid "You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with."
 msgstr ""
 
-#: views/my.tt:26
+#: views/my.tt:25
 msgid "You have"
 msgstr ""
 
-#: views/my.tt:79
+#: views/my.tt:78
 msgid "You have no current loans."
 msgstr ""
 
-#: views/my.tt:129
+#: views/my.tt:128
 msgid "You have no old loans."
 msgstr ""
 
@@ -307,11 +311,11 @@ msgstr ""
 msgid "and got"
 msgstr ""
 
-#: views/my.tt:25
+#: views/my.tt:24
 msgid "books"
 msgstr ""
 
-#: views/my.tt:56 views/my.tt:68
+#: views/my.tt:55 views/my.tt:67
 msgid "days"
 msgstr ""
 
@@ -323,15 +327,15 @@ msgstr ""
 msgid "here"
 msgstr ""
 
-#: views/my.tt:69
+#: views/my.tt:68
 msgid "hours"
 msgstr ""
 
-#: views/my.tt:70
+#: views/my.tt:69
 msgid "minutes"
 msgstr ""
 
-#: views/my.tt:63
+#: views/my.tt:62
 msgid "months"
 msgstr ""
 
@@ -343,7 +347,7 @@ msgstr ""
 msgid "or find out more"
 msgstr ""
 
-#: views/my.tt:60
+#: views/my.tt:59
 msgid "overdue"
 msgstr ""
 
@@ -355,6 +359,6 @@ msgstr ""
 msgid "user"
 msgstr ""
 
-#: views/my.tt:66
+#: views/my.tt:65
 msgid "weeks"
 msgstr ""

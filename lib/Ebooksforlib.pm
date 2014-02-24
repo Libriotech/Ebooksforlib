@@ -16,7 +16,7 @@ use URI::Escape;
 
 use Ebooksforlib::Util;
 use Ebooksforlib::Route::Login;
-use Ebooksforlib::Route::MyPage;
+use Ebooksforlib::Route::MyProfile;
 use Ebooksforlib::Route::Circ;
 use Ebooksforlib::Route::RestApi;
 use Ebooksforlib::Route::Admin;

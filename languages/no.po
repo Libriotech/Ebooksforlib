@@ -39,6 +39,10 @@ msgstr "Legg til forfatter"
 msgid "Admin"
 msgstr "Admin"
 
+#: views/layouts/main.tt:135
+msgid "Administer loans"
+msgstr "Administrer lån"
+
 #: views/admin.tt:16
 msgid "Age"
 msgstr "Alder"
@@ -47,7 +51,7 @@ msgstr "Alder"
 msgid "All users"
 msgstr "Alle brukere"
 
-#: views/my.tt:123 views/my.tt:92 views/my.tt:94
+#: views/my.tt:122 views/my.tt:91 views/my.tt:93
 msgid "Anonymize"
 msgstr "Anonymiser"
 
@@ -63,7 +67,7 @@ msgstr "Lån ebøker gratis"
 msgid "Borrow this book"
 msgstr "Lån denne boken"
 
-#: views/my.tt:106 views/my.tt:44
+#: views/my.tt:105 views/my.tt:43
 msgid "Borrowed"
 msgstr "Lånt"
 
@@ -91,7 +95,7 @@ msgstr "Omslag"
 msgid "Creators"
 msgstr "Forfattere"
 
-#: views/my.tt:38
+#: views/my.tt:37
 msgid "Current loans"
 msgstr "Aktive lån"
 
@@ -119,7 +123,7 @@ msgstr "Rediger denne forfatteren"
 msgid "Edit this list"
 msgstr "Rediger denne lista"
 
-#: views/my.tt:16
+#: views/my.tt:15
 msgid "Email"
 msgstr "Epost"
 
@@ -127,7 +131,7 @@ msgstr "Epost"
 msgid "Error while fetching descriptions."
 msgstr "Det oppstod en feil ved henting av omtaler."
 
-#: views/my.tt:45
+#: views/my.tt:44
 msgid "Expires"
 msgstr "Utløper"
 
@@ -163,7 +167,7 @@ msgstr "ISBN"
 msgid "Imported books"
 msgstr "Importerte bøker"
 
-#: views/my.tt:136
+#: views/my.tt:135
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!"
 msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Hvis informasjonen ikke stemmer vennligst kontakt biblioteket. Takk for at du bruker eBib!"
 
@@ -171,11 +175,11 @@ msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Hvis inf
 msgid "Items"
 msgstr "Eksemplarer"
 
-#: views/my.tt:92 views/my.tt:94
+#: views/my.tt:91 views/my.tt:93
 msgid "Keep history"
 msgstr "Behold historikk"
 
-#: views/my.tt:20
+#: views/my.tt:19
 msgid "Library"
 msgstr "Bibliotek"
 
@@ -195,7 +199,7 @@ msgstr "Logg inn"
 msgid "Log in failed"
 msgstr "Innloggin mislyktes"
 
-#: views/layouts/main.tt:248
+#: views/layouts/main.tt:141 views/layouts/main.tt:248
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -203,19 +207,23 @@ msgstr "Logg ut"
 msgid "Logs"
 msgstr "Logger"
 
-#: views/my.tt:25
+#: views/my.tt:24
 msgid "Maximum number of concurrent loans"
 msgstr "Maks samtidige lån"
 
-#: views/layouts/main.tt:245
+#: views/layouts/main.tt:134 views/layouts/main.tt:245
 msgid "My books"
 msgstr "Mine bøker"
 
-#: views/layouts/main.tt:246 views/my.tt:7
+#:
 msgid "My page"
 msgstr "Min side"
 
-#: views/my.tt:15
+#: lib/Ebooksforlib/Route/MyProfile.pm:30 views/layouts/main.tt:140 views/layouts/main.tt:246 views/my.tt:6
+msgid "My profile"
+msgstr "Min profil"
+
+#: views/my.tt:14
 msgid "Name"
 msgstr "Navn"
 
@@ -231,11 +239,11 @@ msgstr "Ny bruker?"
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
-#: views/my.tt:85
+#: views/my.tt:84
 msgid "Old loans"
 msgstr "Gamle lån"
 
-#: lib/Ebooksforlib/Route/MyPage.pm:69
+#: lib/Ebooksforlib/Route/MyProfile.pm:73
 msgid "Oops, we got an error:<br />"
 msgstr "Det oppstod en feil:<br /> "
 
@@ -271,11 +279,11 @@ msgstr "Utgivelsesår"
 msgid "Read more about it"
 msgstr "Les mer om tjenesten"
 
-#: views/my.tt:47 views/my.tt:73
+#: views/my.tt:46 views/my.tt:72
 msgid "Return"
 msgstr "Lever"
 
-#: views/my.tt:107
+#: views/my.tt:106
 msgid "Returned"
 msgstr "Levert"
 
@@ -323,11 +331,11 @@ msgstr "Det er importerte bøker som må kontrolleres"
 msgid "These books have been automatically imported and now need to be edited manually to add metadata, covers etc."
 msgstr "Disse bøkene har blitt importert, og trenger metadata, omslagsbilder osv."
 
-#: views/my.tt:46
+#: views/my.tt:45
 msgid "Time left"
 msgstr "Tid som gjenstår"
 
-#: views/my.tt:105 views/my.tt:43
+#: views/my.tt:104 views/my.tt:42
 msgid "Title"
 msgstr "Tittel"
 
@@ -335,7 +343,7 @@ msgstr "Tittel"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: views/my.tt:14
+#: views/my.tt:13
 msgid "Username"
 msgstr "Brukernavn"
 
@@ -363,7 +371,7 @@ msgstr "Du er <em>ikke</em> logget inn ved biblioteket du har valgt, og kan ikke
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr "Du er logget inn ved biblioteket du har valgt, og kan låne bøker."
 
-#: views/my.tt:31
+#: views/my.tt:30
 msgid "You are not connected to any libraries."
 msgstr "Du er ikke knyttet til noen bibliotek."
 
@@ -379,7 +387,7 @@ msgstr "Du kan bytte bibliotek når du måtte ønske, men legg merke til at du b
 msgid "You do not have access to borrow books from this library."
 msgstr "Du har ikke tilgang til å låne bøker fra dette biblioteket."
 
-#: views/my.tt:26
+#: views/my.tt:25
 msgid "You have"
 msgstr "Du har"
 
@@ -387,11 +395,11 @@ msgstr "Du har"
 msgid "You have checked out the maximum number of concurrent books."
 msgstr "Du har allerede lånt maksimalt antall bøker."
 
-#: views/my.tt:79
+#: views/my.tt:78
 msgid "You have no current loans."
 msgstr "Du har ingen aktive lån."
 
-#: views/my.tt:129
+#: views/my.tt:128
 msgid "You have no old loans."
 msgstr "Du har ingen gamle lån."
 
@@ -419,11 +427,11 @@ msgstr "om eBib"
 msgid "and got"
 msgstr "og fikk"
 
-#: views/my.tt:25
+#: views/my.tt:24
 msgid "books"
 msgstr "bøker"
 
-#: views/my.tt:56 views/my.tt:68
+#: views/my.tt:55 views/my.tt:67
 msgid "days"
 msgstr "dager"
 
@@ -435,15 +443,15 @@ msgstr "Med eBib kan du låne gratis e-bøker fra ditt lokale bibliotek."
 msgid "here"
 msgstr "her"
 
-#: views/my.tt:69
+#: views/my.tt:68
 msgid "hours"
 msgstr "timer"
 
-#: views/my.tt:70
+#: views/my.tt:69
 msgid "minutes"
 msgstr "minutter"
 
-#: views/my.tt:63
+#: views/my.tt:62
 msgid "months"
 msgstr "måneder"
 
@@ -455,7 +463,7 @@ msgstr "eller velg et annet bibliotek nedenfor"
 msgid "or find out more"
 msgstr "eller finn ut mer"
 
-#: views/my.tt:60
+#: views/my.tt:59
 msgid "overdue"
 msgstr "forfalt"
 
@@ -471,6 +479,6 @@ msgstr "bokleseren for å laste ned og lese boken"
 msgid "user"
 msgstr "bruker"
 
-#: views/my.tt:66
+#: views/my.tt:65
 msgid "weeks"
 msgstr "uker"

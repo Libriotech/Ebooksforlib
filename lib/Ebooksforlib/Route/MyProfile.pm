@@ -1,8 +1,8 @@
-package Ebooksforlib::Route::MyPage;
+package Ebooksforlib::Route::MyProfile;
 
-=head1 Ebooksforlib::Route::MyPage
+=head1 Ebooksforlib::Route::MyProfile
 
-Routes for displaying "My page" and handle anonymization. 
+Routes for displaying "My profile" and handle anonymization. 
 
 =cut
 
@@ -10,6 +10,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Dancer::Plugin::Lexicon;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 use Ebooksforlib::Err;
@@ -17,14 +18,18 @@ use Data::Dumper; # FIXME Debug
 
 =head2 /my
 
-Display "My page"
+Display "My profile"
 
 =cut
 
 get '/my' => require_login sub {
     debug '*** Showing My Page for user with id = ' . session('logged_in_user_id');
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
-    template 'my', { userdata => logged_in_user, user => $user };
+    template 'my', {
+        userdata  => logged_in_user,
+        user      => $user,
+        pagetitle => l( 'My profile' ),
+    };
 };
 
 =head2 /anon_toggle
