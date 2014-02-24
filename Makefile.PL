@@ -16,6 +16,7 @@ WriteMakefile(
         'YAML'       => 0,
         'Dancer'     => 1.311,
         'Dancer::Plugin::Auth::Extensible' => 0,
+        'Dancer::Plugin::Database' => 0,
         'Dancer::Plugin::DBIC' => 0,
         'Dancer::Plugin::FlashMessage' => 0,
         'Dancer::Plugin::Lexicon' => 0,
