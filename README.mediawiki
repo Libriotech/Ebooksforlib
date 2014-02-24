@@ -23,6 +23,18 @@ On Debian, add the following to /etc/mysql/my.cnf:
 
 Then restart MySQL.
 
+==MySQL setup==
+
+Login to MySQL as the root user:
+
+  $ mysql -u root -p
+
+Then create the database and grant access to it:
+
+  mysql> create database <databasename>;
+  mysql> grant all on <databasename>.* to '<databaseuser>'@'localhost' identified by '<password>';
+  mysql> flush privileges;
+
 ==Running tests==
 
 The code uses Modern::Perl, so in order for Test::Perl::Critic tests to pass, you should include this in your ~/.perlcriticrc file:
