@@ -23,7 +23,7 @@
 [% END %]
 
 <h2>Enter data from scratch</h2>
-[% IF data.results.bindings.size < 1 %]
+[% IF data.results.bindings.size && data.results.bindings.size < 1 %]
     <p>Sorry, we did not find any sources of metadata for that book. Please fill in data manually below, or try again later.</p>
 [% END %]
 <form method="POST" action="/books/add">
