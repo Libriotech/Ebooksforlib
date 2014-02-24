@@ -15,19 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views/layouts/main.tt:200 views/layouts/main.tt:216
+#: views/layouts/main.tt:238 views/layouts/main.tt:254
 msgid "About eBib"
 msgstr ""
 
-#: views/admin.tt:10
+#: views/admin.tt:11
 msgid "Add a new book based on ISBN"
 msgstr ""
 
-#: views/admin.tt:9
+#: views/admin.tt:10
 msgid "Add a new book from scratch"
 msgstr ""
 
-#: views/admin.tt:11
+#: views/admin.tt:12
 msgid "Add a new creator"
 msgstr ""
 
@@ -35,71 +35,55 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: views/admin.tt:15
+#: views/admin.tt:16
 msgid "Age"
 msgstr ""
 
-#: views/my.tt:114 views/my.tt:88 views/my.tt:90
+#: views/my.tt:123 views/my.tt:92 views/my.tt:94
 msgid "Anonymize"
 msgstr ""
 
-#: views/creator.tt:7
+#: views/creator.tt:5
 msgid "Books by"
 msgstr ""
 
-#: views/index.tt:14
-msgid "Borrow ebooks for free"
-msgstr ""
-
-#: views/book.tt:177
-msgid "Borrow this book"
-msgstr ""
-
-#: views/my.tt:102 views/my.tt:44
+#: views/my.tt:106 views/my.tt:44
 msgid "Borrowed"
 msgstr ""
 
-#: views/chooselib.tt:10 views/chooselib.tt:8
+#: lib/Ebooksforlib.pm:116
+msgid "Choose library"
+msgstr ""
+
+#: views/chooselib.tt:6 views/chooselib.tt:8
 msgid "Choose library:"
 msgstr ""
 
-#: views/layouts/main.tt:202 views/layouts/main.tt:218
+#: views/layouts/main.tt:240 views/layouts/main.tt:256
 msgid "Contact"
-msgstr ""
-
-#: views/book.tt:333
-msgid "Covers"
-msgstr ""
-
-#: views/book.tt:330
-msgid "Creators"
 msgstr ""
 
 #: views/my.tt:38
 msgid "Current loans"
 msgstr ""
 
-#: views/list.tt:32
+#: views/list.tt:30
 msgid "Delete books"
 msgstr ""
 
-#: views/list.tt:32
+#: views/list.tt:30
 msgid "Delete books from this list"
 msgstr ""
 
-#: views/book.tt:130
-msgid "Description"
-msgstr ""
-
-#: views/book.tt:329 views/creator.tt:20 views/list.tt:31
+#: views/creator.tt:18 views/list.tt:29
 msgid "Edit"
 msgstr ""
 
-#: views/creator.tt:20
+#: views/creator.tt:18
 msgid "Edit this creator"
 msgstr ""
 
-#: views/list.tt:31
+#: views/list.tt:29
 msgid "Edit this list"
 msgstr ""
 
@@ -107,51 +91,35 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: views/index.tt:80
-msgid "Error while fetching descriptions."
-msgstr ""
-
 #: views/my.tt:45
 msgid "Expires"
 msgstr ""
 
-#: views/admin.tt:16
+#: views/admin.tt:17
 msgid "Gender"
-msgstr ""
-
-#: views/book.tt:65
-msgid "Genre"
 msgstr ""
 
 #: views/lists.tt:4
 msgid "Genres"
 msgstr ""
 
-#: views/book.tt:155
-msgid "Go to"
-msgstr ""
-
-#: views/layouts/main.tt:209 views/layouts/main.tt:224
+#: views/layouts/main.tt:247 views/layouts/main.tt:262
 msgid "Help"
 msgstr ""
 
-#: views/list.tt:10
+#: views/list.tt:8
 msgid "Home"
 msgstr ""
 
-#: views/book.tt:47
-msgid "ISBN"
+#: views/admin.tt:9 views/admin_navbar.tt:7 views/books_imported.tt:5
+msgid "Imported books"
 msgstr ""
 
-#: views/my.tt:124
+#: views/my.tt:136
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!"
 msgstr ""
 
-#: views/book.tt:332
-msgid "Items"
-msgstr ""
-
-#: views/my.tt:88 views/my.tt:90
+#: views/my.tt:92 views/my.tt:94
 msgid "Keep history"
 msgstr ""
 
@@ -159,27 +127,27 @@ msgstr ""
 msgid "Library"
 msgstr ""
 
-#: views/book.tt:331 views/book.tt:72 views/lists.tt:13
+#: views/lists.tt:13
 msgid "Lists"
 msgstr ""
 
-#: views/admin.tt:12
+#: views/admin.tt:13
 msgid "Lists and genres"
 msgstr ""
 
-#: views/layouts/main.tt:157 views/layouts/main.tt:223 views/login_form.tt:15
+#: views/layouts/main.tt:190 views/layouts/main.tt:261 views/login_form.tt:15
 msgid "Log in"
 msgstr ""
 
-#: views/login.tt:24
+#: views/login.tt:36
 msgid "Log in failed"
 msgstr ""
 
-#: views/layouts/main.tt:117 views/layouts/main.tt:210
+#: views/layouts/main.tt:248
 msgid "Log out"
 msgstr ""
 
-#: views/admin.tt:19
+#: views/admin.tt:20
 msgid "Logs"
 msgstr ""
 
@@ -187,11 +155,11 @@ msgstr ""
 msgid "Maximum number of concurrent loans"
 msgstr ""
 
-#: views/layouts/main.tt:207
+#: views/layouts/main.tt:245
 msgid "My books"
 msgstr ""
 
-#: views/layouts/main.tt:116 views/layouts/main.tt:208 views/my.tt:7
+#: views/layouts/main.tt:246 views/my.tt:7
 msgid "My page"
 msgstr ""
 
@@ -203,11 +171,7 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
-#: views/index.tt:28
-msgid "New user?"
-msgstr ""
-
-#: lib/Ebooksforlib.pm:100
+#: lib/Ebooksforlib.pm:133
 msgid "Not a valid library."
 msgstr ""
 
@@ -215,31 +179,19 @@ msgstr ""
 msgid "Old loans"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:308
-msgid "Oops, we got an error:<br />$_"
-msgstr ""
-
-#: views/book.tt:314
-msgid "Other books by"
+#: lib/Ebooksforlib/Route/MyPage.pm:69
+msgid "Oops, we got an error:<br />"
 msgstr ""
 
 #: views/login_form.tt:8 views/login_form.tt:9
 msgid "PIN code"
 msgstr ""
 
-#: views/book.tt:50
-msgid "Pages"
-msgstr ""
-
 #: views/login_form.tt:4 views/login_form.tt:5
 msgid "Patron number"
 msgstr ""
 
-#: views/book.tt:44
-msgid "Published"
-msgstr ""
-
-#: views/chooselib.tt:36
+#: views/chooselib.tt:34
 msgid "Read more about it"
 msgstr ""
 
@@ -247,15 +199,15 @@ msgstr ""
 msgid "Return"
 msgstr ""
 
-#: views/my.tt:103
+#: views/my.tt:107
 msgid "Returned"
 msgstr ""
 
-#: views/layouts/main.tt:107 views/layouts/main.tt:152
+#: views/layouts/main.tt:129 views/layouts/main.tt:153 views/layouts/main.tt:185
 msgid "Search"
 msgstr ""
 
-#: views/admin.tt:10
+#: views/admin.tt:11
 msgid "Send"
 msgstr ""
 
@@ -263,31 +215,31 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: views/book.tt:183
-msgid "Sorry, all our copies of this book are on loan."
-msgstr ""
-
-#: views/index.tt:77
-msgid "Sorry, no description available."
-msgstr ""
-
-#: views/search.tt:26
+#: views/search.tt:30
 msgid "Sorry, no matches found."
 msgstr ""
 
-#: views/list.tt:20
+#: views/list.tt:18
 msgid "Sorry, there are no titles in this list yet."
 msgstr ""
 
-#: views/admin.tt:13
+#: views/admin.tt:14
 msgid "Statistics"
+msgstr ""
+
+#: views/books_imported.tt:15
+msgid "There are no imported books that need looking after."
+msgstr ""
+
+#: views/books_imported.tt:8
+msgid "These books have been automatically imported and now need to be edited manually to add metadata, covers etc."
 msgstr ""
 
 #: views/my.tt:46
 msgid "Time left"
 msgstr ""
 
-#: views/my.tt:101 views/my.tt:43
+#: views/my.tt:105 views/my.tt:43
 msgid "Title"
 msgstr ""
 
@@ -295,27 +247,19 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: views/index.tt:28
-msgid "What you need in order to borrow"
-msgstr ""
-
-#: views/layouts/main.tt:201 views/layouts/main.tt:217
+#: views/layouts/main.tt:239 views/layouts/main.tt:255
 msgid "What you need to borrow"
 msgstr ""
 
-#: views/chooselib.tt:19
+#: views/chooselib.tt:17
 msgid "Yes"
 msgstr ""
 
-#: views/book.tt:155
-msgid "You already borrow this book."
-msgstr ""
-
-#: views/chooselib.tt:28
+#: views/chooselib.tt:26
 msgid "You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it."
 msgstr ""
 
-#: views/chooselib.tt:26
+#: views/chooselib.tt:24
 msgid "You are logged in with the library you have chosen, and can borrow books from it."
 msgstr ""
 
@@ -323,55 +267,43 @@ msgstr ""
 msgid "You are not connected to any libraries."
 msgstr ""
 
-#: views/layouts/main.tt:157
+#: views/layouts/main.tt:190
 msgid "You are not logged in."
 msgstr ""
 
-#: views/chooselib.tt:12
+#: views/chooselib.tt:10
 msgid "You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with."
-msgstr ""
-
-#: views/book.tt:150
-msgid "You do not have access to borrow books from this library."
 msgstr ""
 
 #: views/my.tt:26
 msgid "You have"
 msgstr ""
 
-#: views/book.tt:160
-msgid "You have checked out the maximum number of concurrent books."
-msgstr ""
-
 #: views/my.tt:79
 msgid "You have no current loans."
 msgstr ""
 
-#: views/my.tt:120
+#: views/my.tt:129
 msgid "You have no old loans."
 msgstr ""
 
-#: views/book.tt:145
-msgid "You must be logged in to borrow books."
-msgstr ""
-
-#: views/login.tt:14 views/login.tt:25
+#: views/login.tt:26 views/login.tt:37
 msgid "You must log in with a valid"
 msgstr ""
 
-#: views/login.tt:12
+#: views/login.tt:19
 msgid "You must log in with a valid admin user."
 msgstr ""
 
-#: views/search.tt:22
+#: views/search.tt:26
 msgid "You searched for"
 msgstr ""
 
-#: views/layouts/main.tt:157
+#: views/layouts/main.tt:190
 msgid "about eBib"
 msgstr ""
 
-#: views/search.tt:22
+#: views/search.tt:26
 msgid "and got"
 msgstr ""
 
@@ -383,11 +315,11 @@ msgstr ""
 msgid "days"
 msgstr ""
 
-#: views/chooselib.tt:36
+#: views/chooselib.tt:34
 msgid "eBib lets you borrow electronic books for free from your local library."
 msgstr ""
 
-#: views/chooselib.tt:36
+#: views/chooselib.tt:34
 msgid "here"
 msgstr ""
 
@@ -403,11 +335,11 @@ msgstr ""
 msgid "months"
 msgstr ""
 
-#: views/login.tt:25
+#: views/login.tt:37
 msgid "or choose a different library below"
 msgstr ""
 
-#: views/layouts/main.tt:157
+#: views/layouts/main.tt:190
 msgid "or find out more"
 msgstr ""
 
@@ -415,15 +347,11 @@ msgstr ""
 msgid "overdue"
 msgstr ""
 
-#: views/search.tt:22
+#: views/search.tt:26
 msgid "results"
 msgstr ""
 
-#: views/book.tt:155
-msgid "the reader to download and read the book"
-msgstr ""
-
-#: views/login.tt:14 views/login.tt:25
+#: views/login.tt:26 views/login.tt:37
 msgid "user"
 msgstr ""
 
