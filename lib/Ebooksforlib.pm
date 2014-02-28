@@ -69,6 +69,8 @@ hook 'before' => sub {
         unless ( request->path =~ /\/choose/  || # Let users choose a library
                  request->path =~ /\/set\/.*/ || # Let users set a library
                  request->path =~ /\/in/      || # Let users log in
+                 request->path =~ /\/blocked/ || # Display the blocked message to blocked users
+                 request->path =~ /\/unblock/ || # Let users unblock themselves
                  request->path =~ /\/rest\/.*/   # Don't force choosing a library for the API
                ) {
             return redirect '/choose?return_url=' . request->path();
