@@ -304,6 +304,11 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 # Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 12:25:00
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6Vjb31bYUvO2mjV7/T8V5w
 
+__PACKAGE__->add_columns(
+  "failed",
+  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+);
+
 sub number_of_loans_from_library {
     my ( $self, $library_id ) = @_;
     my $number_of_loans = 0;

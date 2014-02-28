@@ -69,6 +69,7 @@ post '/in' => sub {
     # Check if any of the above worked
     if ($success) {
 
+        # Destroy the temporary session, to avoid problems related to session fixation
         session->destroy;
 
         debug "=== Successfull login for $username, x, $realm";
@@ -128,7 +129,10 @@ post '/in' => sub {
             }
             flash info => "Welcome, new user!";
         } else {
+            # We are updating an old user
             debug "*** User $username was updated";
+            # Reset the counter for failed logins
+            $new_user->update({ 'failed' => 0 });
         }
         
         session logged_in_user_id => $new_user->id;
@@ -209,6 +213,15 @@ post '/in' => sub {
         }
 
     } else {
+    
+        # Failed login
+        
+        # Record the failed login in the users table
+        my $failed_user = resultset( 'User' )->find({ 'username' => $username });
+        if ( $failed_user ) {
+            # Increment the fail counter
+            $failed_user->update({ 'failed' => $failed_user->failed + 1 });
+        }
 
         # Log
         _log2db({
