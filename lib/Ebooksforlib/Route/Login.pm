@@ -270,7 +270,7 @@ get '/blocked' => sub {
 
 get '/unblock' => sub {
     my $token = param 'token';
-    if ( $token && length $token <= 64 ) {
+    if ( $token && length $token >= 64 ) {
         # Find the user based on the token
         my @users = resultset( 'User' )->search({ 'token' => $token });
         my $found_users = @users;
