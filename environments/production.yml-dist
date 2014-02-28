@@ -72,6 +72,14 @@ laanekort_username: "x"
 laanekort_password: "y"
 
 plugins:
+    Email:
+        transport:
+            SMTP:
+                ssl: 1
+                host: 'smtp.gmail.com'
+                port: 465
+                sasl_username: 'example@example.com'
+                sasl_password: 'example
     EscapeHTML:
         automatic_escaping: 1
     Auth::Extensible:
