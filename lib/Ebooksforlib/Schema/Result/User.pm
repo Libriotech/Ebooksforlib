@@ -307,6 +307,8 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 __PACKAGE__->add_columns(
   "failed",
   { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  "token",
+  { data_type => "char", is_nullable => 1, size => 128 },
 );
 
 sub number_of_loans_from_library {

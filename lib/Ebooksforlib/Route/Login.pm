@@ -13,6 +13,7 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 use Data::Dumper; # FIXME Debug
+use Digest::SHA3 qw(sha3_512_hex);
 
 get '/in' => sub {
     template 'login', { disable_search => 1, };
@@ -231,6 +232,13 @@ post '/in' => sub {
         if ( $failed_user ) {
             # Increment the fail counter
             $failed_user->update({ 'failed' => $failed_user->failed + 1 });
+            debug "*** User $username blocked, " . $failed_user->failed . " failed logins";
+            if ( $failed_user->failed >= setting( 'max_failed_logins' ) ) {
+                if ( $failed_user->failed == setting( 'max_failed_logins' ) ) {
+                    _add_logintoken( $failed_user );
+                }
+                return redirect '/blocked';
+            }
         }
 
         # Log
@@ -248,8 +256,41 @@ post '/in' => sub {
     }
 };
 
+sub _add_logintoken {
+
+    my ( $user ) = @_;
+    my $token = sha3_512_hex( time(), $user->username, $user->name, $user->email, rand(10000000) );
+    $user->update({ 'token' => $token });
+
+}
+
 get '/blocked' => sub {
     template 'blocked';
+};
+
+get '/unblock' => sub {
+    my $token = param 'token';
+    if ( $token && length $token <= 64 ) {
+        # Find the user based on the token
+        my @users = resultset( 'User' )->search({ 'token' => $token });
+        my $found_users = @users;
+        if ( $found_users == 1 ) {
+            my $user = $users[0];
+            # Reset the failed logins counter
+            $user->update({ 'failed' => 0 });
+            # Remove the token
+            $user->update({ 'token' => undef });
+            flash message => "Your account has been unblocked, please try to log in again.";
+            return redirect '/in';
+        } else {
+            # This hould not happen
+            return redirect '/in';
+        }
+    } else {
+        my $token_length = length $token;
+        debug "Token was not given or was not long enough (it was $token_length).";
+        return redirect '/in';
+    }
 };
 
 get '/login/denied' => sub {
