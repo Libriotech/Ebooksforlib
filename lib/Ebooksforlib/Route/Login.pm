@@ -9,11 +9,14 @@ Routes for handling login and logout.
 use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
+use Dancer::Plugin::Email;
 use Dancer::Plugin::FlashMessage;
+use Dancer::Plugin::Lexicon;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 use Data::Dumper; # FIXME Debug
 use Digest::SHA3 qw(sha3_512_hex);
+use Try::Tiny;
 
 get '/in' => sub {
     template 'login', { disable_search => 1, };
@@ -261,6 +264,17 @@ sub _add_logintoken {
     my ( $user ) = @_;
     my $token = sha3_512_hex( time(), $user->username, $user->name, $user->email, rand(10000000) );
     $user->update({ 'token' => $token });
+    # Send the token in an email
+    try {
+        email {
+            from    => 'ebib@ebib.no',
+            to      => $user->email,
+            subject => l('Your eBib account has been blocked'),
+            body    => l('Please visit this URL to unblock the account: ') . "\n\nhttp://ebib.no/unblock?token=$token",
+        };
+    } catch {
+        error "Could not send email: $_";
+    };
 
 }
 
