@@ -28,6 +28,16 @@ post '/in' => sub {
     $username =~ s/^ {1,}//;
     $username =~ s/ {1,}$//;
     
+    # TODO Check the format of the username
+    
+    # Do a quick check to see if this user is blocked after too many failed logins
+    my $checkuser = resultset('User')->find({ 'username' => $username });
+    if ( $checkuser && $checkuser->failed >= setting( 'max_failed_logins' ) ) {
+        $checkuser->update({ 'failed' => $checkuser->failed + 1 });
+        debug "*** User $username blocked, " . $checkuser->failed . " failed logins";
+        return redirect '/blocked';
+    }
+    
     # Find the realm we should try to athenticate against
     if ( param 'realm' ) {
         $userrealm = param 'realm';
@@ -236,6 +246,10 @@ post '/in' => sub {
         }
 
     }
+};
+
+get '/blocked' => sub {
+    template 'blocked';
 };
 
 get '/login/denied' => sub {
