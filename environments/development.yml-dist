@@ -32,6 +32,9 @@ auto_reload: 0
 # Minimum password length
 min_pass: 4
 
+# Max number of failed logins before a user is blocked from logging in
+max_failed_logins: 5
+
 # This setting determins what to do if a search returns 1 hit (either one title
 # or one person). 
 # 0 = display the one hit as a result list
