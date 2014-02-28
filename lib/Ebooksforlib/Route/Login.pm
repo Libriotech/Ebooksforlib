@@ -210,12 +210,10 @@ post '/in' => sub {
         }
 
         # Log
-        debug " Updating db log ";
         _log2db({
             logcode => 'LOGIN',
             logmsg  => "Username: $username, realm: $realm",
         });
-        debug " Log updated ";
         
         # Redirect based on roles
         if ( user_has_role('admin') ) { 
@@ -275,7 +273,11 @@ sub _add_logintoken {
     } catch {
         error "Could not send email: $_";
     };
-
+    # Log the block event
+    _log2db({
+        logcode => 'BLOCKED',
+        logmsg  => "User " . $user->id . " was blocked because of too many failed attempts",
+    });
 }
 
 get '/blocked' => sub {
@@ -295,6 +297,10 @@ get '/unblock' => sub {
             # Remove the token
             $user->update({ 'token' => undef });
             flash message => "Your account has been unblocked, please try to log in again.";
+            _log2db({
+                logcode => 'UNBLOCKED',
+                logmsg  => "User " . $user->id . " was unblocked",
+            });
             return redirect '/in';
         } else {
             # This hould not happen
