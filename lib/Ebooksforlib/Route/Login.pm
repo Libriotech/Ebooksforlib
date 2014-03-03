@@ -83,6 +83,8 @@ post '/in' => sub {
     # Check if any of the above worked
     if ($success) {
 
+        ## SUCCESSFULL LOGIN
+
         # Destroy the temporary session, to avoid problems related to session fixation
         session->destroy;
 
@@ -100,6 +102,9 @@ post '/in' => sub {
 
         # Store roles in the session (will be used in the templates)
         session logged_in_user_roles => user_roles;
+        
+        # Create a CSRF token and store it in the session
+        session csrftoken => sha3_512_hex( time(), $username, rand(10000000) );
 
         # Update the local user or create a new one
         my $new_user = rset('User')->update_or_new({
@@ -226,7 +231,7 @@ post '/in' => sub {
 
     } else {
     
-        # Failed login
+        ## UN-SUCCESSFULL LOGIN
         
         # Record the failed login in the users table
         my $failed_user = resultset( 'User' )->find({ 'username' => $username });
