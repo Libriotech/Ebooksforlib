@@ -115,6 +115,9 @@ function scrolldown() {
                             [% IF role == 'admin' %]
                                 [% INCLUDE 'admin_navbar.tt' %]
                             [% END %]
+                            [% IF role == 'superadmin' %]
+                                [% INCLUDE 'superadmin_navbar.tt' %]
+                            [% END %]
                         [% END %]
     					<!-- .btn-navbar is used as the toggle for collapsed navbar content 
 						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">

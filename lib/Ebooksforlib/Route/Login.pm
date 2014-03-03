@@ -101,6 +101,7 @@ post '/in' => sub {
         session logged_in_user_name => $user->{name};
 
         # Store roles in the session (will be used in the templates)
+        # FIXME Looks like this does not work
         session logged_in_user_roles => user_roles;
         
         # Create a CSRF token and store it in the session
