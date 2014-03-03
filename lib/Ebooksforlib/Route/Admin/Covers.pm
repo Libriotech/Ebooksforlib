@@ -13,6 +13,7 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 use Ebooksforlib::Err;
+use Data::Dumper;
 
 get '/books/covers/:id' => require_role admin => sub {
 
