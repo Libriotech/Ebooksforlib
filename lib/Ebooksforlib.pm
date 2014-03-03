@@ -25,6 +25,7 @@ use Ebooksforlib::Route::Admin::Books;
 use Ebooksforlib::Route::Admin::Lists;
 use Ebooksforlib::Route::Admin::Stats;
 use Ebooksforlib::Route::Admin::Logs;
+use Ebooksforlib::Route::Superadmin;
 
 use Dancer::Plugin::Auth::Basic;
 use Dancer::Plugin::EscapeHTML;
@@ -339,20 +340,6 @@ get '/list/:id' => sub {
     template 'list', { 
         list      => $list,
         pagetitle => $list->name,
-    };
-};
-
-### Routes below this point require admin/superadmin privileges
-
-get '/superadmin' => require_role superadmin => sub { 
-    my @users     = rset('User')->all;
-#    my @sanitized = Ebooksforlib::San::sanList(@users);
-    my @libraries = rset('Library')->all;
-    my @providers = rset('Provider')->all;
-    template 'superadmin', { 
-        'users'     => \@users,
-        'libraries' => \@libraries,
-        'providers' => \@providers,
     };
 };
 
