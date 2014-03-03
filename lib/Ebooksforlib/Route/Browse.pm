@@ -7,9 +7,11 @@ Routes for finding books, including search, lists, detail view etc.
 =cut
 
 use Dancer ':syntax';
+use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
-use Ebooksforlib::Err;
+use Dancer::Exception qw(:all);
+use Ebooksforlib::Util;
 
 get '/' => sub {
 
