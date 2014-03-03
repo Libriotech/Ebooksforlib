@@ -106,12 +106,15 @@ post '/users/password' => require_role superadmin => sub {
     my $id        = param 'id';
     my $password1 = param 'password1';
     my $password2 = param 'password2'; 
-    
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $hs = HTML::Strip->new();
     $id  = $hs->parse( $id );
     $hs->eof;
     $id = HTML::Entities::encode($id); 
-
 
     # Check the provided data
     _check_password_length( $password1 )             or return template 'users_password', { id => $id };

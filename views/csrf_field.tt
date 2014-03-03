@@ -1,0 +1,1 @@
+<input type="hidden" name="csrftoken" id="csrftoken" value="[% session.csrftoken %]" />

@@ -29,6 +29,7 @@ our @EXPORT = qw(
     _get_library_for_admin_user
     _check_password_length
     _check_password_match
+    _check_csrftoken
     _encrypt_password
     check_hash
     hash_pkey
@@ -68,6 +69,37 @@ sub _get_simplestats {
     return \%stats;
 
 }
+
+=head2 _log2db
+
+Logs an event to the database. 
+
+Usage:
+
+    _log2db({
+        logcode => 'FAILED',
+        logmsg  => "Some message",
+    });
+
+Logcodes in use:
+
+=over 4
+
+=item * BORROW
+
+=item * LOGIN
+
+=item * LOGINFAIL
+
+=item * LOGOUT
+
+=item * RETURN
+
+=item * RESTDENY
+
+=back
+
+=cut
 
 sub _log2db {
 
@@ -260,6 +292,51 @@ sub _check_password_match {
     } else {
         return 1;
     }
+}
+
+=head2 _check_csrftoken
+
+Takes a csrftoken as input and compares it to the csrftoken of the currently 
+logged in user. 
+
+Returns 1 if the token is OK. 
+
+If the token is not OK, the user will be logged out (by a call to 
+session->destroy), and 0 will be returned. 
+
+=cut
+
+sub _check_csrftoken {
+
+    my ( $token ) = @_;
+    
+    # Check for undef and empty token
+    if ( !$token || $token eq '' ) {
+        # Logging
+        _log2db({
+            logcode => 'CSRFFAIL',
+            logmsg  => 'CSRF token was undef or empty. User: ' . session('logged_in_user_id'),
+        });
+        error 'CSRF token was undef or empty. User: ' . session('logged_in_user_id');
+        # Log out the user
+        session->destroy;
+        return 0;
+    }
+    
+    if ( $token eq session('csrftoken') ) {
+        return 1;
+    } else {
+        # Logging
+        _log2db({
+            logcode => 'CSRFFAIL',
+            logmsg  => 'CSRF tokens did not match. User: ' . session('logged_in_user_id'),
+        });
+        error 'CSRF tokens did not match. User: ' . session('logged_in_user_id') . ". Token from form: $token. Token from session: " . session('csrftoken');
+        # Log out the user
+        session->destroy;
+        return 0;
+    }
+
 }
 
 sub _encrypt_password {
