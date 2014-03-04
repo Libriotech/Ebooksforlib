@@ -1,5 +1,7 @@
 [% META pagetitle = 'Confirm deletion of item' %]
 
+<div class="container">
+
 <p>Are you sure you want to delete the item with ID = [% item.id %]?</p>
 
 <p>This item is connected to the book <em>[% book.title %]</em>.</p>
@@ -8,3 +10,5 @@
     <a href="/books/items/delete_ok/[% item.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
     <a href="/books/items/[% book.id %]"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>
+
+</div>
