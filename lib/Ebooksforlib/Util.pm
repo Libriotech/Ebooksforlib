@@ -341,7 +341,7 @@ sub _check_csrftoken {
 
 sub _encrypt_password {
     my $password = shift;
-    my $csh = Crypt::SaltedHash->new();
+    my $csh = Crypt::SaltedHash->new( 'algorithm' => 'SHA-512' );
     $csh->add( $password );
     return $csh->generate;
 }
