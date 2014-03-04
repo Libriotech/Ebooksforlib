@@ -13,6 +13,10 @@ use Ebooksforlib::Err;
 
 post '/ratings/add' => require_login sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $rating  = param 'rating';
     my $book_id = param 'book_id';
     my $user_id = session( 'logged_in_user_id' );

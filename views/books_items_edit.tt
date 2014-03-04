@@ -31,4 +31,5 @@
 New loan period: 
 <input type="number" id="loan_period" name="loan_period" value="[% item.loan_period %]" min="1" max="1000" size="3"> 
 <input type="submit" value="Save">
+[% INCLUDE 'csrf_field.tt' %]
 </form>

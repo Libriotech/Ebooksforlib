@@ -19,6 +19,10 @@ get '/providers/add' => require_role superadmin => sub {
 
 post '/providers/add' => require_role superadmin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $name        = param 'name';
     my $description = param 'description';
     my $hs = HTML::Strip->new();
@@ -47,6 +51,10 @@ get '/providers/edit/:id' => require_role superadmin => sub {
 };
 
 post '/providers/edit' => require_role superadmin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $id = param 'id';
     my $name = param 'name';
@@ -77,6 +85,10 @@ get '/providers/delete/:id' => require_role superadmin => sub {
 };
 
 get '/providers/delete_ok/:id?' => require_role superadmin => sub { 
+    
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
     
     my $id = param 'id';
     my $provider = rset('Provider')->find( $id );

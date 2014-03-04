@@ -2,4 +2,5 @@
 
 <form method="POST" action="/creators/edit">
 [% INCLUDE creators_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>

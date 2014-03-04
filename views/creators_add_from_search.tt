@@ -6,6 +6,7 @@
 
 <form method="GET" action="/creators/add_from_search">
 <input type="text" name="q" id="q" value="[% params.q %]" required>
+[% INCLUDE 'csrf_field.tt' %]
 <input type="button" value="Search">
 </form>
 

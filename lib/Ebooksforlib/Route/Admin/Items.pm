@@ -42,6 +42,10 @@ get '/books/items/edit/:item_id' => require_role admin => sub {
 
 post '/books/items/edit' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $item_id     = param 'item_id';
     my $loan_period = param 'loan_period';
     # Consider html strip
@@ -60,6 +64,10 @@ post '/books/items/edit' => require_role admin => sub {
 };
 
 post '/books/items/editall' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $book_id     = param 'book_id';
     my $loan_period = param 'loan_period';
@@ -90,14 +98,11 @@ post '/books/items/editall' => require_role admin => sub {
 
 };
 
-get '/books/items/delete/:item_id' => require_role admin => sub {
-    my $item_id = param 'item_id';
-    my $item    = rset('Item')->find( $item_id );
-    my $book    = rset('Book')->find( $item->file->book_id );
-    template 'books_items_delete', { item => $item, book => $book };
-};
-
 post '/books/items/add' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $library_id  = _get_library_for_admin_user();
     my $file_id     = param 'file_id';
@@ -126,8 +131,19 @@ post '/books/items/add' => require_role admin => sub {
 
 };
 
+get '/books/items/delete/:item_id' => require_role admin => sub {
+    my $item_id = param 'item_id';
+    my $item    = rset('Item')->find( $item_id );
+    my $book    = rset('Book')->find( $item->file->book_id );
+    template 'books_items_delete', { item => $item, book => $book };
+};
+
 get '/books/items/delete_ok/:item_id?' => require_role admin => sub { 
-    
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
     my $book = rset('Book')->find( $item->file->book_id );

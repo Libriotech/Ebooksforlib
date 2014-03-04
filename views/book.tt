@@ -126,8 +126,8 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]"><span style="font-size:20px;font-weight:100;">+</span><i class="fa fa-book"></i> <div class="btn-txt">Lån boken</div></a>
-                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]"><span style="font-size:20px;font-weight:100;">+</span><i class="fa fa-book"></i> <div class="btn-txt">Lån boken</div></a>
+                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
                 [% END %]
             [% ELSE %]
                 <div class="alert">
@@ -157,6 +157,7 @@
         <input name="rating" type="radio" class="star" value="4"[% IF user_rating == 4 %] checked[% END %]>
         <input name="rating" type="radio" class="star" value="5"[% IF user_rating == 5 %] checked[% END %]>
         <input type="hidden" name="book_id" value="[% book.id %]">
+        [% INCLUDE 'csrf_field.tt' %]
         <input type="submit" value="Save">
     </form>
     <p>
@@ -195,6 +196,7 @@
 [% IF session.logged_in_user %]
     <form method="POST" action="/comments/add">
     [% INCLUDE 'comments_form.tt' %]
+    [% INCLUDE 'csrf_field.tt' %]
     </form>
 [% END %]
 

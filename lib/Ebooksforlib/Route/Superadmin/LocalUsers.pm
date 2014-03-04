@@ -20,6 +20,10 @@ get '/users/add' => require_role superadmin => sub {
 
 post '/users/add' => require_role superadmin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $name       = param 'name';
     my $username   = param 'username';
     my $password1  = param 'password1';
@@ -72,6 +76,10 @@ get '/users/edit/:id' => require_role superadmin => sub {
 
 post '/users/edit' => require_role superadmin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $id   = param 'id';
     my $username = param 'username';
     my $name     = param 'name';
@@ -103,13 +111,13 @@ get '/users/password/:id' => require_role superadmin => sub {
 
 post '/users/password' => require_role superadmin => sub {
 
-    my $id        = param 'id';
-    my $password1 = param 'password1';
-    my $password2 = param 'password2'; 
-
     unless ( _check_csrftoken( param 'csrftoken' ) ) {
         return redirect '/';
     }
+
+    my $id        = param 'id';
+    my $password1 = param 'password1';
+    my $password2 = param 'password2'; 
 
     my $hs = HTML::Strip->new();
     $id  = $hs->parse( $id );
@@ -146,6 +154,10 @@ get '/users/roles/:id' => require_role superadmin => sub {
 
 get '/users/roles/add/:user_id/:role_id' => require_role superadmin => sub { 
     
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+    
     my $user_id = param 'user_id';
     my $role_id = param 'role_id';
     try {
@@ -163,6 +175,10 @@ get '/users/roles/add/:user_id/:role_id' => require_role superadmin => sub {
 };
 
 get '/users/roles/delete/:user_id/:role_id' => require_role superadmin => sub { 
+    
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
     
     my $user_id = param 'user_id';
     my $role_id = param 'role_id';
@@ -191,6 +207,10 @@ get '/users/libraries/:id' => require_role superadmin => sub {
 # Add a connection between user and library
 get '/users/libraries/add/:user_id/:library_id' => require_role superadmin => sub { 
     
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+    
     my $user_id    = param 'user_id';
     my $library_id = param 'library_id';
     try {
@@ -208,6 +228,10 @@ get '/users/libraries/add/:user_id/:library_id' => require_role superadmin => su
 };
 
 get '/users/libraries/delete/:user_id/:library_id' => require_role superadmin => sub { 
+    
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
     
     my $user_id    = param 'user_id';
     my $library_id = param 'library_id';
@@ -235,6 +259,10 @@ get '/users/delete/:id?' => require_role superadmin => sub {
 };
 
 get '/users/delete_ok/:id?' => require_role superadmin => sub { 
+    
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
     
     # Do the actual delete
     my $id = param 'id';

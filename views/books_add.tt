@@ -18,6 +18,7 @@
             below does not pick up the last iteration of the bindings 
             automatically. %]
         [% INCLUDE books_form.tt sbook=sparqlbook %]
+        [% INCLUDE 'csrf_field.tt' %]
         </form>
     [% END %]
 [% END %]
@@ -29,6 +30,7 @@
 <form method="POST" action="/books/add">
 [% adding = 1 %]
 [% INCLUDE books_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>
 
 </div>

@@ -69,7 +69,7 @@
                     [% loan.time_left.minutes %] [% l('minutes') %]
                 [% END %]
             </td> -->
-            <td><a href="/return/[% loan.item_id %]" class="btn">[% l('Return') %]</a></td>
+            <td><a href="/return/[% loan.item_id %]?[% INCLUDE 'csrf_link.tt' %]" class="btn">[% l('Return') %]</a></td>
         </tr>
     [% END %]
     </tbody>
@@ -88,9 +88,9 @@
         [% toggle_target = '/anon_toggle_ok' %]
     [% END %] 
     [% IF user.anonymize == 1 %]
-    	[% l('Anonymize') %] | <a href="[% toggle_target %]">[% l('Keep history') %]</a>
+    	[% l('Anonymize') %] | <a href="[% toggle_target %]?[% INCLUDE 'csrf_link.tt' %]">[% l('Keep history') %]</a>
 	[% ELSE %]
-		<a href="[% toggle_target %]">[% l('Anonymize') %]</a> | [% l('Keep history') %]
+		<a href="[% toggle_target %]?[% INCLUDE 'csrf_link.tt' %]">[% l('Anonymize') %]</a> | [% l('Keep history') %]
 	[% END %]
 </div>
 </h3>
@@ -119,7 +119,7 @@
             [% IF settings.toggle_anon_confirm == 0 %]
                 [% anon_target = '/anon_ok' %]
             [% END %]
-            <td><a href="[% anon_target %]/[% loan.id %]" class="btn">[% l('Anonymize') %]</a></td>
+            <td><a href="[% anon_target %]/[% loan.id %]?[% INCLUDE 'csrf_link.tt' %]" class="btn">[% l('Anonymize') %]</a></td>
         </tr>
     [% END %]
     </tbody>

@@ -107,8 +107,10 @@ get '/choose' => sub {
 
     my $return_url = param 'return_url';
 
-    $return_url = '' if($return_url =~ /^[a-z]+\:/i);
-    $return_url = uri_escape($return_url);
+    if ( $return_url ) {
+        $return_url = '' if($return_url =~ /^[a-z]+\:/i);
+        $return_url = uri_escape($return_url);
+    }
 
     my @libraries = rset( 'Library' )->all;
 

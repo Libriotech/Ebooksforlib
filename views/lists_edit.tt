@@ -5,6 +5,7 @@
 
 <form method="POST" action="/lists/edit">
 [% INCLUDE lists_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>
 
 <h2>Promoted books</h2>
@@ -15,7 +16,7 @@
 <ul>
 [% FOREACH booklistitem IN booklist %]
     [% IF booklistitem.promoted == 1 %]
-        <li><a href="/lists/promo/demote/[% list.id %]/[% booklistitem.book_id %]"><img src="/images/arrow_down.png" height="16" width="16" alt="Demote" title="Demote"> [% booklistitem.book.creators_as_string %]: [% booklistitem.book.title %]</a></li>
+        <li><a href="/lists/promo/demote/[% list.id %]/[% booklistitem.book_id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/arrow_down.png" height="16" width="16" alt="Demote" title="Demote"> [% booklistitem.book.creators_as_string %]: [% booklistitem.book.title %]</a></li>
         [% num_promoted = num_promoted + 1 %]
     [% END  %]
 [% END %]
@@ -31,7 +32,7 @@
 <ul>
 [% FOREACH booklistitem IN booklist %]
     [% IF booklistitem.promoted != 1 %]
-        <li><a href="/lists/promo/promote/[% list.id %]/[% booklistitem.book_id %]"><img src="/images/arrow_up.png" height="16" width="16" alt="Promote" title="Promote"> [% booklistitem.book.creators_as_string %]: [% booklistitem.book.title %]</a></li>
+        <li><a href="/lists/promo/promote/[% list.id %]/[% booklistitem.book_id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/arrow_up.png" height="16" width="16" alt="Promote" title="Promote"> [% booklistitem.book.creators_as_string %]: [% booklistitem.book.title %]</a></li>
     [% END  %]
 [% END %]
 </ul>

@@ -22,6 +22,10 @@ get '/admin/settings' => require_role admin => sub {
 ### Concurrent loans
 
 post '/admin/settings/concurrent_loans' => require_role admin => sub { 
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
     
     my $concurrent_loans = param 'concurrent_loans';
     my $library = rset('Library')->find( _get_library_for_admin_user() );
@@ -40,6 +44,11 @@ post '/admin/settings/concurrent_loans' => require_role admin => sub {
 ### Detail view
 
 post '/admin/settings/detailview' => require_role admin => sub { 
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $detail_head = param 'detail_head';
     my $soc_links   = param 'soc_links';
     my $library = rset('Library')->find( _get_library_for_admin_user() );
@@ -53,6 +62,7 @@ post '/admin/settings/detailview' => require_role admin => sub {
         error "$_";
     };
     redirect '/admin/settings';
+
 };
 
 true;

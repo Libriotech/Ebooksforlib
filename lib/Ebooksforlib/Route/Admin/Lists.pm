@@ -28,6 +28,10 @@ get '/lists/add' => require_role admin => sub {
 
 post '/lists/add' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $name      = param 'name';
     my $is_genre  = param 'is_genre';
     my $frontpage = param 'frontpage';
@@ -70,6 +74,10 @@ get '/lists/edit/:id' => require_role admin => sub {
 
 post '/lists/edit' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $id   = param 'id';
     my $name = param 'name';
     my $is_genre = param 'is_genre';
@@ -107,6 +115,10 @@ get '/lists/delete/:id?' => require_role admin => sub {
 
 get '/lists/delete_ok/:id?' => require_role admin => sub { 
     
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+    
     # Do the actual delete
     my $id = param 'id';
     my $list = rset('List')->find( $id );
@@ -125,8 +137,11 @@ get '/lists/delete_ok/:id?' => require_role admin => sub {
 };
 
 get '/lists/promo/:action/:list_id/:book_id' => require_role admin => sub { 
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
     
-    # Do the actual delete
     my $action  = param 'action';
     my $list_id = param 'list_id';
     my $book_id = param 'book_id';
@@ -199,6 +214,11 @@ get '/books/lists/:book_id' => require_role admin => sub {
 };
 
 post '/books/lists' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $book_id = param 'book_id';
     my $list_id = param 'list_id';
     try {
@@ -213,6 +233,7 @@ post '/books/lists' => require_role admin => sub {
         error "$_";
         redirect '/books/lists/' . $book_id;
     };
+
 };
 
 get '/lists/books/:list_id' => require_role admin => sub {
@@ -222,6 +243,11 @@ get '/lists/books/:list_id' => require_role admin => sub {
 };
 
 get '/books/lists/delete/:book_id/:list_id' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $book_id = param 'book_id';
     my $list_id = param 'list_id';
     my $book_list = rset('ListBook')->find({ book_id => $book_id, list_id => $list_id });

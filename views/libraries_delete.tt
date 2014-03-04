@@ -5,6 +5,6 @@
 <p>(This will automatically delete any connections between users and this library.)</p>
 
 <p>
-    <a href="/libraries/delete_ok/[% library.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+    <a href="/libraries/delete_ok/[% library.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
     <a href="/superadmin"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>

@@ -325,6 +325,10 @@ get '/login/denied' => sub {
 
 any '/out' => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     # Log
     _log2db({
         logcode => 'LOGOUT',

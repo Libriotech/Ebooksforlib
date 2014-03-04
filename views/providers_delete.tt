@@ -3,6 +3,6 @@
 <p>Are you sure you want to delete the provider <em>[% provider.name %]</em>?</p>
 
 <p>
-    <a href="/providers/delete_ok/[% provider.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+    <a href="/providers/delete_ok/[% provider.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
     <a href="/superadmin"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>

@@ -19,6 +19,10 @@ get '/libraries/add' => require_role superadmin => sub {
 
 post '/libraries/add' => require_role superadmin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $name = param 'name';
     try {
         my $hs = HTML::Strip->new();
@@ -46,6 +50,10 @@ get '/libraries/edit/:id' => require_role superadmin => sub {
 };
 
 post '/libraries/edit' => require_role superadmin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $id    = param 'id';
     my $name  = param 'name';
@@ -79,7 +87,11 @@ get '/libraries/delete/:id?' => require_role superadmin => sub {
 };
 
 get '/libraries/delete_ok/:id?' => require_role superadmin => sub { 
-    
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     # Do the actual delete
     my $id = param 'id';
     my $library = rset('Library')->find( $id );

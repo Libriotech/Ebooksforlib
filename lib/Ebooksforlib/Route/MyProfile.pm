@@ -56,6 +56,11 @@ setting.
 =cut
 
 get '/anon_toggle_ok' => require_login sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     my $new_anonymize = 0;
     if ( $user->anonymize == 0 ) {
@@ -96,6 +101,11 @@ Actually anonymize a single loan, after confirmation has been given.
 =cut
 
 get '/anon_ok/:id' => require_login sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $id = param 'id';
     my $oldloan = rset( 'OldLoan' )->find({ 
         id      => $id,
@@ -139,6 +149,11 @@ Actually anonymize all old loans, after confirmation has been given.
 =cut
 
 get '/anon_all_ok' => require_login sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $user = rset( 'User' )->find( session('logged_in_user_id') );
     my $num_anon = 0;
     foreach my $oldloan ( $user->old_loans ) {

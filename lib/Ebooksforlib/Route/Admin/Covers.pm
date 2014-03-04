@@ -41,6 +41,10 @@ get '/books/covers/:id' => require_role admin => sub {
 
 post '/books/covers' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $book_id  = param 'id';
     my $coverurl = param 'coverurl';
 

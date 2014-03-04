@@ -6,7 +6,7 @@
 
 <ul>
 [% FOREACH role in user.roles %]
-<li><a href="/users/roles/delete/[% user.id %]/[% role.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this role" title="Delete this role"> [% role.role %]</a></li>
+<li><a href="/users/roles/delete/[% user.id %]/[% role.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this role" title="Delete this role"> [% role.role %]</a></li>
 [% END %]
 </ul>
 
@@ -21,7 +21,7 @@
         [% END %]
     [% END %]
     [% IF role_already_connected == 0 %]
-        <li><a href="/users/roles/add/[% user.id %]/[% role.id %]"><img src="/images/add.png" height="16" width="16" alt="Add this role" title="Add this role"> [% role.role %]</a></li>
+        <li><a href="/users/roles/add/[% user.id %]/[% role.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/add.png" height="16" width="16" alt="Add this role" title="Add this role"> [% role.role %]</a></li>
     [% END %]
 [% END %]
 </ul>

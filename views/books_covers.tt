@@ -26,6 +26,7 @@
     <form method="POST" action="/books/covers" style="display: inline;">
     <input type="hidden" name="id" value="[% book.id %]">
     <input type="hidden" name="coverurl" value="[% cover.cover.value %]">
+    [% INCLUDE 'csrf_field.tt' %]
     <button type="submit">
     <img src="[% cover.cover.value %]" title="[% cover.cover.value %]">
     </button>
@@ -35,6 +36,7 @@
     <form method="POST" action="/books/covers" style="display: inline;">
     <input type="hidden" name="id" value="[% book.id %]">
     <input type="hidden" name="coverurl" value="[% bokkilden %]">
+    [% INCLUDE 'csrf_field.tt' %]
     <button type="submit">
     <img src="[% bokkilden %]" title="[% bokkilden %]">
     </button>

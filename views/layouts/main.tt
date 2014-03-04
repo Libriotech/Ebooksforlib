@@ -141,7 +141,7 @@ function scrolldown() {
 						    	<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
 						    		<ul class="dropdown-menu" role="menu">
 						    			<li><a href="/my" src="" data="Log out">[% l('My profile') %]</a></li>
-						    			<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
+						    			<li><a href="/out?[% INCLUDE 'csrf_link.tt' %]" src="" data="Log out">[% l('Log out') %]</a></li>
 						    		</ul>
 				 			   	</li>
 						 		<li><a href="/page/help" src="" data="Hjelp">
@@ -247,8 +247,8 @@ function scrolldown() {
 			<ul class="footer-menu-list">
 				<li><a href="[% settings.reader_url %]/">[% l('My books') %]</a></li>
 				<li><a href="/my">[% l('My profile') %]</a></li>
-				<li><a href="/page/help" src="" data="Hjelp">[% l('Help') %]</a></li>
-				<li><a href="/out" src="" data="Log out">[% l('Log out') %]</a></li>
+				<li><a href="/page/help" data="Hjelp">[% l('Help') %]</a></li>
+				<li><a href="/out?[% INCLUDE 'csrf_link.tt' %]" data="Log out">[% l('Log out') %]</a></li>
 			</ul>
 		</div>
 [% ELSE %]	

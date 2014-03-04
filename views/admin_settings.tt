@@ -5,8 +5,10 @@
 <h2>Concurrent loans</h2>
 <p>Users connected to your library are limited to [% library.concurrent_loans %] concurrent loans.</p>
 <p>Set a new limit (this will not affect books that are already on loan):</p>
+
 <form method="POST" action="/admin/settings/concurrent_loans">
 <input type="number" id="concurrent_loans" name="concurrent_loans" value="[% library.concurrent_loans %]" min="1" max="1000" size="3">
+[% INCLUDE 'csrf_field.tt' %]
 <input type="submit" value="Save">
 </form>
 
@@ -31,6 +33,7 @@
 </fieldset>
 
 <br>
+[% INCLUDE 'csrf_field.tt' %]
 <input type="submit" id="save" value="Save" />
 </form>
 

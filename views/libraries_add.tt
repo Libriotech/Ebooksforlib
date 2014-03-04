@@ -2,4 +2,5 @@
 
 <form method="POST" action="/libraries/add">
 [% INCLUDE libraries_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>

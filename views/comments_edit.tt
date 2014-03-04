@@ -4,4 +4,5 @@
 
 <form method="POST" action="/comments/edit">
 [% INCLUDE 'comments_form.tt' %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>

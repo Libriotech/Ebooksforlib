@@ -8,7 +8,11 @@
     <li><a href="/admin/settings">[% l('Settings') %]</a></li>
     <li><a href="/books/imported">[% l('Imported books') %] ([% imported_books %])</a></li>
     <li><a href="/books/add">[% l('Add a new book from scratch') %]</a></li>
-    <li>[% l('Add a new book based on ISBN') %]: <form method="GET" action="/books/add_from_isbn" style="display: inline;"><input type="text" name="isbn"><input type="submit" value="[% l('Send') %]"></form></li>
+    <li>[% l('Add a new book based on ISBN') %]: <form method="GET" action="/books/add_from_isbn" style="display: inline;">
+                                                 <input type="text" name="isbn">
+                                                 [% INCLUDE 'csrf_field.tt' %]
+                                                 <input type="submit" value="[% l('Send') %]">
+                                                 </form></li>
     <li><a href="/creators/add">[% l('Add a new creator') %]</a></li>
     <li><a href="/admin/lists">[% l('Lists and genres') %]</a></li>
     <li><a href="/admin/stats">[% l('Statistics') %]</a>

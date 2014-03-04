@@ -27,6 +27,10 @@ get '/books/imported' => require_role admin => sub {
 
 get '/books/add_from_isbn' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $isbn_in = param 'isbn';
     my $hs = HTML::Strip->new();
     $isbn_in  = $hs->parse( $isbn_in );
@@ -47,6 +51,10 @@ get '/books/add_from_isbn' => require_role admin => sub {
 };
 
 post '/books/add' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $title   = param 'title';
     my $date    = param 'date';
@@ -182,6 +190,10 @@ get '/books/edit/:id' => require_role admin => sub {
 
 post '/books/edit' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $id      = param 'id';
     my $title   = param 'title';
     my $date    = param 'date';
@@ -228,6 +240,10 @@ post '/books/edit' => require_role admin => sub {
 ### Files
 
 post '/files/add' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $book_id     = param 'book_id';
     my $provider_id = param 'provider_id';

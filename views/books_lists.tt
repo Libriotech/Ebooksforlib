@@ -57,6 +57,7 @@
     [% END %]
 [% END %]
 </select>
+[% INCLUDE 'csrf_field.tt' %]
 <input type="submit" value="Add" />
 </form>
 

@@ -3,4 +3,5 @@
 <form method="POST" action="/users/add">
 [% adding = 1 %]
 [% INCLUDE users_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>

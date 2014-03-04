@@ -13,6 +13,10 @@ use Ebooksforlib::Err;
 
 post '/comments/add' => require_login sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $comment_raw = param 'comment';
     my $book_id     = param 'book_id';
     my $user_id     = session( 'logged_in_user_id' );
@@ -56,6 +60,10 @@ get '/comments/edit/:id' => sub {
 };
 
 post '/comments/edit' => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $comment_id  = param 'comment_id';
     my $comment_raw = param 'comment';

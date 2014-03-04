@@ -7,7 +7,7 @@
 <p>(This will automatically delete any connections to books, but not the books themselves.)</p>
 
 <p>
-    <a href="/lists/delete_ok/[% list.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+    <a href="/lists/delete_ok/[% list.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
     <a href="/admin/lists"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>
 

@@ -2,4 +2,5 @@
 
 <form method="POST" action="/providers/add">
 [% INCLUDE providers_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>

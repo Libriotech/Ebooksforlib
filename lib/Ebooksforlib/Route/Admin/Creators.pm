@@ -22,6 +22,10 @@ get '/creators/add' => require_role admin => sub {
 
 get '/creators/add_from_search' => require_role admin => sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $q = param 'q';
     
     my $sparql = 'SELECT DISTINCT ?person ?name WHERE { 
@@ -37,6 +41,10 @@ get '/creators/add_from_search' => require_role admin => sub {
 };
 
 post '/creators/add' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $name    = param 'name';
     my $dataurl = param 'dataurl';
@@ -64,6 +72,10 @@ get '/creators/edit/:id' => require_role admin => sub {
 
 
 post '/creators/edit' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $id      = param 'id';
     my $name    = param 'name';
@@ -94,6 +106,11 @@ get '/books/creators/add/:bookid' => require_role admin => sub {
 };
 
 post '/books/creators/add' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $book_id    = param 'bookid';
     my $creator_id = param 'creatorid';
     try {
@@ -108,9 +125,15 @@ post '/books/creators/add' => require_role admin => sub {
         error "$_";
         redirect '/books/creators/add/' . $book_id;
     };
+
 };
 
 get '/books/creators/delete/:book_id/:creator_id' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $book_id    = param 'book_id';
     my $creator_id = param 'creator_id';
     my $book_creator = rset('BookCreator')->find({ book_id => $book_id, creator_id => $creator_id });

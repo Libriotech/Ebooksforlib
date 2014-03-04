@@ -5,6 +5,6 @@
 <p>(This will automatically remove any roles the user has and delete any connections to libraries.)</p>
 
 <p>
-    <a href="/users/delete_ok/[% user.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
+    <a href="/users/delete_ok/[% user.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
     <a href="/superadmin"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>

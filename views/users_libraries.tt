@@ -6,7 +6,7 @@
 
 <ul>
 [% FOREACH library in user.libraries %]
-<li><a href="/users/libraries/delete/[% user.id %]/[% library.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this connection" title="Delete this connection"> [% library.name %]</a></li>
+<li><a href="/users/libraries/delete/[% user.id %]/[% library.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this connection" title="Delete this connection"> [% library.name %]</a></li>
 [% END %]
 </ul>
 
@@ -21,7 +21,7 @@
         [% END %]
     [% END %]
     [% IF library_already_connected == 0 %]
-        <li><a href="/users/libraries/add/[% user.id %]/[% library.id %]"><img src="/images/add.png" height="16" width="16" alt="Connect to this library" title="Connect to this library"> [% library.name %]</a></li>
+        <li><a href="/users/libraries/add/[% user.id %]/[% library.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/add.png" height="16" width="16" alt="Connect to this library" title="Connect to this library"> [% library.name %]</a></li>
     [% END %]
 [% END %]
 </ul>

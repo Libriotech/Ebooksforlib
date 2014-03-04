@@ -17,6 +17,10 @@ use Ebooksforlib::Err;
 
 get '/borrow/:item_id' => require_login sub {
 
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
     my $item_id = param 'item_id';
     my $item = rset('Item')->find( $item_id );
     my $user = rset('User')->find( session('logged_in_user_id') );
@@ -89,6 +93,10 @@ get '/borrow/:item_id' => require_login sub {
 };
 
 get '/return/:item_id' => require_login sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
 
     my $item_id = param 'item_id';
     my $user_id = session('logged_in_user_id');

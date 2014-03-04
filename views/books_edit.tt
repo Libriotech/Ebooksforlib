@@ -2,4 +2,5 @@
 
 <form method="POST" action="/books/edit">
 [% INCLUDE books_form.tt %]
+[% INCLUDE 'csrf_field.tt' %]
 </form>
