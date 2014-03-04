@@ -1,0 +1,39 @@
+=pod
+
+=head1 EBOOKSFORLIB CODING GUIDELINES
+
+These are the coding guidelines of Ebooksforlib. Individual guidelines can be 
+referred to as e.g. HTML1 and SEC1. Patches to the guidelines are welcome! 
+
+=head2 HTML
+
+=head3 HTML1 - Use HTML5
+
+All HTML pages should use HTML5. 
+
+=head2 SECURITY
+
+=head3 SEC1 - Protection against CSRF
+
+All routes that change the database should be protected against CSRF attacks. 
+The route itself should include the following code snippet:
+
+    post '/something/delete' => require_role admin => sub {
+        unless ( _check_csrftoken( param 'csrftoken' ) ) {
+            return redirect '/';
+        }
+        # Code goes here
+    };
+ 
+Forms that point to routes that change the DB should include csrf_field.tt:
+
+    <form>
+    <!-- Form fields go here -->
+    [% INCLUDE 'csrf_field.tt' %]
+    </form>
+ 
+Links that point to routes that change the DB should include csrf_link.tt:
+
+    <a href="/something/delete?[% INCLUDE 'csrf_link.tt' %]">Delete</a>
+
+=cut
