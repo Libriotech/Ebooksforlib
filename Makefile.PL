@@ -35,6 +35,7 @@ WriteMakefile(
         'DateTime::Format::ISO8601' => 0,
         'DBIx::Class::Helper::ResultSet::AutoRemoveColumns' => 0,
         'Try::Tiny' => 0,
+        'Data::Password::Check' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Ebooksforlib-*' },

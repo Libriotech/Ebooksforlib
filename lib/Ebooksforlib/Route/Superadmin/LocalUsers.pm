@@ -32,8 +32,12 @@ post '/users/add' => require_role superadmin => sub {
     my $library_id = param 'library';  
     
     # Check the provided data
-    _check_password_length( $password1 )             or return template 'users_add';
-    _check_password_match(  $password1, $password2 ) or return template 'users_add';
+    _check_password_length(  $password1 )             or return template 'users_add';
+    _check_password_match(   $password1, $password2 ) or return template 'users_add';
+    my $pwcheck = _check_password_content( $password1 );
+    if ( $pwcheck->has_errors ) {
+        return template 'users_add', { 'pwerrors' => $pwcheck->error_list };
+    }
     
     # Data looks good, try to save it
     try {
@@ -125,8 +129,12 @@ post '/users/password' => require_role superadmin => sub {
     $id = HTML::Entities::encode($id); 
 
     # Check the provided data
-    _check_password_length( $password1 )             or return template 'users_password', { id => $id };
-    _check_password_match(  $password1, $password2 ) or return template 'users_password', { id => $id };
+    _check_password_length( $password1 )             or return template 'users_password', { 'id' => $id };
+    _check_password_match(  $password1, $password2 ) or return template 'users_password', { 'id' => $id };
+    my $pwcheck = _check_password_content( $password1 );
+    if ( $pwcheck->has_errors ) {
+        return template 'users_password', { 'id' => $id, 'pwerrors' => $pwcheck->error_list };
+    }
     
     # Data looks good, try to save it
     my $user = rset('User')->find( $id );

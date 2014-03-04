@@ -12,6 +12,7 @@ use URL::Encode 'url_encode';
 use MIME::Base64 qw(encode_base64);
 use Crypt::SaltedHash;
 use Digest::MD5 qw( md5_hex );
+use Data::Password::Check;
 use Modern::Perl;
 use base 'Exporter';
 
@@ -29,6 +30,7 @@ our @EXPORT = qw(
     _get_library_for_admin_user
     _check_password_length
     _check_password_match
+    _check_password_content
     _check_csrftoken
     _encrypt_password
     check_hash
@@ -292,6 +294,16 @@ sub _check_password_match {
     } else {
         return 1;
     }
+}
+
+sub _check_password_content {
+    my ( $password ) = @_;
+    my $pwcheck = Data::Password::Check->check({
+        'password'           => $password,
+        'tests'              => [ qw( diverse_characters ) ],
+        'diversity_required' => 4,
+    });
+    return $pwcheck;
 }
 
 =head2 _check_csrftoken
