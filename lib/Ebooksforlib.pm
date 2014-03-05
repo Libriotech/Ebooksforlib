@@ -87,6 +87,23 @@ hook 'before' => sub {
         }
     }
     
+    # Guard against session hijacking
+    # Get the session from the database
+    my $session = resultset('Sessioncount')->find({ 'session_id' => cookie( 'dancer.session' ) });
+    # Check that IP and UA have not changed since the session was created
+    if ( $session && ( $session->ip ne request->remote_address || $session->ua ne request->user_agent ) ) {
+        _log2db({
+            logcode => 'SESSIONHIJACK',
+            logmsg  => "Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' ),
+        });
+        error "SESSIONHIJACK - Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' );
+        # Log the user out
+        session->destroy;
+        # This flash message has to be set after the session is destroyed, to be displayed to the user
+        flash info => "Your IP or User Agent changed. You have been logged out. Please log in again.";
+        return redirect '/choose';
+    }
+
     # We need to show lists and genres on a lot of pages, so we might as well 
     # make the data available from here
     # TODO Perhaps have a list of pages that need the data here, to check

@@ -99,7 +99,9 @@ Logcodes in use:
 
 =item * RESTDENY
 
-=item * MULTISESSION - A user has more than one active sessions
+=item * MULTISESSION - A user has more than one active sessions.
+
+=item * SESSIONHIJACK - Looks like a session was hijacked.
 
 =back
 

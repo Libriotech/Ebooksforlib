@@ -255,6 +255,7 @@ post '/in' => sub {
                 logcode => 'MULTISESSION',
                 logmsg  => "Username: $username, ID: " . $new_user->id,
             });
+            error "MULTISESSION - Username: $username, ID: " . $new_user->id;
             # Send an email to the user
             # TODO Translation! 
             my $body = "It has been detected that you have more than one active session. Details are given below:\n\n";
