@@ -221,6 +221,65 @@ post '/in' => sub {
             logmsg  => "Username: $username, realm: $realm",
         });
         
+        # Keep track of the session for this user
+        my $current_session_id = cookie( 'dancer.session' );
+        resultset('Sessioncount')->create({
+            session_id => $current_session_id,
+            user_id    => $new_user->id, 
+            ip         => request->remote_address,
+            ua         => request->user_agent,
+        });
+        # Check if this user has other active sessions
+        # This should pick up e.g. stolen usernames/passwords
+        my @sessions = resultset('Sessioncount')->search({
+            user_id    => $new_user->id, 
+        });
+        my @activesessions;
+        foreach my $session ( @sessions ) {
+            my $session_id = $session->session_id;
+            next if $session_id eq $current_session_id;
+            debug "*** Checking session_id = $session_id";
+            my $retrieved_session = Dancer::Session::DBI->retrieve( $session_id );
+            if ( $retrieved_session ) {
+                # flash error => "WARNING! You have more than one active session!";
+                push @activesessions, $session;
+                debug "*** Active session: $session_id";
+            } else {
+                debug "*** Inactive session: $session_id";
+            }
+        }
+        debug '*** Done testing sessions';
+        if ( scalar @activesessions > 0 ) {
+            # Log the incident
+            _log2db({
+                logcode => 'MULTISESSION',
+                logmsg  => "Username: $username, ID: " . $new_user->id,
+            });
+            # Send an email to the user
+            # TODO Translation! 
+            my $body = "It has been detected that you have more than one active session. Details are given below:\n\n";
+            foreach my $sess ( @activesessions ) {
+                $body .= "Last modified: $sess->last_modified\n"; 
+                $body .= "IP address: $sess->ip\n";
+                $body .= "User agent: $sess->ua\n\n";
+            }
+            $body .= "If you have logged in from more than browser at the same time, this is probably OK, and you can proceed to use the site as normal.\n\n";
+            $body .= "If you are only logged in in one place, this might indicate that someone has gotten hold of your username and passowrd, or has been able to impersonate you to the system in some other way. Please take appropriate action...";
+            $body .= "Best regards,\neBib";
+            try {
+                email {
+                    from    => 'ebib@ebib.no',
+                    to      => $user->email,
+                    subject => l('eBib: More than one active session'),
+                    body    => $body,
+                };
+            } catch {
+                error "Could not send email: $_";
+            };
+            # Display information about the sessions to the user
+            return template 'sessions', { 'sessions' => \@activesessions };
+        }
+
         # Redirect based on roles
         if ( user_has_role('admin') ) { 
             redirect '/admin';
@@ -327,6 +386,12 @@ any '/out' => sub {
 
     unless ( _check_csrftoken( param 'csrftoken' ) ) {
         return redirect '/';
+    }
+    
+    # Remove the session from sessioncount
+    my $session = resultset('Sessioncount')->find({ 'session_id' => cookie( 'dancer.session' ) });
+    if ( $session ) {
+        $session->delete;
     }
 
     # Log

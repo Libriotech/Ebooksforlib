@@ -99,6 +99,8 @@ Logcodes in use:
 
 =item * RESTDENY
 
+=item * MULTISESSION - A user has more than one active sessions
+
 =back
 
 =cut
