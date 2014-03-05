@@ -263,16 +263,17 @@ post '/in' => sub {
                 $body .= "IP address: $sess->ip\n";
                 $body .= "User agent: $sess->ua\n\n";
             }
-            $body .= "If you have logged in from more than browser at the same time, this is probably OK, and you can proceed to use the site as normal.\n\n";
+            $body .= "If you have logged in from more than one browser at the same time, this is probably OK, and you can proceed to use the site as normal.\n\n";
             $body .= "If you are only logged in in one place, this might indicate that someone has gotten hold of your username and passowrd, or has been able to impersonate you to the system in some other way. Please take appropriate action...";
             $body .= "Best regards,\neBib";
+            debug "*** Going to try sending an email to: " . $new_user->email;
             try {
-                email {
+                email({
                     from    => 'ebib@ebib.no',
-                    to      => $user->email,
+                    to      => $new_user->email,
                     subject => l('eBib: More than one active session'),
                     body    => $body,
-                };
+                });
             } catch {
                 error "Could not send email: $_";
             };
@@ -329,12 +330,12 @@ sub _add_logintoken {
     $user->update({ 'token' => $token });
     # Send the token in an email
     try {
-        email {
+        email({
             from    => 'ebib@ebib.no',
             to      => $user->email,
             subject => l('Your eBib account has been blocked'),
             body    => l('Please visit this URL to unblock the account: ') . "\n\nhttp://ebib.no/unblock?token=$token",
-        };
+        });
     } catch {
         error "Could not send email: $_";
     };
