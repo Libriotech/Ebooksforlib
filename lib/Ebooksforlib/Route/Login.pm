@@ -181,7 +181,8 @@ post '/in' => sub {
         # are logged in etc, unlesss this cookie already exists and matches the
         # user we are logging in now
         my $set_ebib_cookie = 1;
-        if ( cookie 'ebib' ) {
+        if ( cookie 'ebib' && cookie 'ebib' ne '' ) {
+            debug "*** Cookie: " . cookie 'ebib';
             # Should we set a new cookie? 
             my $cookie = from_json( cookie 'ebib' );
             if ( $cookie->{'uid'} eq $new_user->id && $cookie->{'username'} eq $new_user->username ) {
