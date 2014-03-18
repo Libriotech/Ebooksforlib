@@ -92,17 +92,21 @@ hook 'before' => sub {
     my $session = resultset('Sessioncount')->find({ 'session_id' => cookie( 'dancer.session' ) });
     # Check that IP and UA have not changed since the session was created
     if ( $session && ( $session->ip ne request->remote_address || $session->ua ne request->user_agent ) ) {
-        _log2db({
-            logcode => 'SESSIONHIJACK',
-            logmsg  => "Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' ),
-        });
-        error "SESSIONHIJACK - Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' );
-        # Log the user out
-        session->destroy;
-        debug "+++ Session was destroyed because of a suspected session hijacking";
-        # This flash message has to be set after the session is destroyed, to be displayed to the user
-        flash info => "Your IP or User Agent changed. You have been logged out. Please log in again.";
-        return redirect '/choose';
+        # Allow the reader to "hijack" sessions, since that is basically how it does it's job
+        if ( request->path !~ /\/rest\/.*/ && !config->{ 'rest_allowed_ips' }{ request->remote_address } ) {
+            # Log the incident
+            _log2db({
+                logcode => 'SESSIONHIJACK',
+                logmsg  => "Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' ),
+            });
+            error "SESSIONHIJACK - Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' );
+            # Log the user out
+            session->destroy;
+            debug "+++ Session was destroyed because of a suspected session hijacking";
+            # This flash message has to be set after the session is destroyed, to be displayed to the user
+            flash info => "Your IP or User Agent changed. You have been logged out. Please log in again.";
+            return redirect '/choose';
+        }
     }
 
     # We need to show lists and genres on a lot of pages, so we might as well 
