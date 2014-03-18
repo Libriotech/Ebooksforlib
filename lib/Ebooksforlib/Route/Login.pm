@@ -300,9 +300,13 @@ post '/in' => sub {
         if ( $failed_user ) {
             # Increment the fail counter
             $failed_user->update({ 'failed' => $failed_user->failed + 1 });
-            debug "*** User $username blocked, " . $failed_user->failed . " failed logins";
+            # Check if this user is now blocked, because of too many ettempts
             if ( $failed_user->failed >= setting( 'max_failed_logins' ) ) {
+                # Yes, this user is blocked
+                debug "*** User $username is blocked, " . $failed_user->failed . " failed logins";
                 if ( $failed_user->failed == setting( 'max_failed_logins' ) ) {
+                    # This user became blocked just now, add a token for unblocking
+                    debug "*** User $username is blocked NOW, " . $failed_user->failed . " failed logins";
                     _add_logintoken( $failed_user );
                 }
                 return redirect '/blocked';
