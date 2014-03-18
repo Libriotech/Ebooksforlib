@@ -211,6 +211,7 @@ post '/in' => sub {
                 'value'     => to_json( \%data ),
                 'domain'    => setting('session_domain'),
                 'http_only' => 0,
+                'secure'    => 1,
             );
             debug $cookie->to_header;
             header 'Set-Cookie' => $cookie->to_header;

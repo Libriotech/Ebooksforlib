@@ -50,6 +50,8 @@ time_zone: 'Europe/Oslo'
 books_root: '/path/to/directory/'
 
 session: YAML
+session_expires: 30 minutes
+session_secure: 1
 session_dir: "/tmp/ebooksforlib-sessions"
 
 # SPARQL endpoint that we can fetch bibliographic and other data from 
