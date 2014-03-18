@@ -99,6 +99,7 @@ hook 'before' => sub {
         error "SESSIONHIJACK - Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' );
         # Log the user out
         session->destroy;
+        debug "+++ Session was destroyed because of a suspected session hijacking";
         # This flash message has to be set after the session is destroyed, to be displayed to the user
         flash info => "Your IP or User Agent changed. You have been logged out. Please log in again.";
         return redirect '/choose';

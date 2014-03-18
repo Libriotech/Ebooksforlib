@@ -336,6 +336,7 @@ sub _check_csrftoken {
         error 'CSRF token was undef or empty. User: ' . session('logged_in_user_id');
         # Log out the user
         session->destroy;
+        debug "+++ Session was destroyed because of a missing CSRF token";
         return 0;
     }
     
@@ -350,6 +351,7 @@ sub _check_csrftoken {
         error 'CSRF tokens did not match. User: ' . session('logged_in_user_id') . ". Token from form: $token. Token from session: " . session('csrftoken');
         # Log out the user
         session->destroy;
+        debug "+++ Session was destroyed because of a wrong CSRF token";
         return 0;
     }
 

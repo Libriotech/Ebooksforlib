@@ -87,6 +87,7 @@ post '/in' => sub {
 
         # Destroy the temporary session, to avoid problems related to session fixation
         session->destroy;
+        debug "+++ Temporary session was destroyed after sucessfull login, to prevent session fixation";
 
         debug "=== Successfull login for $username, x, $realm";
         session logged_in_user => $username;
@@ -414,6 +415,7 @@ any '/out' => sub {
     });
 
     session->destroy;
+    debug "+++ Session was destroyed because the user logged out";
 
     # Get rid of the ebib cookie
     my $cookie = Dancer::Cookie->new(
