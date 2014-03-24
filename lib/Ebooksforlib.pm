@@ -81,9 +81,7 @@ hook 'before' => sub {
                  request->path =~ /\/unblock/ || # Let users unblock themselves
                  request->path =~ /\/rest\/.*/   # Don't force choosing a library for the API
                ) {
-            return redirect '/choose?return_url=' . request->path();
-            # To force users to one library, uncomment this:
-            # return redirect '/set/2?return_url=' . request->path();
+            return redirect '/choose';
         }
     }
     
@@ -127,25 +125,9 @@ hook 'after' => sub {
 
 get '/choose' => sub {
 
-    my $return_url = param 'return_url';
-
-    if ( $return_url ) {
-        $return_url = '' if($return_url =~ /^[a-z]+\:/i);
-        $return_url = uri_escape($return_url);
-    }
-
     my @libraries = rset( 'Library' )->all;
-
-    my $belongs_to_library = 0;
-    if ( session('logged_in_user_id') ) {
-        my $user = rset( 'User' )->find( session('logged_in_user_id') );
-        $belongs_to_library = $user->belongs_to_library( session('chosen_library') )
-    }
-
     template 'chooselib', { 
         libraries          => \@libraries, 
-        return_url         => $return_url, 
-        belongs_to_library => $belongs_to_library,
         disable_search     => 1,
         pagetitle          => l( 'Choose library' ),
     };
@@ -157,12 +139,9 @@ get '/set/:library_id' => sub {
     # cookie chosen_library => $library_id; # FIXME Expiry
     my $library = rset('Library')->find( $library_id );
     if ( $library ) {
-        session chosen_library => $library->id;
+        debug "*** Going to set chosen library in session";
+        session chosen_library      => $library->id;
         session chosen_library_name => $library->name;
-        # flash info => "A library was chosen.";
-        if (params->{return_url}) {
-           return redirect params->{return_url};
-        }
     } else {
         flash error => localize("Not a valid library.");
     }

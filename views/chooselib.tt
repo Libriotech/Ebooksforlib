@@ -4,28 +4,13 @@
 	    	<div class="span4 offset4 center add-top">
 		    	<h1>[% settings.appname %]</h1>
 				<h5 class="uppercase red">[% l('Choose library:') %]<h5>
-			<!--	[% UNLESS session.chosen_library %] 
-				<h2>[% l('Choose library:') %]</h2>
-				[% ELSE %]
-				<p>[% l('You can change your chosen library at any time, but please note that you can only borrow books from the library you are logged in with.') %]</p> 
-				[% END %] -->
 				<ul class="bibliotek-ul">
 				[% FOREACH library IN libraries %]
 					<li>
-						<a href="/set/[% library.id %][% IF return_url %]?return_url=[% return_url %][% END %]"><i class="fa fa-angle-right"></i> [% library.name %]</a>
-    				<!--	[% IF session.chosen_library == library.id %]
-        				<img src="/images/tick.png" height="16" width="16" alt="[% l('Yes') %]" title="[% l('Yes') %]">
-    					[% END %] -->
+						<a href="/set/[% library.id %]"><i class="fa fa-angle-right"></i> [% library.name %]</a>
 					</li>
 				[% END %]
 				</ul>
-			<!--	[% IF session.chosen_library %]
-    				[% IF belongs_to_library == 1 %]
-        			<p>[% l('You are logged in with the library you have chosen, and can borrow books from it.') %]</p>
-					[% ELSE %]
-        			<p>[% l('You are <em>not</em> logged in with the library you have chosen, and can not borrow books from it.') %]</p>
-    				[% END %]
-				[% END %] -->
 			</div>
 		</div>
     	<div class="row">
