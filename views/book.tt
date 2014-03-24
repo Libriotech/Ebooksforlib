@@ -277,14 +277,13 @@
 [%# Display admin links if the user has the right role %]
 [% FOREACH role IN session.logged_in_user_roles %]
     [% IF role == 'admin' %]
-	<div class="adminactions">
-	<p>Admin actions</p>
-	    <p>
-        <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
-        <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
-        <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
-        <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a> |
-        <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">Covers</a>
+	<div id="adminactions">
+    	<p>Admin actions:<br>
+            <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
+            <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
+            <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
+            <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a> |
+            <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">Covers</a>
 	    </p>
 	</div>
     [% END %]
