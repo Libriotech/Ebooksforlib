@@ -25,7 +25,7 @@
 [% FOREACH list IN book.lists %]
     [% IF list.library_id == library_id %]
         <li>
-            <a href="/books/lists/delete/[% book.id %]/[% list.id %]"><img src="/images/delete.png" height="16" width="16" alt="Delete from this list" title="Delete from this list"></a>
+            <a href="/books/lists/delete/[% book.id %]/[% list.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/delete.png" height="16" width="16" alt="Delete from this list" title="Delete from this list"></a>
             <a href="/list/[% list.id %]">[% list.name %]</a>
         </li>
         [% lists_for_current_library = lists_for_current_library + 1 %]
