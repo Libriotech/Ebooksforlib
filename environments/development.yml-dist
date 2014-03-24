@@ -1,5 +1,8 @@
 # configuration file for development environment
 
+# Your app's name
+appname: "Ebooksforlib"
+
 # Base url for the reader. Do not include trailing slash. 
 reader_url: http://reader.example.org
 

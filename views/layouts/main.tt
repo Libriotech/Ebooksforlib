@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="no"><head>
   <meta charset="UTF-8">
-  <title>eBib[% IF pagetitle %] - [% pagetitle %][% END %][% IF template.pagetitle %] - [% template.pagetitle %][% END %]</title>
+  <title>[% settings.appname %][% IF pagetitle %] - [% pagetitle %][% END %][% IF template.pagetitle %] - [% template.pagetitle %][% END %]</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/jquery-ui-1.10.3.custom.min.css" />
   <script src="/js/jquery-1.9.1.min.js"></script>   
@@ -190,7 +190,7 @@ function scrolldown() {
         				[% END %]
 				        [%# Users need to have a chosen library before they can be offered to log in. %]
 				        [% IF session.chosen_library %]
-				        <div class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about eBib') %]</a></div>
+				        <div class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about') %] [% settings.appname %]</a></div>
 				        [% END %]
 			        </div>
 		        </div>
@@ -230,7 +230,7 @@ function scrolldown() {
 <div class="container">
 	<div class="row">
 		<div class="span5">
-			<h1>eBib</h1>
+			<h1>[% settings.appname %]</h1>
 	<!--		<ul class="footer-menu-list">
 				<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
 			</ul> -->
@@ -238,7 +238,7 @@ function scrolldown() {
 [% IF session.logged_in_user %]
 		<div class="span3">
 				<ul class="footer-menu-list">
-				<li><a href="/page/about">[% l('About eBib') %]</a></li>
+				<li><a href="/page/about">[% l('About') %] [% settings.appname %]</a></li>
 				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
 				<li><a href="/page/contact">[% l('Contact') %]</a></li>
 			</ul>
@@ -254,7 +254,7 @@ function scrolldown() {
 [% ELSE %]	
 		<div class="span3">
 			<ul class="footer-menu-list">
-				<li><a href="/page/about">[% l('About eBib') %]</a></li>
+				<li><a href="/page/about">[% l('About') %] [% settings.appname %]</a></li>
 				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
 				<li><a href="/page/contact">[% l('Contact') %]</a></li>
 			</ul>

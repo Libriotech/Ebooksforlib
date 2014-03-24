@@ -132,7 +132,7 @@
 
 		<div class="alert alert-info center">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
-    		<i class="fa fa-info-circle"></i> [% l('Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!') %]
+    		<i class="fa fa-info-circle"></i> [% l('Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using!') %] [% settings.appname %]!
     	</div>
     
 	</div>
