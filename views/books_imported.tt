@@ -8,7 +8,7 @@
     <p>[% l('These books have been automatically imported and now need to be edited manually to add metadata, covers etc.') %]</p>
     <ul>
     [% FOREACH book IN books %]
-        <li><a href="/books/add_from_isbn?isbn=[% book.isbn %]&amp;id=[% book.id %]">[% book.id %]: [% book.isbn %]</a></li>
+        <li><a href="/books/add_from_isbn?isbn=[% book.isbn %]&amp;id=[% book.id %]&amp;[% INCLUDE 'csrf_link.tt' %]">[% book.id %]: [% book.isbn %]</a></li>
     [% END %]
     </ul>
 [% ELSE %]
