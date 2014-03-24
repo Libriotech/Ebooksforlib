@@ -210,7 +210,7 @@ post '/in' => sub {
                 'name'      => 'ebib', 
                 'value'     => to_json( \%data ),
                 'domain'    => setting('session_domain'),
-                'http_only' => 1,
+                'http_only' => 0, # The reader needs this to be not HttpOnly
                 'secure'    => 1,
             );
             debug $cookie->to_header;
