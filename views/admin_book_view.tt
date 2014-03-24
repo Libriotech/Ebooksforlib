@@ -1,3 +1,9 @@
+[% IF book.coverimg %]
+<img src="[% book.coverimg %]" />
+[% ELSE %]
+<img src="/img/missing-cover.png">
+[% END %]
+
 <h2>[% book.title %]</h2> 
 
 <p>Creator(s):</p>
