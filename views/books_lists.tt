@@ -1,22 +1,8 @@
 [% META pagetitle = 'Connect books to lists' %]
 
-<h2>[% book.title %]</h2> 
+<div class="container">
 
-<p>Creator(s):</p>
-
-<ul>
-[% FOREACH creator IN book.creators %]
-<li><a href="/creator/[% creator.id %]">[% creator.name %]</a></li>
-[% END %]
-</ul>
-
-<p>Published: [% book.date %].</p>
-
-[% IF book.isbn %]
-<p>ISBN: [% book.isbn %].</p>
-[% END %]
-
-<hr />
+[% INCLUDE 'admin_book_view.tt' %]
 
 <h2>Current lists</h2>
 
@@ -61,6 +47,6 @@
 <input type="submit" value="Add" />
 </form>
 
-
-
 <p><a href="/lists/add">Add a new list</a></p>
+
+</div>
