@@ -1,6 +1,11 @@
 [% META pagetitle = 'Edit book' %]
 
+<div class="container">
+[% INCLUDE 'admin_book_view.tt' %]
+
 <form method="POST" action="/books/edit">
 [% INCLUDE books_form.tt %]
 [% INCLUDE 'csrf_field.tt' %]
 </form>
+
+</div>
