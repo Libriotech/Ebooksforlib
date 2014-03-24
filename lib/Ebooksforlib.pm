@@ -166,7 +166,7 @@ get '/set/:library_id' => sub {
     } else {
         flash error => localize("Not a valid library.");
     }
-    redirect '/choose';
+    redirect '/';
 };
 
 get '/lang' => sub {
