@@ -60,19 +60,17 @@
                         [% lists.push( list ) %]
                     [% END %]
                 [% END %]
-                [% IF lists.size %]
-                    Sjanger: 
-                    [% FOREACH list IN lists %]
-                        <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
-                    [% END %]
-                    
-                [% END %]
                 [% IF genres.size %]
-                    Lister: 
+                    Sjanger: 
                     [% FOREACH list IN genres %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
-                    
+                [% END %]
+                [% IF lists.size %]
+                    Lister: 
+                    [% FOREACH list IN lists %]
+                        <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
+                    [% END %]
                 [% END %]
             [% END %]
 			</p>
