@@ -1,23 +1,23 @@
 <ul class="nav">
     <li class="dropdown">
-        <a href="/" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+        <a href="/" class="dropdown-toggle" data-toggle="dropdown">[% l('Admin') %]<b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li><a href="/admin">Admin</a></li>
-            <li><a href="/admin/settings">Settings</a></li>
+            <li><a href="/admin">[% l('Admin') %]</a></li>
+            <li><a href="/admin/settings">[% l('Settings') %]</a></li>
             <li><a href="/books/imported">[% l('Imported books') %]</a></li>
-            <li><a href="/books/add">Add a new book</a></li>
-            <li><a href="/creators/add">Add creator</a></li>
-            <li><a href="/admin/lists">Lists and genres</a></li>
+            <li><a href="/books/add">[% l('Add a new book') %]</a></li>
+            <li><a href="/creators/add">[% l('Add author') %]</a></li>
+            <li><a href="/admin/lists">[% l('Lists and genres') %]</a></li>
             <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Statistics</a>
+                <a tabindex="-1" href="#">[% l('Statistics') %]</a>
                 <ul class="dropdown-menu">
-                    <li><a href="/admin/stats">Overview</a></li>
-                    <li><a href="/admin/stats/age">Age</a></li>
-                    <li><a href="/admin/stats/gender">Gender</a></li>
+                    <li><a href="/admin/stats">[% l('Overview') %]</a></li>
+                    <li><a href="/admin/stats/age">[% l('Age') %]</a></li>
+                    <li><a href="/admin/stats/gender">[% l('Gender') %]</a></li>
                 </ul>
             </li>
-            <li><a href="/admin/logs">Logs</a></li>
-            <li><a href="/choose">Switch library</a></li>
+            <li><a href="/admin/logs">[% l('Logs') %]</a></li>
+            <li><a href="/choose">[% l('Switch library') %]</a></li>
         </ul>
     </li>
 </ul>

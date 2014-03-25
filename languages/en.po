@@ -19,6 +19,10 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: views/admin_navbar.tt:8
+msgid "Add a new book"
+msgstr ""
+
 #: views/admin.tt:11
 msgid "Add a new book based on ISBN"
 msgstr ""
@@ -31,7 +35,11 @@ msgstr ""
 msgid "Add a new creator"
 msgstr ""
 
-#: views/admin.tt:5
+#: views/admin_navbar.tt:9
+msgid "Add author"
+msgstr ""
+
+#: views/admin.tt:5 views/admin_navbar.tt:3 views/admin_navbar.tt:5
 msgid "Admin"
 msgstr ""
 
@@ -43,7 +51,7 @@ msgstr ""
 msgid "Administer loans"
 msgstr ""
 
-#: views/admin.tt:20
+#: views/admin.tt:20 views/admin_navbar.tt:15
 msgid "Age"
 msgstr ""
 
@@ -127,7 +135,7 @@ msgstr ""
 msgid "Expires"
 msgstr ""
 
-#: views/admin.tt:21
+#: views/admin.tt:21 views/admin_navbar.tt:16
 msgid "Gender"
 msgstr ""
 
@@ -179,7 +187,7 @@ msgstr ""
 msgid "Lists"
 msgstr ""
 
-#: views/admin.tt:17
+#: views/admin.tt:17 views/admin_navbar.tt:10
 msgid "Lists and genres"
 msgstr ""
 
@@ -195,7 +203,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: views/admin.tt:24
+#: views/admin.tt:24 views/admin_navbar.tt:19
 msgid "Logs"
 msgstr ""
 
@@ -239,6 +247,10 @@ msgstr ""
 msgid "Oops, we got an error:<br />"
 msgstr ""
 
+#: views/admin_navbar.tt:14
+msgid "Overview"
+msgstr ""
+
 #: views/login_form.tt:8 views/login_form.tt:9
 msgid "PIN code"
 msgstr ""
@@ -279,7 +291,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: views/admin.tt:8
+#: views/admin.tt:8 views/admin_navbar.tt:6
 msgid "Settings"
 msgstr ""
 
@@ -291,8 +303,12 @@ msgstr ""
 msgid "Sorry, there are no titles in this list yet."
 msgstr ""
 
-#: views/admin.tt:18
+#: views/admin.tt:18 views/admin_navbar.tt:12
 msgid "Statistics"
+msgstr ""
+
+#: views/admin_navbar.tt:20
+msgid "Switch library"
 msgstr ""
 
 #: views/books_imported.tt:15

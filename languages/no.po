@@ -27,6 +27,10 @@ msgstr "Om eBib"
 msgid "Active loans"
 msgstr "Aktive lån"
 
+#: views/admin_navbar.tt:8
+msgid "Add a new book"
+msgstr "Legg til en ny bok"
+
 #: views/admin.tt:11
 msgid "Add a new book based on ISBN"
 msgstr "Legg til en ny bok basert på ISBN"
@@ -39,7 +43,11 @@ msgstr "Legg til en ny bok fra grunnen av"
 msgid "Add a new creator"
 msgstr "Legg til forfatter"
 
-#: views/admin.tt:5
+#: views/admin_navbar.tt:9
+msgid "Add author"
+msgstr "Legg til forfatter"
+
+#: views/admin.tt:5 views/admin_navbar.tt:3 views/admin_navbar.tt:5
 msgid "Admin"
 msgstr "Admin"
 
@@ -51,7 +59,7 @@ msgstr "Admin"
 msgid "Administer loans"
 msgstr "Administrer lån"
 
-#: views/admin.tt:20
+#: views/admin.tt:20 views/admin_navbar.tt:15
 msgid "Age"
 msgstr "Alder"
 
@@ -155,7 +163,7 @@ msgstr "Det oppstod en feil ved henting av omtaler."
 msgid "Expires"
 msgstr "Utløper"
 
-#: views/admin.tt:21
+#: views/admin.tt:21 views/admin_navbar.tt:16
 msgid "Gender"
 msgstr "Kjønn"
 
@@ -211,7 +219,7 @@ msgstr "Bibliotek"
 msgid "Lists"
 msgstr "Lister"
 
-#: views/admin.tt:17
+#: views/admin.tt:17 views/admin_navbar.tt:10
 msgid "Lists and genres"
 msgstr "Lister og sjangre"
 
@@ -227,7 +235,7 @@ msgstr "Innloggin mislyktes"
 msgid "Log out"
 msgstr "Logg ut"
 
-#: views/admin.tt:24
+#: views/admin.tt:24 views/admin_navbar.tt:19
 msgid "Logs"
 msgstr "Logger"
 
@@ -287,6 +295,10 @@ msgstr "Oops, vi fikk en feil:<br />$_"
 msgid "Other books by"
 msgstr "Andre bøker av"
 
+#: views/admin_navbar.tt:14
+msgid "Overview"
+msgstr "Oversikt"
+
 #: views/login_form.tt:8 views/login_form.tt:9
 msgid "PIN code"
 msgstr "PIN-kode"
@@ -335,7 +347,7 @@ msgstr "Søk"
 msgid "Send"
 msgstr "Send"
 
-#: views/admin.tt:8
+#: views/admin.tt:8 views/admin_navbar.tt:6
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -355,13 +367,17 @@ msgstr "Beklager, ingen treff."
 msgid "Sorry, there are no titles in this list yet."
 msgstr "Beklager, det er ikke noen bøker i denne lista enda."
 
-#: views/admin.tt:18
+#: views/admin.tt:18 views/admin_navbar.tt:12
 msgid "Statistics"
 msgstr "Statistikk"
 
 #:
 msgid "Statistics: Gender"
 msgstr "Statistikk: Kjønn"
+
+#: views/admin_navbar.tt:20
+msgid "Switch library"
+msgstr "Bytt bibliotek"
 
 #: views/books_imported.tt:15
 msgid "There are no imported books that need looking after."
