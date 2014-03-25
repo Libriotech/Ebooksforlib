@@ -276,7 +276,7 @@
 [% FOREACH role IN session.logged_in_user_roles %]
     [% IF role == 'admin' %]
 	<div id="adminactions">
-    	<p>[% l('Admin actions') %]:<br>
+        <p>[% l('Admin actions') %]:
             <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">[% l('Edit') %]</a> |
             <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">[% l('Authors') %]</a> |
             <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">[% l('Lists') %]</a> |
