@@ -93,10 +93,11 @@ post '/books/add' => require_role admin => sub {
                 isbn => $isbn->common_data,
             });
             # This is a new book
-            $new_book->set_column( 'title', $title );
-            $new_book->set_column( 'date',  $date );
-            $new_book->set_column( 'isbn',  $isbn->common_data );
-            $new_book->set_column( 'pages', $pages );
+            $new_book->set_column( 'title',   $title );
+            $new_book->set_column( 'date',    $date );
+            $new_book->set_column( 'isbn',    $isbn->common_data );
+            $new_book->set_column( 'pages',   $pages );
+            $new_book->set_column( 'dataurl', $dataurl );
             if( $new_book->in_storage ) {
                 $new_book->update;
                 $flash_info .= '<cite>' . $new_book->title . '</cite> was updated.<br>';
