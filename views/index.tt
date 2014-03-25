@@ -126,7 +126,7 @@
        			<i class="icon-spin icon-spinner"></i>
 			</div>
 			<ul class="block-list bxslider bxhidden">
-        		[% FOREACH booklistitem IN booklist.booklist %]
+        		[% FOREACH booklistitem IN booklist.booklist.reverse %]
          		   [% IF booklistitem.promoted != 1 %]
 			    		<li>
 				    		<a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
@@ -171,7 +171,7 @@
 		<div class="row">
 			<div class="span12">
 				<ul class="utlisting">
-	    			[% FOREACH booklistitem IN mobilebooklist %]
+	    			[% FOREACH booklistitem IN mobilebooklist.reverse %]
 					<li>
 						<a href="/book/[% booklistitem.book.id %]" class="book-block">
 							<div class="utlisting-img">
