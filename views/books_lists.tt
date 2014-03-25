@@ -31,7 +31,7 @@
 <input type="hidden" name="book_id" id="book_id" value="[% book.id %]" />
 <select name="list_id" id="list_id">
 <option>Choose a list...</option>
-[% FOREACH list IN lists %]
+[% FOREACH list IN lists.sort %]
     [% list_already_connected = 0 %]
     [% FOREACH booklist in book.lists %]
         [% IF list.id == booklist.id %]
