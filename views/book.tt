@@ -40,13 +40,13 @@
 			</div>
 			<p class="details">
 		    [% IF book.date %]
-		        Utgivelsesår: [% book.date %] /
+		        [% l('Publication year') %]: [% book.date %] /
     		[% END %]
             [% IF book.isbn %]
-                ISBN: [% book.isbn %] /
+                [% l('ISBN') %]: [% book.isbn %] /
             [% END %]
             [% IF book.pages %]
-                Sider: [% book.pages %] /
+                [% l('Pages') %]: [% book.pages %] /
             [% END %]
             [% IF book.lists.size %]
                 [%# Build separate arrays for lists and genres %]
@@ -61,13 +61,13 @@
                     [% END %]
                 [% END %]
                 [% IF genres.size %]
-                    Sjanger: 
+                    [% l('Genre') %]: 
                     [% FOREACH list IN genres %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
                 [% END %]
                 [% IF lists.size %]
-                    Lister: 
+                    [% l('Lists') %]:
                     [% FOREACH list IN lists %]
                         <a href="/list/[% list.id %]">[% list.name %]</a>[% UNLESS loop.last() %],[% END %]
                     [% END %]
@@ -81,10 +81,10 @@
 		   [% SET descriptions = book.get_descriptions %]
            [% IF descriptions.results.bindings.size %]
                [% IF descriptions.results.bindings.0.abstract.value %]
-            	<h4>Omtale</h4><p>[% descriptions.results.bindings.0.abstract.value %]</p>
+            	<h4>[% l('Description') %]</h4><p>[% descriptions.results.bindings.0.abstract.value %]</p>
                [% END %]
                [% IF descriptions.results.bindings.0.krydder.value %]
-               <h4>Omtale</h4><p>[% descriptions.results.bindings.0.krydder.value %]</p>
+               <h4>[% l('Description') %]</h4><p>[% descriptions.results.bindings.0.krydder.value %]</p>
                [% END %]
            [% END %]
          </div>  
@@ -92,22 +92,22 @@
 		    [% IF !session.logged_in_user %]
 		        <div class="alert alert-info"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-info-circle"></i> Du må være logget inn for å låne bøker.
+    				<i class="fa fa-info-circle"></i> [% l('You must be logged in to borrow books') %].
     			</div>
             [% ELSIF user_belongs_to_library == 0 %]
                 <div class="alert"">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-exclamation-circle"></i> Du har ikke muligheter til å låne bøker fra dette biblioteket.
+    				<i class="fa fa-exclamation-circle"></i> [% l('You can not borrow books from this library') %].
     			</div>
             [% ELSIF user_has_borrowed == 1 %]
                 <div class="alert alert-success">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-check-circle"></i> Du låner denne boken. Gå til <a href='[% settings.reader_url %]'>bokleseren for å laste ned og lese boken</a>.
+    				<i class="fa fa-check-circle"></i> [% l('You have this book on loan') %]. [% l('Go to') %] <a href='[% settings.reader_url %]'>[% l('the reader app to download and read the book') %]</a>.
     			</div>
             [% ELSIF limit_reached == 1 %]
                 <div class="alert alert-danger">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-exclamation-circle"></i> Du låner allerede maksimalt antall bøker.</div>
+    				<i class="fa fa-exclamation-circle"></i> [% l('You have the maximum number of concurrent books on loan') %].</div>
     			</div>
             [% ELSIF book.files.size %]
                 [% SET longest_loan_period = 0 %]
@@ -124,13 +124,13 @@
                     [% END %]
                 [% END %]
                 [% IF longest_loan_period > 0 %]
-                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]"><span style="font-size:20px;font-weight:100;">+</span><i class="fa fa-book"></i> <div class="btn-txt">Lån boken</div></a>
-                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]" style="margin-left:0;">Lån boken i [% longest_loan_period %] dager</a> -->
+                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]"><span style="font-size:20px;font-weight:100;">+</span><i class="fa fa-book"></i> <div class="btn-txt">[% l('Borrow this book') %]</div></a>
+                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]" style="margin-left:0;">[% l('Borrow this book for') %] [% longest_loan_period %] [% l('days') %]</a> -->
                 [% END %]
             [% ELSE %]
                 <div class="alert">
     				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-exclamation"></i> Alle våre eksemplarer er desverre utlånt.
+    				<i class="fa fa-exclamation"></i> [% l('All our copies are on loan') %].
     			</div>
             [% END %]
 		
@@ -263,7 +263,7 @@
 	<div class="container content-container">
 		<div class="row">
 			<div class="span12">
-				<h5 class="related-titles">Andre bøker av [% FOREACH creator IN book.creators %]
+				<h5 class="related-titles">[% l('More books by') %] [% FOREACH creator IN book.creators %]
             	<span>[% creator.name %]</span>[% UNLESS loop.last() %],[% END %]
         [% END %]:</h5>
     [% INCLUDE 'books_table.tt' books=books %]
@@ -276,12 +276,12 @@
 [% FOREACH role IN session.logged_in_user_roles %]
     [% IF role == 'admin' %]
 	<div id="adminactions">
-    	<p>Admin actions:<br>
-            <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">Edit</a> |
-            <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">Creators</a> |
-            <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">Lists</a> |
-            <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">Items</a> |
-            <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">Covers</a>
+    	<p>[% l('Admin actions') %]:<br>
+            <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">[% l('Edit') %]</a> |
+            <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">[% l('Authors') %]</a> |
+            <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">[% l('Lists') %]</a> |
+            <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">[% l('Items') %]</a> |
+            <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">[% l('Covers') %]</a>
 	    </p>
 	</div>
     [% END %]

@@ -276,7 +276,7 @@ post '/in' => sub {
                     email({
                         from    => 'ebib@ebib.no',
                         to      => $new_user->email,
-                        subject => config->{'appname'} . l(': More than one active session'),
+                        subject => config->{'appname'} . ": " . l('More than one active session'),
                         body    => $body,
                     });
                     debug "*** Email was sent to " . $new_user->email;
@@ -347,7 +347,7 @@ sub _add_logintoken {
         email({
             from    => 'ebib@ebib.no',
             to      => $user->email,
-            subject => config->{appname} . l(': Your account has been blocked'),
+            subject => config->{appname} . ": " . l('Your account has been blocked'),
             body    => l('Please visit this URL to unblock the account: ') . "\n\nhttp://ebib.no/unblock?token=$token",
         });
     } catch {

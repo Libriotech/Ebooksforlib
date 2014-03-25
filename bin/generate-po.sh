@@ -6,5 +6,5 @@ if [ ! -d "languages/" ]; then
   exit
 fi
 
-xgettext.pl -D=views -D=lib -o=languages/en.po -v
-xgettext.pl -D=views -D=lib -o=languages/no.po -v
+xgettext.pl -D=views -D=lib -o="languages/en.po" -v -v -v
+xgettext.pl -D=views -D=lib -o="languages/no.po" -v -v -v
