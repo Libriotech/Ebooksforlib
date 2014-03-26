@@ -14,17 +14,22 @@
 
 			</div>
 		</div>
-		<div class="span3">
-			<h4>Generelt</h4>
-			<h4>Lån</h4>
-			<h4>Lesing</h4>
-			<h4>Bibliotekene<h4>
-			<h4>Utvalget</h4>
-			<h4>Personvern</h4>
-			<h4>Teknisk</h4>
-			<p>Finner du ikke svaret på det du lurer på?</p>
-			<p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
-		</div>
+
+
+
+                <div class="span3">
+                        <h4><a href="/page/help#generelt">Generelt</a></h4>
+                        <h4><a href="/page/help#laan">Lån</a></h4>
+                        <h4><a href="/page/help#lesing">Lesing</a></h4>
+                        <h4><a href="/page/help#bibliotekene">Bibliotekene</a><h4>
+                        <h4><a href="/page/help#utvalget">Utvalget</a></h4>
+                        <h4><a href="/page/help#personvern">Personvern</a></h4>
+                        <h4><a href="/page/help#teknisk">Teknisk</a></h4>
+                        <p>Finner du ikke svaret på det du lurer på?</p>
+                        <p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
+                </div>
+
+
 	</div>
 	</div>
 </div>

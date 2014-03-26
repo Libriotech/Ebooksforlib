@@ -88,17 +88,23 @@ Epost: <a href="mailto:biblioteket@nore-og-uvdal.kommune.no">biblioteket@nore-og
 
 			</div>
 		</div>
-		<div class="span3">
-			<h4><a href="#generelt">Generelt</a></h4>
-			<h4><a href="#laan">Lån</a></h4>
-			<h4><a href="#lesing">Lesing</a></h4>
-			<h4><a href="#bibliotekene">Bibliotekene</a><h4>
-			<h4><a href="#utvalget">Utvalget</a></h4>
-			<h4><a href="#personvern">Personvern</a></h4>
-			<h4><a href="#teknisk">Teknisk</a></h4>
-			<p>Finner du ikke svaret på det du lurer på?</p>
-			<p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
-		</div>
+
+
+
+                <div class="span3">
+                        <h4><a href="/page/help#generelt">Generelt</a></h4>
+                        <h4><a href="/page/help#laan">Lån</a></h4>
+                        <h4><a href="/page/help#lesing">Lesing</a></h4>
+                        <h4><a href="/page/help#bibliotekene">Bibliotekene</a><h4>
+                        <h4><a href="/page/help#utvalget">Utvalget</a></h4>
+                        <h4><a href="/page/help#personvern">Personvern</a></h4>
+                        <h4><a href="/page/help#teknisk">Teknisk</a></h4>
+                        <p>Finner du ikke svaret på det du lurer på?</p>
+                        <p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
+                </div>
+
+
+
 	</div>
 	</div>
 </div>
