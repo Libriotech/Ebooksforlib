@@ -74,11 +74,12 @@ hook 'before' => sub {
     unless ( session('chosen_library') && session('chosen_library_name') ) {
         # Some pages must be reachable without choosing a library 
         # To exempt the front page, include this below: || request->path eq '/'
-        unless ( request->path =~ /\/choose/  || # Let users choose a library
-                 request->path =~ /\/set\/.*/ || # Let users set a library
-                 request->path =~ /\/in/      || # Let users log in
-                 request->path =~ /\/blocked/ || # Display the blocked message to blocked users
-                 request->path =~ /\/unblock/ || # Let users unblock themselves
+        unless ( request->path =~ /\/choose/   || # Let users choose a library
+                 request->path =~ /\/set\/.*/  || # Let users set a library
+                 request->path =~ /\/page\/.*/ || # Let users look at pages without choosing a library
+                 request->path =~ /\/in/       || # Let users log in
+                 request->path =~ /\/blocked/  || # Display the blocked message to blocked users
+                 request->path =~ /\/unblock/  || # Let users unblock themselves
                  request->path =~ /\/rest\/.*/   # Don't force choosing a library for the API
                ) {
             return redirect '/choose';
