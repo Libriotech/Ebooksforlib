@@ -126,6 +126,7 @@
        			<i class="icon-spin icon-spinner"></i>
 			</div>
 			<ul class="block-list bxslider bxhidden">
+                [% SET counter = 0 %]
         		[% FOREACH booklistitem IN booklist.booklist.reverse %]
          		   [% IF booklistitem.promoted != 1 %]
 			    		<li>
@@ -144,6 +145,8 @@
 				    		</a>
 			    		</li>
 		    		[% END %]
+                    [% counter = counter + 1 %]
+                    [% LAST IF counter == 80 %]
 				[% END %]
 			</ul>
       </div>
