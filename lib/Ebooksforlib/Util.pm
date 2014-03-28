@@ -270,12 +270,15 @@ sub _user_has_borrowed {
     }
 }
 
-# Assumes that admin users are only connected to one library
 sub _get_library_for_admin_user {
-    my $user_id = session 'logged_in_user_id';
-    my $user = rset('User')->find( $user_id );
-    my @libraries = $user->libraries;
-    return $libraries[0]->id;
+
+    # Assumed that admin users are only connected to one library
+    # my $user_id = session 'logged_in_user_id';
+    # my $user = rset('User')->find( $user_id );
+    # my @libraries = $user->libraries;
+    # return $libraries[0]->id;
+
+    return session 'chosen_library';
 }
 
 sub _check_password_length {
