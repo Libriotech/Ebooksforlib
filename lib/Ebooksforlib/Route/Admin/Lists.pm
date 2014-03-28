@@ -40,19 +40,13 @@ post '/lists/add' => require_role admin => sub {
     unless ( defined $is_genre ) {
         $is_genre = 0;
     }
-    # Tie the list to the logged in users's library
-    my $user = rset('User')->find( session 'logged_in_user_id' );
-    my @libraries = $user->libraries;
-    my $library = $libraries[0];
-    my $library_id = $library->id;
-    debug "*** Library ID: $library_id";
     try {
         my $new_list = rset('List')->create({
             name       => $name,
             is_genre   => $is_genre,
             frontpage  => $frontpage,
             mobile     => $mobile,
-            library_id => $library_id,
+            library_id => _get_library_for_admin_user(),
         });
         flash info => 'A new list was added! <a href="/list/' . $new_list->id . '">View</a>';
         redirect '/admin/lists';
