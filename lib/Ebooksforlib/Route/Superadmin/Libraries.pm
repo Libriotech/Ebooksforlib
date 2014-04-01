@@ -24,12 +24,18 @@ post '/libraries/add' => require_role superadmin => sub {
     }
 
     my $name = param 'name';
+    my $realm = param 'realm';
+    my $piwik = param 'piwik';
     try {
         my $hs = HTML::Strip->new();
         $name  = $hs->parse( $name );
+        $realm = $hs->parse( $realm );
+        $piwik = $hs->parse( $piwik );
         $hs->eof;
         my $new_library = rset('Library')->create({
             name  => $name,
+            realm => $realm,
+            piwik => $piwik,
         });
         flash info => 'A new library was added!';
         redirect '/superadmin';
@@ -58,14 +64,17 @@ post '/libraries/edit' => require_role superadmin => sub {
     my $id    = param 'id';
     my $name  = param 'name';
     my $realm = param 'realm';
+    my $piwik = param 'piwik';
     my $library = rset('Library')->find( $id );
     try {
         my $hs = HTML::Strip->new();
         $name  = $hs->parse( $name );
         $realm = $hs->parse( $realm );
+        $piwik = $hs->parse( $piwik );
         $hs->eof;
-        $library->set_column('name', $name);
-        $library->set_column('realm', $realm);
+        $library->set_column('name',  $name  );
+        $library->set_column('realm', $realm );
+        $library->set_column('piwik', $piwik );
         $library->update;
         flash info => 'A library was updated!';
         redirect '/superadmin';

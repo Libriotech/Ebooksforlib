@@ -44,7 +44,8 @@ CREATE TABLE libraries (
     realm varchar(32)  UNIQUE KEY, 
     concurrent_loans INTEGER NOT NULL DEFAULT 1, 
     detail_head TEXT, 
-    soc_links TEXT
+    soc_links TEXT,
+    piwik INTEGER(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_roles (

@@ -245,4 +245,9 @@ __PACKAGE__->many_to_many("users", "user_libraries", "user");
 # Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 17:19:33
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:V60lUv7LfPy/T3Vc449Fbw
 
+__PACKAGE__->add_columns(
+  "piwik",
+  { data_type => "integer", is_nullable => 0, size => 16 },
+);
+
 1;
