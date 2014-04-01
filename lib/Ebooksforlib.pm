@@ -98,7 +98,13 @@ hook 'before' => sub {
                 logcode => 'SESSIONHIJACK',
                 logmsg  => "Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' ),
             });
-            error "SESSIONHIJACK - Username: " . session( 'logged_in_user' ) . " ID: " . session( 'logged_in_user_id' );
+            my $username    = session( 'logged_in_user' );
+            my $userid      = session( 'logged_in_user_id' );
+            my $recorded_ip = $session->ip;
+            my $current_ip  = request->remote_address;
+            my $recorded_ua = $session->ua;
+            my $current_ua  = request->user_agent;
+            error "SESSIONHIJACK - Username: $username ID: $userid Recorded IP: $recorded_ip Current IP: $current_ip Recorded UA: $recorded_ua Current UA: $current_ua";
             # Log the user out
             session->destroy;
             debug "+++ Session was destroyed because of a suspected session hijacking";
