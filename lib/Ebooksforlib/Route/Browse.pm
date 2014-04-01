@@ -139,7 +139,11 @@ get '/search' => sub {
         return redirect '/creator/' . $creators[0]->id;
     }
     
-    template 'search', { books => \@books, creators => \@creators };
+    template 'search', {
+        books     => \@books,
+        creators  => \@creators,
+        pagetitle => l('Search'),
+    };
 
 };
 

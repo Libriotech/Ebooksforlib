@@ -1,6 +1,3 @@
-[% META pagetitle = 'Search' %]
-
-
 <div class="article-bg-white">
 <div class="container content-container">
 <div class="row">
@@ -11,12 +8,16 @@
     [% SET allbooks = [] %]
 
     [% IF books.size %]
-        [% allbooks.push( books ) %]
+        [% FOREACH book IN books %]
+            [% allbooks.push( book ) %]
+        [% END %]
     [% END %]
 
     [% IF creators.size %]
         [% FOREACH creator IN creators %]
-            [% allbooks.push( creator.books ) %]
+            [% FOREACH book IN creator.books %]
+                [% allbooks.push( book ) %]
+            [% END %]
         [% END %]
     [% END %]
 
@@ -34,3 +35,4 @@
 </div>
 </div>
 </div>
+
