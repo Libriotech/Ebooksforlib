@@ -285,7 +285,7 @@ function scrolldown() {
 
 [% END %]
 
-[% IF library.piwik %]
+[% IF session.chosen_library_piwik %]
 <script type="text/javascript">
   var _paq = _paq || [];
   _paq.push(["trackPageView"]);

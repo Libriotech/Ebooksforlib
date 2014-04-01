@@ -147,8 +147,9 @@ get '/set/:library_id' => sub {
     my $library = rset('Library')->find( $library_id );
     if ( $library ) {
         debug "*** Going to set chosen library in session";
-        session chosen_library      => $library->id;
-        session chosen_library_name => $library->name;
+        session chosen_library       => $library->id;
+        session chosen_library_name  => $library->name;
+        session chosen_library_piwik => $library->piwik;
     } else {
         flash error => localize("Not a valid library.");
     }
