@@ -7,7 +7,6 @@
     <tr>
         <th>Recorded</th>
         <th>Users</th>
-        <th>Files</th>
         <th>Items</th>
         <th>On loan</th>
         <th>Percentage on loan</th>
@@ -18,7 +17,6 @@
     <tr>
         <td>Now</td>
         <td>[% livestats.users %]</td>
-        <td>[% livestats.files %]</td>
         <td>[% livestats.items %]</td>
         <td>[% livestats.onloan %]</td>
         <td>[% IF livestats.items %][% ( ( livestats.onloan * 100 ) / livestats.items ) FILTER format('%02.1f') %][% END %]</td>
@@ -28,7 +26,6 @@
         <tr>
         <td>[% stat.time %]</td>
         <td>[% stat.users %]</td>
-        <td>[% stat.files %]</td>
         <td>[% stat.items %]</td>
         <td>[% stat.onloan %]</td>
         <td>[% IF stat.items %][% ( ( stat.onloan * 100 ) / stat.items ) FILTER format('%02.1f') %][% END %]</td>

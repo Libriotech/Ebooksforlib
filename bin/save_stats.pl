@@ -46,7 +46,6 @@ foreach my $library ( @libraries ) {
         try {
             my $new_stat = resultset('Stat')->create({
                 library_id => $library->id,
-                files      => $stats->{'files'},
             	users      => $stats->{'users'},
 	            oldloans   => $stats->{'oldloans'},
 	            onloan     => $stats->{'onloan'},
