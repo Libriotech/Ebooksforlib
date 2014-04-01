@@ -11,12 +11,12 @@
     [% SET allbooks = [] %]
 
     [% IF books.size %]
-        [% dummy = allbooks.import( books ) %]
+        [% allbooks.push( books ) %]
     [% END %]
 
     [% IF creators.size %]
         [% FOREACH creator IN creators %]
-            [% dummy = allbooks.import( creator.books ) %]
+            [% allbooks.push( creator.books ) %]
         [% END %]
     [% END %]
 
