@@ -123,15 +123,15 @@
                         [% END %]
                     [% END %]
                 [% END %]
-                [% IF longest_loan_period > 0 %]
-                <a class="laan-btn btn-block" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]"><span style="font-size:20px;font-weight:100;">+</span><i class="fa fa-book"></i> <div class="btn-txt">[% l('Borrow this book') %]</div></a>
-                <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]" style="margin-left:0;">[% l('Borrow this book for') %] [% longest_loan_period %] [% l('days') %]</a> -->
+                [% IF selected_item && longest_loan_period > 0 %]
+                    <a class="laan-btn btn-block" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]"><span style="font-size:20px;font-weight:100;">+</span><i class="fa fa-book"></i> <div class="btn-txt">[% l('Borrow this book') %]</div></a>
+                    <!--    <a class="btn btn-large btn-block btn-primary laaneknapp" href="/borrow/[% selected_item %]?[% INCLUDE 'csrf_link.tt' %]" style="margin-left:0;">[% l('Borrow this book for') %] [% longest_loan_period %] [% l('days') %]</a> -->
+                [% ELSE %]
+                    <div class="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <i class="fa fa-exclamation"></i> [% l('All our copies are on loan') %].
+                    </div>
                 [% END %]
-            [% ELSE %]
-                <div class="alert">
-    				<button type="button" class="close" data-dismiss="alert">&times;</button>
-    				<i class="fa fa-exclamation"></i> [% l('All our copies are on loan') %].
-    			</div>
             [% END %]
 		
            	<div class="share-this center">
