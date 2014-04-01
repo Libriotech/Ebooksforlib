@@ -285,7 +285,7 @@ function scrolldown() {
 
 [% END %]
 
-[% IF session.chosen_library_piwik %]
+[% IF session.chosen_library_piwik && session.logged_in_user_roles != 'admin' && session.logged_in_user_roles != 'superadmin' %]
 <script type="text/javascript">
   var _paq = _paq || [];
   _paq.push(["trackPageView"]);
