@@ -10,6 +10,7 @@ use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
+use Dancer::Plugin::Lexicon;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 
