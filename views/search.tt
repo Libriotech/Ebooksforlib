@@ -24,7 +24,7 @@
     [%# Sort the books by title %]
     [% SET sortedbooks = allbooks.sort('title') %]
 
-    <p class="half-top">[% l('You searched for') %] <b>[% params.q | html_entity %]</b> [% l('and got') %] [% sortedbooks.size %] [% l('results') %]:</p>
+    <p class="half-top">[% l('You searched for') %] <b>[% params.q %]</b> [% l('and got') %] [% sortedbooks.size %] [% l('results') %]:</p>
     [% INCLUDE 'books_table.tt' books=sortedbooks %]
 
 [% ELSE %]
