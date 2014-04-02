@@ -123,7 +123,7 @@
 	<div class="span12 add-top">
     	<div class="bxloadwrapper">
 			<div class="bxspinner">
-       			<i class="icon-spin icon-spinner"></i>
+       			<i class="fa fa-spin fa-spinner"></i>
 			</div>
 			<ul class="block-list bxslider bxhidden">
                 [% SET counter = 0 %]
