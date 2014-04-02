@@ -38,6 +38,7 @@ __PACKAGE__->table("sessioncounts");
 =head2 session_id
 
   data_type: 'char'
+  is_foreign_key: 1
   is_nullable: 0
   size: 40
 
@@ -45,13 +46,6 @@ __PACKAGE__->table("sessioncounts");
 
   data_type: 'integer'
   is_nullable: 1
-
-=head2 last_modified
-
-  data_type: 'timestamp'
-  datetime_undef_if_invalid: 1
-  default_value: current_timestamp
-  is_nullable: 0
 
 =head2 ip
 
@@ -70,16 +64,9 @@ __PACKAGE__->table("sessioncounts");
 
 __PACKAGE__->add_columns(
   "session_id",
-  { data_type => "char", is_nullable => 0, size => 40 },
+  { data_type => "char", is_foreign_key => 1, is_nullable => 0, size => 40 },
   "user_id",
   { data_type => "integer", is_nullable => 1 },
-  "last_modified",
-  {
-    data_type => "timestamp",
-    datetime_undef_if_invalid => 1,
-    default_value => \"current_timestamp",
-    is_nullable => 0,
-  },
   "ip",
   { data_type => "char", is_nullable => 0, size => 16 },
   "ua",
@@ -98,9 +85,26 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("session_id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-05 10:45:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xVDv5TgEU5q7Q0DhZQyOfA
+=head2 session
+
+Type: belongs_to
+
+Related object: L<Ebooksforlib::Schema::Result::Session>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "session",
+  "Ebooksforlib::Schema::Result::Session",
+  { id => "session_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-04-02 20:56:08
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7TbC1SngUoAlNYU55KaH8w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
