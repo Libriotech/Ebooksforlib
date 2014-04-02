@@ -264,7 +264,6 @@ post '/in' => sub {
                 # TODO Translation! 
                 my $body = "It has been detected that you have more than one active session. Details are given below:\n\n";
                 foreach my $sess ( @activesessions ) {
-                    $body .= "Last modified: " . $sess->last_modified . "\n";
                     $body .= "IP address:    " . $sess->ip . "\n";
                     $body .= "User agent:    " . $sess->ua . "\n\n";
                 }
