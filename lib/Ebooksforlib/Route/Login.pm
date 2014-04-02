@@ -262,14 +262,8 @@ post '/in' => sub {
             # Send an email to the user, if we have an email
             if ( $new_user->email ) {
                 # TODO Translation! 
-                my $body = "It has been detected that you have more than one active session. Details are given below:\n\n";
-                foreach my $sess ( @activesessions ) {
-                    $body .= "IP address:    " . $sess->ip . "\n";
-                    $body .= "User agent:    " . $sess->ua . "\n\n";
-                }
-                $body .= "If you have logged in from more than one browser at the same time, this is probably OK, and you can proceed to use the site as normal.\n\n";
-                $body .= "If you are only logged in in one place, this might indicate that someone has gotten hold of your username and passowrd, or has been able to impersonate you to the system in some other way. Please take appropriate action...";
-                $body .= "Best regards,\n" . config->{'appname'};
+                my $body = l("It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK.") . "\n\n";
+                $body .= l("Best regards,") . "\n" . config->{'appname'};
                 debug "*** Going to try sending an email to: " . $new_user->email;
                 try {
                     email({
