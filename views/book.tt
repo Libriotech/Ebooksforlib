@@ -22,9 +22,9 @@
 <div class="row add-top">
 	<div class="span6 offset3 center">
 		<div class="book-page-imgwrapper">
-			<a class="book-page-img" href="[% book.coverimg %]" target="_blank">
-	    		[% IF book.coverimg %]
-    			<img src="[% book.coverimg %]" />
+			<a class="book-page-img" href="[% book.coverurl %]" target="_blank">
+	    		[% IF book.coverurl %]
+    			<img src="[% book.coverurl %]" />
 				[% ELSE %]
             	<img src="/img/missing-cover.png">
 				[% END %]
