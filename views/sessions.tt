@@ -1,31 +1,9 @@
 <div class="container">
 
-<h1>Active sessions</h1>
+<h1>[% l('More than one active session') %]</h1>
 
-<p>It has been detected that you have more than one active session. Details are 
-given in the table below:</p>
+<p>[% l('It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK, and you can proceed to use the site as normal') %].</p>
 
-<table border="1">
-<tr>
-    <th>Last modified</th>
-    <th>IP address</th>
-    <th>User agent</th>
-</tr>
-[% FOREACH session IN sessions %]
-    <tr>
-        <td>[% session.last_modified %]</td>
-        <td>[% session.ip %]</td>
-        <td>[% session.ua %]</td>
-    </tr>
-[% END %]
-</table>
-
-<p>If you have logged in from more than one browser at the same time, this is probably 
-OK, and you can proceed to use the site as normal.</p>
-
-
-<p>If you are only logged in in one place, this might indicate that someone 
-has gotten hold of your username and passowrd, or has been able to impersonate 
-you to the system in some other way. Please take appropriate action...</p>
+<p><a href="/">[% l('Go to the front page') %]</a></p>
 
 </div>
