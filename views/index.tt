@@ -79,8 +79,8 @@
 			        <li>
 				        <div class="book-block">
 					        <a href="/book/[% booklistitem.book.id %]" class="utvalgte-img">
-						        [% IF booklistitem.book.coverimg %]
-                                    <img src="[% booklistitem.book.coverimg %]">
+						        [% IF booklistitem.book.coverurl %]
+                                    <img src="[% booklistitem.book.coverurl %]">
                                 [% ELSE %]
                                     <img src="/img/missing-cover.png">
                                 [% END %]
@@ -132,8 +132,8 @@
 			    		<li>
 				    		<a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
 					    		<div class="block-list-img">
-					        		[% IF booklistitem.book.coverimg %]
-                                		<img src="[% booklistitem.book.coverimg %]">
+					        		[% IF booklistitem.book.coverurl %]
+                                		<img src="[% booklistitem.book.coverurl %]">
                             		[% ELSE %]
                                 		<img src="/img/missing-cover.png">
                             		[% END %]
@@ -178,8 +178,8 @@
 					<li>
 						<a href="/book/[% booklistitem.book.id %]" class="book-block">
 							<div class="utlisting-img">
-								[% IF booklistitem.book.coverimg %]
-                        			<img src="[% booklistitem.book.coverimg %]">
+								[% IF booklistitem.book.coverurl %]
+                        			<img src="[% booklistitem.book.coverurl %]">
                     			[% ELSE %]
                         		[%# FIXME This URL shoul dnot be hard coded %]
                         			<img src="/img/missing-cover.png">
