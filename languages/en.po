@@ -19,6 +19,10 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: views/admin_stats_gender.tt:26
+msgid "Active loans"
+msgstr ""
+
 #: views/admin_navbar.tt:8
 msgid "Add a new book"
 msgstr ""
@@ -55,8 +59,12 @@ msgstr ""
 msgid "Age"
 msgstr ""
 
-#: views/book.tt:133
+#: views/book.tt:132
 msgid "All our copies are on loan"
+msgstr ""
+
+#: views/admin_stats_gender.tt:5
+msgid "All users"
 msgstr ""
 
 #: views/my.tt:122 views/my.tt:91 views/my.tt:93
@@ -65,6 +73,10 @@ msgstr ""
 
 #: views/book.tt:281
 msgid "Authors"
+msgstr ""
+
+#: lib/Ebooksforlib/Route/Login.pm:266
+msgid "Best regards,"
 msgstr ""
 
 #: views/creator.tt:5
@@ -83,7 +95,7 @@ msgstr ""
 msgid "Borrowed"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:132
+#: lib/Ebooksforlib.pm:145
 msgid "Choose library"
 msgstr ""
 
@@ -93,6 +105,10 @@ msgstr ""
 
 #: views/layouts/main.tt:243 views/layouts/main.tt:259
 msgid "Contact"
+msgstr ""
+
+#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53
+msgid "Count"
 msgstr ""
 
 #: views/book.tt:284
@@ -135,7 +151,7 @@ msgstr ""
 msgid "Expires"
 msgstr ""
 
-#: views/admin.tt:21 views/admin_navbar.tt:16
+#: views/admin.tt:21 views/admin_navbar.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr ""
 
@@ -149,6 +165,10 @@ msgstr ""
 
 #: views/book.tt:105
 msgid "Go to"
+msgstr ""
+
+#: views/sessions.tt:7
+msgid "Go to the front page"
 msgstr ""
 
 #: views/layouts/main.tt:250 views/layouts/main.tt:265
@@ -169,6 +189,14 @@ msgstr ""
 
 #: views/my.tt:135
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using!"
+msgstr ""
+
+#: views/sessions.tt:5
+msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK, and you can proceed to use the site as normal"
+msgstr ""
+
+#: lib/Ebooksforlib/Route/Login.pm:265
+msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK."
 msgstr ""
 
 #: views/book.tt:283
@@ -215,7 +243,7 @@ msgstr ""
 msgid "More books by"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Login.pm:279
+#: lib/Ebooksforlib/Route/Login.pm:272 views/sessions.tt:3
 msgid "More than one active session"
 msgstr ""
 
@@ -235,11 +263,11 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:146
+#: lib/Ebooksforlib.pm:160
 msgid "Not a valid library."
 msgstr ""
 
-#: views/my.tt:84
+#: views/admin_stats_gender.tt:47 views/my.tt:84
 msgid "Old loans"
 msgstr ""
 
@@ -263,7 +291,11 @@ msgstr ""
 msgid "Patron number"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Login.pm:351
+#: views/admin_stats_gender.tt:12 views/admin_stats_gender.tt:33 views/admin_stats_gender.tt:54
+msgid "Percentage"
+msgstr ""
+
+#: lib/Ebooksforlib/Route/Login.pm:344
 msgid "Please visit this URL to unblock the account: "
 msgstr ""
 
@@ -283,7 +315,7 @@ msgstr ""
 msgid "Returned"
 msgstr ""
 
-#: views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
+#: lib/Ebooksforlib/Route/Browse.pm:146 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
 msgid "Search"
 msgstr ""
 
@@ -295,7 +327,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: views/search.tt:30
+#: views/search.tt:31
 msgid "Sorry, no matches found."
 msgstr ""
 
@@ -305,6 +337,10 @@ msgstr ""
 
 #: views/admin.tt:18 views/admin_navbar.tt:12
 msgid "Statistics"
+msgstr ""
+
+#: views/admin_stats_gender.tt:3
+msgid "Statistics: Gender"
 msgstr ""
 
 #: views/admin_navbar.tt:20
@@ -325,6 +361,10 @@ msgstr ""
 
 #: views/my.tt:104 views/my.tt:42
 msgid "Title"
+msgstr ""
+
+#: views/admin_stats_gender.tt:18 views/admin_stats_gender.tt:39 views/admin_stats_gender.tt:60
+msgid "Unknown"
 msgstr ""
 
 #: views/my.tt:13
@@ -379,11 +419,11 @@ msgstr ""
 msgid "You must log in with a valid admin user."
 msgstr ""
 
-#: views/search.tt:26
+#: views/search.tt:27
 msgid "You searched for"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Login.pm:350
+#: lib/Ebooksforlib/Route/Login.pm:343
 msgid "Your account has been blocked"
 msgstr ""
 
@@ -391,7 +431,7 @@ msgstr ""
 msgid "about"
 msgstr ""
 
-#: views/search.tt:26
+#: views/search.tt:27
 msgid "and got"
 msgstr ""
 
@@ -435,7 +475,7 @@ msgstr ""
 msgid "overdue"
 msgstr ""
 
-#: views/search.tt:26
+#: views/search.tt:27
 msgid "results"
 msgstr ""
 

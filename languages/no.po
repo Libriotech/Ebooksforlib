@@ -23,7 +23,7 @@ msgstr "Om"
 msgid "About eBib"
 msgstr "Om eBib"
 
-#:
+#: views/admin_stats_gender.tt:26
 msgid "Active loans"
 msgstr "Aktive lån"
 
@@ -63,11 +63,11 @@ msgstr "Administrer lån"
 msgid "Age"
 msgstr "Alder"
 
-#: views/book.tt:133
+#: views/book.tt:132
 msgid "All our copies are on loan"
 msgstr "Alle våre eksemplarer er utlånt"
 
-#:
+#: views/admin_stats_gender.tt:5
 msgid "All users"
 msgstr "Alle brukere"
 
@@ -78,6 +78,10 @@ msgstr "Anonymiser"
 #: views/book.tt:281
 msgid "Authors"
 msgstr "Forfattere"
+
+#: lib/Ebooksforlib/Route/Login.pm:266
+msgid "Best regards,"
+msgstr "Vennlig hilsen"
 
 #: views/creator.tt:5
 msgid "Books by"
@@ -99,7 +103,7 @@ msgstr "Lån denne boken i"
 msgid "Borrowed"
 msgstr "Lånt"
 
-#: lib/Ebooksforlib.pm:132
+#: lib/Ebooksforlib.pm:145
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -111,7 +115,7 @@ msgstr "Velg bibliotek"
 msgid "Contact"
 msgstr "Kontakt oss"
 
-#:
+#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53
 msgid "Count"
 msgstr "Antall"
 
@@ -163,7 +167,7 @@ msgstr "Det oppstod en feil ved henting av omtaler."
 msgid "Expires"
 msgstr "Utløper"
 
-#: views/admin.tt:21 views/admin_navbar.tt:16
+#: views/admin.tt:21 views/admin_navbar.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr "Kjønn"
 
@@ -178,6 +182,10 @@ msgstr "Sjangre"
 #: views/book.tt:105
 msgid "Go to"
 msgstr "Gå til"
+
+#: views/sessions.tt:7
+msgid "Go to the front page"
+msgstr "Gå til forsiden"
 
 #: views/layouts/main.tt:250 views/layouts/main.tt:265
 msgid "Help"
@@ -202,6 +210,14 @@ msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Hvis inf
 #: views/my.tt:135
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using!"
 msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Dersom informasjonen ikke stemmer, vennligst kontakt ditt lokale bibliotek. Takk for at du bruker oss!"
+
+#: views/sessions.tt:5
+msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK, and you can proceed to use the site as normal"
+msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn i flere nettlesere eller på flere enheter samtdig er dette sannsynligvis helt greit, og du kan fortsette å bruke tjensten som normalt"
+
+#: lib/Ebooksforlib/Route/Login.pm:265
+msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK."
+msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn i flere nettlesere eller på flere enheter samtdig er dette sannsynligvis helt greit"
 
 #: views/book.tt:283
 msgid "Items"
@@ -247,7 +263,7 @@ msgstr "Maks samtidige lån"
 msgid "More books by"
 msgstr "Flere bøker av"
 
-#: lib/Ebooksforlib/Route/Login.pm:279
+#: lib/Ebooksforlib/Route/Login.pm:272 views/sessions.tt:3
 msgid "More than one active session"
 msgstr "Mer enn én aktiv sesjon"
 
@@ -275,11 +291,11 @@ msgstr "Hjelp til innloggingen?"
 msgid "New user?"
 msgstr "Ny bruker?"
 
-#: lib/Ebooksforlib.pm:146
+#: lib/Ebooksforlib.pm:160
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
-#: views/my.tt:84
+#: views/admin_stats_gender.tt:47 views/my.tt:84
 msgid "Old loans"
 msgstr "Gamle lån"
 
@@ -311,11 +327,11 @@ msgstr "Sider"
 msgid "Patron number"
 msgstr "Lånernummer"
 
-#:
+#: views/admin_stats_gender.tt:12 views/admin_stats_gender.tt:33 views/admin_stats_gender.tt:54
 msgid "Percentage"
 msgstr "Prosent"
 
-#: lib/Ebooksforlib/Route/Login.pm:351
+#: lib/Ebooksforlib/Route/Login.pm:344
 msgid "Please visit this URL to unblock the account: "
 msgstr "Besøk denne URLen for å fjerne blokkeringen av kontoen din: "
 
@@ -339,7 +355,7 @@ msgstr "Lever"
 msgid "Returned"
 msgstr "Levert"
 
-#: views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
+#: lib/Ebooksforlib/Route/Browse.pm:146 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
 msgid "Search"
 msgstr "Søk"
 
@@ -359,7 +375,7 @@ msgstr "Alle eksemplarene av denne boken er dessverre utlånt."
 msgid "Sorry, no description available."
 msgstr "Beklager, det finnes ingen tilgjengelige omtaler."
 
-#: views/search.tt:30
+#: views/search.tt:31
 msgid "Sorry, no matches found."
 msgstr "Beklager, ingen treff."
 
@@ -371,7 +387,7 @@ msgstr "Beklager, det er ikke noen bøker i denne lista enda."
 msgid "Statistics"
 msgstr "Statistikk"
 
-#:
+#: views/admin_stats_gender.tt:3
 msgid "Statistics: Gender"
 msgstr "Statistikk: Kjønn"
 
@@ -395,7 +411,7 @@ msgstr "Tid som gjenstår"
 msgid "Title"
 msgstr "Tittel"
 
-#:
+#: views/admin_stats_gender.tt:18 views/admin_stats_gender.tt:39 views/admin_stats_gender.tt:60
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -487,11 +503,11 @@ msgstr "Du må logge inn med en gyldig"
 msgid "You must log in with a valid admin user."
 msgstr "Du må logge inn med en gyldig admin-bruker."
 
-#: views/search.tt:26
+#: views/search.tt:27
 msgid "You searched for"
 msgstr "Du søkte etter"
 
-#: lib/Ebooksforlib/Route/Login.pm:350
+#: lib/Ebooksforlib/Route/Login.pm:343
 msgid "Your account has been blocked"
 msgstr "Kontoen din har blitt sperret"
 
@@ -503,7 +519,7 @@ msgstr "om"
 msgid "about eBib"
 msgstr "om eBib"
 
-#: views/search.tt:26
+#: views/search.tt:27
 msgid "and got"
 msgstr "og fikk"
 
@@ -551,7 +567,7 @@ msgstr "eller finn ut mer"
 msgid "overdue"
 msgstr "forfalt"
 
-#: views/search.tt:26
+#: views/search.tt:27
 msgid "results"
 msgstr "treff"
 
