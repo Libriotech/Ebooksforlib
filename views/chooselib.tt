@@ -22,7 +22,7 @@
 		</div>
 		<div class="row">	
 			<div class="span12 center add-top">
-				<img src="[% settings.reader_url %]/img/ebib-mockup2.png" />
+				<img src="/images/front-ill-ebib.png" />
 			</div>
 		</div>
 	</div>
