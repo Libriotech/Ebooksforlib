@@ -15,6 +15,7 @@
 Tlf: 31 02 42 20<br>
 Epost: <a href="mailto:biblioteket@nore-og-uvdal.kommune.no">biblioteket@nore-og-uvdal.kommune.no</a>.</p>
 <p>Lånekort oppretter du ved fysisk å besøke et av de deltagende bibliotekene.</p> 
+<p>Prosjektet er støttet av Nasjonalbiblioteket.</p>
 
 <h2 id="laan">Lån</h2>
 <ul>
@@ -99,8 +100,10 @@ Epost: <a href="mailto:biblioteket@nore-og-uvdal.kommune.no">biblioteket@nore-og
                         <h4><a href="/page/help#utvalget">Utvalget</a></h4>
                         <h4><a href="/page/help#personvern">Personvern</a></h4>
                         <h4><a href="/page/help#teknisk">Teknisk</a></h4>
+                        <!--
                         <p>Finner du ikke svaret på det du lurer på?</p>
                         <p>Send en epost til <a href="mailto:hjelp@ebib.no">hjelp@ebib.no</a></p>
+                        -->
                 </div>
 
 
