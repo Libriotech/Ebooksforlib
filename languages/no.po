@@ -239,7 +239,7 @@ msgstr "Lister"
 msgid "Lists and genres"
 msgstr "Lister og sjangre"
 
-#: views/layouts/main.tt:193 views/layouts/main.tt:264 views/login_form.tt:15
+#: views/layouts/main.tt:193 views/layouts/main.tt:264 views/login_form.tt:23
 msgid "Log in"
 msgstr "Logg inn"
 
@@ -283,7 +283,7 @@ msgstr "Min profil"
 msgid "Name"
 msgstr "Navn"
 
-#: views/login_form.tt:16
+#: views/login_form.tt:24
 msgid "Need help logging in?"
 msgstr "Hjelp til innloggingen?"
 
@@ -315,7 +315,7 @@ msgstr "Andre bøker av"
 msgid "Overview"
 msgstr "Oversikt"
 
-#: views/login_form.tt:8 views/login_form.tt:9
+#: views/login_form.tt:12 views/login_form.tt:16
 msgid "PIN code"
 msgstr "PIN-kode"
 
@@ -323,7 +323,11 @@ msgstr "PIN-kode"
 msgid "Pages"
 msgstr "Sider"
 
-#: views/login_form.tt:4 views/login_form.tt:5
+#: views/login_form.tt:14
+msgid "Password"
+msgstr "Passord"
+
+#: views/login_form.tt:4 views/login_form.tt:8
 msgid "Patron number"
 msgstr "Lånernummer"
 
@@ -355,7 +359,7 @@ msgstr "Lever"
 msgid "Returned"
 msgstr "Levert"
 
-#: lib/Ebooksforlib/Route/Browse.pm:146 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
+#: lib/Ebooksforlib/Route/Browse.pm:161 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
 msgid "Search"
 msgstr "Søk"
 
@@ -403,6 +407,10 @@ msgstr "Det er importerte bøker som må kontrolleres"
 msgid "These books have been automatically imported and now need to be edited manually to add metadata, covers etc."
 msgstr "Disse bøkene har blitt importert, og trenger metadata, omslagsbilder osv."
 
+#: views/book.tt:105
+msgid "This book is available to you"
+msgstr "Denne boka er tilgjengelig for deg"
+
 #: views/my.tt:45
 msgid "Time left"
 msgstr "Tid som gjenstår"
@@ -415,7 +423,7 @@ msgstr "Tittel"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: views/my.tt:13
+#: views/login_form.tt:6 views/my.tt:13
 msgid "Username"
 msgstr "Brukernavn"
 
@@ -483,7 +491,7 @@ msgstr "Du har ingen gamle lån."
 msgid "You have the maximum number of concurrent books on loan"
 msgstr "Du har maksimalt antall samtidige lån"
 
-#: views/book.tt:105
+#:
 msgid "You have this book on loan"
 msgstr "Du har allerede lånt denne boka"
 

@@ -219,7 +219,7 @@ msgstr ""
 msgid "Lists and genres"
 msgstr ""
 
-#: views/layouts/main.tt:193 views/layouts/main.tt:264 views/login_form.tt:15
+#: views/layouts/main.tt:193 views/layouts/main.tt:264 views/login_form.tt:23
 msgid "Log in"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: views/login_form.tt:16
+#: views/login_form.tt:24
 msgid "Need help logging in?"
 msgstr ""
 
@@ -279,7 +279,7 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: views/login_form.tt:8 views/login_form.tt:9
+#: views/login_form.tt:12 views/login_form.tt:16
 msgid "PIN code"
 msgstr ""
 
@@ -287,7 +287,11 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: views/login_form.tt:4 views/login_form.tt:5
+#: views/login_form.tt:14
+msgid "Password"
+msgstr ""
+
+#: views/login_form.tt:4 views/login_form.tt:8
 msgid "Patron number"
 msgstr ""
 
@@ -315,7 +319,7 @@ msgstr ""
 msgid "Returned"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Browse.pm:146 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
+#: lib/Ebooksforlib/Route/Browse.pm:161 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
 msgid "Search"
 msgstr ""
 
@@ -355,6 +359,10 @@ msgstr ""
 msgid "These books have been automatically imported and now need to be edited manually to add metadata, covers etc."
 msgstr ""
 
+#: views/book.tt:105
+msgid "This book is available to you"
+msgstr ""
+
 #: views/my.tt:45
 msgid "Time left"
 msgstr ""
@@ -367,7 +375,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: views/my.tt:13
+#: views/login_form.tt:6 views/my.tt:13
 msgid "Username"
 msgstr ""
 
@@ -401,10 +409,6 @@ msgstr ""
 
 #: views/book.tt:110
 msgid "You have the maximum number of concurrent books on loan"
-msgstr ""
-
-#: views/book.tt:105
-msgid "You have this book on loan"
 msgstr ""
 
 #: views/book.tt:95
