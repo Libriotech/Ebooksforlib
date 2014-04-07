@@ -9,9 +9,9 @@
 <div class="logginn-wrapper">
 	<div class="container content-container">
     	<div class="row">
-	    	<div class="span12 center add-top">
-		    	<h1 style="margin-bottom:0;">[% settings.appname %]</h1>
-				<h4 class="red" style="letter-spacing:1.25px;font-weight:500;margin-top:-10px;margin-bottom:20px;">Lån ebøker gratis</h4>
+	    	<div class="span12 center">
+		    	<h1>[% settings.appname %]</h1>
+				<h4 class="red">Lån ebøker gratis</h4>
         	</div>
         	<div class="span4 offset4">
         		[% INCLUDE 'login_form.tt' %]
@@ -80,7 +80,7 @@
 				        <div class="book-block">
 					        <a href="/book/[% booklistitem.book.id %]" class="utvalgte-img">
 						        [% IF booklistitem.book.coverurl %]
-                                    <img src="[% booklistitem.book.coverurl %]">
+                                    <img src="/cover/[% booklistitem.book.id %]">
                                 [% ELSE %]
                                     <img src="/img/missing-cover.png">
                                 [% END %]
@@ -133,7 +133,7 @@
 				    		<a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
 					    		<div class="block-list-img">
 					        		[% IF booklistitem.book.coverurl %]
-                                		<img src="[% booklistitem.book.coverurl %]">
+                                		<img src="/cover/[% booklistitem.book.id %]">
                             		[% ELSE %]
                                 		<img src="/img/missing-cover.png">
                             		[% END %]
@@ -179,7 +179,7 @@
 						<a href="/book/[% booklistitem.book.id %]" class="book-block">
 							<div class="utlisting-img">
 								[% IF booklistitem.book.coverurl %]
-                        			<img src="[% booklistitem.book.coverurl %]">
+                        			<img src="/cover/[% booklistitem.book.id %]">
                     			[% ELSE %]
                         		[%# FIXME This URL shoul dnot be hard coded %]
                         			<img src="/img/missing-cover.png">

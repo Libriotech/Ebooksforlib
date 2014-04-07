@@ -11,7 +11,8 @@ use Dancer::Plugin::DBIC;
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Plugin::Lexicon;
-use Dancer::Exception qw(:all);
+use Dancer::Exception qw( :all );
+use MIME::Base64 qw( decode_base64 );
 use Ebooksforlib::Util;
 
 get '/' => sub {
@@ -87,6 +88,20 @@ get '/book/:id' => sub {
         library                 => $library,
         pagetitle               => $book->title,
     };
+};
+
+get '/cover/:id' => sub {
+
+    my $book_id = param 'id';
+    my $book = resultset('Book')->find( $book_id );
+
+    my $base64_img = $book->coverimg;
+   
+    $base64_img =~ s/^.*?base64,//;
+    # FIXME Base the content type on the data in coverimg
+    header 'Content-type' => 'image/jpeg';
+    return decode_base64( $base64_img );
+
 };
 
 ### "Static" pages

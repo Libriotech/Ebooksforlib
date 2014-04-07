@@ -10,7 +10,7 @@
             [% END %]
 		[% END %]
     </li>
-    <li><span>[% book.title %]</span></li>
+    <!-- <li><span>[% book.title %]</span></li> -->
 </ul>
 
 <!-- BOK
@@ -22,13 +22,13 @@
 <div class="row add-top">
 	<div class="span6 offset3 center">
 		<div class="book-page-imgwrapper">
-			<a class="book-page-img" href="[% book.coverurl %]" target="_blank">
+			[%# <a class="book-page-img" href="[ % book.coverurl % ]" target="_blank"> %]
 	    		[% IF book.coverurl %]
-    			<img src="[% book.coverurl %]" />
+    			<img src="/cover/[% book.id %]" />
 				[% ELSE %]
             	<img src="/img/missing-cover.png">
 				[% END %]
-			</a>
+			[%# </a> %]
 		</div>
 		<br />
 		<div class="book-details center">

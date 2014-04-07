@@ -10,8 +10,8 @@
 			<li>
 				<a href="/book/[% book.id %]" class="book-block">
 					<div class="listview-img">
-					[% IF book.coverimg %]
-                        <img src="[% book.coverimg %]">
+					[% IF book.coverurl %]
+                        <img src="/cover/[% book.id %]">
                     [% ELSE %]
                         <img src="/img/missing-cover.png">
                     [% END %]

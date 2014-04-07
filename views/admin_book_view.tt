@@ -1,6 +1,6 @@
 <div style="float: left; max-width: 100px; padding-right: 2em; padding-top: 1em;">
 [% IF book.coverimg %]
-<img src="[% book.coverimg %]" />
+<img src="/cover/[% book.id %]" />
 [% ELSE %]
 <img src="/img/missing-cover.png">
 [% END %]
