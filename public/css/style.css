@@ -603,11 +603,13 @@ color: rgba(239, 221, 218, 1.0);
 .logginn-wrapper h1 {
 font-family:"brandon-grotesque";
 font-weight:700;
-font-size:65px;
+font-size:100px;
 color:#fff;
+margin-top:20px;
+margin-bottom:0;
 }
 
-.logginn-wrapper h4 {}
+.logginn-wrapper h4 {letter-spacing:1.25px;font-weight:500;margin-top:-10px;margin-bottom:20px;}
 
 .login-container {
 	background:rgba(255, 255, 255, 1);
@@ -1526,7 +1528,9 @@ left:-50%;
   .block-list-img, .bx-wrapper .bx-controls-direction a { height:160px;}
   .block-list-img {padding-right: 1em;}
   .logginn-wrapper {padding-bottom: 15px}
-  .logginn-wrapper h1 {font-size:48px;}
+  .logginn-wrapper h1 {font-size:72px;margin-top:-15px;}
+    .logginn-wrapper h4 {font-size:16px;}
+
 	.bxloadwrapper {height:165px;}
 	.login-form {margin-bottom:0;}
 	.article-mobil {padding:15px 0;margin:0 3px 2px 3px;background:#fff;}
@@ -1586,7 +1590,7 @@ left:-50%;
 
 	.btn-login2 {padding:7px 15px;font-size: 14px;}
 	.logginn-wrapper h1 {
-	font-size:65px;
+	font-size:100px;
 	}
 
 }

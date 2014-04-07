@@ -76,6 +76,12 @@
 	*display: inline;
 }
 
+@media all  and (max-width: 1199px) {
+
+	.bx-pager-item {display:none !important;}
+
+}
+
 .bx-wrapper .bx-pager.bx-default-pager a {
 	background: #ccc;
 	text-indent: -9999px;
