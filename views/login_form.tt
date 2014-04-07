@@ -2,11 +2,19 @@
     <div class="login-container">
         <div class="login-row1">
         	<label for="text" style="display:none;">[% l('Patron number') %]</label>
-        	<input class="span3" type="text" id='username' name='username' placeholder="[% l('Patron number') %]" autocapitalize="off">
+                [% IF ( params.admin == 1 ) %]
+                    <input class="span3" type="text" id='username' name='username' placeholder="[% l('Username') %]" autocapitalize="off">
+                [% ELSE %]
+                    <input class="span3" type="text" id='username' name='username' placeholder="[% l('Patron number') %]" autocapitalize="off">
+                [% END %]
     	</div>
 		<div class="login-row2">
    			<label for="password" style="display:none;">[% l('PIN code') %]</label>
-   			<input class="span3" type="password" id='password' name='password' placeholder="[% l('PIN code') %]" autocomplete="off" >
+                        [% IF ( params.admin == 1 ) %]
+                            <input class="span3" type='password' novalidate id='password' name='password' placeholder="[% l('Password') %]" autocomplete="off" >
+                        [% ELSE %]
+                            <input class="span3" type='password' pattern='\d*' novalidate id='password' name='password' placeholder="[% l('PIN code') %]" autocomplete="off" >
+                        [% END %]
        		[% IF params.admin == 1 %]
       		<input type="hidden" name="realm" value="local">
       		[% END %]
