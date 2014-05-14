@@ -1,0 +1,55 @@
+=pod
+
+=head1 SQL QUERIES
+
+The admin and superadmin parts of Ebooksforlib are not yet fully built out. 
+This file contains some SQL queries that should/could be a part of the UI, 
+but that are not yet implemented. Until they are, they can be used from the
+command line. 
+
+=head2 Which books are on loan?
+
+A (potentially long) list of all the books that are currently on loan to someone. 
+
+    SELECT 
+        f.book_id, 
+        b.title, 
+        i.file_id, 
+        l.* 
+    FROM 
+        loans AS l, 
+        items AS i, 
+        files AS f, 
+        books as b 
+    WHERE 
+        l.item_id = i.id AND 
+        i.file_id = f.id AND 
+        f.book_id = b.id 
+    ORDER BY book_id;
+
+=head2 Is a given book on loan to anyone? 
+
+Given a book-ID, this query will show file and item IDs, as well as info 
+about who has it on loan. 
+
+    SELECT 
+        f.book_id, 
+        b.title, 
+        f.id AS file_id, 
+        i.id AS item_id, 
+        l.user_id, 
+        l.library_id,
+        l.loaned, 
+        l.due 
+    FROM 
+        books as b, 
+        files AS f, 
+        items AS i 
+    LEFT JOIN 
+        loans AS l ON i.id = l.item_id 
+    WHERE 
+        b.id = <book ID> AND 
+        b.id = f.book_id AND 
+        f.id = i.file_id;
+
+=cut
