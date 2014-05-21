@@ -70,6 +70,6 @@ Given a user_id, show which books the user has on loan.
         l.item_id = i.id AND
         i.file_id = f.id AND
         f.book_id = b.id AND
-        l.user_id = 152;
+        l.user_id = <user_id>;
 
 =cut
