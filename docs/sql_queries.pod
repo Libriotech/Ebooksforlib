@@ -52,4 +52,24 @@ about who has it on loan.
         b.id = f.book_id AND 
         f.id = i.file_id;
 
+=head2 Which books does a given user have on loan?
+
+Given a user_id, show which books the user has on loan. 
+
+    SELECT
+        l.user_id,
+        f.book_id,
+        b.title,
+        l.loaned
+    FROM 
+        loans as l,
+        items as i,
+        files as f,
+        books as b
+    WHERE
+        l.item_id = i.id AND
+        i.file_id = f.id AND
+        f.book_id = b.id AND
+        l.user_id = 152;
+
 =cut
