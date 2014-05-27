@@ -72,4 +72,26 @@ Given a user_id, show which books the user has on loan.
         f.book_id = b.id AND
         l.user_id = <user_id>;
 
+=head2 How many times has a book been on loan?
+
+Replace C<old_loans> with C<loans> to see which books are on loan right now.
+
+    SELECT
+        b.title,
+        b.isbn,
+        COUNT(*) as loans
+    FROM
+        books AS b,
+        files AS f,
+        items as i,
+        old_loans as l
+    WHERE
+        b.id = f.book_id AND
+        f.id = i.file_id AND
+        i.id = l.item_id
+    GROUP BY
+        isbn
+    ORDER BY
+        loans DESC;
+
 =cut
