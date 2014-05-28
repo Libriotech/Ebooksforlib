@@ -74,6 +74,8 @@ Given a user_id, show which books the user has on loan.
 
 =head2 How many times has a book been on loan?
 
+=head3 Old and new loans separately
+
 Replace C<old_loans> with C<loans> to see which books are on loan right now.
 
     SELECT
@@ -93,5 +95,44 @@ Replace C<old_loans> with C<loans> to see which books are on loan right now.
         isbn
     ORDER BY
         loans DESC;
+
+=head3 Old and new loans combined
+
+Ordered by 1. the number of loans, and 2. title.
+
+    SELECT title, isbn, COUNT(*) AS total_loans FROM (
+        SELECT
+            b.title as title,
+            b.isbn as isbn,
+            due
+        FROM
+            books AS b,
+            files AS f,
+            items as i,
+            loans as l
+        WHERE
+            b.id = f.book_id AND
+            f.id = i.file_id AND
+            i.id = l.item_id
+    UNION ALL
+        SELECT
+            b.title as title,
+            b.isbn as isbn,
+            due
+        FROM
+            books AS b,
+            files AS f,
+            items as i,
+            old_loans as l
+        WHERE
+            b.id = f.book_id AND
+            f.id = i.file_id AND
+            i.id = l.item_id
+    ) loans
+    GROUP BY
+        isbn
+    ORDER BY
+        total_loans DESC,
+        title;
 
 =cut
