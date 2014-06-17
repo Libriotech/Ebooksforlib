@@ -135,4 +135,19 @@ Ordered by 1. the number of loans, and 2. title.
         total_loans DESC,
         title;
 
+=head2 Summary of log for today
+
+This will show the types of actions that have been logged today, and how often 
+they have occured, across all libraries.
+
+    SELECT
+        logcode,
+        COUNT(*) as count
+    FROM
+        log
+    WHERE
+        DATE(time) = DATE(NOW())
+    GROUP BY
+        logcode;
+
 =cut
