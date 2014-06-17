@@ -104,6 +104,9 @@ post '/in' => sub {
         # Store roles in the session (will be used in the templates)
         # FIXME Looks like this does not work
         session logged_in_user_roles => user_roles;
+        # Do this a new way, but keep the old way, for now
+        session user_is_admin      => 1 if user_has_role('admin');
+        session user_is_superadmin => 1 if user_has_role('superadmin');
         
         # Create a CSRF token and store it in the session
         session csrftoken => sha3_512_hex( time(), $username, rand(10000000) );

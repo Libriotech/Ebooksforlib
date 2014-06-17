@@ -111,13 +111,11 @@ function scrolldown() {
 			    <div class="navbar-inner">
 				    <a class="brand" href="/"><i class="fa fa-home"></i> <span class="library-name">[% session.chosen_library_name %]</span></a>
 						[%# Determine if this user should be able to see the admin menu %]
-                        [% FOREACH role IN session.logged_in_user_roles %]
-                            [% IF role == 'admin' %]
-                                [% INCLUDE 'admin_navbar.tt' %]
-                            [% END %]
-                            [% IF role == 'superadmin' %]
-                                [% INCLUDE 'superadmin_navbar.tt' %]
-                            [% END %]
+                        [% IF session.user_is_admin == 1 %]
+                            [% INCLUDE 'admin_navbar.tt' %]
+                        [% END %]
+                        [% IF session.user_is_superadmin == 1 %]
+                            [% INCLUDE 'superadmin_navbar.tt' %]
                         [% END %]
     					<!-- .btn-navbar is used as the toggle for collapsed navbar content 
 						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
