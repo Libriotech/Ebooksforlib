@@ -84,13 +84,13 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
                 isbn => $isbn->common_data,
             });
             if( $new_book->in_storage ) {
-                say "! A book with this ISBN already exists";
+                say "! A book with this ISBN already exists" if $verbose;
                 next FILE;
             } else {
                 $new_book->insert;
             }
             $book_id = $new_book->id;
-            say "Added book with id = $book_id" if $verbose;
+            say "Added book with id = $book_id";
         } catch {
             say "Error while saving book: $_";
             next FILE;
@@ -106,7 +106,7 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
                 file        => $file_contents,
             });
             $file_id = $new_file->id;
-            say "Added file with id = $file_id" if $verbose;
+            say "Added file with id = $file_id";
         } catch {
             say "Error while saving file: $_";
             next FILE;
@@ -123,7 +123,7 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
                         file_id     => $file_id,
                         loan_period => $library->{ 'loan_period' },
                     });
-                    say "Added item with id = " . $new_item->id if $verbose;
+                    say "Added item with id = " . $new_item->id;
                 } catch {
                     say "Error while saving item: $_";
                 }
