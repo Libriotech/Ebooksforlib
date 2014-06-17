@@ -16,8 +16,16 @@ use Ebooksforlib::Util;
 ### Lists
 
 get '/superadmin/logs' => require_role superadmin => sub { 
-    
-    my @logs  = resultset('Log')->search(
+
+    my @today = resultset('Log')->search(
+        \[ 'DATE(time) = DATE(NOW())' ],
+        {
+            '+select'   => [ { count => '*' } ],
+            '+as'       => [ 'count' ],
+            'group_by'  => [ 'logcode' ],
+        }
+    );   
+    my @recent  = resultset('Log')->search(
         {  }, 
         {
             order_by => { -desc => 'time' },
@@ -25,7 +33,8 @@ get '/superadmin/logs' => require_role superadmin => sub {
         }
     );
     template 'superadmin_logs', { 
-        logs  => \@logs,
+        today  => \@today,
+        recent => \@recent,
     };
 };
 

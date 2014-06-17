@@ -2,6 +2,28 @@
 
 <h2>Logs</h2>
 
+<h3>Summary for today</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>Code</th>
+        <th>Count</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH log IN today %]
+        <tr>
+        <td>[% log.logcode %]</td>
+        <td>[% log.get_column('count') %]</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+
+<h3>Most recent entries</h3>
+
 <table class="table table-striped table-bordered table-hover">
 <thead>
     <tr>
@@ -13,10 +35,10 @@
     <tr>
 </thead>
 <tbody>
-    [% FOREACH log IN logs %]
+    [% FOREACH log IN recent %]
         <tr>
         <td>[% log.time %]</td>
-        <td>[% log.library_id.name %]</td>
+        <td>[% log.library_id %]</td>
         <td>[% log.user_id %]</td>
         <td>[% log.logcode %]</td>
         <td>[% log.logmsg %]</td>
