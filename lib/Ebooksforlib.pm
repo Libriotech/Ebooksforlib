@@ -20,6 +20,7 @@ use Ebooksforlib::Route::Login;
 use Ebooksforlib::Route::MyProfile;
 use Ebooksforlib::Route::Circ;
 use Ebooksforlib::Route::RestApi;
+
 use Ebooksforlib::Route::Admin;
 use Ebooksforlib::Route::Admin::Settings;
 use Ebooksforlib::Route::Admin::Books;
@@ -29,11 +30,12 @@ use Ebooksforlib::Route::Admin::Items;
 use Ebooksforlib::Route::Admin::Lists;
 use Ebooksforlib::Route::Admin::Stats;
 use Ebooksforlib::Route::Admin::Logs;
+
 use Ebooksforlib::Route::Superadmin;
 use Ebooksforlib::Route::Superadmin::Providers;
 use Ebooksforlib::Route::Superadmin::Libraries;
 use Ebooksforlib::Route::Superadmin::LocalUsers;
-use Ebooksforlib::Route::Superadmin::Stats;
+use Ebooksforlib::Route::Superadmin::Logs;
 
 use Dancer::Plugin::Auth::Basic;
 use Dancer::Plugin::EscapeHTML;
