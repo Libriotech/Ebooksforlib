@@ -24,7 +24,7 @@ get '/superadmin/logs' => require_role superadmin => sub {
             rows     => 30,
         }
     );
-    template 'admin_logs', { 
+    template 'superadmin_logs', { 
         logs  => \@logs,
     };
 };
