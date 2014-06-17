@@ -15,7 +15,7 @@ use Ebooksforlib::Util;
 
 ### Lists
 
-get '/admin/logs' => require_role superadmin => sub { 
+get '/superadmin/logs' => require_role superadmin => sub { 
     
     my @logs  = resultset('Log')->search(
         {  }, 
