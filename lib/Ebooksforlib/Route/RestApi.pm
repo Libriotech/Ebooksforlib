@@ -388,7 +388,12 @@ get '/rest/:action' => sub {
                         debug "*** The download was recorded"
                     } catch {
                         debug "Oops, the download was NOT recorded: $_";
-                    }; 
+                    };
+                    # Log the download
+                    _log2db({
+                        logcode => 'DOWNLOAD',
+                        logmsg  => "book_id = $book_id, file_id = " . $loan->item->file->id,
+                    });
                     # Send the actual file
                     return send_file(
                         \$content,
