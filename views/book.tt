@@ -106,7 +106,7 @@
                         <i class="fa fa-check-circle"></i>
                         [% l('This book is available to you') %]. [% l('Go to') %] <a href='[% settings.reader_url %]'>[% l('the reader app to download and read the book') %]</a>.
                     </p>
-                    <p>[% l('Expires') %]: [% date.format( time => user_has_borrowed.due.epoch, format => settings.date_format, locale => settings.locale ) %].</p>
+                    <p>[% l('Loan expires') %]: [% date.format( time => user_has_borrowed.due.epoch, format => settings.date_format, locale => settings.locale ) %].</p>
     			</div>
             [% ELSIF limit_reached == 1 %]
                 <div class="alert alert-danger">

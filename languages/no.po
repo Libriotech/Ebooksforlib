@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views/layouts/main.tt:241 views/layouts/main.tt:257
+#: views/layouts/main.tt:239 views/layouts/main.tt:255
 msgid "About"
 msgstr "Om"
 
@@ -51,11 +51,11 @@ msgstr "Legg til forfatter"
 msgid "Admin"
 msgstr "Admin"
 
-#: views/book.tt:279
+#: views/book.tt:283
 msgid "Admin actions"
 msgstr "Admin"
 
-#: views/layouts/main.tt:138
+#: views/layouts/main.tt:136
 msgid "Administer loans"
 msgstr "Administrer lån"
 
@@ -63,7 +63,7 @@ msgstr "Administrer lån"
 msgid "Age"
 msgstr "Alder"
 
-#: views/book.tt:132
+#: views/book.tt:136
 msgid "All our copies are on loan"
 msgstr "Alle våre eksemplarer er utlånt"
 
@@ -75,11 +75,11 @@ msgstr "Alle brukere"
 msgid "Anonymize"
 msgstr "Anonymiser"
 
-#: views/book.tt:281
+#: views/book.tt:285
 msgid "Authors"
 msgstr "Forfattere"
 
-#: lib/Ebooksforlib/Route/Login.pm:266
+#: lib/Ebooksforlib/Route/Login.pm:269
 msgid "Best regards,"
 msgstr "Vennlig hilsen"
 
@@ -91,11 +91,11 @@ msgstr "Bøker av"
 msgid "Borrow ebooks for free"
 msgstr "Lån ebøker gratis"
 
-#: views/book.tt:127
+#: views/book.tt:131
 msgid "Borrow this book"
 msgstr "Lån denne boken"
 
-#: views/book.tt:128
+#: views/book.tt:132
 msgid "Borrow this book for"
 msgstr "Lån denne boken i"
 
@@ -103,7 +103,7 @@ msgstr "Lån denne boken i"
 msgid "Borrowed"
 msgstr "Lånt"
 
-#: lib/Ebooksforlib.pm:145
+#: lib/Ebooksforlib.pm:147
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -111,7 +111,7 @@ msgstr "Velg bibliotek"
 msgid "Choose library:"
 msgstr "Velg bibliotek"
 
-#: views/layouts/main.tt:243 views/layouts/main.tt:259
+#: views/layouts/main.tt:241 views/layouts/main.tt:257
 msgid "Contact"
 msgstr "Kontakt oss"
 
@@ -119,7 +119,7 @@ msgstr "Kontakt oss"
 msgid "Count"
 msgstr "Antall"
 
-#: views/book.tt:284
+#: views/book.tt:288
 msgid "Covers"
 msgstr "Omslag"
 
@@ -143,7 +143,7 @@ msgstr "Slett bøker fra denne lista"
 msgid "Description"
 msgstr "Omtale"
 
-#: views/book.tt:280 views/creator.tt:18 views/list.tt:29
+#: views/book.tt:284 views/creator.tt:18 views/list.tt:29
 msgid "Edit"
 msgstr "Rediger"
 
@@ -179,7 +179,7 @@ msgstr "Sjanger"
 msgid "Genres"
 msgstr "Sjangre"
 
-#: views/book.tt:105
+#: views/book.tt:107
 msgid "Go to"
 msgstr "Gå til"
 
@@ -187,7 +187,7 @@ msgstr "Gå til"
 msgid "Go to the front page"
 msgstr "Gå til forsiden"
 
-#: views/layouts/main.tt:250 views/layouts/main.tt:265
+#: views/layouts/main.tt:248 views/layouts/main.tt:263
 msgid "Help"
 msgstr "Hjelp"
 
@@ -215,11 +215,11 @@ msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Dersom i
 msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK, and you can proceed to use the site as normal"
 msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn i flere nettlesere eller på flere enheter samtdig er dette sannsynligvis helt greit, og du kan fortsette å bruke tjensten som normalt"
 
-#: lib/Ebooksforlib/Route/Login.pm:265
+#: lib/Ebooksforlib/Route/Login.pm:268
 msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK."
 msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn i flere nettlesere eller på flere enheter samtdig er dette sannsynligvis helt greit"
 
-#: views/book.tt:283
+#: views/book.tt:287
 msgid "Items"
 msgstr "Eksemplarer"
 
@@ -231,7 +231,7 @@ msgstr "Behold historikk"
 msgid "Library"
 msgstr "Bibliotek"
 
-#: views/book.tt:282 views/book.tt:70 views/lists.tt:13
+#: views/book.tt:286 views/book.tt:70 views/lists.tt:13
 msgid "Lists"
 msgstr "Lister"
 
@@ -239,7 +239,11 @@ msgstr "Lister"
 msgid "Lists and genres"
 msgstr "Lister og sjangre"
 
-#: views/layouts/main.tt:193 views/layouts/main.tt:264 views/login_form.tt:23
+#: views/book.tt:109
+msgid "Loan expires"
+msgstr "Lånet utløper"
+
+#: views/layouts/main.tt:191 views/layouts/main.tt:262 views/login_form.tt:23
 msgid "Log in"
 msgstr "Logg inn"
 
@@ -247,11 +251,11 @@ msgstr "Logg inn"
 msgid "Log in failed"
 msgstr "Innloggin mislyktes"
 
-#: views/layouts/main.tt:144 views/layouts/main.tt:251
+#: views/layouts/main.tt:142 views/layouts/main.tt:249
 msgid "Log out"
 msgstr "Logg ut"
 
-#: views/admin.tt:24 views/admin_navbar.tt:19
+#: views/admin.tt:24 views/admin_navbar.tt:19 views/superadmin_navbar.tt:6
 msgid "Logs"
 msgstr "Logger"
 
@@ -259,15 +263,15 @@ msgstr "Logger"
 msgid "Maximum number of concurrent loans"
 msgstr "Maks samtidige lån"
 
-#: views/book.tt:266
+#: views/book.tt:270
 msgid "More books by"
 msgstr "Flere bøker av"
 
-#: lib/Ebooksforlib/Route/Login.pm:272 views/sessions.tt:3
+#: lib/Ebooksforlib/Route/Login.pm:275 views/sessions.tt:3
 msgid "More than one active session"
 msgstr "Mer enn én aktiv sesjon"
 
-#: views/layouts/main.tt:137 views/layouts/main.tt:248
+#: views/layouts/main.tt:135 views/layouts/main.tt:246
 msgid "My books"
 msgstr "Mine bøker"
 
@@ -275,7 +279,7 @@ msgstr "Mine bøker"
 msgid "My page"
 msgstr "Min side"
 
-#: lib/Ebooksforlib/Route/MyProfile.pm:31 views/layouts/main.tt:143 views/layouts/main.tt:249 views/my.tt:6
+#: lib/Ebooksforlib/Route/MyProfile.pm:31 views/layouts/main.tt:141 views/layouts/main.tt:247 views/my.tt:6
 msgid "My profile"
 msgstr "Min profil"
 
@@ -291,7 +295,7 @@ msgstr "Hjelp til innloggingen?"
 msgid "New user?"
 msgstr "Ny bruker?"
 
-#: lib/Ebooksforlib.pm:160
+#: lib/Ebooksforlib.pm:162
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
@@ -335,7 +339,7 @@ msgstr "Lånernummer"
 msgid "Percentage"
 msgstr "Prosent"
 
-#: lib/Ebooksforlib/Route/Login.pm:344
+#: lib/Ebooksforlib/Route/Login.pm:347
 msgid "Please visit this URL to unblock the account: "
 msgstr "Besøk denne URLen for å fjerne blokkeringen av kontoen din: "
 
@@ -359,7 +363,7 @@ msgstr "Lever"
 msgid "Returned"
 msgstr "Levert"
 
-#: lib/Ebooksforlib/Route/Browse.pm:161 views/layouts/main.tt:132 views/layouts/main.tt:156 views/layouts/main.tt:188
+#: lib/Ebooksforlib/Route/Browse.pm:161 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
 msgid "Search"
 msgstr "Søk"
 
@@ -407,7 +411,7 @@ msgstr "Det er importerte bøker som må kontrolleres"
 msgid "These books have been automatically imported and now need to be edited manually to add metadata, covers etc."
 msgstr "Disse bøkene har blitt importert, og trenger metadata, omslagsbilder osv."
 
-#: views/book.tt:105
+#: views/book.tt:107
 msgid "This book is available to you"
 msgstr "Denne boka er tilgjengelig for deg"
 
@@ -431,7 +435,7 @@ msgstr "Brukernavn"
 msgid "What you need in order to borrow"
 msgstr "Dette trenger du for å låne"
 
-#: views/layouts/main.tt:242 views/layouts/main.tt:258
+#: views/layouts/main.tt:240 views/layouts/main.tt:256
 msgid "What you need to borrow"
 msgstr "Dette trenger du for å låne"
 
@@ -455,7 +459,7 @@ msgstr "Du er logget inn ved biblioteket du har valgt, og kan låne bøker."
 msgid "You are not connected to any libraries."
 msgstr "Du er ikke knyttet til noen bibliotek."
 
-#: views/layouts/main.tt:193
+#: views/layouts/main.tt:191
 msgid "You are not logged in."
 msgstr "Du er ikke logget inn"
 
@@ -487,7 +491,7 @@ msgstr "Du har ingen aktive lån."
 msgid "You have no old loans."
 msgstr "Du har ingen gamle lån."
 
-#: views/book.tt:110
+#: views/book.tt:114
 msgid "You have the maximum number of concurrent books on loan"
 msgstr "Du har maksimalt antall samtidige lån"
 
@@ -515,11 +519,11 @@ msgstr "Du må logge inn med en gyldig admin-bruker."
 msgid "You searched for"
 msgstr "Du søkte etter"
 
-#: lib/Ebooksforlib/Route/Login.pm:343
+#: lib/Ebooksforlib/Route/Login.pm:346
 msgid "Your account has been blocked"
 msgstr "Kontoen din har blitt sperret"
 
-#: views/layouts/main.tt:193
+#: views/layouts/main.tt:191
 msgid "about"
 msgstr "om"
 
@@ -535,7 +539,7 @@ msgstr "og fikk"
 msgid "books"
 msgstr "bøker"
 
-#: views/book.tt:128 views/my.tt:55 views/my.tt:67
+#: views/book.tt:132 views/my.tt:55 views/my.tt:67
 msgid "days"
 msgstr "dager"
 
@@ -567,7 +571,7 @@ msgstr "måneder"
 msgid "or choose a different library below"
 msgstr "eller velg et annet bibliotek nedenfor"
 
-#: views/layouts/main.tt:193
+#: views/layouts/main.tt:191
 msgid "or find out more"
 msgstr "eller finn ut mer"
 
@@ -579,7 +583,7 @@ msgstr "forfalt"
 msgid "results"
 msgstr "treff"
 
-#: views/book.tt:105
+#: views/book.tt:107
 msgid "the reader app to download and read the book"
 msgstr "bokleseren for å laste ned og lese boken"
 
