@@ -74,9 +74,9 @@ post '/books/items/editall' => require_role admin => sub {
     # Consider html strip
     my $library_id  = _get_library_for_admin_user();
     my @items = rset('Item')->search({
-        'file.book_id'    => $book_id,
-        'item.library_id' => $library_id,
-        'deleted'         => 0
+        'file.book_id'     => $book_id,
+        'items.library_id' => $library_id,
+        'deleted'          => 0
     }, {
         join => 'file'
     });
