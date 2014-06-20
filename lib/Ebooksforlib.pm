@@ -121,7 +121,6 @@ hook 'before' => sub {
     my $real_session = resultset('Session')->find( cookie( 'dancer.session' ) );
     $real_session->set_column( 'last_active', undef );
     $real_session->update;
-    debug "*** Updated session timestamp: " . $real_session->last_active;
 
     # We need to show lists and genres on a lot of pages, so we might as well 
     # make the data available from here
