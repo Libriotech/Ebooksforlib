@@ -36,6 +36,7 @@ use Ebooksforlib::Route::Superadmin::Providers;
 use Ebooksforlib::Route::Superadmin::Libraries;
 use Ebooksforlib::Route::Superadmin::LocalUsers;
 use Ebooksforlib::Route::Superadmin::Logs;
+use Ebooksforlib::Route::Superadmin::Stats;
 
 use Dancer::Plugin::Auth::Basic;
 use Dancer::Plugin::EscapeHTML;
