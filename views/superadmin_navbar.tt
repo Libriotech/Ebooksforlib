@@ -4,6 +4,7 @@
         <ul class="dropdown-menu">
             <li><a href="/superadmin">Superadmin</a></li>
             <li><a href="/superadmin/logs">[% l('Logs') %]</a></li>
+            <li><a href="/superadmin/stats/failed">[% l('Failed logins') %]</a></li>
         </ul>
     </li>
 </ul>
