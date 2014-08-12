@@ -17,9 +17,9 @@ use Ebooksforlib::Util;
 
 get '/superadmin/stats/failed' => require_role superadmin => sub { 
 
-    my @failed = resultset('User')->search({
-        failed => '> 0',
-    });   
+    my @failed = resultset('User')->search(
+        \[ 'failed > 0' ]
+    );
     template 'superadmin_stats_failed', { 
         failed => \@failed,
     };

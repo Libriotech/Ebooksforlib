@@ -2,7 +2,25 @@
 
 <h2>Users with failed logins</h2>
 
-[% USE Dumper %]
-<pre>[% Dumper.dump_html( failed ) %]</pre>
+<table>
+<tr>
+    <th>Failed logins</th>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Libraries</th>
+</tr>
+[% FOREACH user IN failed %]
+<tr>
+    <td>[% user.failed %]</td>
+    <td>[% user.name %]</td>
+    <td>[% user.username %]</td>
+    <td>
+        [% FOREACH library IN user.libraries %]
+            [% library.name %],
+        [% END %]
+    </td>
+</tr>
+[% END %]
+</table>
 
 </div>
