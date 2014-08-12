@@ -1,0 +1,8 @@
+<div class="container">
+
+<h2>Users with failed logins</h2>
+
+[% USE Dumper %]
+<pre>[% Dumper.dump_html( failed ) %]</pre>
+
+</div>
