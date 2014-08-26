@@ -90,7 +90,7 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
                 $new_book->insert;
             }
             $book_id = $new_book->id;
-            say "Added book with id = $book_id";
+            say "\n* Added book with ISBN = $isbn_string as id = $book_id";
         } catch {
             say "Error while saving book: $_";
             next FILE;
