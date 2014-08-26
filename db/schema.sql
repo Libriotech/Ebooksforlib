@@ -73,7 +73,7 @@ CREATE TABLE books (
     isbn     VARCHAR(64), 
     pages    VARCHAR(32),
     coverurl VARCHAR(255), 
-    coverimg BLOB,
+    coverimg MEDIUMBLOB,
     dataurl  VARCHAR(255),
     -- FULLTEXT ( title, isbn )
     UNIQUE KEY isbn ( isbn )
