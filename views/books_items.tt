@@ -4,6 +4,8 @@
 
 <h2>[% book.title %]</h2> 
 
+<p><a href="/book/[% book.id %]">[% l( 'Normal view' ) %]</a></p>
+
 <p>Creator(s):</p>
 
 <ul>

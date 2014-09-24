@@ -51,7 +51,7 @@ msgstr "Legg til forfatter"
 msgid "Admin"
 msgstr "Admin"
 
-#: views/book.tt:283
+#: views/book.tt:282
 msgid "Admin actions"
 msgstr "Admin"
 
@@ -74,6 +74,10 @@ msgstr "Alle brukere"
 #: views/my.tt:122 views/my.tt:91 views/my.tt:93
 msgid "Anonymize"
 msgstr "Anonymiser"
+
+#: views/superadmin_delete_book.tt:33
+msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
+msgstr "Er du sikker på at du ønsker å slette denne boka, inkludert alle tilknyttede filer, eksemplarer og eventuelle lån"
 
 #: views/book.tt:285
 msgid "Authors"
@@ -135,6 +139,10 @@ msgstr "Aktive lån"
 msgid "Date"
 msgstr "Utgitt"
 
+#: views/book.tt:291
+msgid "Delete"
+msgstr "Slett"
+
 #: views/list.tt:30
 msgid "Delete books"
 msgstr "Slett bøker"
@@ -154,6 +162,10 @@ msgstr "Omtale"
 #: views/book.tt:284 views/creator.tt:18 views/list.tt:29
 msgid "Edit"
 msgstr "Rediger"
+
+#: views/superadmin_delete_book.tt:31
+msgid "Edit items"
+msgstr "Rediger eksemplarer"
 
 #: views/creator.tt:18
 msgid "Edit this creator"
@@ -319,9 +331,21 @@ msgstr "Hjelp til innloggingen?"
 msgid "New user?"
 msgstr "Ny bruker?"
 
+#: views/superadmin_delete_book.tt:33
+msgid "No"
+msgstr "Nei"
+
+#: views/books_items.tt:7
+msgid "Normal view"
+msgstr "Normal visning"
+
 #: lib/Ebooksforlib.pm:164
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
+
+#: views/superadmin_delete_book.tt:23
+msgid "Not on loan"
+msgstr "Ikke utlånt"
 
 #: views/admin_stats_gender.tt:47 views/my.tt:84
 msgid "Old loans"
@@ -467,7 +491,7 @@ msgstr "Dette trenger du for å låne"
 msgid "What you need to borrow"
 msgstr "Dette trenger du for å låne"
 
-#:
+#: views/superadmin_delete_book.tt:33
 msgid "Yes"
 msgstr "Ja"
 

@@ -277,17 +277,20 @@
 	</div> <!-- end container -->
 
 [%# Display admin links if the user has the right role %]
-[% FOREACH role IN session.logged_in_user_roles %]
-    [% IF role == 'admin' %]
+[% IF session.user_is_admin == 1 || session.user_is_superadmin == 1 %]
 	<div id="adminactions">
         <p>[% l('Admin actions') %]:
-            <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">[% l('Edit') %]</a> |
-            <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">[% l('Authors') %]</a> |
-            <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">[% l('Lists') %]</a> |
-            <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">[% l('Items') %]</a> |
-            <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">[% l('Covers') %]</a>
+            [% IF session.user_is_admin == 1 %]
+                <a href="/books/edit/[% book.id %]" title="Edit the bibliographic information, not including creators">[% l('Edit') %]</a> |
+                <a href="/books/creators/add/[% book.id %]" title="Add or remove creators">[% l('Authors') %]</a> |
+                <a href="/books/lists/[% book.id %]" title="Add to or remove from lists, including genres">[% l('Lists') %]</a> |
+                <a href="/books/items/[% book.id %]" title="Add or remove items, change loan periods">[% l('Items') %]</a> |
+                <a href="/books/covers/[% book.id %]" title="Choose a cover for this book">[% l('Covers') %]</a> |
+            [% END %]
+            [% IF session.user_is_superadmin == 1 %]
+                <a href="/superadmin/delete_book/[% book.id %]" title="Delete this book">[% l('Delete') %]</a>
+            [% END %]
 	    </p>
 	</div>
-    [% END %]
 [% END %]
 </div> <!-- end article-bg-white -->

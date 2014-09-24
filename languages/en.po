@@ -47,7 +47,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: views/book.tt:283
+#: views/book.tt:282
 msgid "Admin actions"
 msgstr ""
 
@@ -69,6 +69,10 @@ msgstr ""
 
 #: views/my.tt:122 views/my.tt:91 views/my.tt:93
 msgid "Anonymize"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:33
+msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
 msgstr ""
 
 #: views/book.tt:285
@@ -123,6 +127,10 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
+#: views/book.tt:291
+msgid "Delete"
+msgstr ""
+
 #: views/list.tt:30
 msgid "Delete books"
 msgstr ""
@@ -141,6 +149,10 @@ msgstr ""
 
 #: views/book.tt:284 views/creator.tt:18 views/list.tt:29
 msgid "Edit"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:31
+msgid "Edit items"
 msgstr ""
 
 #: views/creator.tt:18
@@ -291,8 +303,20 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
+#: views/superadmin_delete_book.tt:33
+msgid "No"
+msgstr ""
+
+#: views/books_items.tt:7
+msgid "Normal view"
+msgstr ""
+
 #: lib/Ebooksforlib.pm:164
 msgid "Not a valid library."
+msgstr ""
+
+#: views/superadmin_delete_book.tt:23
+msgid "Not on loan"
 msgstr ""
 
 #: views/admin_stats_gender.tt:47 views/my.tt:84
@@ -413,6 +437,10 @@ msgstr ""
 
 #: views/layouts/main.tt:240 views/layouts/main.tt:256
 msgid "What you need to borrow"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:33
+msgid "Yes"
 msgstr ""
 
 #: views/my.tt:30

@@ -20,7 +20,7 @@
             <li>
                 [% l( 'Item' ) %] [% i.id %] [% l( 'belonging to' ) %] [% i.library.name %]
                 [% IF i.deleted == 1 %]- [% l( 'Deleted' ) %][% END %]
-                [% IF i.loan %]- <span style="color: red; font-weight: bold;">[% l( 'On loan' ) %]</span>[% END %]
+                [% IF i.loan %]- <span style="color: red; font-weight: bold;">[% l( 'On loan' ) %]</span>[% ELSE %]- <span style="color: green; font-weight: bold;">[% l( 'Not on loan' ) %]</span>[% END %]
             </li>
         [% END %]
         </ul>
@@ -28,6 +28,8 @@
 [% END %]
 </ul>
 
-<p>Are you sure you want to delete this book, including its files and items?</p>
+<p><a href="/books/items/[% book.id %]">[% l( 'Edit items' ) %]</a></p>
+
+<p>[% l( 'Are you sure you want to completely delete this book, including its files, items and any loans' ) %]? <a href="/superadmin/delete_book_ok/[% book.id %]?[% INCLUDE 'csrf_link.tt' %]">[% l( 'Yes' ) %]</a> | <a href="/book/[% book.id %]">[% l( 'No' ) %]</a></p>
 
 </div>
