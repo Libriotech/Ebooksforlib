@@ -95,7 +95,7 @@ msgstr ""
 msgid "Borrowed"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:147
+#: lib/Ebooksforlib.pm:149
 msgid "Choose library"
 msgstr ""
 
@@ -119,12 +119,20 @@ msgstr ""
 msgid "Current loans"
 msgstr ""
 
+#: views/superadmin_delete_book.tt:8
+msgid "Date"
+msgstr ""
+
 #: views/list.tt:30
 msgid "Delete books"
 msgstr ""
 
 #: views/list.tt:30
 msgid "Delete books from this list"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:22
+msgid "Deleted"
 msgstr ""
 
 #: views/book.tt:84 views/book.tt:87
@@ -149,6 +157,18 @@ msgstr ""
 
 #: views/my.tt:44
 msgid "Expires"
+msgstr ""
+
+#: views/superadmin_navbar.tt:7
+msgid "Failed logins"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:17
+msgid "File"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:12
+msgid "Files and items"
 msgstr ""
 
 #: views/admin.tt:21 views/admin_navbar.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
@@ -179,7 +199,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: views/book.tt:46
+#: views/book.tt:46 views/superadmin_delete_book.tt:7
 msgid "ISBN"
 msgstr ""
 
@@ -197,6 +217,10 @@ msgstr ""
 
 #: lib/Ebooksforlib/Route/Login.pm:268
 msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK."
+msgstr ""
+
+#: views/superadmin_delete_book.tt:21
+msgid "Item"
 msgstr ""
 
 #: views/book.tt:287
@@ -267,12 +291,16 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:162
+#: lib/Ebooksforlib.pm:164
 msgid "Not a valid library."
 msgstr ""
 
 #: views/admin_stats_gender.tt:47 views/my.tt:84
 msgid "Old loans"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:23
+msgid "On loan"
 msgstr ""
 
 #: lib/Ebooksforlib/Route/MyProfile.pm:79
@@ -287,7 +315,7 @@ msgstr ""
 msgid "PIN code"
 msgstr ""
 
-#: views/book.tt:49
+#: views/book.tt:49 views/superadmin_delete_book.tt:9
 msgid "Pages"
 msgstr ""
 
@@ -355,7 +383,7 @@ msgstr ""
 msgid "Switch library"
 msgstr ""
 
-#: views/books_imported.tt:15
+#: views/books_imported.tt:19
 msgid "There are no imported books that need looking after."
 msgstr ""
 
@@ -371,7 +399,7 @@ msgstr ""
 msgid "Time left"
 msgstr ""
 
-#: views/my.tt:104 views/my.tt:42
+#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6
 msgid "Title"
 msgstr ""
 
@@ -443,12 +471,20 @@ msgstr ""
 msgid "and got"
 msgstr ""
 
+#: views/superadmin_delete_book.tt:21
+msgid "belonging to"
+msgstr ""
+
 #: views/my.tt:24
 msgid "books"
 msgstr ""
 
 #: views/book.tt:132 views/my.tt:55 views/my.tt:67
 msgid "days"
+msgstr ""
+
+#: views/superadmin_delete_book.tt:17
+msgid "from"
 msgstr ""
 
 #: views/chooselib.tt:19

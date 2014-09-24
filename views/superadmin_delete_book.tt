@@ -1,0 +1,33 @@
+<div class="container">
+
+<h1>[% book.title %]</h1>
+
+<ul>
+<li>[% l( 'Title' ) %]: [% book.title %]</li>
+<li>[% l( 'ISBN' ) %]: [% book.isbn %]</li>
+<li>[% l( 'Date' ) %]: [% book.date %]</li>
+<li>[% l( 'Pages' ) %]: [% book.pages %]</li>
+</ul>
+
+<h2>[% l( 'Files and items' ) %]</h2>
+
+<ul>
+[% FOREACH f IN book.files %]
+    <li>
+        [% l( 'File' ) %] [% f.id %] [% l( 'from' ) %] [% f.provider.name %]
+        <ul>
+        [% FOREACH i IN f.items %]
+            <li>
+                [% l( 'Item' ) %] [% i.id %] [% l( 'belonging to' ) %] [% i.library.name %]
+                [% IF i.deleted == 1 %]- [% l( 'Deleted' ) %][% END %]
+                [% IF i.loan %]- <span style="color: red; font-weight: bold;">[% l( 'On loan' ) %]</span>[% END %]
+            </li>
+        [% END %]
+        </ul>
+    </li>
+[% END %]
+</ul>
+
+<p>Are you sure you want to delete this book, including its files and items?</p>
+
+</div>

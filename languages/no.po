@@ -103,7 +103,7 @@ msgstr "Lån denne boken i"
 msgid "Borrowed"
 msgstr "Lånt"
 
-#: lib/Ebooksforlib.pm:147
+#: lib/Ebooksforlib.pm:149
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -131,6 +131,10 @@ msgstr "Forfattere"
 msgid "Current loans"
 msgstr "Aktive lån"
 
+#: views/superadmin_delete_book.tt:8
+msgid "Date"
+msgstr "Utgitt"
+
 #: views/list.tt:30
 msgid "Delete books"
 msgstr "Slett bøker"
@@ -138,6 +142,10 @@ msgstr "Slett bøker"
 #: views/list.tt:30
 msgid "Delete books from this list"
 msgstr "Slett bøker fra denne lista"
+
+#: views/superadmin_delete_book.tt:22
+msgid "Deleted"
+msgstr "Slettet"
 
 #: views/book.tt:84 views/book.tt:87
 msgid "Description"
@@ -167,6 +175,18 @@ msgstr "Det oppstod en feil ved henting av omtaler."
 msgid "Expires"
 msgstr "Utløper"
 
+#: views/superadmin_navbar.tt:7
+msgid "Failed logins"
+msgstr "Mislykkede innlogginger"
+
+#: views/superadmin_delete_book.tt:17
+msgid "File"
+msgstr "Fil"
+
+#: views/superadmin_delete_book.tt:12
+msgid "Files and items"
+msgstr "Filer og eksemplarer"
+
 #: views/admin.tt:21 views/admin_navbar.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr "Kjønn"
@@ -195,7 +215,7 @@ msgstr "Hjelp"
 msgid "Home"
 msgstr "Forsiden"
 
-#: views/book.tt:46
+#: views/book.tt:46 views/superadmin_delete_book.tt:7
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -218,6 +238,10 @@ msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn 
 #: lib/Ebooksforlib/Route/Login.pm:268
 msgid "It looks like you have more than one active session. If you have logged in from more than one browser at the same time, this is probably OK."
 msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn i flere nettlesere eller på flere enheter samtdig er dette sannsynligvis helt greit"
+
+#: views/superadmin_delete_book.tt:21
+msgid "Item"
+msgstr "Eksemplar"
 
 #: views/book.tt:287
 msgid "Items"
@@ -295,13 +319,17 @@ msgstr "Hjelp til innloggingen?"
 msgid "New user?"
 msgstr "Ny bruker?"
 
-#: lib/Ebooksforlib.pm:162
+#: lib/Ebooksforlib.pm:164
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
 #: views/admin_stats_gender.tt:47 views/my.tt:84
 msgid "Old loans"
 msgstr "Gamle lån"
+
+#: views/superadmin_delete_book.tt:23
+msgid "On loan"
+msgstr "Utlånt"
 
 #: lib/Ebooksforlib/Route/MyProfile.pm:79
 msgid "Oops, we got an error:<br />"
@@ -323,7 +351,7 @@ msgstr "Oversikt"
 msgid "PIN code"
 msgstr "PIN-kode"
 
-#: views/book.tt:49
+#: views/book.tt:49 views/superadmin_delete_book.tt:9
 msgid "Pages"
 msgstr "Sider"
 
@@ -403,7 +431,7 @@ msgstr "Statistikk: Kjønn"
 msgid "Switch library"
 msgstr "Bytt bibliotek"
 
-#: views/books_imported.tt:15
+#: views/books_imported.tt:19
 msgid "There are no imported books that need looking after."
 msgstr "Det er importerte bøker som må kontrolleres"
 
@@ -419,7 +447,7 @@ msgstr "Denne boka er tilgjengelig for deg"
 msgid "Time left"
 msgstr "Tid som gjenstår"
 
-#: views/my.tt:104 views/my.tt:42
+#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6
 msgid "Title"
 msgstr "Tittel"
 
@@ -535,6 +563,10 @@ msgstr "om eBib"
 msgid "and got"
 msgstr "og fikk"
 
+#: views/superadmin_delete_book.tt:21
+msgid "belonging to"
+msgstr "som tilhører"
+
 #: views/my.tt:24
 msgid "books"
 msgstr "bøker"
@@ -546,6 +578,10 @@ msgstr "dager"
 #:
 msgid "eBib lets you borrow electronic books for free from your local library."
 msgstr "Med eBib kan du låne gratis e-bøker fra ditt lokale bibliotek."
+
+#: views/superadmin_delete_book.tt:17
+msgid "from"
+msgstr "fra"
 
 #: views/chooselib.tt:19
 msgid "here"
