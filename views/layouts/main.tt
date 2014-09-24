@@ -239,6 +239,7 @@ function scrolldown() {
 				<li><a href="/page/about">[% l('About') %] [% settings.appname %]</a></li>
 				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
 				<li><a href="/page/contact">[% l('Contact') %]</a></li>
+                                <li><a href="http://www.encripto.no/sertifisering/ebib.php">Sertifisert av Encripto</a></li>
 			</ul>
 		</div>
 		<div class="span2">
@@ -255,6 +256,7 @@ function scrolldown() {
 				<li><a href="/page/about">[% l('About') %] [% settings.appname %]</a></li>
 				<li><a href="/page/newuser">[% l('What you need to borrow') %]</a></li>
 				<li><a href="/page/contact">[% l('Contact') %]</a></li>
+                                <li><a href="http://www.encripto.no/sertifisering/ebib.php">Sertifisert av Encripto</a></li>
 			</ul>
 		</div>
 		<div class="span2">
