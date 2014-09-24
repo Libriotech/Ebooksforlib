@@ -1,5 +1,7 @@
 [% META pagetitle = 'Items' %]
 
+<div class="container">
+
 <h2>[% book.title %]</h2> 
 
 <p>Creator(s):</p>
@@ -159,3 +161,5 @@ Availability:<br />
 [% INCLUDE 'csrf_field.tt' %]
 <input type="submit" value="Upload">
 </form>
+
+</div>
