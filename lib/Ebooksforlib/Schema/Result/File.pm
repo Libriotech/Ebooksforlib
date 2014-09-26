@@ -191,8 +191,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-08-07 14:19:07
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mKA27DjvkgX8D+fms4zITg
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vslAl+2anjvgTE+2Ql21Ww
 
 use Dancer ':syntax';
 

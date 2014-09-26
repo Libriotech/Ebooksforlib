@@ -65,12 +65,18 @@ __PACKAGE__->table("users");
   is_nullable: 1
   size: 255
 
-=head2 place
+=head2 gender
 
-  data_type: 'varchar'
+  data_type: 'char'
   default_value: (empty string)
   is_nullable: 1
-  size: 64
+  size: 1
+
+=head2 birthday
+
+  data_type: 'date'
+  datetime_undef_if_invalid: 1
+  is_nullable: 1
 
 =head2 zipcode
 
@@ -79,18 +85,12 @@ __PACKAGE__->table("users");
   is_nullable: 1
   size: 9
 
-=head2 birthday
+=head2 place
 
-  data_type: 'date'
-  datetime_undef_if_invalid: 1
-  is_nullable: 1
-
-=head2 gender
-
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 1
-  size: 1
+  size: 64
 
 =head2 anonymize
 
@@ -118,14 +118,14 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 255 },
   "email",
   { data_type => "varchar", is_nullable => 1, size => 255 },
-  "place",
-  { data_type => "varchar", default_value => "", is_nullable => 1, size => 64 },
-  "zipcode",
-  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
-  "birthday",
-  { data_type => "date", datetime_undef_if_invalid => 1, is_nullable => 1 },
   "gender",
   { data_type => "char", default_value => "", is_nullable => 1, size => 1 },
+  "birthday",
+  { data_type => "date", datetime_undef_if_invalid => 1, is_nullable => 1 },
+  "zipcode",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
+  "place",
+  { data_type => "varchar", default_value => "", is_nullable => 1, size => 64 },
   "anonymize",
   { data_type => "integer", default_value => 1, is_nullable => 1 },
   "hash",
@@ -301,8 +301,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 12:25:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6Vjb31bYUvO2mjV7/T8V5w
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:87n4jnySfdeqpJIwdZYf+g
 
 __PACKAGE__->add_columns(
   "failed",

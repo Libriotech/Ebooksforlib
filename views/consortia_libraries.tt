@@ -1,0 +1,31 @@
+[% META pagetitle = 'Edit connections to libraries' %]
+
+<div class="container">
+
+<p>Consortium: [% consortium.name %] (id = [% consortium.id %]) <a href="/consortia/edit/[% consortium.id %]"><img src="/images/cart_edit.png" height="16" width="16" alt="Edit this consortium" title="Edit this consortium"></a></p>
+
+<h2>Remove existing connections</h2>
+
+<ul>
+[% FOREACH library in consortium.libraries %]
+<li><a href="/consortia/libraries/delete/[% consortium.id %]/[% library.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/delete.png" height="16" width="16" alt="Delete this connection" title="Delete this connection"> [% library.name %]</a></li>
+[% END %]
+</ul>
+
+<h2>Add a new connection</h2>
+
+<ul>
+[% FOREACH library IN libraries %]
+    [% library_already_connected = 0 %]
+    [% FOREACH userlib in consortium.libraries %]
+        [% IF userlib.id == library.id %]
+            [% library_already_connected = 1 %]
+        [% END %]
+    [% END %]
+    [% IF library_already_connected == 0 %]
+        <li><a href="/consortia/libraries/add/[% consortium.id %]/[% library.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/add.png" height="16" width="16" alt="Connect to this library" title="Connect to this library"> [% library.name %]</a></li>
+    [% END %]
+[% END %]
+</ul>
+
+</div>

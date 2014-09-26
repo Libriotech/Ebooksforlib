@@ -14,9 +14,11 @@ use Ebooksforlib::Util;
 
 get '/superadmin' => require_role superadmin => sub { 
     my @libraries = rset('Library')->all;
+    my @consortia = rset('Consortium')->all;
     my @providers = rset('Provider')->all;
     template 'superadmin', { 
         'libraries' => \@libraries,
+        'consortia' => \@consortia,
         'providers' => \@providers,
     };
 };

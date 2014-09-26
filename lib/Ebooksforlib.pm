@@ -38,6 +38,7 @@ use Ebooksforlib::Route::Superadmin::LocalUsers;
 use Ebooksforlib::Route::Superadmin::Logs;
 use Ebooksforlib::Route::Superadmin::Stats;
 use Ebooksforlib::Route::Superadmin::DeleteBook;
+use Ebooksforlib::Route::Superadmin::Consortia;
 
 use Dancer::Plugin::Auth::Basic;
 use Dancer::Plugin::EscapeHTML;

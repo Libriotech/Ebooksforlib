@@ -65,17 +65,17 @@ __PACKAGE__->table("lists");
   default_value: 0
   is_nullable: 1
 
-=head2 frontpage_order
-
-  data_type: 'integer'
-  default_value: 0
-  is_nullable: 0
-
 =head2 mobile
 
   data_type: 'integer'
   default_value: 0
   is_nullable: 1
+
+=head2 frontpage_order
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 0
 
 =cut
 
@@ -90,10 +90,10 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 0, is_nullable => 1 },
   "frontpage",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
-  "frontpage_order",
-  { data_type => "integer", default_value => 0, is_nullable => 0 },
   "mobile",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
+  "frontpage_order",
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -141,8 +141,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-21 15:00:01
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+5TkmCGXBJWb41QSDml05g
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z5+bpBWJ+a8U+Bpiehl/sA
 
 __PACKAGE__->many_to_many( books => 'list_books', 'book' );
 

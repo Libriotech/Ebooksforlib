@@ -43,7 +43,7 @@ __PACKAGE__->table("books");
 
 =head2 title
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 1
   size: 255
@@ -74,7 +74,7 @@ __PACKAGE__->table("books");
 
 =head2 coverimg
 
-  data_type: 'blob'
+  data_type: 'mediumblob'
   is_nullable: 1
 
 =head2 dataurl
@@ -89,7 +89,7 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "title",
-  { data_type => "char", default_value => "", is_nullable => 1, size => 255 },
+  { data_type => "varchar", default_value => "", is_nullable => 1, size => 255 },
   "date",
   { data_type => "varchar", is_nullable => 0, size => 32 },
   "isbn",
@@ -99,7 +99,7 @@ __PACKAGE__->add_columns(
   "coverurl",
   { data_type => "varchar", is_nullable => 1, size => 255 },
   "coverimg",
-  { data_type => "blob", is_nullable => 1 },
+  { data_type => "mediumblob", is_nullable => 1 },
   "dataurl",
   { data_type => "varchar", is_nullable => 1, size => 255 },
 );
@@ -248,8 +248,8 @@ Composing rels: L</book_creators> -> creator
 __PACKAGE__->many_to_many("creators", "book_creators", "creator");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-12-05 14:32:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DMGG3Co/sQuwHk8KOY+2+g
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SyD34lpI1ejK9e+ms39MTg
 
 use Ebooksforlib::Util;
 

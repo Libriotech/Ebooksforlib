@@ -15,6 +15,8 @@ DROP TABLE IF EXISTS downloads;
 DROP TABLE IF EXISTS old_downloads;
 DROP TABLE IF EXISTS log;
 DROP TABLE IF EXISTS stats;
+DROP TABLE IF EXISTS consortium_libraries;
+DROP TABLE IF EXISTS consortiums;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -239,6 +241,20 @@ CREATE TABLE stats (
     items      INTEGER NOT NULL,
     time       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT stats_fk_1 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE consortiums (
+    id   INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE consortium_libraries (
+    consortium_id INTEGER NOT NULL,
+    library_id    INTEGER NOT NULL,
+    PRIMARY KEY consortium_library (consortium_id, library_id),
+    CONSTRAINT consortium_libraries_fk_1 FOREIGN KEY (consortium_id) REFERENCES consortiums (id) ON DELETE CASCADE,
+    CONSTRAINT consortium_libraries_fk_2 FOREIGN KEY (library_id)    REFERENCES libraries   (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data

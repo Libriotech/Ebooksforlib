@@ -27,6 +27,37 @@
     </table>
 [% END %]
 
+<h2>Consortia</h2>
+
+<p><a href="/consortia/add"><img src="/images/cart_add.png" height="16" width="16" alt="Add" title="Add">Add a new consortium</a></p>
+
+[% IF libraries.size %]
+    <table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr><th>ID</th><th>Name</th><th>Libraries</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    [% FOREACH consortium IN consortia %]
+    <tr><td>[% consortium.id %]</td>
+        <td>[% consortium.name %]</td>
+        <td>
+            <ul>
+            [% FOREACH library IN consortium.libraries %]
+                <li>[% library.name %]</li>
+            [% END %]
+            </ul>
+        </td>
+        <td>
+            <a href="/consortia/edit/[% consortium.id %]"><img src="/images/cart_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+            <a href="/consortia/delete/[% consortium.id %]"><img src="/images/cart_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
+            <a href="/consortia/libraries/[% consortium.id %]"><img src="/images/building.png" height="16" width="16" alt="Edit library-connections" title="Edit library-connections"></a>
+        </td>
+    </tr>
+    [% END %]
+    </tbody>
+    </table>
+[% END %]
+
 <h2>Providers</h2>
 
 <p><a href="/providers/add"><img src="/images/basket_add.png" height="16" width="16" alt="Add" title="Add">Add a new provider</a></p>

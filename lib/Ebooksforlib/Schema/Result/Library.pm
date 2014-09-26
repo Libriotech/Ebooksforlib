@@ -69,6 +69,11 @@ __PACKAGE__->table("libraries");
   data_type: 'text'
   is_nullable: 1
 
+=head2 piwik
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -84,6 +89,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "soc_links",
   { data_type => "text", is_nullable => 1 },
+  "piwik",
+  { data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -125,6 +132,21 @@ __PACKAGE__->add_unique_constraint("name", ["name"]);
 __PACKAGE__->add_unique_constraint("realm", ["realm"]);
 
 =head1 RELATIONS
+
+=head2 consortium_libraries
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::ConsortiumLibrary>
+
+=cut
+
+__PACKAGE__->has_many(
+  "consortium_libraries",
+  "Ebooksforlib::Schema::Result::ConsortiumLibrary",
+  { "foreign.library_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
 
 =head2 files
 
@@ -231,6 +253,16 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 consortiums
+
+Type: many_to_many
+
+Composing rels: L</consortium_libraries> -> consortium
+
+=cut
+
+__PACKAGE__->many_to_many("consortiums", "consortium_libraries", "consortium");
+
 =head2 users
 
 Type: many_to_many
@@ -242,8 +274,8 @@ Composing rels: L</user_libraries> -> user
 __PACKAGE__->many_to_many("users", "user_libraries", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 17:19:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:V60lUv7LfPy/T3Vc449Fbw
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aFqNIRX3UEiDDkEK7OdHWQ
 
 __PACKAGE__->add_columns(
   "piwik",

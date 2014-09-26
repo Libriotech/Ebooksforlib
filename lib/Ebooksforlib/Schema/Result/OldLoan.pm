@@ -71,6 +71,12 @@ __PACKAGE__->table("old_loans");
   datetime_undef_if_invalid: 1
   is_nullable: 0
 
+=head2 library_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =head2 gender
 
   data_type: 'char'
@@ -78,23 +84,17 @@ __PACKAGE__->table("old_loans");
   is_nullable: 1
   size: 1
 
+=head2 age
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =head2 zipcode
 
   data_type: 'char'
   default_value: (empty string)
   is_nullable: 1
   size: 9
-
-=head2 age
-
-  data_type: 'integer'
-  is_nullable: 1
-
-=head2 library_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
 
 =cut
 
@@ -123,14 +123,14 @@ __PACKAGE__->add_columns(
     datetime_undef_if_invalid => 1,
     is_nullable => 0,
   },
-  "gender",
-  { data_type => "char", default_value => "", is_nullable => 1, size => 1 },
-  "zipcode",
-  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
-  "age",
-  { data_type => "integer", is_nullable => 1 },
   "library_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "gender",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 1 },
+  "age",
+  { data_type => "integer", is_nullable => 1 },
+  "zipcode",
+  { data_type => "char", default_value => "", is_nullable => 1, size => 9 },
 );
 
 =head1 PRIMARY KEY
@@ -198,8 +198,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07036 @ 2013-11-15 17:19:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZwSiKi6HB1QvJjfbcQlY6A
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ShcIKUkdwJvdR7z4lposwQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

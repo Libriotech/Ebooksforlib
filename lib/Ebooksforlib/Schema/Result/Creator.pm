@@ -104,7 +104,7 @@ Composing rels: L</book_creators> -> book
 __PACKAGE__->many_to_many("books", "book_creators", "book");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07025 @ 2013-08-07 14:07:09
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L+nKDtp2NEo1SSgTq2Opcg
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Qxil5bv0ekvGAkhzbMDbMA
 
 1;
