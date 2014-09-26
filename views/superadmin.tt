@@ -27,43 +27,6 @@
     </table>
 [% END %]
 
-<h2>Users</h2>
-
-<p><a href="/users/add"><img src="/images/user_add.png" height="16" width="16" alt="Add" title="Add">Add a new user</a></p>
-
-[% IF users.size %]
-    <table class="table table-striped table-bordered table-hover">
-    <thead>
-    <tr><th>ID</th><th>Username</th><th>Name</th><th>Roles</th><th>Libraries</th><th>Actions</th></tr>
-    </thead>
-    <tbody>
-    [% FOREACH user IN users %]
-    <tr><td>[% user.id %]</td>
-        <td>[% user.username %]</td>
-        <td>[% user.name %]</td>
-        <td>
-            [% FOREACH role IN user.roles %]
-            [% role.role %]
-            [% END %]
-        </td>
-        <td>
-            [% FOREACH library IN user.libraries %]
-            [% library.name %]
-            [% END %]
-        </td>
-        <td>
-            <a href="/users/edit/[% user.id %]"><img src="/images/user_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
-            <a href="/users/password/[% user.id %]"><img src="/images/key.png" height="16" width="16" alt="Change password" title="Change password"></a>
-            <a href="/users/roles/[% user.id %]"><img src="/images/bricks.png" height="16" width="16" alt="Edit roles" title="Edit roles"></a>
-            <a href="/users/libraries/[% user.id %]"><img src="/images/building.png" height="16" width="16" alt="Edit library-connections" title="Edit library-connections"></a>
-            <a href="/users/delete/[% user.id %]"><img src="/images/user_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
-        </td>
-    </tr>
-    [% END %]
-    </tbody>
-    </table>
-[% END %]
-
 <h2>Providers</h2>
 
 <p><a href="/providers/add"><img src="/images/basket_add.png" height="16" width="16" alt="Add" title="Add">Add a new provider</a></p>

@@ -61,7 +61,7 @@ post '/users/add' => require_role superadmin => sub {
             });
         }
         flash info => 'A new user was added!';
-        redirect '/superadmin';
+        redirect '/superadmin/users';
     } catch {
         flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
@@ -100,7 +100,7 @@ post '/users/edit' => require_role superadmin => sub {
         $user->set_column('email',    $email);
         $user->update;
         flash info => 'A user was updated!';
-        redirect '/superadmin';
+        redirect '/superadmin/users';
     } catch {
         flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
@@ -142,7 +142,7 @@ post '/users/password' => require_role superadmin => sub {
         $user->set_column( 'password', _encrypt_password($password1) );
         $user->update;
         flash info => "The password was updated for user with ID = $id!";
-        redirect '/superadmin';
+        redirect '/superadmin/users';
     } catch {
         flash error => "Oops, error when trying to update password:<br />".errmsg($_);
         error "$_";
@@ -280,7 +280,7 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
         $user->delete;
         flash info => 'A user was deleted!';
         info "Deleted user with ID = $id";
-        redirect '/superadmin';
+        redirect '/superadmin/users';
     } catch {
         flash error => "Oops, we got an error:<br />".errmsg($_);
         error "$_";
