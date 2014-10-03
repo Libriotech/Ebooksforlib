@@ -1,6 +1,10 @@
 [% META pagetitle = 'Edit library' %]
 
+<div class="container">
+
 <form method="POST" action="/libraries/edit">
 [% INCLUDE libraries_form.tt %]
 [% INCLUDE 'csrf_field.tt' %]
 </form>
+
+</div>

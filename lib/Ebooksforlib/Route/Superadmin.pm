@@ -13,8 +13,8 @@ use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 
 get '/superadmin' => require_role superadmin => sub { 
-    my @libraries = rset('Library')->all;
-    my @consortia = rset('Consortium')->all;
+    my @libraries = rset('Library')->search({ is_consortium => 0 });
+    my @consortia = rset('Library')->search({ is_consortium => 1 });
     my @providers = rset('Provider')->all;
     template 'superadmin', { 
         'libraries' => \@libraries,

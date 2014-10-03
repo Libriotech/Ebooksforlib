@@ -1,8 +1,10 @@
 -- Database schema for Ebooksforlib
 
+DROP TABLE IF EXISTS user_roles;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS consortiums;
 DROP TABLE IF EXISTS list_book;
 DROP TABLE IF EXISTS lists;
-DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS user_libraries;
 DROP TABLE IF EXISTS loans;
 DROP TABLE IF EXISTS old_loans;
@@ -15,10 +17,9 @@ DROP TABLE IF EXISTS downloads;
 DROP TABLE IF EXISTS old_downloads;
 DROP TABLE IF EXISTS log;
 DROP TABLE IF EXISTS stats;
-DROP TABLE IF EXISTS consortium_libraries;
-DROP TABLE IF EXISTS consortiums;
-
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS libraries;
+
 CREATE TABLE users (
     id        INTEGER     AUTO_INCREMENT PRIMARY KEY,
     username  VARCHAR(32) NOT NULL       UNIQUE KEY,
@@ -30,16 +31,16 @@ CREATE TABLE users (
     zipcode   CHAR(9) DEFAULT '',
     place     VARCHAR(64) DEFAULT '',
     anonymize INTEGER(1) DEFAULT 1, 
-    hash      CHAR(64)   DEFAULT ''
+    hash      CHAR(64)   DEFAULT '',
+    failed    INT(4) NOT NULL DEFAULT '0',
+    token     CHAR(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
     id    INTEGER     AUTO_INCREMENT PRIMARY KEY,
     role  VARCHAR(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS libraries;
 CREATE TABLE libraries (
     id    INTEGER AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(255) UNIQUE KEY NOT NULL,
@@ -47,7 +48,16 @@ CREATE TABLE libraries (
     concurrent_loans INTEGER NOT NULL DEFAULT 1, 
     detail_head TEXT, 
     soc_links TEXT,
-    piwik INTEGER(16) DEFAULT NULL
+    piwik INTEGER(16) DEFAULT NULL,
+    is_consortium TINYINT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE consortiums (
+    consortium_id INTEGER NOT NULL,
+    library_id    INTEGER NOT NULL,
+    PRIMARY KEY consortium_library (consortium_id, library_id),
+    CONSTRAINT consortium_libraries_fk_1 FOREIGN KEY (consortium_id) REFERENCES libraries (id) ON DELETE CASCADE,
+    CONSTRAINT consortium_libraries_fk_2 FOREIGN KEY (library_id)    REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_roles (
@@ -137,13 +147,13 @@ CREATE TABLE files (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE items (
-    id          INTEGER AUTO_INCREMENT PRIMARY KEY,
-    library_id  INTEGER NOT NULL,
-    file_id     INTEGER NOT NULL,
-    loan_period INTEGER NOT NULL DEFAULT 0,
-    deleted     INTEGER DEFAULT 0,
-    CONSTRAINT items_fk_1 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE,
-    CONSTRAINT items_fk_2 FOREIGN KEY (file_id)     REFERENCES files (id) ON DELETE CASCADE
+    id            INTEGER AUTO_INCREMENT PRIMARY KEY,
+    library_id    INTEGER NOT NULL DEFAULT 0,
+    file_id       INTEGER NOT NULL,
+    loan_period   INTEGER NOT NULL DEFAULT 0,
+    deleted       INTEGER DEFAULT 0,
+    CONSTRAINT items_fk_1 FOREIGN KEY (library_id)    REFERENCES libraries   (id) ON DELETE CASCADE,
+    CONSTRAINT items_fk_2 FOREIGN KEY (file_id)       REFERENCES files       (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE loans (
@@ -243,20 +253,6 @@ CREATE TABLE stats (
     CONSTRAINT stats_fk_1 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE consortiums (
-    id   INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE consortium_libraries (
-    consortium_id INTEGER NOT NULL,
-    library_id    INTEGER NOT NULL,
-    PRIMARY KEY consortium_library (consortium_id, library_id),
-    CONSTRAINT consortium_libraries_fk_1 FOREIGN KEY (consortium_id) REFERENCES consortiums (id) ON DELETE CASCADE,
-    CONSTRAINT consortium_libraries_fk_2 FOREIGN KEY (library_id)    REFERENCES libraries   (id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- Sample data
 -- TODO Split this out into a separate file
 
@@ -274,6 +270,7 @@ INSERT INTO users SET id = 5, username = 'test2',  name = 'Test Testdatter', ema
 -- Libraries
 INSERT INTO libraries SET id = 1, name = 'Storevik', realm = 'storevik', concurrent_loans = 3;
 INSERT INTO libraries SET id = 2, name = 'Lillevik', realm = 'lillevik', concurrent_loans = 4;
+INSERT INTO libraries SET id = 3, name = 'Konsortiet', is_consortium = 1;
 
 -- Users and roles
 INSERT INTO user_roles SET user_id = 2, role_id = 1; -- Henrik is admin at Storevik

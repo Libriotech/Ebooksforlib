@@ -44,6 +44,7 @@ __PACKAGE__->table("items");
 =head2 library_id
 
   data_type: 'integer'
+  default_value: 0
   is_foreign_key: 1
   is_nullable: 0
 
@@ -71,7 +72,12 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "library_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  {
+    data_type      => "integer",
+    default_value  => 0,
+    is_foreign_key => 1,
+    is_nullable    => 0,
+  },
   "file_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "loan_period",
@@ -155,7 +161,7 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0nTAWtMxshZuN3ChTiRrug
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:33:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IvQ1MkLtv84/ujngJwIB2w
 
 1;

@@ -35,83 +35,76 @@ __PACKAGE__->table("consortiums");
 
 =head1 ACCESSORS
 
-=head2 id
+=head2 consortium_id
 
   data_type: 'integer'
-  is_auto_increment: 1
+  is_foreign_key: 1
   is_nullable: 0
 
-=head2 name
+=head2 library_id
 
-  data_type: 'varchar'
-  is_nullable: 0
-  size: 255
-
-=head2 time
-
-  data_type: 'timestamp'
-  datetime_undef_if_invalid: 1
-  default_value: current_timestamp
+  data_type: 'integer'
+  is_foreign_key: 1
   is_nullable: 0
 
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "name",
-  { data_type => "varchar", is_nullable => 0, size => 255 },
-  "time",
-  {
-    data_type => "timestamp",
-    datetime_undef_if_invalid => 1,
-    default_value => \"current_timestamp",
-    is_nullable => 0,
-  },
+  "consortium_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "library_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
 
 =over 4
 
-=item * L</id>
+=item * L</consortium_id>
+
+=item * L</library_id>
 
 =back
 
 =cut
 
-__PACKAGE__->set_primary_key("id");
+__PACKAGE__->set_primary_key("consortium_id", "library_id");
 
 =head1 RELATIONS
 
-=head2 consortium_libraries
+=head2 consortium
 
-Type: has_many
+Type: belongs_to
 
-Related object: L<Ebooksforlib::Schema::Result::ConsortiumLibrary>
+Related object: L<Ebooksforlib::Schema::Result::Library>
 
 =cut
 
-__PACKAGE__->has_many(
-  "consortium_libraries",
-  "Ebooksforlib::Schema::Result::ConsortiumLibrary",
-  { "foreign.consortium_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+__PACKAGE__->belongs_to(
+  "consortium",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "consortium_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
 );
 
-=head2 libraries
+=head2 library
 
-Type: many_to_many
+Type: belongs_to
 
-Composing rels: L</consortium_libraries> -> library
+Related object: L<Ebooksforlib::Schema::Result::Library>
 
 =cut
 
-__PACKAGE__->many_to_many("libraries", "consortium_libraries", "library");
+__PACKAGE__->belongs_to(
+  "library",
+  "Ebooksforlib::Schema::Result::Library",
+  { id => "library_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:16:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wJrYRzP9iWBGg8r5c+9Tew
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:58:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KI6k4JngF8aYCfTvyUAwsQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

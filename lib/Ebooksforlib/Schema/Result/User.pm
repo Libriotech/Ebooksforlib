@@ -105,6 +105,18 @@ __PACKAGE__->table("users");
   is_nullable: 1
   size: 64
 
+=head2 failed
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 0
+
+=head2 token
+
+  data_type: 'char'
+  is_nullable: 1
+  size: 128
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -130,6 +142,10 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 1, is_nullable => 1 },
   "hash",
   { data_type => "char", default_value => "", is_nullable => 1, size => 64 },
+  "failed",
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
+  "token",
+  { data_type => "char", is_nullable => 1, size => 128 },
 );
 
 =head1 PRIMARY KEY
@@ -301,8 +317,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:87n4jnySfdeqpJIwdZYf+g
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:33:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:t/NThTdvnWMga7BALJcbvQ
 
 __PACKAGE__->add_columns(
   "failed",

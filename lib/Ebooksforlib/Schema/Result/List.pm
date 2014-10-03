@@ -141,8 +141,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z5+bpBWJ+a8U+Bpiehl/sA
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 15:15:41
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p7qfNAMAeMC1cSnxrUCq8A
 
 __PACKAGE__->many_to_many( books => 'list_books', 'book' );
 

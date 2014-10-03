@@ -26,16 +26,19 @@ post '/libraries/add' => require_role superadmin => sub {
     my $name = param 'name';
     my $realm = param 'realm';
     my $piwik = param 'piwik';
+    my $is_consortium = param 'is_consortium';
     try {
         my $hs = HTML::Strip->new();
         $name  = $hs->parse( $name );
         $realm = $hs->parse( $realm );
         $piwik = $hs->parse( $piwik );
+        $is_consortium = $hs->parse( $is_consortium );
         $hs->eof;
         my $new_library = rset('Library')->create({
             name  => $name,
             realm => $realm,
             piwik => $piwik,
+            is_consortium => $is_consortium,
         });
         flash info => 'A new library was added!';
         redirect '/superadmin';
@@ -65,16 +68,19 @@ post '/libraries/edit' => require_role superadmin => sub {
     my $name  = param 'name';
     my $realm = param 'realm';
     my $piwik = param 'piwik';
+    my $is_consortium = param 'is_consortium';
     my $library = rset('Library')->find( $id );
     try {
         my $hs = HTML::Strip->new();
         $name  = $hs->parse( $name );
         $realm = $hs->parse( $realm );
         $piwik = $hs->parse( $piwik );
+        $is_consortium = $hs->parse( $is_consortium );
         $hs->eof;
         $library->set_column('name',  $name  );
         $library->set_column('realm', $realm );
         $library->set_column('piwik', $piwik );
+        $library->set_column('is_consortium', $is_consortium );
         $library->update;
         flash info => 'A library was updated!';
         redirect '/superadmin';

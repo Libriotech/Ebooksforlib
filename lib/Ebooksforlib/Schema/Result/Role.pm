@@ -96,7 +96,7 @@ Composing rels: L</user_roles> -> user
 __PACKAGE__->many_to_many("users", "user_roles", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IrI3DPbjdLmYgoWXI0B7ug
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 15:15:41
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8dQU/fiX1QNxZGsZoOzkAg
 
 1;

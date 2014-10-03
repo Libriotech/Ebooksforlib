@@ -143,7 +143,7 @@ hook 'after' => sub {
 
 get '/choose' => sub {
 
-    my @libraries = rset( 'Library' )->all;
+    my @libraries = rset('Library')->search({ is_consortium => 0 });
     template 'chooselib', { 
         libraries          => \@libraries, 
         disable_search     => 1,

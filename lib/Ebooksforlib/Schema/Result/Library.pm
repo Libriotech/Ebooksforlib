@@ -74,6 +74,12 @@ __PACKAGE__->table("libraries");
   data_type: 'integer'
   is_nullable: 1
 
+=head2 is_consortium
+
+  data_type: 'tinyint'
+  default_value: 0
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -91,6 +97,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 1 },
   "piwik",
   { data_type => "integer", is_nullable => 1 },
+  "is_consortium",
+  { data_type => "tinyint", default_value => 0, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -133,17 +141,32 @@ __PACKAGE__->add_unique_constraint("realm", ["realm"]);
 
 =head1 RELATIONS
 
-=head2 consortium_libraries
+=head2 consortiums_consortiums
 
 Type: has_many
 
-Related object: L<Ebooksforlib::Schema::Result::ConsortiumLibrary>
+Related object: L<Ebooksforlib::Schema::Result::Consortium>
 
 =cut
 
 __PACKAGE__->has_many(
-  "consortium_libraries",
-  "Ebooksforlib::Schema::Result::ConsortiumLibrary",
+  "consortiums_consortiums",
+  "Ebooksforlib::Schema::Result::Consortium",
+  { "foreign.consortium_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 consortiums_libraries
+
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::Consortium>
+
+=cut
+
+__PACKAGE__->has_many(
+  "consortiums_libraries",
+  "Ebooksforlib::Schema::Result::Consortium",
   { "foreign.library_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -257,11 +280,21 @@ __PACKAGE__->has_many(
 
 Type: many_to_many
 
-Composing rels: L</consortium_libraries> -> consortium
+Composing rels: L</consortiums_consortiums> -> consortium
 
 =cut
 
-__PACKAGE__->many_to_many("consortiums", "consortium_libraries", "consortium");
+__PACKAGE__->many_to_many("consortiums", "consortiums_consortiums", "consortium");
+
+=head2 libraries
+
+Type: many_to_many
+
+Composing rels: L</consortiums_consortiums> -> library
+
+=cut
+
+__PACKAGE__->many_to_many("libraries", "consortiums_consortiums", "library");
 
 =head2 users
 
@@ -274,8 +307,8 @@ Composing rels: L</user_libraries> -> user
 __PACKAGE__->many_to_many("users", "user_libraries", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 13:32:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aFqNIRX3UEiDDkEK7OdHWQ
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:58:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tFmLfuWYN+7V1o8vd8B9uA
 
 __PACKAGE__->add_columns(
   "piwik",

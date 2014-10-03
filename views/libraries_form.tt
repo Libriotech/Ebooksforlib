@@ -3,14 +3,25 @@
 <label for="name">Name:</label>
 <input type="text" name="name" id="name" value="[% name %][% library.name %]" required/>
 <br />
+
 <label for="realm">Realm:</label>
 <input type="text" name="realm" id="realm" value="[% realm %][% library.realm %]" /> <img src="/images/information.png" height="16" width="16" title="Please note: Authentication realms have to be configured in the application's config file before they can be referenced here.">
 <br />
+
 <label for="piwik">Piwik site ID:</label>
-<input type="text" name="piwik" id="piwik" value="[% piwik %][% library.piwik %]" required/>
+<input type="text" name="piwik" id="piwik" value="[% piwik %][% library.piwik %]"/>
+<br />
+
+<label for="is_consortium">This is a consortium:</label>
+[% IF library.is_consortium %]
+    <input type="checkbox" name="is_consortium" id="is_consortium" value="1" checked="checked" />
+[% ELSE %]
+    <input type="checkbox" name="is_consortium" id="is_consortium" value="1" />
+[% END %]
+<br />
+
 [% IF library.id %]
 <input type="hidden" name="id" id="id" value="[% library.id %]"/>
 [% END %]
-<br />
 <input type="submit" id="save" value="Save" />
 </fieldset>

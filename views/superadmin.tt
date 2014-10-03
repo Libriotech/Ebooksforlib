@@ -29,7 +29,7 @@
 
 <h2>Consortia</h2>
 
-<p><a href="/consortia/add"><img src="/images/cart_add.png" height="16" width="16" alt="Add" title="Add">Add a new consortium</a></p>
+<p><a href="/libraries/add"><img src="/images/cart_add.png" height="16" width="16" alt="Add" title="Add">Add a new consortium</a></p>
 
 [% IF libraries.size %]
     <table class="table table-striped table-bordered table-hover">
@@ -48,8 +48,8 @@
             </ul>
         </td>
         <td>
-            <a href="/consortia/edit/[% consortium.id %]"><img src="/images/cart_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
-            <a href="/consortia/delete/[% consortium.id %]"><img src="/images/cart_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
+            <a href="/libraries/edit/[% consortium.id %]"><img src="/images/cart_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+            <a href="/libraries/delete/[% consortium.id %]"><img src="/images/cart_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
             <a href="/consortia/libraries/[% consortium.id %]"><img src="/images/building.png" height="16" width="16" alt="Edit library-connections" title="Edit library-connections"></a>
         </td>
     </tr>
