@@ -126,6 +126,10 @@ get '/page/:slug' => sub {
 
 get '/search' => sub {
 
+    # FIXME! 
+    # This does not take into consideration the library that the user belongs to
+    # at all... Should find a better way to do search. ElasticSearch, perhaps? 
+
     my $q = param 'q';
     
     # Bail out if no search was specified
