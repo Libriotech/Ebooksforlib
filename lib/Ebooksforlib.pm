@@ -144,10 +144,12 @@ hook 'after' => sub {
 get '/choose' => sub {
 
     my @libraries = rset('Library')->search({ is_consortium => 0 });
+    my @consortia = rset('Library')->search({ is_consortium => 1 });
     template 'chooselib', { 
-        libraries          => \@libraries, 
-        disable_search     => 1,
-        pagetitle          => l( 'Choose library' ),
+        'libraries'      => \@libraries, 
+        'consortia'      => \@consortia,
+        'disable_search' => 1,
+        'pagetitle'      => l( 'Choose library' ),
     };
 
 };

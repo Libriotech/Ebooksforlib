@@ -6,10 +6,13 @@
 				<h5 class="uppercase red">[% l('Choose library:') %]<h5>
 				<ul class="bibliotek-ul">
 				[% FOREACH library IN libraries %]
-					<li>
-						<a href="/set/[% library.id %]"><i class="fa fa-angle-right"></i> [% library.name %]</a>
-					</li>
+					<li><a href="/set/[% library.id %]"><i class="fa fa-angle-right"></i> [% library.name %]</a></li>
 				[% END %]
+				[% IF session.user_is_admin == 1 %]
+    				[% FOREACH library IN consortia %]
+	    				<li><a href="/set/[% library.id %]"><i class="fa fa-angle-right"></i> [% library.name %] ([% l( 'consortium' ) %])</a></li>
+    				[% END %]
+                [% END %]
 				</ul>
 			</div>
 		</div>
