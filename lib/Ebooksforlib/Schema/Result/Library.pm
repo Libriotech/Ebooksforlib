@@ -141,32 +141,32 @@ __PACKAGE__->add_unique_constraint("realm", ["realm"]);
 
 =head1 RELATIONS
 
-=head2 consortiums_consortiums
+=head2 consortium_members_consortiums
 
 Type: has_many
 
-Related object: L<Ebooksforlib::Schema::Result::Consortium>
+Related object: L<Ebooksforlib::Schema::Result::ConsortiumMember>
 
 =cut
 
 __PACKAGE__->has_many(
-  "consortiums_consortiums",
-  "Ebooksforlib::Schema::Result::Consortium",
+  "consortium_members_consortiums",
+  "Ebooksforlib::Schema::Result::ConsortiumMember",
   { "foreign.consortium_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 consortiums_libraries
+=head2 consortium_members_libraries
 
 Type: has_many
 
-Related object: L<Ebooksforlib::Schema::Result::Consortium>
+Related object: L<Ebooksforlib::Schema::Result::ConsortiumMember>
 
 =cut
 
 __PACKAGE__->has_many(
-  "consortiums_libraries",
-  "Ebooksforlib::Schema::Result::Consortium",
+  "consortium_members_libraries",
+  "Ebooksforlib::Schema::Result::ConsortiumMember",
   { "foreign.library_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -280,21 +280,21 @@ __PACKAGE__->has_many(
 
 Type: many_to_many
 
-Composing rels: L</consortiums_consortiums> -> consortium
+Composing rels: L</consortium_members_consortiums> -> consortium
 
 =cut
 
-__PACKAGE__->many_to_many("consortiums", "consortiums_consortiums", "consortium");
+__PACKAGE__->many_to_many("consortiums", "consortium_members_consortiums", "consortium");
 
 =head2 libraries
 
 Type: many_to_many
 
-Composing rels: L</consortiums_consortiums> -> library
+Composing rels: L</consortium_members_consortiums> -> library
 
 =cut
 
-__PACKAGE__->many_to_many("libraries", "consortiums_consortiums", "library");
+__PACKAGE__->many_to_many("libraries", "consortium_members_consortiums", "library");
 
 =head2 users
 
@@ -307,12 +307,29 @@ Composing rels: L</user_libraries> -> user
 __PACKAGE__->many_to_many("users", "user_libraries", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:58:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tFmLfuWYN+7V1o8vd8B9uA
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-10 11:19:33
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L32/+4GHNLiOG5ThxPA9cg
 
 __PACKAGE__->add_columns(
   "piwik",
   { data_type => "integer", is_nullable => 0, size => 16 },
 );
+
+use Dancer::Plugin::DBIC;
+
+# For some reason, library.consortiums (in TT) does not work, so here is a 
+# workaround...
+sub get_consortia {
+
+    my $self = shift;
+    my @memberships = resultset('ConsortiumMember')->find({ library_id => $self->id });
+    my @consortia;
+    foreach my $mem ( @memberships ) {
+        my $consortium = resultset('Library')->find({ id => $mem->consortium_id });
+        push @consortia, $consortium;
+    }
+    return @consortia;
+
+}
 
 1;

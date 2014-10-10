@@ -2,7 +2,7 @@
 
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS consortiums;
+DROP TABLE IF EXISTS consortium_members;
 DROP TABLE IF EXISTS list_book;
 DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS user_libraries;
@@ -19,6 +19,8 @@ DROP TABLE IF EXISTS log;
 DROP TABLE IF EXISTS stats;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS libraries;
+DROP TABLE IF EXISTS sessioncounts;
+DROP TABLE IF EXISTS sessions;
 
 CREATE TABLE users (
     id        INTEGER     AUTO_INCREMENT PRIMARY KEY,
@@ -52,12 +54,12 @@ CREATE TABLE libraries (
     is_consortium TINYINT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE consortiums (
+CREATE TABLE consortium_members (
     consortium_id INTEGER NOT NULL,
     library_id    INTEGER NOT NULL,
-    PRIMARY KEY consortium_library (consortium_id, library_id),
-    CONSTRAINT consortium_libraries_fk_1 FOREIGN KEY (consortium_id) REFERENCES libraries (id) ON DELETE CASCADE,
-    CONSTRAINT consortium_libraries_fk_2 FOREIGN KEY (library_id)    REFERENCES libraries (id) ON DELETE CASCADE
+    PRIMARY KEY consortium (consortium_id, library_id),
+    CONSTRAINT consortium_members_fk_1 FOREIGN KEY (consortium_id) REFERENCES libraries (id) ON DELETE CASCADE,
+    CONSTRAINT consortium_members_fk_2 FOREIGN KEY (library_id)    REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_roles (
@@ -251,6 +253,21 @@ CREATE TABLE stats (
     items      INTEGER NOT NULL,
     time       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT stats_fk_1 FOREIGN KEY (library_id)  REFERENCES libraries (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE sessions (
+  id           char(40) NOT NULL,
+  session_data text,
+  last_active  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE sessioncounts (
+  session_id char(40) NOT NULL PRIMARY KEY,
+  user_id    int(11) DEFAULT NULL,
+  ip         char(16) NOT NULL,
+  ua         varchar(255) NOT NULL DEFAULT '',
+  CONSTRAINT sessioncounts_fk_1 FOREIGN KEY (session_id) REFERENCES sessions (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Sample data

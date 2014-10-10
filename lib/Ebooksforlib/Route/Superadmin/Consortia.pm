@@ -34,7 +34,7 @@ get '/consortia/libraries/add/:consortium_id/:library_id' => require_role supera
     my $consortium_id    = param 'consortium_id';
     my $library_id = param 'library_id';
     try {
-        rset('Consortium')->create({
+        rset('ConsortiumMember')->create({
             consortium_id => $consortium_id,
             library_id    => $library_id,
         });
@@ -55,7 +55,7 @@ get '/consortia/libraries/delete/:consortium_id/:library_id' => require_role sup
     
     my $consortium_id    = param 'consortium_id';
     my $library_id = param 'library_id';
-    my $connection = rset('Consortium')->find({ consortium_id => $consortium_id, library_id => $library_id });
+    my $connection = rset('ConsortiumMember')->find({ consortium_id => $consortium_id, library_id => $library_id });
     try {
         $connection->delete;
         flash info => 'A connection was deleted!';

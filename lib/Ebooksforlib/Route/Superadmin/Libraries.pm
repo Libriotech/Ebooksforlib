@@ -12,6 +12,7 @@ use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
+use Ebooksforlib::Err;
 
 get '/libraries/add' => require_role superadmin => sub { 
     template 'libraries_add';

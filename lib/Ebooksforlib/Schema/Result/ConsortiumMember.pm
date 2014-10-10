@@ -1,12 +1,12 @@
 use utf8;
-package Ebooksforlib::Schema::Result::Consortium;
+package Ebooksforlib::Schema::Result::ConsortiumMember;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-Ebooksforlib::Schema::Result::Consortium
+Ebooksforlib::Schema::Result::ConsortiumMember
 
 =cut
 
@@ -27,11 +27,11 @@ use base 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
-=head1 TABLE: C<consortiums>
+=head1 TABLE: C<consortium_members>
 
 =cut
 
-__PACKAGE__->table("consortiums");
+__PACKAGE__->table("consortium_members");
 
 =head1 ACCESSORS
 
@@ -103,8 +103,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:58:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KI6k4JngF8aYCfTvyUAwsQ
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-10 11:19:33
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wXtAhw5bVXSS5E0j+tKUTQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

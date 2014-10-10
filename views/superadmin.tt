@@ -9,7 +9,7 @@
 [% IF libraries.size %]
     <table class="table table-striped table-bordered table-hover">
     <thead>
-    <tr><th>ID</th><th>Name</th><th>Realm</th><th>Piwik</th><th>Actions</th></tr>
+    <tr><th>ID</th><th>Name</th><th>Realm</th><th>Piwik</th><th>Consortia</th><th>Actions</th></tr>
     </thead>
     <tbody>
     [% FOREACH library IN libraries %]
@@ -17,6 +17,13 @@
         <td>[% library.name %]</td>
         <td>[% library.realm %]</td>
         <td>[% library.piwik %]</td>
+        <td>
+            <ul>
+            [% FOREACH consortium IN library.get_consortia %]
+                <li>[% consortium.name %]</li>
+            [% END %]
+            </ul>
+        </td>
         <td>
             <a href="/libraries/edit/[% library.id %]"><img src="/images/building_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
             <a href="/libraries/delete/[% library.id %]"><img src="/images/building_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
