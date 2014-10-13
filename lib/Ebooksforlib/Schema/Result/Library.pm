@@ -328,7 +328,7 @@ sub get_consortia {
         my $consortium = resultset('Library')->find({ id => $mem->consortium_id });
         push @consortia, $consortium;
     }
-    return @consortia;
+    return \@consortia;
 
 }
 

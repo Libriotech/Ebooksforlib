@@ -320,6 +320,8 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 # Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:33:06
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:t/NThTdvnWMga7BALJcbvQ
 
+use Dancer::Plugin::DBIC;
+
 __PACKAGE__->add_columns(
   "failed",
   { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
@@ -340,9 +342,16 @@ sub number_of_loans_from_library {
 
 sub belongs_to_library {
     my ( $self, $library_id ) = @_;
+    # Check the libraries the user is connected to directly
     foreach my $library ( $self->libraries ) {
         if ( $library->id == $library_id ) {
             return 1;
+        }
+        # Check consortia
+        foreach my $consortium ( @{ $library->get_consortia() } ) {
+            if ( $consortium->id == $library_id ) {
+                return 1;
+            }
         }
     }
     return 0;    

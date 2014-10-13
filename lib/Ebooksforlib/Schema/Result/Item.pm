@@ -164,4 +164,25 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-03 11:33:06
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IvQ1MkLtv84/ujngJwIB2w
 
+use Dancer::Plugin::DBIC;
+
+sub is_available_to {
+
+    my ( $item, $library_id ) = @_;
+    # Do the simple check first
+    if ( $item->library_id == $library_id ) {
+        return 1;
+    }
+    # If we are still here, proceed to check consortia
+    my $library = resultset( 'Library' )->find( $library_id );
+    foreach my $consortium ( @{ $library->get_consortia() } ) {
+        if ( $item->library_id == $consortium->id ) {
+            return 1;
+        }
+    }
+    # If we got this far, the item is not available
+    return 0;
+
+}
+
 1;
