@@ -325,8 +325,10 @@ sub get_consortia {
     my @memberships = resultset('ConsortiumMember')->find({ library_id => $self->id });
     my @consortia;
     foreach my $mem ( @memberships ) {
-        my $consortium = resultset('Library')->find({ id => $mem->consortium_id });
-        push @consortia, $consortium;
+        if ( $mem && $mem->consortium_id ) {
+            my $consortium = resultset('Library')->find({ id => $mem->consortium_id });
+            push @consortia, $consortium;
+        }
     }
     return \@consortia;
 
