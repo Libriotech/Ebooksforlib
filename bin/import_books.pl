@@ -31,11 +31,16 @@ use Modern::Perl;
 use Ebooksforlib::Util;
 
 # Get options
-my ( $run, $verbose, $debug ) = get_options();
+my ( $run, $provider_id, $verbose, $debug ) = get_options();
 
 # Get the directories we should be looking at
 my $providers = config->{'providers'};
 IMPORTDIR: foreach my $provider ( @{ $providers } ) {
+
+    if ( $provider_id != 0 && $provider_id != $provider->{'provider_id'} ) {
+        say "Skipping provider (looking for $provider_id, got " , $provider->{'provider_id'} . ")" if $verbose;
+        next IMPORTDIR;
+    }
 
     # Be verbose
     say Dumper $provider if $debug;
@@ -54,6 +59,21 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
         
         my $file_path = $provider->{'dir'} . '/' . $filename;
         say "Path: $file_path" if $verbose;
+
+        # Skip this if it is not a regular file (but e.g. a directory)
+        if ( ! -f $file_path ) {
+            say "$file_path is not a regular file, skipping" if $verbose;
+            next FILE;
+        }
+
+        # Check if we imported this file already
+        my @existing_files = resultset('File')->find({
+            'from_path' => $file_path,
+        });
+        if ( $existing_files[0] ) {
+            say 'File already imported, skipping';
+            next FILE;
+        }
         
         # Split up the filename
         my ( $isbn_string, $fileext ) = split /\./, $filename;
@@ -85,7 +105,6 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
             });
             if( $new_book->in_storage ) {
                 say "! A book with this ISBN already exists" if $verbose;
-                next FILE;
             } else {
                 $new_book->insert;
             }
@@ -103,6 +122,7 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
             my $new_file = rset( 'File' )->create({
                 book_id     => $book_id,
                 provider_id => $provider->{ 'provider_id' },
+                from_path   => $file_path,
                 file        => $file_contents,
             });
             $file_id = $new_file->id;
@@ -136,22 +156,24 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
 
 sub get_options {
 
-  # Options
-  my $run        = '';
-  my $verbose    = '';
-  my $debug      = '';
-  my $help       = '';
+    # Options
+    my $run      = '';
+    my $provider = 0;
+    my $verbose  = '';
+    my $debug    = '';
+    my $help     = '';
   
-	GetOptions (
-	'r|run'     => \$run,
-    'v|verbose' => \$verbose,
-    'd|debug'   => \$debug,  
-	'h|?|help'  => \$help
-  );
+    GetOptions (
+        'r|run'        => \$run,
+        'p|provider=s' => \$provider,
+        'v|verbose'    => \$verbose,
+        'd|debug'      => \$debug,  
+	'h|?|help'     => \$help
+    );
 
-  pod2usage( -exitval => 0 ) if $help;
+    pod2usage( -exitval => 0 ) if $help;
 
-  return ( $run, $verbose, $debug );
+    return ( $run, $provider, $verbose, $debug );
 
 }
 
@@ -172,6 +194,10 @@ DANCER_ENVIRONMENT=production perl import_books.pl -r
 =item B<-r, --run>
 
 Actually run the import process. Running the script without this option will only report the number of books that would have been done with this option. 
+
+=item B<-p, --provider>
+
+The ID of a provider, if you only want to process one. 
 
 =item B<-v --verbose>
 
