@@ -143,8 +143,14 @@ hook 'after' => sub {
 
 get '/choose' => sub {
 
-    my @libraries = rset('Library')->search({ is_consortium => 0 });
-    my @consortia = rset('Library')->search({ is_consortium => 1 });
+    my @libraries = rset('Library')->search(
+        { is_consortium => 0 },
+        { order_by => 'name' }
+    );
+    my @consortia = rset('Library')->search(
+        { is_consortium => 1 },
+        { order_by => 'name' }
+    );
     template 'chooselib', { 
         'libraries'      => \@libraries, 
         'consortia'      => \@consortia,
