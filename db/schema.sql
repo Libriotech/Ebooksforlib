@@ -140,6 +140,7 @@ CREATE TABLE files (
     book_id     INTEGER NOT NULL,
     provider_id INTEGER NOT NULL,
     library_id  INTEGER,
+    from_path   TINYTEXT NOT NULL DEFAULT '',
     file        LONGBLOB,
     updated     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UNIQUE ( book_id, provider_id, library_id ), -- there should only be one file per book, provider and library

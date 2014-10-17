@@ -59,6 +59,11 @@ __PACKAGE__->table("files");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 from_path
+
+  data_type: 'tinytext'
+  is_nullable: 0
+
 =head2 file
 
   data_type: 'longblob'
@@ -82,6 +87,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "library_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "from_path",
+  { data_type => "tinytext", is_nullable => 0 },
   "file",
   { data_type => "longblob", is_nullable => 1 },
   "updated",
@@ -191,8 +198,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 15:15:41
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IZ5mZfTauYZXkC2lwoeLnw
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-17 10:20:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0RoMSxKtokZXhCv3ZbSj/g
 
 use Dancer ':syntax';
 
