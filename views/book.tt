@@ -266,7 +266,7 @@
             <tr>
                 <td>[% file.id %]</td>
                 <td>[% item.id %]</td>
-                <td>[% item.library_id %]</td>
+                <td>[% item.library_id %] ([% item.library.name %])</td>
                 <td>[% item.loan_period %]</td>
                 <td>[% item.is_available_to( session.chosen_library ) %]</td>
                 <td>[% item.loan.loaned %]</td>
