@@ -51,7 +51,7 @@ msgstr "Legg til forfatter"
 msgid "Admin"
 msgstr "Admin"
 
-#: views/book.tt:301
+#: views/book.tt:335
 msgid "Admin actions"
 msgstr "Admin"
 
@@ -79,7 +79,7 @@ msgstr "Anonymiser"
 msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
 msgstr "Er du sikker på at du ønsker å slette denne boka, inkludert alle tilknyttede filer, eksemplarer og eventuelle lån"
 
-#: views/book.tt:304
+#: views/book.tt:338
 msgid "Authors"
 msgstr "Forfattere"
 
@@ -107,7 +107,7 @@ msgstr "Lån denne boken i"
 msgid "Borrowed"
 msgstr "Lånt"
 
-#: lib/Ebooksforlib.pm:152
+#: lib/Ebooksforlib.pm:158
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -123,7 +123,7 @@ msgstr "Kontakt oss"
 msgid "Count"
 msgstr "Antall"
 
-#: views/book.tt:307
+#: views/book.tt:341
 msgid "Covers"
 msgstr "Omslag"
 
@@ -139,7 +139,7 @@ msgstr "Aktive lån"
 msgid "Date"
 msgstr "Utgitt"
 
-#: views/book.tt:310
+#: views/book.tt:344
 msgid "Delete"
 msgstr "Slett"
 
@@ -159,7 +159,7 @@ msgstr "Slettet"
 msgid "Description"
 msgstr "Omtale"
 
-#: views/book.tt:303 views/creator.tt:18 views/list.tt:29
+#: views/book.tt:337 views/creator.tt:18 views/list.tt:29
 msgid "Edit"
 msgstr "Rediger"
 
@@ -194,6 +194,10 @@ msgstr "Mislykkede innlogginger"
 #: views/superadmin_delete_book.tt:17
 msgid "File"
 msgstr "Fil"
+
+#: views/books_imported.tt:18
+msgid "File ID"
+msgstr "Fil-ID"
 
 #: views/superadmin_delete_book.tt:12
 msgid "Files and items"
@@ -255,7 +259,7 @@ msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn 
 msgid "Item"
 msgstr "Eksemplar"
 
-#: views/book.tt:306
+#: views/book.tt:340
 msgid "Items"
 msgstr "Eksemplarer"
 
@@ -267,7 +271,7 @@ msgstr "Behold historikk"
 msgid "Library"
 msgstr "Bibliotek"
 
-#: views/book.tt:305 views/book.tt:70 views/lists.tt:13
+#: views/book.tt:339 views/book.tt:70 views/lists.tt:13
 msgid "Lists"
 msgstr "Lister"
 
@@ -299,7 +303,7 @@ msgstr "Logger"
 msgid "Maximum number of concurrent loans"
 msgstr "Maks samtidige lån"
 
-#: views/book.tt:289
+#: views/book.tt:323
 msgid "More books by"
 msgstr "Flere bøker av"
 
@@ -337,13 +341,13 @@ msgstr "Nei"
 
 #: views/book.tt:143
 msgid "No available copies"
-msgstr "Ingen tilgjengelige eksmeplarer"
+msgstr "Ingen tilgjengelige eksemplarer"
 
 #: views/books_items.tt:7
 msgid "Normal view"
 msgstr "Normal visning"
 
-#: lib/Ebooksforlib.pm:167
+#: lib/Ebooksforlib.pm:173
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
@@ -459,7 +463,7 @@ msgstr "Statistikk: Kjønn"
 msgid "Switch library"
 msgstr "Bytt bibliotek"
 
-#: views/books_imported.tt:19
+#: views/books_imported.tt:32
 msgid "There are no imported books that need looking after."
 msgstr "Det er importerte bøker som må kontrolleres"
 
@@ -615,7 +619,7 @@ msgstr "dager"
 msgid "eBib lets you borrow electronic books for free from your local library."
 msgstr "Med eBib kan du låne gratis e-bøker fra ditt lokale bibliotek."
 
-#: views/superadmin_delete_book.tt:17
+#: views/books_imported.tt:19 views/superadmin_delete_book.tt:17
 msgid "from"
 msgstr "fra"
 
@@ -626,6 +630,10 @@ msgstr "her"
 #: views/my.tt:68
 msgid "hours"
 msgstr "timer"
+
+#: views/books_imported.tt:24
+msgid "items"
+msgstr "eksemplarer"
 
 #: views/chooselib.tt:22
 msgid "lets you borrow electronic books for free from your local library."

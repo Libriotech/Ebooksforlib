@@ -47,7 +47,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: views/book.tt:301
+#: views/book.tt:335
 msgid "Admin actions"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
 msgstr ""
 
-#: views/book.tt:304
+#: views/book.tt:338
 msgid "Authors"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Borrowed"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:152
+#: lib/Ebooksforlib.pm:158
 msgid "Choose library"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: views/book.tt:307
+#: views/book.tt:341
 msgid "Covers"
 msgstr ""
 
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: views/book.tt:310
+#: views/book.tt:344
 msgid "Delete"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: views/book.tt:303 views/creator.tt:18 views/list.tt:29
+#: views/book.tt:337 views/creator.tt:18 views/list.tt:29
 msgid "Edit"
 msgstr ""
 
@@ -173,6 +173,10 @@ msgstr ""
 
 #: views/superadmin_delete_book.tt:17
 msgid "File"
+msgstr ""
+
+#: views/books_imported.tt:18
+msgid "File ID"
 msgstr ""
 
 #: views/superadmin_delete_book.tt:12
@@ -231,7 +235,7 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: views/book.tt:306
+#: views/book.tt:340
 msgid "Items"
 msgstr ""
 
@@ -243,7 +247,7 @@ msgstr ""
 msgid "Library"
 msgstr ""
 
-#: views/book.tt:305 views/book.tt:70 views/lists.tt:13
+#: views/book.tt:339 views/book.tt:70 views/lists.tt:13
 msgid "Lists"
 msgstr ""
 
@@ -275,7 +279,7 @@ msgstr ""
 msgid "Maximum number of concurrent loans"
 msgstr ""
 
-#: views/book.tt:289
+#: views/book.tt:323
 msgid "More books by"
 msgstr ""
 
@@ -311,7 +315,7 @@ msgstr ""
 msgid "Normal view"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:167
+#: lib/Ebooksforlib.pm:173
 msgid "Not a valid library."
 msgstr ""
 
@@ -407,7 +411,7 @@ msgstr ""
 msgid "Switch library"
 msgstr ""
 
-#: views/books_imported.tt:19
+#: views/books_imported.tt:32
 msgid "There are no imported books that need looking after."
 msgstr ""
 
@@ -519,7 +523,7 @@ msgstr ""
 msgid "days"
 msgstr ""
 
-#: views/superadmin_delete_book.tt:17
+#: views/books_imported.tt:19 views/superadmin_delete_book.tt:17
 msgid "from"
 msgstr ""
 
@@ -529,6 +533,10 @@ msgstr ""
 
 #: views/my.tt:68
 msgid "hours"
+msgstr ""
+
+#: views/books_imported.tt:24
+msgid "items"
 msgstr ""
 
 #: views/chooselib.tt:22
