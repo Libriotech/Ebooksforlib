@@ -12,6 +12,19 @@
             <a href="/books/add_from_isbn?isbn=[% book.isbn %]&amp;id=[% book.id %]&amp;[% INCLUDE 'csrf_link.tt' %]">[% book.id %]: [% book.isbn %]</a> |
             <a href="https://www.deich.folkebibl.no/cgi-bin/websok?sourceid=egendef&amp;mode=vistitler&amp;st=p&amp;publikumskjema=1&amp;indekssok_kval=&amp;pubsok_kval_0=&amp;pubsok_txt_0=[% book.isbn %]">Deichman</a> |
             <a href="http://data.deichman.no/sparql?default-graph-uri=&amp;query=SELECT+*+WHERE+{%0D%0A%3Fs+%3Chttp%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2Fisbn%3E+%22[% book.isbn %]%22+.%0D%0A%3Fs+%3Fp+%3Fo+.%0D%0A}&amp;format=text%2Fhtml&amp;timeout=0&amp;debug=on">Triplestore</a>
+            <ul>
+            [% FOREACH file IN book.files %]
+                <li>
+                    [% l( 'File ID' ) %]: [% file.id %] 
+                    [% l( 'from' ) %] [% file.provider.name %]
+                    [% SET num_items = 0 %]
+                    [% FOREACH item IN file.items %]
+                        [% num_items = num_items + 1 %]
+                    [% END %]
+                    ([% num_items %] [% l( 'items' ) %])
+                </li>
+            [% END %]
+            </ul>
         </li>
     [% END %]
     </ul>
