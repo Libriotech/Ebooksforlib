@@ -18,13 +18,8 @@ use Ebooksforlib::Util;
 get '/' => sub {
 
     my @lists = resultset('List')->search({
-        -and => [
-            'list_libraries.frontpage'      => 1,
-            -or => [
-                'list_libraries.library_id' => _get_library_for_admin_user(),
-                'is_global'                 => 1,
-            ],
-        ],
+        'list_libraries.frontpage'      => 1,
+        'list_libraries.library_id' => session('chosen_library'),
     },{
         'join'     => 'list_libraries',
         'order_by' => 'list_libraries.frontpage_order',
