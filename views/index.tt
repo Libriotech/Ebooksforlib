@@ -37,16 +37,17 @@
 
 <div class="velg-sjanger visible-phone center">Velg sjanger:</div>
 
-[% FOREACH booklist IN booklists %]
+[%# Loops over local and global lists for the chosen library, that are set to display on the front page. %]
+[% FOREACH list IN lists %]
 
 <!-- FOR MOBIL VIEWPORT -->
 
-<section id="[% booklist.list.name %]" class="visible-phone">
+<section id="[% list.list.name %]" class="visible-phone">
 	<div class="article-mobil">
 		<div class="container content-container">
 			<div class="row">
 				<div class="span12">
-					<a class="genre-title-mobile" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
+					<a class="genre-title-mobile" href="/list/[% list.list.id %]">[% list.list.name %] <i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
 				</div>
 			</div>
 		</div>
@@ -56,7 +57,7 @@
 
 <!-- FOR NETTBRETT OG STØRRE VIEWPORTS -->
 
-<section id="[% booklist.list.name %]" class="hidden-phone">
+<section id="[% list.list.name %]" class="hidden-phone">
 
 <a href="javascript:scrolldown();" class="scroll-down"><i class="fa fa-angle-down"></i></a> <!-- scroll ned knapp -->
 
@@ -65,8 +66,8 @@
     <div class="row">
     	<div class="span12 center">
     		<div class="genre-head">
-    	    	<a class="genre-title" href="/list/[% booklist.list.id %]">[% booklist.list.name %] <i class="fa fa-angle-right visible-phone" style="margin-left:10px;"></i></a>
-    			<a class="genre-btn pull-right hidden-phone" href="/list/[% booklist.list.id %]">Se alle<i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
+                <a class="genre-title" href="/list/[% list.id %]">[% list.name %] <i class="fa fa-angle-right visible-phone" style="margin-left:10px;"></i></a>
+                <a class="genre-btn pull-right hidden-phone" href="/list/[% list.id %]">Se alle<i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
     		</div>
     	</div>
     </div>
@@ -74,22 +75,23 @@
     <div class="row">
     <div class="span12">
       	<ul class="utvalgte">
-            [% FOREACH booklistitem IN booklist.booklist %]
-                [% IF booklistitem.promoted == 1 %]
+            [%# Loops over the books in each list and picks out any that are promoted %]
+            [% FOREACH listitem IN list.list_books %]
+                [% IF listitem.promoted == 1 %]
 			        <li>
 				        <div class="book-block">
-					        <a href="/book/[% booklistitem.book.id %]" class="utvalgte-img">
-						        [% IF booklistitem.book.coverurl %]
-                                    <img src="/cover/[% booklistitem.book.id %]">
+					        <a href="/book/[% listitem.id %]" class="utvalgte-img">
+						        [% IF listitem.book.coverurl %]
+                                    <img src="/cover/[% listitem.book.id %]">
                                 [% ELSE %]
                                     <img src="/img/missing-cover.png">
                                 [% END %]
 					        </a>
 					        <div class="li-text-portal">
-					        	<a href="/book/[% booklistitem.book.id %]">
-						        	<h4 class="title-alt max-1l ellipsis">[% booklistitem.book.title %]</h4>
-						        	<p class="author-alt">[% booklistitem.book.creators_as_string %]</p>
-						        	[% SET descriptions = booklistitem.book.get_descriptions %]
+					        	<a href="/book/[% listitem.book.id %]">
+						        	<h4 class="title-alt max-1l ellipsis">[% listitem.book.title %]</h4>
+						        	<p class="author-alt">[% listitem.book.creators_as_string %]</p>
+						        	[% SET descriptions = listitem.book.get_descriptions %]
 						        </a>
 						        <p class="intro max-5l ellipsis">
 				                    [% IF descriptions.results.bindings.size %]
@@ -127,19 +129,20 @@
 			</div>
 			<ul class="block-list bxslider bxhidden">
                 [% SET counter = 0 %]
-        		[% FOREACH booklistitem IN booklist.booklist.reverse %]
-         		   [% IF booklistitem.promoted != 1 %]
+                [%# Loops over the books in each list and picks out any that are NOT promoted %]
+        		[% FOREACH listitem IN list.list_books.reverse %]
+         		   [% IF listitem.promoted != 1 %]
 			    		<li>
-				    		<a href="/book/[% booklistitem.book.id %]" class="book-block-alt">
+				    		<a href="/book/[% listitem.book_id %]" class="book-block-alt">
 					    		<div class="block-list-img">
-					        		[% IF booklistitem.book.coverurl %]
-                                		<img src="/cover/[% booklistitem.book.id %]">
+					        		[% IF listitem.book.coverurl %]
+                                		<img src="/cover/[% listitem.book.id %]">
                             		[% ELSE %]
                                 		<img src="/img/missing-cover.png">
                             		[% END %]
 						    		<div class="li-text">
-							    		<h4 class="title max-1l ellipsis">[% booklistitem.book.title %]</h4>
-							    		<p class="author max-1l ellipsis">[% booklistitem.book.creators_as_string %]</p>
+							    		<h4 class="title max-1l ellipsis">[% listitem.book.title %]</h4>
+							    		<p class="author max-1l ellipsis">[% listitem.book.creators_as_string %]</p>
 						    		</div>
 					    		</div>
 				    		</a>
@@ -159,14 +162,14 @@
  </section>
     
 [% END %]
-[%# END of FOREACH booklist IN booklists %]
+[%# END of FOREACH list IN lists %]
 
 
 
 <!-- BOKLISTE MOBIL
 ************************************* -->
 
-[% IF mobilebooklist %]
+[% IF mobilelist %]
 <div class="siste visible-phone center">Siste:</div>
 <section id="bokliste-mobil" class="visible-phone">
 <div class="article-list-mobil">
@@ -174,21 +177,21 @@
 		<div class="row">
 			<div class="span12">
 				<ul class="utlisting">
-	    			[% FOREACH booklistitem IN mobilebooklist.reverse %]
+	    			[% FOREACH listitem IN mobilelist.reverse %]
 					<li>
-						<a href="/book/[% booklistitem.book.id %]" class="book-block">
+						<a href="/book/[% listitem.book.id %]" class="book-block">
 							<div class="utlisting-img">
-								[% IF booklistitem.book.coverurl %]
-                        			<img src="/cover/[% booklistitem.book.id %]">
+								[% IF listitem.book.coverurl %]
+                        			<img src="/cover/[% listitem.book.id %]">
                     			[% ELSE %]
                         		[%# FIXME This URL shoul dnot be hard coded %]
                         			<img src="/img/missing-cover.png">
                     			[% END %]
                     		</div>
 							<div class="li-text-portal">
-								<h4 class="title">[% booklistitem.book.title %]</h4>
+								<h4 class="title">[% listitem.book.title %]</h4>
 								<p class="author">
-							    	[% FOREACH creator IN booklistitem.book.creators %]
+							    	[% FOREACH creator IN listitem.book.creators %]
                         	        	[% creator.name %][% UNLESS loop.last() %],[% END %]
                         	    	[% END %]
                   		      	</p>
@@ -205,6 +208,6 @@
 	</div>
 </div>
 </section>
-[%# INCLUDE 'books_table.tt' books=mobilebooklist %]
+[%# INCLUDE 'books_table.tt' books=mobilelist %]
 
 [% END %]

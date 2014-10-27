@@ -1,43 +1,52 @@
 <div class="container">
 
-<h2>Lists</h2>
-
-<p><a href="/lists/add"><img src="/images/script_add.png" height="16" width="16" alt="Edit" title="Edit"> Add a new genre or list</a></p>
-
-<h3>Genres</h3>
-<ul>
-[% FOREACH list IN lists %]
-    [% IF list.is_genre == 1 %]
-        <li>
-        <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+[% BLOCK list_li %]
+    <li>
+    <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
+    [% IF show_delete == 1 %]
         <a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
-        <a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size or 0 %])
-        [% IF list.frontpage == 1 %]
-            <span title="Show this list on the front page">frontpage</span>
-        [% END %]
-        [% IF list.mobile == 1 %]
-            <span title="Use this list on the mobile view of the front page">mobile</span>
-        [% END %]
-        </li>
+    [% END %]
+    <a href="/list/[% list.id %]">[% list.name %]</a>
+    [% IF show_book_count == 1 %]
+        ([% list.books.size or 0 %])
+    [% END %]
+    [% IF list.list_libraries.frontpage == 1 %]
+        <span title="Show this list on the front page">[% l( 'frontpage' ) %]</span>
+    [% END %]
+    [% IF list.list_libraries.mobile == 1 %]
+        <span title="Use this list on the mobile view of the front page">[% l( 'mobile' ) %]</span>
+    [% END %]
+    </li>
+[% END %]
+
+<h2>Global genres/lists</h2>
+
+<h3>Global genres</h3>
+<ul>
+[% FOREACH list IN global_lists %]
+    [% IF list.is_genre == 1 %]
+        [% PROCESS list_li show_delete="0" show_book_count="0" %]
     [% END %]
 [% END %]
 </ul>
 
-<h3>Lists</h3>
+<h3>Global lists</h3>
 <ul>
-[% FOREACH list IN lists %]
+[% FOREACH list IN global_lists %]
     [% IF list.is_genre == 0 %]
-        <li>
-        <a href="/lists/edit/[% list.id %]"><img src="/images/script_edit.png" height="16" width="16" alt="Edit" title="Edit"></a>
-        <a href="/lists/delete/[% list.id %]"><img src="/images/script_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
-        <a href="/list/[% list.id %]">[% list.name %]</a> ([% list.books.size or 0 %])
-        [% IF list.frontpage == 1 %]
-            <span title="Show this list on the front page">frontpage</span>
-        [% END %]
-        [% IF list.mobile == 1 %]
-            <span title="Use this list on the mobile view of the front page">mobile</span>
-        [% END %]
-        </li>
+        [% PROCESS list_li show_delete="0" show_book_count="0" %]
+    [% END %]
+[% END %]
+</ul>
+
+<h2>Local lists</h2>
+
+<p><a href="/lists/add"><img src="/images/script_add.png" height="16" width="16" alt="Edit" title="Edit"> Add a new local list</a></p>
+
+<ul>
+[% FOREACH list IN local_lists %]
+    [% IF list.is_genre == 0 %]
+        [% PROCESS list_li show_delete="1" show_book_count="1" %]
     [% END %]
 [% END %]
 </ul>
@@ -47,11 +56,8 @@
 <p>Click and drag the elements below to reorder the lists/genres shown on the front page.</p>
 
 <ul id="frontpage_sort" class="ui-sortable">
-[% sorted_lists = lists.sort('frontpage_order') %]
-[% FOREACH list IN sorted_lists %]
-    [% IF list.frontpage == 1 %]
-         <li class="ui-state-default" id="[% list.id %]"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>[% list.name %]</li>
-    [% END %]
+[% FOREACH list IN frontpage_lists %]
+     <li class="ui-state-default" id="[% list.id %]"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>[% list.name %]</li>
 [% END %]
 </ul>
 

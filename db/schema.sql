@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS consortium_members;
 DROP TABLE IF EXISTS list_book;
+DROP TABLE IF EXISTS list_libraries;
 DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS user_libraries;
 DROP TABLE IF EXISTS loans;
@@ -112,12 +113,20 @@ CREATE TABLE book_creators (
 CREATE TABLE lists (
     id         INTEGER AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(255) NOT NULL,
-    library_id INTEGER NOT NULL,
     is_genre   INTEGER(1) DEFAULT 0,
-    frontpage  INTEGER(1) DEFAULT 0,
-    mobile     INTEGER(1) DEFAULT 0, -- use this list for the mobile view of the front page
-    frontpage_order INTEGER(10) DEFAULT 0 NOT NULL,
-    CONSTRAINT lists_fk_1 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
+    is_global  INTEGER(1) DEFAULT 0
+    -- FIXME frontpage_order INTEGER(10) DEFAULT 0 NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE list_libraries (
+    list_id         INTEGER NOT NULL, -- foreign key to the 'lists' table
+    library_id      INTEGER NOT NULL, -- foreign key to the 'libraries' table
+    frontpage       INTEGER(1) DEFAULT 0, -- display this list on the front page
+    frontpage_order INTEGER(10) NOT NULL DEFAULT '0', -- order of lists on the frontpage of the library
+    mobile          INTEGER(1) DEFAULT 0, -- use this list for the mobile view of the front page
+    PRIMARY KEY list_book (list_id, library_id),
+    CONSTRAINT list_libraries_fk_1 FOREIGN KEY (list_id)    REFERENCES lists     (id) ON DELETE CASCADE,
+    CONSTRAINT list_libraries_fk_2 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE list_book (
@@ -386,12 +395,18 @@ INSERT INTO book_creators SET book_id = 5, creator_id = 7;
 INSERT INTO book_creators SET book_id = 6, creator_id = 1;
 
 -- Lists
-INSERT INTO lists SET id = 1, name = 'Classics',          library_id = 1, is_genre = 1;
-INSERT INTO lists SET id = 2, name = 'Humour',            library_id = 1, is_genre = 1;
-INSERT INTO lists SET id = 3, name = 'Easter reading',    library_id = 1, is_genre = 0;
-INSERT INTO lists SET id = 4, name = 'Henrik recommends', library_id = 1, is_genre = 0;
-INSERT INTO lists SET id = 5, name = 'Funny stuff',       library_id = 2, is_genre = 1;
-INSERT INTO lists SET id = 6, name = 'Travel',            library_id = 2, is_genre = 1;
+INSERT INTO lists SET id = 1, name = 'Classics',          is_genre = 1, is_global = 1;
+INSERT INTO lists SET id = 2, name = 'Humour',            is_genre = 1, is_global = 1;
+INSERT INTO lists SET id = 3, name = 'Easter reading',    is_genre = 0, is_global = 0;
+INSERT INTO lists SET id = 4, name = 'Henrik recommends', is_genre = 0, is_global = 0;
+INSERT INTO lists SET id = 5, name = 'Travel',            is_genre = 1, is_global = 1;
+INSERT INTO lists SET id = 6, name = 'Pulitzer nominees', is_genre = 0, is_global = 1;
+INSERT INTO lists SET id = 7, name = 'Sigrid recommends', is_genre = 0, is_global = 0;
+
+-- Lists that belong to libraries
+INSERT INTO list_libraries SET list_id = 3, library_id = 1, frontpage = 0, frontpage_order = 1;
+INSERT INTO list_libraries SET list_id = 4, library_id = 2, frontpage = 1, frontpage_order = 2; -- Henrik recommends
+INSERT INTO list_libraries SET list_id = 7, library_id = 2, frontpage = 1, frontpage_order = 1; -- Sigrid recommends
 
 -- Books in lists
 INSERT INTO list_book SET list_id = 1, book_id = 1;
@@ -404,9 +419,7 @@ INSERT INTO list_book SET list_id = 3, book_id = 1;
 INSERT INTO list_book SET list_id = 3, book_id = 5;
 INSERT INTO list_book SET list_id = 4, book_id = 2;
 INSERT INTO list_book SET list_id = 4, book_id = 3;
-INSERT INTO list_book SET list_id = 5, book_id = 3;
 INSERT INTO list_book SET list_id = 5, book_id = 5;
-INSERT INTO list_book SET list_id = 6, book_id = 5;
 
 -- Comments
 INSERT INTO comments SET id = 1, book_id = 1, user_id = 2, time = NOW() - INTERVAL 4 DAY, comment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare sem eu diam dictum commodo. Nulla in egestas nunc. Nulla et auctor erat. Integer vestibulum posuere pellentesque. Aenean ornare pellentesque lectus, eget dictum est elementum eu. Duis lacinia nulla quis libero bibendum a auctor nunc ultricies. Vestibulum viverra magna vitae quam luctus rutrum. Pellentesque ac metus orci. Morbi vestibulum diam quis ligula luctus ut porta libero pharetra. Aenean eu sapien ac orci tempor sagittis. Vestibulum eget sagittis leo. Vivamus magna felis, rutrum et adipiscing id, aliquam in velit. Suspendisse sed lorem quam. Etiam orci tellus, aliquet quis sollicitudin vitae, dictum nec arcu. Nulla interdum, risus eu lacinia sollicitudin, lorem magna rhoncus mauris, ac aliquet turpis orci eu est. Quisque justo risus, vehicula nec bibendum et, pellentesque eget nisi.';

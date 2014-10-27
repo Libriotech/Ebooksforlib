@@ -201,17 +201,17 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 lists
+=head2 list_libraries
 
 Type: has_many
 
-Related object: L<Ebooksforlib::Schema::Result::List>
+Related object: L<Ebooksforlib::Schema::Result::ListLibrary>
 
 =cut
 
 __PACKAGE__->has_many(
-  "lists",
-  "Ebooksforlib::Schema::Result::List",
+  "list_libraries",
+  "Ebooksforlib::Schema::Result::ListLibrary",
   { "foreign.library_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -307,8 +307,8 @@ Composing rels: L</user_libraries> -> user
 __PACKAGE__->many_to_many("users", "user_libraries", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-10 11:19:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L32/+4GHNLiOG5ThxPA9cg
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-21 14:31:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:33dzUSPepDsMgcdEXxvA4w
 
 __PACKAGE__->add_columns(
   "piwik",

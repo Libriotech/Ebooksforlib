@@ -4,15 +4,20 @@
 
 [% INCLUDE 'admin_book_view.tt' %]
 
-<h2>Current lists</h2>
+<h2>[% l( 'Current lists and genres' ) %]</h2>
 
 <ul>
 [% SET lists_for_current_library = 0 %]
+[%# Loop over the lists connected to this book %]
 [% FOREACH list IN book.lists %]
-    [% IF list.library_id == library_id %]
+    [%# Check if the books are connected to our chosen library OR if they are global %]
+    [% IF list.list_libraries.library_id == library_id || list.is_global %]
         <li>
             <a href="/books/lists/delete/[% book.id %]/[% list.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/delete.png" height="16" width="16" alt="Delete from this list" title="Delete from this list"></a>
             <a href="/list/[% list.id %]">[% list.name %]</a>
+            [% IF list.is_global == 1 %]
+                <img src="/images/world.png" height="16" width="16" alt="[% l( 'Global list ' ) %]" title="[% l( 'Global list ' ) %]">
+            [% END %]
         </li>
         [% lists_for_current_library = lists_for_current_library + 1 %]
     [% END %]
@@ -20,18 +25,19 @@
 </ul>
 
 [% IF lists_for_current_library == 0 %]
-<p>This book is not connected to any lists, yet.</p>
+<p>[% l( 'This book is not connected to any lists, yet' ) %].</p>
 [% END %]
 
 <hr />
 
-<h2>Add to a list</h2>
+<h2>[% l( 'Add to a list' ) %]</h2>
 
 <form method="POST" action="/books/lists">
 <input type="hidden" name="book_id" id="book_id" value="[% book.id %]" />
 <select name="list_id" id="list_id">
-<option>Choose a list...</option>
-[% FOREACH list IN lists.sort('name') %]
+<option>[% l( 'Choose a list...' ) %]</option>
+<optgroup label="[% l( 'Global lists' ) %]">
+[% FOREACH list IN global_lists %]
     [% list_already_connected = 0 %]
     [% FOREACH booklist in book.lists %]
         [% IF list.id == booklist.id %]
@@ -42,11 +48,25 @@
         <option value="[% list.id %]">[% list.name %]</option>
     [% END %]
 [% END %]
+</optgroup>
+<optgroup label="[% l( 'Local lists' ) %]">
+[% FOREACH list IN local_lists %]
+    [% list_already_connected = 0 %]
+    [% FOREACH booklist in book.lists %]
+        [% IF list.id == booklist.id %]
+            [% list_already_connected = 1 %]
+        [% END %]
+    [% END %]
+    [% IF list_already_connected == 0 %]
+        <option value="[% list.id %]">[% list.name %]</option>
+    [% END %]
+[% END %]
+</optgroup>
 </select>
 [% INCLUDE 'csrf_field.tt' %]
-<input type="submit" value="Add" />
+<input type="submit" value="[% l( 'Add' ) %]" />
 </form>
 
-<p><a href="/lists/add">Add a new list</a></p>
+<p><a href="/lists/add">[% l( 'Add a new list' ) %]</a></p>
 
 </div>

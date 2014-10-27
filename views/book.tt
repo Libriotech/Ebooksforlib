@@ -5,7 +5,7 @@
 <ul class="path">
     <li class="back-btn">
 	  	[% FOREACH list IN book.lists %]
-            [% IF list.library.id == session.chosen_library %]
+            [% IF list.list_libraries.library_id == session.chosen_library || list.is_global == 1 %]
                 <a href="/list/[% list.id %]">[% list.name %][% UNLESS loop.last() %],[% END %]</a>
             [% END %]
 		[% END %]
@@ -53,10 +53,10 @@
                 [% SET genres = [] %]
                 [% SET lists  = [] %]
                 [% FOREACH list IN book.lists %]
-                    [% IF list.is_genre == 1 && list.library.id == session.chosen_library %]
+                    [% IF list.is_genre == 1 && ( list.list_libraries.library_id == session.chosen_library || list.is_global == 1 ) %]
                         [% genres.push( list ) %]
                     [% END %]
-                    [% IF list.is_genre == 0 && list.library.id == session.chosen_library %]
+                    [% IF list.is_genre == 0 && ( list.list_libraries.library_id == session.chosen_library || list.is_global == 1 ) %]
                         [% lists.push( list ) %]
                     [% END %]
                 [% END %]

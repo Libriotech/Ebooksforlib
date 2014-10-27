@@ -47,35 +47,17 @@ __PACKAGE__->table("lists");
   is_nullable: 0
   size: 255
 
-=head2 library_id
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 0
-
 =head2 is_genre
 
   data_type: 'integer'
   default_value: 0
   is_nullable: 1
 
-=head2 frontpage
+=head2 is_global
 
   data_type: 'integer'
   default_value: 0
   is_nullable: 1
-
-=head2 mobile
-
-  data_type: 'integer'
-  default_value: 0
-  is_nullable: 1
-
-=head2 frontpage_order
-
-  data_type: 'integer'
-  default_value: 0
-  is_nullable: 0
 
 =cut
 
@@ -84,16 +66,10 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 0, size => 255 },
-  "library_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_genre",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
-  "frontpage",
+  "is_global",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
-  "mobile",
-  { data_type => "integer", default_value => 0, is_nullable => 1 },
-  "frontpage_order",
-  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -110,21 +86,6 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 library
-
-Type: belongs_to
-
-Related object: L<Ebooksforlib::Schema::Result::Library>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "library",
-  "Ebooksforlib::Schema::Result::Library",
-  { id => "library_id" },
-  { is_deferrable => 1, on_delete => "CASCADE", on_update => "RESTRICT" },
-);
-
 =head2 list_books
 
 Type: has_many
@@ -140,9 +101,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 list_libraries
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-09-26 15:15:41
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p7qfNAMAeMC1cSnxrUCq8A
+Type: has_many
+
+Related object: L<Ebooksforlib::Schema::Result::ListLibrary>
+
+=cut
+
+__PACKAGE__->has_many(
+  "list_libraries",
+  "Ebooksforlib::Schema::Result::ListLibrary",
+  { "foreign.list_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-21 14:31:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QoAcerHepItcs2AKtbQonw
 
 __PACKAGE__->many_to_many( books => 'list_books', 'book' );
 

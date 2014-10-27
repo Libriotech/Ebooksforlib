@@ -130,10 +130,10 @@ hook 'before' => sub {
     # TODO Perhaps have a list of pages that need the data here, to check
     # against? 
     # FIXME Not sure this is a good idea anymore...
-    my @lists = rset('List')->search({
-        'library_id' => session('chosen_library')
-    });
-    var lists => \@lists;
+    # my @lists = rset('List')->search({
+    #     'library_id' => session('chosen_library')
+    # });
+    # var lists => \@lists;
 
 };
 

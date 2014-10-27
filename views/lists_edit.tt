@@ -1,5 +1,4 @@
 [% META pagetitle = 'Edit list' %]
-[% USE Dumper %]
 
 <div class="container">
 

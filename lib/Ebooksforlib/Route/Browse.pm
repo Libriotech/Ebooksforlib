@@ -17,35 +17,20 @@ use Ebooksforlib::Util;
 
 get '/' => sub {
 
-    my @booklists;
-
-    # Find all the lists for this library, that should be shown on the front page
-    my @lists = rset('List')->search({
-        'library_id' => session('chosen_library'),
-        'frontpage'  => 1,
-    }, {
-        'order_by' => 'frontpage_order',
+    my @lists = resultset('List')->search({
+        -and => [
+            'list_libraries.frontpage'      => 1,
+            -or => [
+                'list_libraries.library_id' => _get_library_for_admin_user(),
+                'is_global'                 => 1,
+            ],
+        ],
+    },{
+        'join'     => 'list_libraries',
+        'order_by' => 'list_libraries.frontpage_order',
     });
-    # Get the ListBook's for each list
-    # FIXME Why do I do this? Can't I get the books from the lists themselves?!? 
-    foreach my $list ( @lists ) {
-        my @booklist = rset('ListBook')->search({ list_id => $list->id });
-        push @booklists, { booklist => \@booklist, list => $list };
-    }
-        
-    my @mobile = rset('List')->search({
-        'library_id' => session('chosen_library'),
-        'mobile'     => 1,
-    });
-    my @mobilebooklist;
-    if ( $mobile[0] ) {
-        @mobilebooklist = rset('ListBook')->search({ list_id => $mobile[0]->id });
-    }
-    
-    var hide_dropdowns => 1;    
     template 'index', { 
-        booklists      => \@booklists, 
-        mobilebooklist => \@mobilebooklist, 
+        lists => \@lists,
     };
     
 };

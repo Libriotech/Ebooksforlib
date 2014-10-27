@@ -22,7 +22,7 @@ sub errcode{
 }
 
 sub errinit{
-  my $errfile = '/home/ebokdev/error.txt'; # config->{'errlog'};
+  my $errfile = '/home/magnus/error.txt'; # config->{'errlog'};
   open my $fh, '<', $errfile or return; 
   while ( my $line = <$fh> ){
     my ($date,$code,$err) = split(';', $line);
@@ -34,7 +34,7 @@ sub errinit{
 }
 
 sub errexit{
-  my $errfile = '/home/ebokdev/error.txt'; # config->{'errlog'};
+  my $errfile = '/home/magnus/error.txt'; # config->{'errlog'};
   open my $fh, '>', $errfile or return; 
   foreach my $err (sort {$errcodes{$a}[0] <=> $errcodes{$b}[0]} keys %errcodes){
     print $fh $errcodes{$err}[1].";".$errcodes{$err}[0].";".$err.";\n" if($errcodes{$err}[1]);

@@ -1,6 +1,10 @@
 [% META pagetitle = 'Remove books from a list' %]
 
+<div class="container">
+
 <h2>[% list.name %]</h2> 
+
+<p>Remove books from this list:</p>
 
 [% IF list.books.size %]
     <ul>
@@ -14,3 +18,5 @@
 [% ELSE %]
     <p>There are no books in this list yet!</p>
 [% END %]
+
+</div>
