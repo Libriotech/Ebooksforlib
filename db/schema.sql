@@ -124,7 +124,7 @@ CREATE TABLE list_libraries (
     frontpage       INTEGER(1) DEFAULT 0, -- display this list on the front page
     frontpage_order INTEGER(10) NOT NULL DEFAULT '0', -- order of lists on the frontpage of the library
     mobile          INTEGER(1) DEFAULT 0, -- use this list for the mobile view of the front page
-    PRIMARY KEY list_book (list_id, library_id),
+    PRIMARY KEY list_library (list_id, library_id),
     CONSTRAINT list_libraries_fk_1 FOREIGN KEY (list_id)    REFERENCES lists     (id) ON DELETE CASCADE,
     CONSTRAINT list_libraries_fk_2 FOREIGN KEY (library_id) REFERENCES libraries (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
