@@ -80,7 +80,7 @@
                 [% IF listitem.promoted == 1 %]
 			        <li>
 				        <div class="book-block">
-					        <a href="/book/[% listitem.id %]" class="utvalgte-img">
+					        <a href="/book/[% listitem.book.id %]" class="utvalgte-img">
 						        [% IF listitem.book.coverurl %]
                                     <img src="/cover/[% listitem.book.id %]">
                                 [% ELSE %]
