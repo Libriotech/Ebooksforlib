@@ -19,11 +19,11 @@
     </li>
 [% END %]
 
-<h2>Global genres/lists</h2>
+<h2>Global genres/lists - all</h2>
 
 <h3>Global genres</h3>
 <ul>
-[% FOREACH list IN global_lists %]
+[% FOREACH list IN global_lists_all %]
     [% IF list.is_genre == 1 %]
         [% PROCESS list_li show_delete="0" show_book_count="0" %]
     [% END %]
@@ -32,7 +32,27 @@
 
 <h3>Global lists</h3>
 <ul>
-[% FOREACH list IN global_lists %]
+[% FOREACH list IN global_lists_all %]
+    [% IF list.is_genre == 0 %]
+        [% PROCESS list_li show_delete="0" show_book_count="0" %]
+    [% END %]
+[% END %]
+</ul>
+
+<h2>Global genres/lists - on the frontpage</h2>
+
+<h3>Global genres</h3>
+<ul>
+[% FOREACH list IN global_lists_frontpage %]
+    [% IF list.is_genre == 1 %]
+        [% PROCESS list_li show_delete="0" show_book_count="0" %]
+    [% END %]
+[% END %]
+</ul>
+
+<h3>Global lists</h3>
+<ul>
+[% FOREACH list IN global_lists_frontpage %]
     [% IF list.is_genre == 0 %]
         [% PROCESS list_li show_delete="0" show_book_count="0" %]
     [% END %]

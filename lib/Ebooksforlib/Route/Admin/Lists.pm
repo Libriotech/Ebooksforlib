@@ -18,23 +18,22 @@ use Ebooksforlib::Err;
 ### Lists
 
 get '/admin/lists' => require_role admin => sub { 
-    my @global_lists = resultset('List')->search({
-        -and => [
-            is_global  => 1,
-            -or => [
-                'list_libraries.library_id' => _get_library_for_admin_user(),
-                'list_libraries.library_id' => undef
-            ],
-        ],
+    my @global_lists_all = resultset('List')->search({
+        is_global  => 1,
+    });
+    my @global_lists_frontpage = resultset('List')->search({
+        is_global  => 1,
+        'list_libraries.library_id' => _get_library_for_admin_user(),
+        'list_libraries.frontpage' => 1,
     },{
-        join => 'list_libraries',
+        'prefetch' => 'list_libraries',
     });
     my @local_lists = resultset('List')->search({
         is_global                   => 0,
         is_genre                    => 0,
         'list_libraries.library_id' => _get_library_for_admin_user(),
     },{
-        join => 'list_libraries',
+        'prefetch' => 'list_libraries',
     });
     my @frontpage_lists = resultset('List')->search({
         'list_libraries.library_id' => _get_library_for_admin_user(),
@@ -44,9 +43,10 @@ get '/admin/lists' => require_role admin => sub {
         order_by => 'list_libraries.frontpage_order',
     });
     template 'admin_lists', {
-        global_lists    => \@global_lists,
-        local_lists     => \@local_lists,
-        frontpage_lists => \@frontpage_lists,
+        global_lists_all       => \@global_lists_all,
+        global_lists_frontpage => \@global_lists_frontpage,
+        local_lists            => \@local_lists,
+        frontpage_lists        => \@frontpage_lists,
     };
 };
 
