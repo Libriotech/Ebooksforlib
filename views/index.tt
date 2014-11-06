@@ -42,12 +42,12 @@
 
 <!-- FOR MOBIL VIEWPORT -->
 
-<section id="[% list.list.name %]" class="visible-phone">
+<section id="[% list.name %]" class="visible-phone">
 	<div class="article-mobil">
 		<div class="container content-container">
 			<div class="row">
 				<div class="span12">
-					<a class="genre-title-mobile" href="/list/[% list.list.id %]">[% list.list.name %] <i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
+					<a class="genre-title-mobile" href="/list/[% list.id %]">[% list.name %] <i class="fa fa-angle-right" style="margin-left:10px;"></i></a>
 				</div>
 			</div>
 		</div>
