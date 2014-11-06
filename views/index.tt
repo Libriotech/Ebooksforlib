@@ -132,6 +132,17 @@
                 [%# Loops over the books in each list and picks out any that are NOT promoted %]
         		[% FOREACH listitem IN list.list_books.reverse %]
          		   [% IF listitem.promoted != 1 %]
+	                    [%# Check that this book has at least one item that is not deleted and that is available to the chosen library %]
+                        [%# FIXME This solutin is probably not ideal, it would probably be better to limit in the DBIC query in the route %]
+                        [% SET available_items = 0 %]
+                        [% FOREACH file IN book.files %]
+                            [% FOREACH item IN file.items %]
+                                [% IF item.deleted != 1 && item.is_available_to( session.chosen_library ) == 1 %]
+                                    [% available_items = available_items + 1 %]
+                                [% END %]
+                            [% END %]
+                        [% END %]
+                        [% NEXT IF available_items == 0 %]
 			    		<li>
 				    		<a href="/book/[% listitem.book_id %]" class="book-block-alt">
 					    		<div class="block-list-img">
@@ -149,7 +160,7 @@
 			    		</li>
 		    		[% END %]
                     [% counter = counter + 1 %]
-                    [% LAST IF counter == 80 %]
+                    [% LAST IF counter == 40 %]
 				[% END %]
 			</ul>
       </div>
