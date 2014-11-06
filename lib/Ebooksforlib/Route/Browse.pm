@@ -165,6 +165,10 @@ get '/lists' => sub {
 get '/list/:id' => sub {
     my $list_id = param 'id';
     my $list = rset('List')->find( $list_id );
+    # FIXME List display should be limited the currently chosen library. At the
+    # moment we are doing this by looping over all items in the template. This
+    # is probably far from ideal, it would be better to do it in here, in the
+    # DBIC query. https://github.com/Libriotech/Ebooksforlib/issues/18
     template 'list', { 
         list      => $list,
         pagetitle => $list->name,

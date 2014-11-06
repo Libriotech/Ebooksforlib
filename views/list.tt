@@ -21,15 +21,13 @@
 </div>
 
 [%# Display admin links if the user has the right role %]
-[% FOREACH role IN session.logged_in_user_roles %]
-    [% IF role == 'admin' %]
-<div class="adminactions">
-<p>Admin actions</p>
-<p>
-    <a href="/lists/edit/[% list.id %]" title="[% l('Edit this list') %]">[% l('Edit') %]</a> |
-    <a href="/lists/books/[% list.id %]" title="[% l('Delete books from this list') %]">[% l('Delete books') %]</a>
-</p>
-</div>
-    [% END %]
+[% IF session.user_is_admin == 1 %]
+    <div class="adminactions">
+    <p>Admin actions</p>
+    <p>
+        <a href="/lists/edit/[% list.id %]" title="[% l('Edit this list') %]">[% l('Edit') %]</a> |
+        <a href="/lists/books/[% list.id %]" title="[% l('Delete books from this list') %]">[% l('Delete books') %]</a>
+    </p>
+    </div>
 [% END %]
 </div>
