@@ -3,7 +3,7 @@
 		<div class="span9">
 			<div class="bg-white padding20">
 			
-<h1>[% page.title | html %]</h1>
+<h1>[% page.title %]</h1>
 [% page.text_html %]
 
 			</div>
