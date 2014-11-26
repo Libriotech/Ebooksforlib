@@ -27,6 +27,10 @@ msgstr "Om eBib"
 msgid "Active loans"
 msgstr "Aktive lån"
 
+#: views/books_lists.tt:67
+msgid "Add"
+msgstr "Legg til"
+
 #: views/admin_navbar.tt:8
 msgid "Add a new book"
 msgstr "Legg til en ny bok"
@@ -43,9 +47,17 @@ msgstr "Legg til en ny bok fra grunnen av"
 msgid "Add a new creator"
 msgstr "Legg til forfatter"
 
+#: views/books_lists.tt:70
+msgid "Add a new list"
+msgstr "Legg til en ny liste"
+
 #: views/admin_navbar.tt:9
 msgid "Add author"
 msgstr "Legg til forfatter"
+
+#: views/books_lists.tt:33
+msgid "Add to a list"
+msgstr "Legg til i en liste"
 
 #: views/admin.tt:5 views/admin_navbar.tt:3 views/admin_navbar.tt:5
 msgid "Admin"
@@ -83,6 +95,10 @@ msgstr "Er du sikker på at du ønsker å slette denne boka, inkludert alle tilk
 msgid "Authors"
 msgstr "Forfattere"
 
+#: views/superadmin_pages_edit.tt:10
+msgid "Back to page"
+msgstr "Tilbake til siden"
+
 #: lib/Ebooksforlib/Route/Login.pm:269
 msgid "Best regards,"
 msgstr "Vennlig hilsen"
@@ -107,7 +123,11 @@ msgstr "Lån denne boken i"
 msgid "Borrowed"
 msgstr "Lånt"
 
-#: lib/Ebooksforlib.pm:158
+#: views/books_lists.tt:38
+msgid "Choose a list..."
+msgstr "Velg en liste..."
+
+#: lib/Ebooksforlib.pm:159
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -131,6 +151,10 @@ msgstr "Omslag"
 msgid "Creators"
 msgstr "Forfattere"
 
+#: views/books_lists.tt:7
+msgid "Current lists and genres"
+msgstr "Eksisterende lister og sjangre"
+
 #: views/my.tt:37
 msgid "Current loans"
 msgstr "Aktive lån"
@@ -143,11 +167,11 @@ msgstr "Utgitt"
 msgid "Delete"
 msgstr "Slett"
 
-#: views/list.tt:30
+#: views/list.tt:29
 msgid "Delete books"
 msgstr "Slett bøker"
 
-#: views/list.tt:30
+#: views/list.tt:29
 msgid "Delete books from this list"
 msgstr "Slett bøker fra denne lista"
 
@@ -159,7 +183,7 @@ msgstr "Slettet"
 msgid "Description"
 msgstr "Omtale"
 
-#: views/book.tt:337 views/creator.tt:18 views/list.tt:29
+#: views/book.tt:337 views/creator.tt:18 views/list.tt:28
 msgid "Edit"
 msgstr "Rediger"
 
@@ -171,9 +195,13 @@ msgstr "Rediger eksemplarer"
 msgid "Edit this creator"
 msgstr "Rediger denne forfatteren"
 
-#: views/list.tt:29
+#: views/list.tt:28
 msgid "Edit this list"
 msgstr "Rediger denne lista"
+
+#: views/superadmin_pages_edit.tt:3
+msgid "Editing"
+msgstr "Redigerer"
 
 #: views/my.tt:15
 msgid "Email"
@@ -214,6 +242,14 @@ msgstr "Sjanger"
 #: views/lists.tt:4
 msgid "Genres"
 msgstr "Sjangre"
+
+#: views/books_lists.tt:19
+msgid "Global list "
+msgstr "Global liste "
+
+#: views/books_lists.tt:39
+msgid "Global lists"
+msgstr "Globale lister"
 
 #: views/book.tt:107
 msgid "Go to"
@@ -267,6 +303,10 @@ msgstr "Eksemplarer"
 msgid "Keep history"
 msgstr "Behold historikk"
 
+#: views/superadmin_pages_edit.tt:13
+msgid "Last edited"
+msgstr "Sist endret"
+
 #: views/my.tt:19
 msgid "Library"
 msgstr "Bibliotek"
@@ -282,6 +322,10 @@ msgstr "Lister og sjangre"
 #: views/book.tt:109
 msgid "Loan expires"
 msgstr "Lånet utløper"
+
+#: views/books_lists.tt:52
+msgid "Local lists"
+msgstr "Lokale lister"
 
 #: views/layouts/main.tt:191 views/layouts/main.tt:264 views/login_form.tt:23
 msgid "Log in"
@@ -347,7 +391,7 @@ msgstr "Ingen tilgjengelige eksemplarer"
 msgid "Normal view"
 msgstr "Normal visning"
 
-#: lib/Ebooksforlib.pm:173
+#: lib/Ebooksforlib.pm:174
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
@@ -423,7 +467,11 @@ msgstr "Lever"
 msgid "Returned"
 msgstr "Levert"
 
-#: lib/Ebooksforlib/Route/Browse.pm:165 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
+#: views/superadmin_pages_edit.tt:10
+msgid "Save"
+msgstr "Lagre"
+
+#: lib/Ebooksforlib/Route/Browse.pm:155 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
 msgid "Search"
 msgstr "Søk"
 
@@ -475,11 +523,15 @@ msgstr "Disse bøkene har blitt importert, og trenger metadata, omslagsbilder os
 msgid "This book is available to you"
 msgstr "Denne boka er tilgjengelig for deg"
 
+#: views/books_lists.tt:28
+msgid "This book is not connected to any lists, yet"
+msgstr "Denne boka er ikke knyttet til noen lister, enda"
+
 #: views/my.tt:45
 msgid "Time left"
 msgstr "Tid som gjenstår"
 
-#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6
+#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
 msgid "Title"
 msgstr "Tittel"
 
@@ -607,6 +659,10 @@ msgstr "som tilhører"
 msgid "books"
 msgstr "bøker"
 
+#: views/superadmin_pages_edit.tt:13
+msgid "by"
+msgstr "av"
+
 #: views/chooselib.tt:13
 msgid "consortium"
 msgstr "konsortium"
@@ -622,6 +678,10 @@ msgstr "Med eBib kan du låne gratis e-bøker fra ditt lokale bibliotek."
 #: views/books_imported.tt:19 views/superadmin_delete_book.tt:17
 msgid "from"
 msgstr "fra"
+
+#: views/admin_lists.tt:14
+msgid "frontpage"
+msgstr "forsiden"
 
 #: views/chooselib.tt:22
 msgid "here"
@@ -642,6 +702,10 @@ msgstr "lar deg låne elektroniske bøker gratis fra ditt bibliotek"
 #: views/my.tt:69
 msgid "minutes"
 msgstr "minutter"
+
+#: views/admin_lists.tt:17
+msgid "mobile"
+msgstr "mobil"
 
 #: views/my.tt:62
 msgid "months"

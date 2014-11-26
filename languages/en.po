@@ -23,6 +23,10 @@ msgstr ""
 msgid "Active loans"
 msgstr ""
 
+#: views/books_lists.tt:67
+msgid "Add"
+msgstr ""
+
 #: views/admin_navbar.tt:8
 msgid "Add a new book"
 msgstr ""
@@ -39,8 +43,16 @@ msgstr ""
 msgid "Add a new creator"
 msgstr ""
 
+#: views/books_lists.tt:70
+msgid "Add a new list"
+msgstr ""
+
 #: views/admin_navbar.tt:9
 msgid "Add author"
+msgstr ""
+
+#: views/books_lists.tt:33
+msgid "Add to a list"
 msgstr ""
 
 #: views/admin.tt:5 views/admin_navbar.tt:3 views/admin_navbar.tt:5
@@ -75,6 +87,10 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
+#: views/superadmin_pages_edit.tt:10
+msgid "Back to page"
+msgstr ""
+
 #: lib/Ebooksforlib/Route/Login.pm:269
 msgid "Best regards,"
 msgstr ""
@@ -95,7 +111,11 @@ msgstr ""
 msgid "Borrowed"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:158
+#: views/books_lists.tt:38
+msgid "Choose a list..."
+msgstr ""
+
+#: lib/Ebooksforlib.pm:159
 msgid "Choose library"
 msgstr ""
 
@@ -115,6 +135,10 @@ msgstr ""
 msgid "Covers"
 msgstr ""
 
+#: views/books_lists.tt:7
+msgid "Current lists and genres"
+msgstr ""
+
 #: views/my.tt:37
 msgid "Current loans"
 msgstr ""
@@ -127,11 +151,11 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: views/list.tt:30
+#: views/list.tt:29
 msgid "Delete books"
 msgstr ""
 
-#: views/list.tt:30
+#: views/list.tt:29
 msgid "Delete books from this list"
 msgstr ""
 
@@ -143,7 +167,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: views/book.tt:337 views/creator.tt:18 views/list.tt:29
+#: views/book.tt:337 views/creator.tt:18 views/list.tt:28
 msgid "Edit"
 msgstr ""
 
@@ -155,8 +179,12 @@ msgstr ""
 msgid "Edit this creator"
 msgstr ""
 
-#: views/list.tt:29
+#: views/list.tt:28
 msgid "Edit this list"
+msgstr ""
+
+#: views/superadmin_pages_edit.tt:3
+msgid "Editing"
 msgstr ""
 
 #: views/my.tt:15
@@ -193,6 +221,14 @@ msgstr ""
 
 #: views/lists.tt:4
 msgid "Genres"
+msgstr ""
+
+#: views/books_lists.tt:19
+msgid "Global list "
+msgstr ""
+
+#: views/books_lists.tt:39
+msgid "Global lists"
 msgstr ""
 
 #: views/book.tt:107
@@ -243,6 +279,10 @@ msgstr ""
 msgid "Keep history"
 msgstr ""
 
+#: views/superadmin_pages_edit.tt:13
+msgid "Last edited"
+msgstr ""
+
 #: views/my.tt:19
 msgid "Library"
 msgstr ""
@@ -257,6 +297,10 @@ msgstr ""
 
 #: views/book.tt:109
 msgid "Loan expires"
+msgstr ""
+
+#: views/books_lists.tt:52
+msgid "Local lists"
 msgstr ""
 
 #: views/layouts/main.tt:191 views/layouts/main.tt:264 views/login_form.tt:23
@@ -315,7 +359,7 @@ msgstr ""
 msgid "Normal view"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:173
+#: lib/Ebooksforlib.pm:174
 msgid "Not a valid library."
 msgstr ""
 
@@ -379,7 +423,11 @@ msgstr ""
 msgid "Returned"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Browse.pm:165 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
+#: views/superadmin_pages_edit.tt:10
+msgid "Save"
+msgstr ""
+
+#: lib/Ebooksforlib/Route/Browse.pm:155 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
 msgid "Search"
 msgstr ""
 
@@ -423,11 +471,15 @@ msgstr ""
 msgid "This book is available to you"
 msgstr ""
 
+#: views/books_lists.tt:28
+msgid "This book is not connected to any lists, yet"
+msgstr ""
+
 #: views/my.tt:45
 msgid "Time left"
 msgstr ""
 
-#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6
+#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
 msgid "Title"
 msgstr ""
 
@@ -515,6 +567,10 @@ msgstr ""
 msgid "books"
 msgstr ""
 
+#: views/superadmin_pages_edit.tt:13
+msgid "by"
+msgstr ""
+
 #: views/chooselib.tt:13
 msgid "consortium"
 msgstr ""
@@ -525,6 +581,10 @@ msgstr ""
 
 #: views/books_imported.tt:19 views/superadmin_delete_book.tt:17
 msgid "from"
+msgstr ""
+
+#: views/admin_lists.tt:14
+msgid "frontpage"
 msgstr ""
 
 #: views/chooselib.tt:22
@@ -545,6 +605,10 @@ msgstr ""
 
 #: views/my.tt:69
 msgid "minutes"
+msgstr ""
+
+#: views/admin_lists.tt:17
+msgid "mobile"
 msgstr ""
 
 #: views/my.tt:62
