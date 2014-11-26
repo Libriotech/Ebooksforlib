@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS libraries;
 DROP TABLE IF EXISTS sessioncounts;
 DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS pages;
 
 CREATE TABLE users (
     id        INTEGER     AUTO_INCREMENT PRIMARY KEY,
@@ -280,6 +281,14 @@ CREATE TABLE sessioncounts (
   CONSTRAINT sessioncounts_fk_1 FOREIGN KEY (session_id) REFERENCES sessions (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE pages (
+  slug        char(32) NOT NULL PRIMARY KEY,
+  title       varchar(255) NOT NULL,
+  text        TEXT,
+  last_edit   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  last_editor VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Sample data
 -- TODO Split this out into a separate file
 
@@ -441,6 +450,13 @@ INSERT INTO ratings SET user_id = 5, book_id = 2, rating = 2;
 INSERT INTO ratings SET user_id = 5, book_id = 3, rating = 5;
 INSERT INTO ratings SET user_id = 5, book_id = 4, rating = 3;
 INSERT INTO ratings SET user_id = 5, book_id = 5, rating = 5;
+
+-- Pages
+INSERT INTO pages SET slug = 'about',   title = 'About',    text = 'Some text here', last_editor = 'Sample Data';
+INSERT INTO pages SET slug = 'contact', title = 'Contact',  text = 'Some text here', last_editor = 'Sample Data';
+INSERT INTO pages SET slug = 'help',    title = 'Help',     text = 'Some text here', last_editor = 'Sample Data';
+INSERT INTO pages SET slug = 'info',    title = 'Info',     text = 'Some text here', last_editor = 'Sample Data';
+INSERT INTO pages SET slug = 'newuser', title = 'New user', text = 'Some text here', last_editor = 'Sample Data';
 
 -- Social links
 UPDATE libraries SET detail_head = 

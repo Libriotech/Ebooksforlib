@@ -91,11 +91,21 @@ get '/page/:slug' => sub {
     my $slug = param 'slug';
     
     # Allowed pages
-    my @pages = qw( help help2 help3 help4 help5 newuser about contact info );
-    # FIXME Apparently, ~~ is deprecated as of Perl 5.18 so replacing it here 
-    # would be a good idea
-    if ( /$slug/i ~~ @pages ) {
-        template 'page', { slug => "page_$slug.tt" };
+    my %pages = (
+        help    => 1,
+        newuser => 1,
+        about   => 1,
+        contact => 1,
+        info    => 1,
+    );
+    if ( $pages{ $slug } == 1 ) {
+        my $page = resultset('Page')->find( $slug );
+        # This will let us use page.text_html without autoescaping
+        $page->{'text_html'} = $page->text;
+        template 'page', {
+            'slug' => $slug,
+            'page' => $page,
+        };
     } else {
         return redirect '/';
     }

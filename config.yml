@@ -27,7 +27,8 @@ plugins:
     EscapeHTML:
         automatic_escaping: true
         traverse_objects: true
-        exclude_pattern: 'settings'
+        # exclude_pattern: 'settings'
+        exclude_pattern: '_html$'
 
 # template engine
 template: "template_toolkit"

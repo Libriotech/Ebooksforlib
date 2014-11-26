@@ -1,0 +1,24 @@
+<div class="container">
+
+<h1>[% l('Editing') %] "[% page.title %]"</h1>
+
+<form action="/superadmin/page/save" method="POST">
+[% INCLUDE 'csrf_field.tt' %]
+<input type="hidden" name="slug" value="[% page.slug %]"/>
+[% l('Title') %]: <input type="text" name="title" value="[% page.title %]"/><br/>
+<textarea name="text" style="height: 500px; width: 1000px;">[% page.text %]</textarea>
+<input type="submit" id="save" value="[% l('Save') %]"> <a href="/page/[% page.slug %]">[% l('Back to page') %]</a>
+</form>
+
+<p>[% l('Last edited') %]: [% page.last_edit %] [% l('by') %] [% page.last_editor %]</p>
+
+</div>
+
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>
+tinymce.init({
+    selector : 'textarea',
+    plugins : 'table link code',
+    extended_valid_elements : "span[!class]"
+});
+</script>
