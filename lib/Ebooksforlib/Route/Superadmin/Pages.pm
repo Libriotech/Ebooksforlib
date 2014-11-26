@@ -45,6 +45,10 @@ post '/superadmin/page/save' => require_role superadmin => sub {
         $page->set_column( 'last_editor', $user->name );
         $page->update;
         flash info => 'A page was updated!';
+        _log2db({
+            logcode => 'EDITPAGE',
+            logmsg  => "slug: $slug, editor: " . $user->name,
+        });
         redirect '/page/' . $slug;
     } catch {
         flash error => "Oops, we got an error:<br />".errmsg($_);
