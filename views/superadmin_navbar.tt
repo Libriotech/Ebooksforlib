@@ -6,6 +6,12 @@
             <li><a href="/superadmin/users">[% l('Users') %]</a></li>
             <li><a href="/superadmin/logs">[% l('Logs') %]</a></li>
             <li><a href="/superadmin/stats/failed">[% l('Failed logins') %]</a></li>
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">[% l('Statistics') %]</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/superadmin/stats/mostpop">[% l('Most popular titles') %]</a></li>
+                </ul>
+            </li>
         </ul>
     </li>
 </ul>

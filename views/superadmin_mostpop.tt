@@ -1,0 +1,24 @@
+<div class="container">
+
+<h2>Most popular titles</h2>
+
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th>Title</th>
+        <th>ISBN</th>
+        <th>Loans</th>
+    <tr>
+</thead>
+<tbody>
+    [% FOREACH book IN mostpop %]
+        <tr>
+        <td><a href="/book/[% book.id %]">[% book.title %]</a></td>
+        <td>[% book.isbn %]</td>
+        <td>[% book.loans %]</td>
+        </tr>
+    [% END %]
+</tbody>
+</table>
+
+</div>
