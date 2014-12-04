@@ -14,20 +14,17 @@ use Dancer::Plugin::FlashMessage;
 use Dancer::Exception qw(:all);
 use Ebooksforlib::Util;
 
-get '/superadmin/stats/mostpop' => require_role superadmin => sub { 
+get '/superadmin/stats/mostpop' => require_role superadmin => sub {
 
-    # my @mostpop = resultset('Book')->search(
-    #     undef,
-    # {
-    #     join => { files => { items => 'old_loans' } },
-    #     select   => [ 'title', 'isbn', { count => 'old_loans.id' } ],
-    #     as       => [qw/ title isbn count /],
-    #     group_by => [qw/ isbn /],
-    #     order_by => { -desc => 'count' },
-    #     rows => 10,
-    # });
+    my $library = param 'library';
+
+    my $library_limit;
+    if ( $library && $library =~ m/[0-9]{1,}/ && $library > 0 ) {
+        $library_limit = "AND l.library_id = $library";
+    }
+
     my $sth = database->prepare(
-'SELECT
+"SELECT
     b.id,
     b.title,
     b.isbn,
@@ -41,19 +38,27 @@ WHERE
     b.id = f.book_id AND
     f.id = i.file_id AND
     i.id = l.item_id
+    $library_limit
 GROUP BY
     isbn
 ORDER BY
     loans DESC
-LIMIT 10;'
+LIMIT 10;"
     );
     $sth->execute();
     my @mostpop;
     while ( my $book = $sth->fetchrow_hashref ) {
         push @mostpop, $book;
     }
+
+    my @libraries = rset('Library')->search(
+        { is_consortium => 0 },
+        { order_by => 'name' }
+    );
+
     template 'superadmin_mostpop', { 
-        mostpop => \@mostpop,
+        mostpop   => \@mostpop,
+        libraries => \@libraries,
     };
 };
 
