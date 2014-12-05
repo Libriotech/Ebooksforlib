@@ -55,7 +55,7 @@ foreach my $odue ( @overdues ) {
     if ( $run ) {
         
         my $return = _return_loan( $odue );
-        if ( $return->error == 1 ) {
+        if ( $return->{'error'} == 1 ) {
             say $return->errormsg;
         } else {
             $num_returned++;
