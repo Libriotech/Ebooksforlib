@@ -13,7 +13,7 @@
 <div class="container content-container">
 
 [% IF list.books.size %]
-    [% INCLUDE 'books_table.tt' books=list.books %]
+    [% INCLUDE 'books_table.tt' books=list.books.reverse %]
 [% ELSE %]
     <p>[% l('Sorry, there are no titles in this list yet.') %]</p>
 [% END %]
