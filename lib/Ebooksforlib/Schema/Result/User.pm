@@ -333,7 +333,7 @@ sub number_of_loans_from_library {
     my ( $self, $library_id ) = @_;
     my $number_of_loans = 0;
     foreach my $loan ( $self->loans ) {
-        if ( $loan->item->library_id == $library_id ) {
+        if ( $loan->library_id == $library_id ) {
             $number_of_loans++;
         }
     }
