@@ -52,7 +52,7 @@ get '/book/:id' => sub {
         $user_has_borrowed = _user_has_borrowed( $user, $book );
 
         # Check the number of concurrent loans
-        if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
+        if ( $user->number_of_loans_from_library( $library->id ) >= $library->concurrent_loans ) {
             $limit_reached = 1;
         }
         

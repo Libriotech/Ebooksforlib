@@ -43,7 +43,7 @@ get '/borrow/:item_id' => require_login sub {
     # Users should not see this, unless they try to cheat the system, because the 
     # "Borrow" links should be hidden when they have reached the threshold
     my $library = rset('Library')->find( session('chosen_library') );
-    if ( $user->number_of_loans_from_library( $library->id ) == $library->concurrent_loans ) {
+    if ( $user->number_of_loans_from_library( $library->id ) >= $library->concurrent_loans ) {
         flash error => "You have already reached the number of concurrent loans for your library!";
         debug '!!! User ' . $user->id . ' tried to borrow too many books';
         return redirect '/book/' . $item->file->book_id;
