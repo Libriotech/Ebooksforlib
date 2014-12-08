@@ -8,6 +8,7 @@
 
 <form role="form" action="/superadmin/stats/mostpop" method="GET">
 <fieldset>
+
     <div class="form-group">
         <label for="library">[% l('Library') %]</label>
         <select class="form-control" name="library" id="library">
@@ -17,6 +18,23 @@
             [% END %]
         </select>
     </div>
+
+    <div class="form-group">
+        <label for="limit">[% l('Number of books') %]</label>
+        <select class="form-control" name="limit" id="limit">
+        [% SET numbers = [
+            { name => 'ten', number = '10' },
+            { name => 'twentyfive', number = '25' },
+            { name => 'fifty', number = '50' },
+            { name => 'hundred', number = '100' },
+            { name => 'all', number = 'All' },
+        ] %]
+        [% FOREACH limit IN numbers %]
+            <option value="[% limit.name %]" [% IF params.limit == limit.name %]selected[% END %]>[% limit.number %]</option>
+        [% END %]
+        </select>
+    </div>
+
     <button type="submit" class="btn btn-default">[% l('Display') %]</button>
 </fieldset>
 </form>
