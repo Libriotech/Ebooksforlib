@@ -17,14 +17,25 @@ use Ebooksforlib::Util;
 get '/superadmin/stats/mostpop' => require_role superadmin => sub {
 
     my $library = param 'library';
+    my $limit   = param 'limit';
 
-    my $library_limit;
+    my $library_sql;
     if ( $library && $library =~ m/[0-9]{1,}/ && $library > 0 ) {
-        $library_limit = "AND l.library_id = $library";
+        $library_sql = "AND l.library_id = $library";
     }
 
-    my $sth = database->prepare(
-"SELECT
+    my $limit_sql = 'LIMIT ';
+    if ( $limit ne '' ) {
+        if ( $limit eq 'ten' )        { $limit_sql .= '10'; }
+        if ( $limit eq 'twentyfive' ) { $limit_sql .= '25'; }
+        if ( $limit eq 'fifty' )      { $limit_sql .= '50'; }
+        if ( $limit eq 'hundred' )    { $limit_sql .= '100'; }
+        if ( $limit eq 'all' )        { $limit_sql = ''; } # No limit
+    } else {
+        $limit_sql .= '10';
+    }
+
+my $sql = "SELECT
     b.id,
     b.title,
     b.isbn,
@@ -38,13 +49,14 @@ WHERE
     b.id = f.book_id AND
     f.id = i.file_id AND
     i.id = l.item_id
-    $library_limit
+    $library_sql
 GROUP BY
     isbn
 ORDER BY
     loans DESC
-LIMIT 10;"
-    );
+$limit_sql;";
+
+    my $sth = database->prepare( $sql );
     $sth->execute();
     my @mostpop;
     while ( my $book = $sth->fetchrow_hashref ) {
