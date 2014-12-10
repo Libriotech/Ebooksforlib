@@ -20,6 +20,7 @@ use Ebooksforlib::Route::Login;
 use Ebooksforlib::Route::MyProfile;
 use Ebooksforlib::Route::Circ;
 use Ebooksforlib::Route::RestApi;
+use Ebooksforlib::Route::StatsApi;
 
 use Ebooksforlib::Route::Admin;
 use Ebooksforlib::Route::Admin::Settings;
@@ -87,7 +88,8 @@ hook 'before' => sub {
                  request->path =~ /\/in/       || # Let users log in
                  request->path =~ /\/blocked/  || # Display the blocked message to blocked users
                  request->path =~ /\/unblock/  || # Let users unblock themselves
-                 request->path =~ /\/rest\/.*/   # Don't force choosing a library for the API
+                 request->path =~ /\/rest\/.*/ || # Don't force choosing a library for the reader API
+                 request->path =~ /\/stats/ # Don't force choosing a library for the stats API
                ) {
             return redirect '/choose';
         }
