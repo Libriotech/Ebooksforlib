@@ -339,12 +339,13 @@ sub _add_logintoken {
     my $token = sha3_512_hex( time(), $user->username, $user->name, $user->email, rand(10000000) );
     $user->update({ 'token' => $token });
     # Send the token in an email
+    # FIXME Make the text translateable
     try {
         email({
             from    => 'ebib@ebib.no',
             to      => $user->email,
-            subject => config->{appname} . ": " . l('Your account has been blocked'),
-            body    => l('Please visit this URL to unblock the account: ') . "\n\nhttp://ebib.no/unblock?token=$token",
+            subject => config->{appname} . ": " . 'Your account has been blocked',
+            body    => 'Besøk denne URLen for å fjerne blokkeringen av kontoen din. Du kan enten klikke på den eller kopiere og lime den inn i din nettleser:' . "\n\nhttp://ebib.no/unblock?token=$token" . "\n\nVennlig hilsen\neBib",
         });
     } catch {
         error "Could not send email: $_";
