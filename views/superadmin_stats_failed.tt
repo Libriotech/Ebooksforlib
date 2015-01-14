@@ -2,7 +2,7 @@
 
 <h2>Users with failed logins</h2>
 
-<table>
+<table class="table table-striped table-bordered table-hover">
 <tr>
     <th>Failed logins</th>
     <th>Name</th>
