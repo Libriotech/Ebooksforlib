@@ -101,7 +101,10 @@ post '/creators/edit' => require_role admin => sub {
 get '/books/creators/add/:bookid' => require_role admin => sub {
     my $book_id = param 'bookid';
     my $book     = rset('Book')->find( $book_id );
-    my @creators = rset('Creator')->all;
+    my @creators = rset('Creator')->search(
+        undef,{
+        order_by => 'name'
+    })->all;
     template 'books_creators', { book => $book, creators => \@creators };
 };
 
