@@ -47,7 +47,7 @@ msgstr ""
 msgid "Add a new list"
 msgstr ""
 
-#: views/admin_navbar.tt:9
+#: views/admin_navbar.tt:10
 msgid "Add author"
 msgstr ""
 
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: views/book.tt:335
+#: views/book.tt:337
 msgid "Admin actions"
 msgstr ""
 
@@ -67,8 +67,16 @@ msgstr ""
 msgid "Administer loans"
 msgstr ""
 
-#: views/admin.tt:20 views/admin_navbar.tt:15
+#: views/admin.tt:20 views/admin_navbar.tt:16
 msgid "Age"
+msgstr ""
+
+#: views/creators.tt:5
+msgid "All creators"
+msgstr ""
+
+#: views/superadmin_mostpop.tt:49
+msgid "All libraries"
 msgstr ""
 
 #: views/admin_stats_gender.tt:5
@@ -83,8 +91,12 @@ msgstr ""
 msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
 msgstr ""
 
-#: views/book.tt:338
+#: views/book.tt:340
 msgid "Authors"
+msgstr ""
+
+#: views/superadmin_mostpop.tt:43
+msgid "Back to default view"
 msgstr ""
 
 #: views/superadmin_pages_edit.tt:10
@@ -93,6 +105,10 @@ msgstr ""
 
 #: lib/Ebooksforlib/Route/Login.pm:269
 msgid "Best regards,"
+msgstr ""
+
+#: views/creators.tt:14
+msgid "Books"
 msgstr ""
 
 #: views/creator.tt:5
@@ -115,7 +131,7 @@ msgstr ""
 msgid "Choose a list..."
 msgstr ""
 
-#: lib/Ebooksforlib.pm:159
+#: lib/Ebooksforlib.pm:161
 msgid "Choose library"
 msgstr ""
 
@@ -131,7 +147,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: views/book.tt:341
+#: views/book.tt:343
 msgid "Covers"
 msgstr ""
 
@@ -143,11 +159,15 @@ msgstr ""
 msgid "Current loans"
 msgstr ""
 
+#: views/creators.tt:15
+msgid "Data URL"
+msgstr ""
+
 #: views/superadmin_delete_book.tt:8
 msgid "Date"
 msgstr ""
 
-#: views/book.tt:344
+#: views/book.tt:346 views/books_imported.tt:13
 msgid "Delete"
 msgstr ""
 
@@ -167,7 +187,11 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: views/book.tt:337 views/creator.tt:18 views/list.tt:28
+#: views/superadmin_mostpop.tt:38
+msgid "Display"
+msgstr ""
+
+#: views/book.tt:339 views/creator.tt:18 views/list.tt:28
 msgid "Edit"
 msgstr ""
 
@@ -203,7 +227,7 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: views/books_imported.tt:18
+#: views/books_imported.tt:19
 msgid "File ID"
 msgstr ""
 
@@ -211,7 +235,7 @@ msgstr ""
 msgid "Files and items"
 msgstr ""
 
-#: views/admin.tt:21 views/admin_navbar.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
+#: views/admin.tt:21 views/admin_navbar.tt:17 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr ""
 
@@ -271,7 +295,7 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: views/book.tt:340
+#: views/book.tt:342
 msgid "Items"
 msgstr ""
 
@@ -283,15 +307,19 @@ msgstr ""
 msgid "Last edited"
 msgstr ""
 
-#: views/my.tt:19
+#: views/my.tt:19 views/superadmin_mostpop.tt:13
 msgid "Library"
 msgstr ""
 
-#: views/book.tt:339 views/book.tt:70 views/lists.tt:13
+#: views/superadmin_mostpop.tt:7
+msgid "Limitations"
+msgstr ""
+
+#: views/book.tt:341 views/book.tt:70 views/lists.tt:13
 msgid "Lists"
 msgstr ""
 
-#: views/admin.tt:17 views/admin_navbar.tt:10
+#: views/admin.tt:17 views/admin_navbar.tt:11
 msgid "Lists and genres"
 msgstr ""
 
@@ -315,7 +343,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: views/admin.tt:24 views/admin_navbar.tt:19 views/superadmin_navbar.tt:7
+#: views/admin.tt:24 views/admin_navbar.tt:20 views/superadmin_navbar.tt:7
 msgid "Logs"
 msgstr ""
 
@@ -323,12 +351,16 @@ msgstr ""
 msgid "Maximum number of concurrent loans"
 msgstr ""
 
-#: views/book.tt:323
+#: views/book.tt:325
 msgid "More books by"
 msgstr ""
 
 #: lib/Ebooksforlib/Route/Login.pm:275 views/sessions.tt:3
 msgid "More than one active session"
+msgstr ""
+
+#: views/superadmin_navbar.tt:12
+msgid "Most popular titles"
 msgstr ""
 
 #: views/layouts/main.tt:135 views/layouts/main.tt:247
@@ -339,7 +371,7 @@ msgstr ""
 msgid "My profile"
 msgstr ""
 
-#: views/my.tt:14
+#: views/creators.tt:13 views/my.tt:14
 msgid "Name"
 msgstr ""
 
@@ -359,12 +391,16 @@ msgstr ""
 msgid "Normal view"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:174
+#: lib/Ebooksforlib.pm:176
 msgid "Not a valid library."
 msgstr ""
 
 #: views/superadmin_delete_book.tt:23
 msgid "Not on loan"
+msgstr ""
+
+#: views/superadmin_mostpop.tt:23
+msgid "Number of books"
 msgstr ""
 
 #: views/admin_stats_gender.tt:47 views/my.tt:84
@@ -379,7 +415,7 @@ msgstr ""
 msgid "Oops, we got an error:<br />"
 msgstr ""
 
-#: views/admin_navbar.tt:14
+#: views/admin_navbar.tt:15
 msgid "Overview"
 msgstr ""
 
@@ -401,10 +437,6 @@ msgstr ""
 
 #: views/admin_stats_gender.tt:12 views/admin_stats_gender.tt:33 views/admin_stats_gender.tt:54
 msgid "Percentage"
-msgstr ""
-
-#: lib/Ebooksforlib/Route/Login.pm:347
-msgid "Please visit this URL to unblock the account: "
 msgstr ""
 
 #: views/book.tt:43
@@ -439,6 +471,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: views/admin_navbar.tt:9
+msgid "Show all authors"
+msgstr ""
+
 #: views/search.tt:31
 msgid "Sorry, no matches found."
 msgstr ""
@@ -447,7 +483,7 @@ msgstr ""
 msgid "Sorry, there are no titles in this list yet."
 msgstr ""
 
-#: views/admin.tt:18 views/admin_navbar.tt:12
+#: views/admin.tt:18 views/admin_navbar.tt:13 views/superadmin_navbar.tt:10
 msgid "Statistics"
 msgstr ""
 
@@ -455,11 +491,11 @@ msgstr ""
 msgid "Statistics: Gender"
 msgstr ""
 
-#: views/admin_navbar.tt:20
+#: views/admin_navbar.tt:21
 msgid "Switch library"
 msgstr ""
 
-#: views/books_imported.tt:32
+#: views/books_imported.tt:33
 msgid "There are no imported books that need looking after."
 msgstr ""
 
@@ -547,10 +583,6 @@ msgstr ""
 msgid "You searched for"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Login.pm:346
-msgid "Your account has been blocked"
-msgstr ""
-
 #: views/layouts/main.tt:191
 msgid "about"
 msgstr ""
@@ -579,7 +611,7 @@ msgstr ""
 msgid "days"
 msgstr ""
 
-#: views/books_imported.tt:19 views/superadmin_delete_book.tt:17
+#: views/books_imported.tt:20 views/superadmin_delete_book.tt:17
 msgid "from"
 msgstr ""
 
@@ -595,7 +627,7 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
-#: views/books_imported.tt:24
+#: views/books_imported.tt:25
 msgid "items"
 msgstr ""
 

@@ -51,7 +51,7 @@ msgstr "Legg til forfatter"
 msgid "Add a new list"
 msgstr "Legg til en ny liste"
 
-#: views/admin_navbar.tt:9
+#: views/admin_navbar.tt:10
 msgid "Add author"
 msgstr "Legg til forfatter"
 
@@ -63,7 +63,7 @@ msgstr "Legg til i en liste"
 msgid "Admin"
 msgstr "Admin"
 
-#: views/book.tt:335
+#: views/book.tt:337
 msgid "Admin actions"
 msgstr "Admin"
 
@@ -71,9 +71,17 @@ msgstr "Admin"
 msgid "Administer loans"
 msgstr "Administrer lån"
 
-#: views/admin.tt:20 views/admin_navbar.tt:15
+#: views/admin.tt:20 views/admin_navbar.tt:16
 msgid "Age"
 msgstr "Alder"
+
+#: views/creators.tt:5
+msgid "All creators"
+msgstr "Alle forfattere"
+
+#: views/superadmin_mostpop.tt:49
+msgid "All libraries"
+msgstr "Alle bibliotek"
 
 #:
 msgid "All our copies are on loan"
@@ -91,9 +99,13 @@ msgstr "Anonymiser"
 msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
 msgstr "Er du sikker på at du ønsker å slette denne boka, inkludert alle tilknyttede filer, eksemplarer og eventuelle lån"
 
-#: views/book.tt:338
+#: views/book.tt:340
 msgid "Authors"
 msgstr "Forfattere"
+
+#: views/superadmin_mostpop.tt:43
+msgid "Back to default view"
+msgstr "Tilbake til standard visning"
 
 #: views/superadmin_pages_edit.tt:10
 msgid "Back to page"
@@ -102,6 +114,10 @@ msgstr "Tilbake til siden"
 #: lib/Ebooksforlib/Route/Login.pm:269
 msgid "Best regards,"
 msgstr "Vennlig hilsen"
+
+#: views/creators.tt:14
+msgid "Books"
+msgstr "Bøker"
 
 #: views/creator.tt:5
 msgid "Books by"
@@ -127,7 +143,7 @@ msgstr "Lånt"
 msgid "Choose a list..."
 msgstr "Velg en liste..."
 
-#: lib/Ebooksforlib.pm:159
+#: lib/Ebooksforlib.pm:161
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -143,7 +159,7 @@ msgstr "Kontakt oss"
 msgid "Count"
 msgstr "Antall"
 
-#: views/book.tt:341
+#: views/book.tt:343
 msgid "Covers"
 msgstr "Omslag"
 
@@ -159,11 +175,15 @@ msgstr "Eksisterende lister og sjangre"
 msgid "Current loans"
 msgstr "Aktive lån"
 
+#: views/creators.tt:15
+msgid "Data URL"
+msgstr "Data-URL"
+
 #: views/superadmin_delete_book.tt:8
 msgid "Date"
 msgstr "Utgitt"
 
-#: views/book.tt:344
+#: views/book.tt:346 views/books_imported.tt:13
 msgid "Delete"
 msgstr "Slett"
 
@@ -183,7 +203,11 @@ msgstr "Slettet"
 msgid "Description"
 msgstr "Omtale"
 
-#: views/book.tt:337 views/creator.tt:18 views/list.tt:28
+#: views/superadmin_mostpop.tt:38
+msgid "Display"
+msgstr "Vis"
+
+#: views/book.tt:339 views/creator.tt:18 views/list.tt:28
 msgid "Edit"
 msgstr "Rediger"
 
@@ -223,7 +247,7 @@ msgstr "Mislykkede innlogginger"
 msgid "File"
 msgstr "Fil"
 
-#: views/books_imported.tt:18
+#: views/books_imported.tt:19
 msgid "File ID"
 msgstr "Fil-ID"
 
@@ -231,7 +255,7 @@ msgstr "Fil-ID"
 msgid "Files and items"
 msgstr "Filer og eksemplarer"
 
-#: views/admin.tt:21 views/admin_navbar.tt:16 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
+#: views/admin.tt:21 views/admin_navbar.tt:17 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr "Kjønn"
 
@@ -295,7 +319,7 @@ msgstr "Det ser ut som du har mer enn én aktiv sesjon. Dersom du er logget inn 
 msgid "Item"
 msgstr "Eksemplar"
 
-#: views/book.tt:340
+#: views/book.tt:342
 msgid "Items"
 msgstr "Eksemplarer"
 
@@ -307,15 +331,19 @@ msgstr "Behold historikk"
 msgid "Last edited"
 msgstr "Sist endret"
 
-#: views/my.tt:19
+#: views/my.tt:19 views/superadmin_mostpop.tt:13
 msgid "Library"
 msgstr "Bibliotek"
 
-#: views/book.tt:339 views/book.tt:70 views/lists.tt:13
+#: views/superadmin_mostpop.tt:7
+msgid "Limitations"
+msgstr "Avgrensinger"
+
+#: views/book.tt:341 views/book.tt:70 views/lists.tt:13
 msgid "Lists"
 msgstr "Lister"
 
-#: views/admin.tt:17 views/admin_navbar.tt:10
+#: views/admin.tt:17 views/admin_navbar.tt:11
 msgid "Lists and genres"
 msgstr "Lister og sjangre"
 
@@ -339,7 +367,7 @@ msgstr "Innloggin mislyktes"
 msgid "Log out"
 msgstr "Logg ut"
 
-#: views/admin.tt:24 views/admin_navbar.tt:19 views/superadmin_navbar.tt:7
+#: views/admin.tt:24 views/admin_navbar.tt:20 views/superadmin_navbar.tt:7
 msgid "Logs"
 msgstr "Logger"
 
@@ -347,13 +375,17 @@ msgstr "Logger"
 msgid "Maximum number of concurrent loans"
 msgstr "Maks samtidige lån"
 
-#: views/book.tt:323
+#: views/book.tt:325
 msgid "More books by"
 msgstr "Flere bøker av"
 
 #: lib/Ebooksforlib/Route/Login.pm:275 views/sessions.tt:3
 msgid "More than one active session"
 msgstr "Mer enn én aktiv sesjon"
+
+#: views/superadmin_navbar.tt:12
+msgid "Most popular titles"
+msgstr "Mest populære titler"
 
 #: views/layouts/main.tt:135 views/layouts/main.tt:247
 msgid "My books"
@@ -367,7 +399,7 @@ msgstr "Min side"
 msgid "My profile"
 msgstr "Min profil"
 
-#: views/my.tt:14
+#: views/creators.tt:13 views/my.tt:14
 msgid "Name"
 msgstr "Navn"
 
@@ -391,13 +423,17 @@ msgstr "Ingen tilgjengelige eksemplarer"
 msgid "Normal view"
 msgstr "Normal visning"
 
-#: lib/Ebooksforlib.pm:174
+#: lib/Ebooksforlib.pm:176
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
 #: views/superadmin_delete_book.tt:23
 msgid "Not on loan"
 msgstr "Ikke utlånt"
+
+#: views/superadmin_mostpop.tt:23
+msgid "Number of books"
+msgstr "Antall bøker"
 
 #: views/admin_stats_gender.tt:47 views/my.tt:84
 msgid "Old loans"
@@ -419,7 +455,7 @@ msgstr "Oops, vi fikk en feil:<br />$_"
 msgid "Other books by"
 msgstr "Andre bøker av"
 
-#: views/admin_navbar.tt:14
+#: views/admin_navbar.tt:15
 msgid "Overview"
 msgstr "Oversikt"
 
@@ -443,7 +479,7 @@ msgstr "Lånernummer"
 msgid "Percentage"
 msgstr "Prosent"
 
-#: lib/Ebooksforlib/Route/Login.pm:347
+#:
 msgid "Please visit this URL to unblock the account: "
 msgstr "Besøk denne URLen for å fjerne blokkeringen av kontoen din: "
 
@@ -483,6 +519,10 @@ msgstr "Send"
 msgid "Settings"
 msgstr "Innstillinger"
 
+#: views/admin_navbar.tt:9
+msgid "Show all authors"
+msgstr "Vis alle forfattere"
+
 #:
 msgid "Sorry, all our copies of this book are on loan."
 msgstr "Alle eksemplarene av denne boken er dessverre utlånt."
@@ -499,7 +539,7 @@ msgstr "Beklager, ingen treff."
 msgid "Sorry, there are no titles in this list yet."
 msgstr "Beklager, det er ikke noen bøker i denne lista enda."
 
-#: views/admin.tt:18 views/admin_navbar.tt:12
+#: views/admin.tt:18 views/admin_navbar.tt:13 views/superadmin_navbar.tt:10
 msgid "Statistics"
 msgstr "Statistikk"
 
@@ -507,11 +547,11 @@ msgstr "Statistikk"
 msgid "Statistics: Gender"
 msgstr "Statistikk: Kjønn"
 
-#: views/admin_navbar.tt:20
+#: views/admin_navbar.tt:21
 msgid "Switch library"
 msgstr "Bytt bibliotek"
 
-#: views/books_imported.tt:32
+#: views/books_imported.tt:33
 msgid "There are no imported books that need looking after."
 msgstr "Det er importerte bøker som må kontrolleres"
 
@@ -635,7 +675,7 @@ msgstr "Du må logge inn med en gyldig admin-bruker."
 msgid "You searched for"
 msgstr "Du søkte etter"
 
-#: lib/Ebooksforlib/Route/Login.pm:346
+#:
 msgid "Your account has been blocked"
 msgstr "Kontoen din har blitt sperret"
 
@@ -675,7 +715,7 @@ msgstr "dager"
 msgid "eBib lets you borrow electronic books for free from your local library."
 msgstr "Med eBib kan du låne gratis e-bøker fra ditt lokale bibliotek."
 
-#: views/books_imported.tt:19 views/superadmin_delete_book.tt:17
+#: views/books_imported.tt:20 views/superadmin_delete_book.tt:17
 msgid "from"
 msgstr "fra"
 
@@ -691,7 +731,7 @@ msgstr "her"
 msgid "hours"
 msgstr "timer"
 
-#: views/books_imported.tt:24
+#: views/books_imported.tt:25
 msgid "items"
 msgstr "eksemplarer"
 
