@@ -19,6 +19,10 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: views/creators.tt:15
+msgid "Actions"
+msgstr ""
+
 #: views/admin_stats_gender.tt:26
 msgid "Active loans"
 msgstr ""
@@ -159,7 +163,7 @@ msgstr ""
 msgid "Current loans"
 msgstr ""
 
-#: views/creators.tt:15
+#: views/creators.tt:16
 msgid "Data URL"
 msgstr ""
 
@@ -167,7 +171,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: views/book.tt:346 views/books_imported.tt:13
+#: views/book.tt:346 views/books_imported.tt:13 views/creators.tt:32
 msgid "Delete"
 msgstr ""
 

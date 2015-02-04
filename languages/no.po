@@ -23,6 +23,10 @@ msgstr "Om"
 msgid "About eBib"
 msgstr "Om eBib"
 
+#: views/creators.tt:15
+msgid "Actions"
+msgstr "Handlinger"
+
 #: views/admin_stats_gender.tt:26
 msgid "Active loans"
 msgstr "Aktive lån"
@@ -175,7 +179,7 @@ msgstr "Eksisterende lister og sjangre"
 msgid "Current loans"
 msgstr "Aktive lån"
 
-#: views/creators.tt:15
+#: views/creators.tt:16
 msgid "Data URL"
 msgstr "Data-URL"
 
@@ -183,7 +187,7 @@ msgstr "Data-URL"
 msgid "Date"
 msgstr "Utgitt"
 
-#: views/book.tt:346 views/books_imported.tt:13
+#: views/book.tt:346 views/books_imported.tt:13 views/creators.tt:32
 msgid "Delete"
 msgstr "Slett"
 
