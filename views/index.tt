@@ -130,7 +130,7 @@
 			<ul class="block-list bxslider bxhidden">
                 [% SET counter = 0 %]
                 [%# Loops over the books in each list and picks out any that are NOT promoted %]
-        		[% FOREACH listitem IN list.list_books.reverse %]
+        		[% FOREACH listitem IN list.list_books.nsort('id').reverse %]
          		   [% IF listitem.promoted != 1 %]
 	                    [%# Check that this book has at least one item that is not deleted and that is available to the chosen library %]
                         [%# FIXME This solutin is probably not ideal, it would probably be better to limit in the DBIC query in the route %]
@@ -188,7 +188,7 @@
 		<div class="row">
 			<div class="span12">
 				<ul class="utlisting">
-	    			[% FOREACH listitem IN mobilelist.reverse %]
+	    			[% FOREACH listitem IN mobilelist.nsort('id').reverse %]
 					<li>
 						<a href="/book/[% listitem.book.id %]" class="book-block">
 							<div class="utlisting-img">
