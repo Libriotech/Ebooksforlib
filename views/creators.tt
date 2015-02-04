@@ -12,6 +12,7 @@
     <th>ID</th>
     <th>[% l('Name') %]</th>
     <th>[% l('Books') %]</th>
+    <th>[% l('Actions') %]</th>
     <th>[% l('Data URL') %]</th>
 </tr>
 
@@ -20,8 +21,15 @@
     <td>[% creator.id %]</td>
     <td><a href="/creator/[% creator.id %]">[% creator.name %]</a></td>
     <td>
+        [% SET book_count = 0 %]
         [% FOREACH book IN creator.books %]
             <a href="/book/[% book.id %]">[% book.title %]</a>[% IF ! loop.last %], [% END %]
+            [% book_count = book_count + 1 %]
+        [% END %]
+    </td>
+    <td>
+        [% IF book_count == 0 %]
+            <a href="/creators/delete/[% creator.id %]">[% l('Delete') %]</a>
         [% END %]
     </td>
     <td>[% creator.dataurl %]</td>

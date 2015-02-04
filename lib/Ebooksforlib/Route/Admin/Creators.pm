@@ -104,6 +104,43 @@ post '/creators/edit' => require_role admin => sub {
 
 };
 
+get '/creators/delete/:id?' => require_role admin => sub {
+
+    # Confirm delete
+    my $id = param 'id';
+    my $creator = resultset('Creator')->find( $id );
+    template 'creators_delete', { creator => $creator };
+
+};
+
+get '/creators/delete_ok/:id?' => require_role admin => sub {
+
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+
+    # Do the actual delete
+    my $id = param 'id';
+    my $creator = resultset('Creator')->find( $id );
+    # Check that this creator has no books
+    if ( scalar $creator->books > 0 ) {
+        flash info => 'Trying to delete an author that has books!';
+        return redirect '/creators';
+    }
+    # Now try to delete
+    try {
+        $creator->delete;
+        flash info => 'A creator was deleted!';
+        info "Deleted creator with ID = $id";
+        redirect '/creators';
+    } catch {
+        flash error => "Oops, we got an error:<br />".errmsg($_);
+        error "$_";
+        redirect '/creators';
+    };
+
+};
+
 ### Creators and books
 
 get '/books/creators/add/:bookid' => require_role admin => sub {
