@@ -6,6 +6,7 @@
             <li><a href="/admin/settings">[% l('Settings') %]</a></li>
             <li><a href="/books/imported">[% l('Imported books') %]</a></li>
             <li><a href="/books/add">[% l('Add a new book') %]</a></li>
+            <li><a href="/creators">[% l('Show all authors') %]</a></li>
             <li><a href="/creators/add">[% l('Add author') %]</a></li>
             <li><a href="/admin/lists">[% l('Lists and genres') %]</a></li>
             <li class="dropdown-submenu">

@@ -16,6 +16,14 @@ use Ebooksforlib::Err;
 
 ### Creators
 
+get '/creators' => require_role admin => sub {
+    my @creators = rset('Creator')->search(
+        undef,{
+        order_by => 'name'
+    })->all;
+    template 'creators', { creators => \@creators };
+};
+
 get '/creators/add' => require_role admin => sub {
     template 'creators_add';
 };
