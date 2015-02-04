@@ -1,5 +1,7 @@
 [% META pagetitle = 'Choose a cover' %]
 
+<div class="container">
+
 <h2>[% book.title %]</h2> 
 
 <p>Creator(s):</p>
@@ -18,30 +20,41 @@
 
 <hr />
 
-<h2>Covers</h2>
+<h2>Choose a cover</h2>
 
 [% IF covers.results.bindings.size || bokkilden != '' %]
     <p>Click on the cover you would like to use:</p>
     [% FOREACH cover IN covers.results.bindings %]
-    <form method="POST" action="/books/covers" style="display: inline;">
-    <input type="hidden" name="id" value="[% book.id %]">
-    <input type="hidden" name="coverurl" value="[% cover.cover.value %]">
-    [% INCLUDE 'csrf_field.tt' %]
-    <button type="submit">
-    <img src="[% cover.cover.value %]" title="[% cover.cover.value %]">
-    </button>
-    </form>
+        <form method="POST" action="/books/covers" style="display: inline;">
+        <input type="hidden" name="id" value="[% book.id %]">
+        <input type="hidden" name="coverurl" value="[% cover.cover.value %]">
+        [% INCLUDE 'csrf_field.tt' %]
+        <button type="submit">
+        <img src="[% cover.cover.value %]" title="[% cover.cover.value %]">
+        </button>
+        </form>
     [% END %]
     [% IF bokkilden != '' %]
-    <form method="POST" action="/books/covers" style="display: inline;">
-    <input type="hidden" name="id" value="[% book.id %]">
-    <input type="hidden" name="coverurl" value="[% bokkilden %]">
-    [% INCLUDE 'csrf_field.tt' %]
-    <button type="submit">
-    <img src="[% bokkilden %]" title="[% bokkilden %]">
-    </button>
-    </form>
+        <form method="POST" action="/books/covers" style="display: inline;">
+        <input type="hidden" name="id" value="[% book.id %]">
+        <input type="hidden" name="coverurl" value="[% bokkilden %]">
+        [% INCLUDE 'csrf_field.tt' %]
+        <button type="submit">
+        <img src="[% bokkilden %]" title="[% bokkilden %]">
+        </button>
+        </form>
     [% END %]
 [% ELSE %]
     <p>Sorry, no covers were found.</p>
 [% END %]
+
+<h2>Get cover from a URL</h2>
+
+<form method="POST" action="/books/covers" style="display: inline;">
+        <input type="hidden" name="id" value="[% book.id %]">
+        <input type="text" name="coverurl">
+        [% INCLUDE 'csrf_field.tt' %]
+        <input type="submit" value="Use the image from this URL">
+        </form>
+
+</div>
