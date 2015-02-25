@@ -128,15 +128,25 @@ hook 'before' => sub {
     $real_session->set_column( 'last_active', undef );
     $real_session->update;
 
-    # We need to show lists and genres on a lot of pages, so we might as well 
-    # make the data available from here
-    # TODO Perhaps have a list of pages that need the data here, to check
-    # against? 
-    # FIXME Not sure this is a good idea anymore...
-    # my @lists = rset('List')->search({
-    #     'library_id' => session('chosen_library')
-    # });
-    # var lists => \@lists;
+    # We need to show lists and genres on all pages
+    # This should be
+    # 1) All global lists and genre, plus
+    # 2) All lists and genre local to the chosen library
+    if ( session('chosen_library') ) {
+        my @lists = resultset('List')->search({
+            -or => [
+                is_global  => 1,
+                -and => [
+                    is_global => 0,
+                    'list_libraries.library_id' => session('chosen_library'),
+                ]
+            ]
+        },{
+            'prefetch' => 'list_libraries',
+            'order_by' => 'name',
+        });
+        var lists => \@lists;
+    }
 
 };
 

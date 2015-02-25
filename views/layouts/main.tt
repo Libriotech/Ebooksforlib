@@ -110,50 +110,43 @@ function scrolldown() {
 		    <div class="navbar navbar-inverse">
 			    <div class="navbar-inner">
 				    <a class="brand" href="/"><i class="fa fa-home"></i> <span class="library-name">[% session.chosen_library_name %]</span></a>
-						[%# Determine if this user should be able to see the admin menu %]
+						[%# Determine if this user should be able to see the admin/superadmin menu %]
                         [% IF session.user_is_admin == 1 %]
                             [% INCLUDE 'admin_navbar.tt' %]
                         [% END %]
                         [% IF session.user_is_superadmin == 1 %]
                             [% INCLUDE 'superadmin_navbar.tt' %]
                         [% END %]
-    					<!-- .btn-navbar is used as the toggle for collapsed navbar content 
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</a>
-						<div class="nav-collapse"> -->
-				    		<ul class="nav pull-right">
-				    			<li>
-				    				<form class="navbar-search hidden-phone pull-right" action="/search" method="GET">
-										<input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
-    								</form>
-    							</li>
-				    			<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-book"></i></a>
-				    				<ul class="dropdown-menu" role="menu">
-				    					<li><a href="[% settings.reader_url %]/">[% l('My books') %]</a></li>
-				    					<li><a href="/my">[% l('Administer loans') %]</a></li>
-				    				</ul>
-				   			 	</li>
-						    	<li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
-						    		<ul class="dropdown-menu" role="menu">
-						    			<li><a href="/my" src="" data="Log out">[% l('My profile') %]</a></li>
-						    			<li><a href="/out?[% INCLUDE 'csrf_link.tt' %]" src="" data="Log out">[% l('Log out') %]</a></li>
-						    		</ul>
-				 			   	</li>
-						 		<li><a href="/page/help" src="" data="Hjelp">
-				 					<i class="fa fa-question"></i></a>
-						 		</li>
-				  		  </ul>
-				    <!-- </div> -->
+			          <ul class="nav pull-right">
+			             <li>
+			                <form class="navbar-search hidden-phone pull-right" action="/search" method="GET">
+									<input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
+								</form>
+							</li>
+			             <li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-book"></i></a>
+			                <ul class="dropdown-menu" role="menu">
+			                   <li><a href="[% settings.reader_url %]/">[% l('My books') %]</a></li>
+			                   <li><a href="/my">[% l('Administer loans') %]</a></li>
+			                </ul>
+			                </li>
+					       <li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
+					          <ul class="dropdown-menu" role="menu">
+					             <li><a href="/my" src="" data="Log out">[% l('My profile') %]</a></li>
+					             <li><a href="/out?[% INCLUDE 'csrf_link.tt' %]" src="" data="Log out">[% l('Log out') %]</a></li>
+					          </ul>
+			                </li>
+					       <li><a href="/page/help" src="" data="Hjelp">
+			                <i class="fa fa-question"></i></a>
+					       </li>
+                            [% INCLUDE 'lists_menu.tt' %]
+			          </ul>
 			    </div>
 		    </div>
 		    <div id="navbar-search-mobile" class="visible-phone txt-center">
 		    <form class="navbar-search " style="width:90%;margin-left:auto;margin-right:auto;" action="/search" method="GET">
 				<input type="text" class="search-query" style="width:100%;" name="q" placeholder="[% l('Search') %]" />
-    		</form>
-    		</div>
+          </form>
+          </div>
 	    </nav>
     </header>
     </div>
@@ -178,18 +171,21 @@ function scrolldown() {
 	        <nav>
 		        <div class="navbar navbar-inverse">
 			        <div class="navbar-inner">
-				        <a class="brand" href="/">
-				        	<i class="fa fa-home"></i> <span class="hidden-phone library-name">[% session.chosen_library_name %]</span>
-				        </a>
-				        [% IF ! disable_search %]
-				            <form class="navbar-search hidden-phone pull-right" action="/search" method="GET">
-						        <input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
-            				</form>
-        				[% END %]
+				        <a class="brand" href="/"><i class="fa fa-home"></i> <span class="library-name">[% session.chosen_library_name %]</span></a>
 				        [%# Users need to have a chosen library before they can be offered to log in. %]
 				        [% IF session.chosen_library %]
-				        <div class="logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about') %] [% settings.appname %]</a></div>
+				        <div class="nav logged-out-info hidden-phone">[% l('You are not logged in.') %] <a href="/in">[% l('Log in') %]</a> [% l('or find out more') %] <a href="/page/about">[% l('about') %] [% settings.appname %]</a></div>
 				        [% END %]
+			          <ul class="nav pull-right">
+				            [% IF ! disable_search %]
+			                 <li>
+				                    <form class="navbar-search hidden-phone pull-right" action="/search" method="GET">
+						                <input type="text" class="search-query" name="q" placeholder="[% l('Search') %]">
+                                </form>
+                            </li>
+                        [% END %]
+                        [% INCLUDE 'lists_menu.tt' %]
+                    </ul>
 			        </div>
 		        </div>
 	        </nav>
