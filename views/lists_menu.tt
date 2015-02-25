@@ -1,3 +1,4 @@
+[% IF vars.lists.size %]
 <li><a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i></a>
 	<ul class="dropdown-menu" role="menu">
 		[% FOREACH list IN vars.lists %]
@@ -5,3 +6,4 @@
         [% END %]
 	</ul>
 </li>
+[% END %]
