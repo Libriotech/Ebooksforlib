@@ -2,11 +2,12 @@
 
 <div class="container">
 
-<p>Are you sure you want to anonymize your loan of <cite>[% oldloan.item.book.title %]</cite>?</p>
-
+<div class="well">
+<p>Are you sure you want to anonymize your loan of "<cite>[% oldloan.item.file.book.title %]</cite>"? This action can not be undone.</p>
 <p>
-<a href="/anon_ok/[% oldloan.id %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
-<a href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
+<a class="btn btn-default btn-lg" href="/anon_ok/[% oldloan.id %]?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a>
+<a class="btn btn-default btn-lg" href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
 </p>
+</div>
 
 </div>

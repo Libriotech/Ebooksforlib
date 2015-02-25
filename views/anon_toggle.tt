@@ -2,23 +2,25 @@
 
 <div class="container">
 
-[% IF user.anonymize == 1 %]
+    <div class="well">
+    [% IF user.anonymize == 1 %]
 
-    <p>Your returned loans <em>are</em> being anonymized.</p>
-    <p>Some text about the implications of changing...</p>
+        <p>[% l('Your reading history is <em>not</em> being stored') %].</p>
+        <p>[% l('If you choose to change this, you can still anonymize individual loans at any time') %].</p>
 
-[% ELSE %]
+    [% ELSE %]
 
-    <p>Your returned loans are <em>not</em> being anonymized.</p>
-    <p>Some text about the implications of changing...</p>
-    
-[% END %]
+        <p>[% l('Your reading history <em>is</em> being stored') %].</p>
+        <p>[% l('If you choose to change this, your existing history will not be autmatically anonymized, you will have to do it by hand') %].</p>
 
-<p>Do you want to change?</p>
+    [% END %]
 
-<p>
-<a href="/anon_toggle_ok"><img src="/images/tick.png" height="16" width="16" alt="Yes" title="Yes"> Yes</a> or 
-<a href="/my"><img src="/images/cancel.png" height="16" width="16" alt="No" title="No"> No</a>
-</p>
+    <p>[% l('Do you want to change?') %]</p>
+
+    <p>
+    <a class="btn btn-default btn-lg" href="/anon_toggle_ok?[% INCLUDE 'csrf_link.tt' %]"><img src="/images/tick.png" height="16" width="16" alt="[% l('Yes') %]" title="[% l('Yes') %]"> [% l('Yes') %]</a> 
+    <a class="btn btn-default btn-lg" href="/my"><img src="/images/cancel.png" height="16" width="16" alt="[% l('No') %]" title="[% l('No') %]"> [% l('No') %]</a>
+    </p>
+    </div>
 
 </div>

@@ -87,7 +87,7 @@ msgstr ""
 msgid "All users"
 msgstr ""
 
-#: views/my.tt:122 views/my.tt:91 views/my.tt:93
+#: views/my.tt:119 views/my.tt:88 views/my.tt:90
 msgid "Anonymize"
 msgstr ""
 
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Borrow this book for"
 msgstr ""
 
-#: views/my.tt:105 views/my.tt:43
+#: views/my.tt:100 views/my.tt:43
 msgid "Borrowed"
 msgstr ""
 
@@ -141,6 +141,14 @@ msgstr ""
 
 #: views/chooselib.tt:6
 msgid "Choose library:"
+msgstr ""
+
+#: views/my.tt:88
+msgid "Click here to start storing your reading history"
+msgstr ""
+
+#: views/my.tt:90
+msgid "Click here to stop storing your reading history"
 msgstr ""
 
 #: views/layouts/main.tt:241 views/layouts/main.tt:258
@@ -193,6 +201,14 @@ msgstr ""
 
 #: views/superadmin_mostpop.tt:38
 msgid "Display"
+msgstr ""
+
+#: views/anon_toggle.tt:19
+msgid "Do you want to change?"
+msgstr ""
+
+#: views/my.tt:102
+msgid "Due"
 msgstr ""
 
 #: views/book.tt:339 views/creator.tt:18 views/list.tt:28
@@ -279,11 +295,19 @@ msgstr ""
 msgid "ISBN"
 msgstr ""
 
+#: views/anon_toggle.tt:9
+msgid "If you choose to change this, you can still anonymize individual loans at any time"
+msgstr ""
+
+#: views/anon_toggle.tt:15
+msgid "If you choose to change this, your existing history will not be autmatically anonymized, you will have to do it by hand"
+msgstr ""
+
 #: views/admin.tt:9 views/admin_navbar.tt:7 views/books_imported.tt:5
 msgid "Imported books"
 msgstr ""
 
-#: views/my.tt:135
+#: views/my.tt:130
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using!"
 msgstr ""
 
@@ -303,7 +327,7 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: views/my.tt:91 views/my.tt:93
+#: views/my.tt:88 views/my.tt:90
 msgid "Keep history"
 msgstr ""
 
@@ -329,6 +353,10 @@ msgstr ""
 
 #: views/book.tt:109
 msgid "Loan expires"
+msgstr ""
+
+#: views/my.tt:101
+msgid "Loan period"
 msgstr ""
 
 #: views/books_lists.tt:52
@@ -383,7 +411,7 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
-#: views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:23 views/superadmin_delete_book.tt:33
 msgid "No"
 msgstr ""
 
@@ -407,7 +435,7 @@ msgstr ""
 msgid "Number of books"
 msgstr ""
 
-#: views/admin_stats_gender.tt:47 views/my.tt:84
+#: views/admin_stats_gender.tt:47 views/my.tt:81
 msgid "Old loans"
 msgstr ""
 
@@ -455,7 +483,7 @@ msgstr ""
 msgid "Return"
 msgstr ""
 
-#: views/my.tt:106
+#: views/my.tt:103
 msgid "Returned"
 msgstr ""
 
@@ -519,7 +547,7 @@ msgstr ""
 msgid "Time left"
 msgstr ""
 
-#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
+#: views/my.tt:42 views/my.tt:99 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
 msgid "Title"
 msgstr ""
 
@@ -539,7 +567,7 @@ msgstr ""
 msgid "What you need to borrow"
 msgstr ""
 
-#: views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
 msgid "Yes"
 msgstr ""
 
@@ -563,7 +591,7 @@ msgstr ""
 msgid "You have no current loans."
 msgstr ""
 
-#: views/my.tt:128
+#: views/my.tt:125
 msgid "You have no old loans."
 msgstr ""
 
@@ -585,6 +613,22 @@ msgstr ""
 
 #: views/search.tt:27
 msgid "You searched for"
+msgstr ""
+
+#: views/anon_toggle.tt:14
+msgid "Your reading history <em>is</em> being stored"
+msgstr ""
+
+#: views/anon_toggle.tt:8
+msgid "Your reading history is <em>not</em> being stored"
+msgstr ""
+
+#: views/my.tt:90
+msgid "Your reading history is being stored"
+msgstr ""
+
+#: views/my.tt:88
+msgid "Your reading history is not being stored"
 msgstr ""
 
 #: views/layouts/main.tt:191
@@ -611,7 +655,7 @@ msgstr ""
 msgid "consortium"
 msgstr ""
 
-#: views/book.tt:139 views/my.tt:55 views/my.tt:67
+#: views/book.tt:139 views/my.tt:112 views/my.tt:55 views/my.tt:67
 msgid "days"
 msgstr ""
 

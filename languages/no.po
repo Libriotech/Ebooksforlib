@@ -95,7 +95,7 @@ msgstr "Alle våre eksemplarer er utlånt"
 msgid "All users"
 msgstr "Alle brukere"
 
-#: views/my.tt:122 views/my.tt:91 views/my.tt:93
+#: views/my.tt:119 views/my.tt:88 views/my.tt:90
 msgid "Anonymize"
 msgstr "Anonymiser"
 
@@ -139,7 +139,7 @@ msgstr "Lån denne boken"
 msgid "Borrow this book for"
 msgstr "Lån denne boken i"
 
-#: views/my.tt:105 views/my.tt:43
+#: views/my.tt:100 views/my.tt:43
 msgid "Borrowed"
 msgstr "Lånt"
 
@@ -154,6 +154,14 @@ msgstr "Velg bibliotek"
 #: views/chooselib.tt:6
 msgid "Choose library:"
 msgstr "Velg bibliotek"
+
+#: views/my.tt:88
+msgid "Click here to start storing your reading history"
+msgstr "Klikk her for å begynne å lagre lånehistorikk"
+
+#: views/my.tt:90
+msgid "Click here to stop storing your reading history"
+msgstr "Klikk her for å slutte å lagre lånehistorikk"
 
 #: views/layouts/main.tt:241 views/layouts/main.tt:258
 msgid "Contact"
@@ -210,6 +218,14 @@ msgstr "Omtale"
 #: views/superadmin_mostpop.tt:38
 msgid "Display"
 msgstr "Vis"
+
+#: views/anon_toggle.tt:19
+msgid "Do you want to change?"
+msgstr "Ønsker du å endre?"
+
+#: views/my.tt:102
+msgid "Due"
+msgstr "Forfaller"
 
 #: views/book.tt:339 views/creator.tt:18 views/list.tt:28
 msgid "Edit"
@@ -299,6 +315,14 @@ msgstr "Forsiden"
 msgid "ISBN"
 msgstr "ISBN"
 
+#: views/anon_toggle.tt:9
+msgid "If you choose to change this, you can still anonymize individual loans at any time"
+msgstr "Dersom du velger å endre dette vil du fortsatt kunne anonymisere individuelle lån når som helst"
+
+#: views/anon_toggle.tt:15
+msgid "If you choose to change this, your existing history will not be autmatically anonymized, you will have to do it by hand"
+msgstr "Dersom du velger å endre dette vil din eksisterende historikk ikke bli anonymisert autmatisk, du må selv gjøre det"
+
 #: views/admin.tt:9 views/admin_navbar.tt:7 views/books_imported.tt:5
 msgid "Imported books"
 msgstr "Importerte bøker"
@@ -307,7 +331,7 @@ msgstr "Importerte bøker"
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using eBib!"
 msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Hvis informasjonen ikke stemmer vennligst kontakt biblioteket. Takk for at du bruker eBib!"
 
-#: views/my.tt:135
+#: views/my.tt:130
 msgid "Information on this page comes from your local library. If the information is not correct, please contact your library. Thank you for using!"
 msgstr "Informasjonen på denne siden kommer fra ditt lokale bibliotek. Dersom informasjonen ikke stemmer, vennligst kontakt ditt lokale bibliotek. Takk for at du bruker oss!"
 
@@ -327,7 +351,7 @@ msgstr "Eksemplar"
 msgid "Items"
 msgstr "Eksemplarer"
 
-#: views/my.tt:91 views/my.tt:93
+#: views/my.tt:88 views/my.tt:90
 msgid "Keep history"
 msgstr "Behold historikk"
 
@@ -354,6 +378,10 @@ msgstr "Lister og sjangre"
 #: views/book.tt:109
 msgid "Loan expires"
 msgstr "Lånet utløper"
+
+#: views/my.tt:101
+msgid "Loan period"
+msgstr "Lånetid"
 
 #: views/books_lists.tt:52
 msgid "Local lists"
@@ -415,7 +443,7 @@ msgstr "Hjelp til innloggingen?"
 msgid "New user?"
 msgstr "Ny bruker?"
 
-#: views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:23 views/superadmin_delete_book.tt:33
 msgid "No"
 msgstr "Nei"
 
@@ -439,7 +467,7 @@ msgstr "Ikke utlånt"
 msgid "Number of books"
 msgstr "Antall bøker"
 
-#: views/admin_stats_gender.tt:47 views/my.tt:84
+#: views/admin_stats_gender.tt:47 views/my.tt:81
 msgid "Old loans"
 msgstr "Gamle lån"
 
@@ -503,7 +531,7 @@ msgstr "Les mer om tjenesten"
 msgid "Return"
 msgstr "Lever"
 
-#: views/my.tt:106
+#: views/my.tt:103
 msgid "Returned"
 msgstr "Levert"
 
@@ -575,7 +603,7 @@ msgstr "Denne boka er ikke knyttet til noen lister, enda"
 msgid "Time left"
 msgstr "Tid som gjenstår"
 
-#: views/my.tt:104 views/my.tt:42 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
+#: views/my.tt:42 views/my.tt:99 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
 msgid "Title"
 msgstr "Tittel"
 
@@ -599,7 +627,7 @@ msgstr "Dette trenger du for å låne"
 msgid "What you need to borrow"
 msgstr "Dette trenger du for å låne"
 
-#: views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
 msgid "Yes"
 msgstr "Ja"
 
@@ -647,7 +675,7 @@ msgstr "Du har allerede lånt maksimalt antall bøker."
 msgid "You have no current loans."
 msgstr "Du har ingen aktive lån."
 
-#: views/my.tt:128
+#: views/my.tt:125
 msgid "You have no old loans."
 msgstr "Du har ingen gamle lån."
 
@@ -683,6 +711,22 @@ msgstr "Du søkte etter"
 msgid "Your account has been blocked"
 msgstr "Kontoen din har blitt sperret"
 
+#: views/anon_toggle.tt:14
+msgid "Your reading history <em>is</em> being stored"
+msgstr "Lesehistorikken din <em>blir</em> lagret"
+
+#: views/anon_toggle.tt:8
+msgid "Your reading history is <em>not</em> being stored"
+msgstr "Lesehistorikken din blir <em>ikke</em> lagret"
+
+#: views/my.tt:90
+msgid "Your reading history is being stored"
+msgstr "Lesehistorikken din blir lagret"
+
+#: views/my.tt:88
+msgid "Your reading history is not being stored"
+msgstr "Lesehistorikken din blir ikke lagret"
+
 #: views/layouts/main.tt:191
 msgid "about"
 msgstr "om"
@@ -711,7 +755,7 @@ msgstr "av"
 msgid "consortium"
 msgstr "konsortium"
 
-#: views/book.tt:139 views/my.tt:55 views/my.tt:67
+#: views/book.tt:139 views/my.tt:112 views/my.tt:55 views/my.tt:67
 msgid "days"
 msgstr "dager"
 
@@ -754,6 +798,10 @@ msgstr "mobil"
 #: views/my.tt:62
 msgid "months"
 msgstr "måneder"
+
+#:
+msgid "or"
+msgstr "eller"
 
 #: views/login.tt:37
 msgid "or choose a different library below"
