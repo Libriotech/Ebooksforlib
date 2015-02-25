@@ -71,7 +71,7 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
             'from_path' => $file_path,
         });
         if ( $existing_files[0] ) {
-            say 'File already imported, skipping';
+            say 'File already imported, skipping' if $verbose;
             next FILE;
         }
         
