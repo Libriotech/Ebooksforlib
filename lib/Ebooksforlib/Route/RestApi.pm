@@ -398,6 +398,7 @@ get '/rest/:action' => sub {
                         logmsg  => "user_id = $user_id, book_id = $book_id, item_id = " . $loan->item->id . ", file_id = " . $loan->item->file->id,
                     });
                     # Send the actual file
+                    debug "Sending file from " . $loan->item->file->from_path;
                     return send_file(
                         $loan->item->file->from_path,
                         system_path  => 1,
