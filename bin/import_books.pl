@@ -118,12 +118,12 @@ IMPORTDIR: foreach my $provider ( @{ $providers } ) {
         my $file_id;
         try {
             # Insert the file into the files table
-            my $file_contents = read_file( $file_path );
+            # EPUBxDB my $file_contents = read_file( $file_path );
             my $new_file = rset( 'File' )->create({
                 book_id     => $book_id,
                 provider_id => $provider->{ 'provider_id' },
                 from_path   => $file_path,
-                file        => $file_contents,
+                # EPUBxDB file        => $file_contents,
             });
             $file_id = $new_file->id;
             say "Added file with id = $file_id";

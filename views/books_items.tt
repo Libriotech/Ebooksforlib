@@ -126,10 +126,12 @@ days
 
 <h2>Add or replace files</h2>
 
+<p>Uploading files is temporarily disabled!</p>
+
 <form method="POST" action="/files/add" enctype="multipart/form-data">
 <input type="hidden" name="book_id" id="book_id" value="[% book.id %]">
 Upload a file from provider
-<select name="provider_id" id="provider_id">
+<select name="provider_id" id="provider_id" disabled>
 [% FOREACH provider IN providers %]
     [% already_provides_book = 0 %]
     [% FOREACH file IN provider.files %]
@@ -150,14 +152,14 @@ Upload a file from provider
 [% END %]
 </select>
 <br />
-File: <input type="file" name="bookfile" id="bookfile"/>
+File: <input type="file" name="bookfile" id="bookfile" disabled />
 <br />
 Availability:<br />
-<input type="radio" name="availability" id="avail_global" value="global" checked="checked" /><label for="avail_global">Available to all libraries</label><br />
-<input type="radio" name="availability" id="avail_local"  value="local" /><label for="avail_local">Available only to my library</label>
+<input type="radio" name="availability" id="avail_global" value="global" checked="checked" disabled /><label for="avail_global">Available to all libraries</label><br />
+<input type="radio" name="availability" id="avail_local"  value="local" disabled /><label for="avail_local">Available only to my library</label>
 <br />
 [% INCLUDE 'csrf_field.tt' %]
-<input type="submit" value="Upload">
+<input type="submit" value="Upload" disabled>
 </form>
 
 </div>

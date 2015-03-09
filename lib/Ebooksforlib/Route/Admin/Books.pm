@@ -240,6 +240,8 @@ post '/books/edit' => require_role admin => sub {
 
 ### Files
 
+# EPUBxDB FIXME! Store in the filesystem instead of the DB
+
 post '/files/add' => require_role admin => sub {
 
     unless ( _check_csrftoken( param 'csrftoken' ) ) {

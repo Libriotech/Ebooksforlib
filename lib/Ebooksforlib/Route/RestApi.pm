@@ -374,10 +374,13 @@ get '/rest/:action' => sub {
                 debug "*** /rest/getbook for item = " . $loan->item->id . " library_id = " . $loan->item->library_id . " file_id = " . $loan->item->file_id;
                 debug "*** /rest/getbook for file = " . $loan->item->file->id;
                 
-                # Get the content
-                my $fulltext = rset('Fulltext')->find( $loan->item->file->id );
-                my $content = $fulltext->file;
-                if ( $content ) {
+                # Get the content from the DB - obsolete! 
+                # EPUBxDB my $fulltext = rset('Fulltext')->find( $loan->item->file->id );
+                # EPUBxDB my $content = $fulltext->file;
+
+                # Get the content from the filesystem
+                # Check that we have a path to an actual file
+                if ( $loan->item->file->from_path && -f $loan->item->file->from_path ) {
                     # Keep track of this download in the downloads table
                     try {
                         rset('Download')->create({
@@ -396,7 +399,8 @@ get '/rest/:action' => sub {
                     });
                     # Send the actual file
                     return send_file(
-                        \$content,
+                        $loan->item->file->from_path,
+                        system_path  => 1,
                         content_type => 'application/epub+zip',
                         filename     => 'book-' . $loan->item->file->id . '.epub'
                     );
@@ -407,7 +411,7 @@ get '/rest/:action' => sub {
                         'error'  => 'Book not found',
                     };
                 }
-                undef $content;
+                # EPUBxDB undef $content;
             }
         }
         # If we got this far we did not find a file representing the given 
