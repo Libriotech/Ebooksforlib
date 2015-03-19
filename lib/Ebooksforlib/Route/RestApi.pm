@@ -374,10 +374,6 @@ get '/rest/:action' => sub {
                 debug "*** /rest/getbook for item = " . $loan->item->id . " library_id = " . $loan->item->library_id . " file_id = " . $loan->item->file_id;
                 debug "*** /rest/getbook for file = " . $loan->item->file->id;
                 
-                # Get the content from the DB - obsolete! 
-                # EPUBxDB my $fulltext = rset('Fulltext')->find( $loan->item->file->id );
-                # EPUBxDB my $content = $fulltext->file;
-
                 # Get the content from the filesystem
                 # Check that we have a path to an actual file
                 if ( $loan->item->file->from_path && -f $loan->item->file->from_path ) {
@@ -412,7 +408,6 @@ get '/rest/:action' => sub {
                         'error'  => 'Book not found',
                     };
                 }
-                # EPUBxDB undef $content;
             }
         }
         # If we got this far we did not find a file representing the given 
