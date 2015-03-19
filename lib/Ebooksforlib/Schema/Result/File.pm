@@ -205,10 +205,6 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
     timezone => setting('time_zone'),
   },
-  "file",
-  {
-    remove_column => 1,
-  },
 );
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
