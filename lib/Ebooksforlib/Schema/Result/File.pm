@@ -64,11 +64,6 @@ __PACKAGE__->table("files");
   data_type: 'tinytext'
   is_nullable: 0
 
-=head2 file
-
-  data_type: 'longblob'
-  is_nullable: 1
-
 =head2 updated
 
   data_type: 'timestamp'
@@ -89,8 +84,6 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "from_path",
   { data_type => "tinytext", is_nullable => 0 },
-  "file",
-  { data_type => "longblob", is_nullable => 1 },
   "updated",
   {
     data_type => "timestamp",
@@ -198,8 +191,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-10-17 10:20:13
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0RoMSxKtokZXhCv3ZbSj/g
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2015-03-19 09:03:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zLPdknIc3qPzks1pzRgOrg
 
 use Dancer ':syntax';
 
