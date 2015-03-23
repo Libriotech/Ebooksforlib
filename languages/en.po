@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views/layouts/main.tt:239 views/layouts/main.tt:256
+#: views/layouts/main.tt:235 views/layouts/main.tt:252
 msgid "About"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Admin actions"
 msgstr ""
 
-#: views/layouts/main.tt:136
+#: views/layouts/main.tt:129
 msgid "Administer loans"
 msgstr ""
 
@@ -97,6 +97,10 @@ msgstr ""
 
 #: views/book.tt:340
 msgid "Authors"
+msgstr ""
+
+#: views/superadmin_stats_loantime.tt:5
+msgid "Average loantime"
 msgstr ""
 
 #: views/superadmin_mostpop.tt:43
@@ -135,7 +139,7 @@ msgstr ""
 msgid "Choose a list..."
 msgstr ""
 
-#: lib/Ebooksforlib.pm:161
+#: lib/Ebooksforlib.pm:171
 msgid "Choose library"
 msgstr ""
 
@@ -151,11 +155,11 @@ msgstr ""
 msgid "Click here to stop storing your reading history"
 msgstr ""
 
-#: views/layouts/main.tt:241 views/layouts/main.tt:258
+#: views/layouts/main.tt:237 views/layouts/main.tt:254
 msgid "Contact"
 msgstr ""
 
-#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53
+#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53 views/superadmin_stats_loantime.tt:12 views/superadmin_stats_loantime.tt:23 views/superadmin_stats_loantime.tt:34
 msgid "Count"
 msgstr ""
 
@@ -177,6 +181,10 @@ msgstr ""
 
 #: views/superadmin_delete_book.tt:8
 msgid "Date"
+msgstr ""
+
+#: views/superadmin_stats_loantime.tt:12
+msgid "Days"
 msgstr ""
 
 #: views/book.tt:346 views/books_imported.tt:13 views/creators.tt:32
@@ -203,7 +211,7 @@ msgstr ""
 msgid "Display"
 msgstr ""
 
-#: views/anon_toggle.tt:19
+#: views/anon_toggle.tt:18
 msgid "Do you want to change?"
 msgstr ""
 
@@ -255,6 +263,10 @@ msgstr ""
 msgid "Files and items"
 msgstr ""
 
+#: views/superadmin_stats_loantime.tt:20 views/superadmin_stats_loantime.tt:31
+msgid "For loans that were shorter than one"
+msgstr ""
+
 #: views/admin.tt:21 views/admin_navbar.tt:17 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr ""
@@ -283,12 +295,16 @@ msgstr ""
 msgid "Go to the front page"
 msgstr ""
 
-#: views/layouts/main.tt:249 views/layouts/main.tt:265
+#: views/layouts/main.tt:245 views/layouts/main.tt:261
 msgid "Help"
 msgstr ""
 
 #: views/list.tt:8
 msgid "Home"
+msgstr ""
+
+#: views/superadmin_stats_loantime.tt:23 views/superadmin_stats_loantime.tt:34
+msgid "Hours"
 msgstr ""
 
 #: views/book.tt:46 views/superadmin_delete_book.tt:7
@@ -299,7 +315,7 @@ msgstr ""
 msgid "If you choose to change this, you can still anonymize individual loans at any time"
 msgstr ""
 
-#: views/anon_toggle.tt:15
+#: views/anon_toggle.tt:14
 msgid "If you choose to change this, your existing history will not be autmatically anonymized, you will have to do it by hand"
 msgstr ""
 
@@ -359,11 +375,19 @@ msgstr ""
 msgid "Loan period"
 msgstr ""
 
+#: views/superadmin_stats_loantime.tt:18 views/superadmin_stats_loantime.tt:29 views/superadmin_stats_loantime.tt:9
+msgid "Loantime in"
+msgstr ""
+
+#: views/superadmin_navbar.tt:13
+msgid "Loantimes"
+msgstr ""
+
 #: views/books_lists.tt:52
 msgid "Local lists"
 msgstr ""
 
-#: views/layouts/main.tt:191 views/layouts/main.tt:264 views/login_form.tt:23
+#: views/layouts/main.tt:177 views/layouts/main.tt:260 views/login_form.tt:23
 msgid "Log in"
 msgstr ""
 
@@ -371,7 +395,7 @@ msgstr ""
 msgid "Log in failed"
 msgstr ""
 
-#: views/layouts/main.tt:142 views/layouts/main.tt:250
+#: views/layouts/main.tt:135 views/layouts/main.tt:246
 msgid "Log out"
 msgstr ""
 
@@ -395,11 +419,11 @@ msgstr ""
 msgid "Most popular titles"
 msgstr ""
 
-#: views/layouts/main.tt:135 views/layouts/main.tt:247
+#: views/layouts/main.tt:128 views/layouts/main.tt:243
 msgid "My books"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/MyProfile.pm:31 views/layouts/main.tt:141 views/layouts/main.tt:248 views/my.tt:6
+#: lib/Ebooksforlib/Route/MyProfile.pm:31 views/layouts/main.tt:134 views/layouts/main.tt:244 views/my.tt:6
 msgid "My profile"
 msgstr ""
 
@@ -411,7 +435,7 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
-#: views/anon_toggle.tt:23 views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
 msgid "No"
 msgstr ""
 
@@ -423,7 +447,7 @@ msgstr ""
 msgid "Normal view"
 msgstr ""
 
-#: lib/Ebooksforlib.pm:176
+#: lib/Ebooksforlib.pm:186
 msgid "Not a valid library."
 msgstr ""
 
@@ -491,7 +515,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: lib/Ebooksforlib/Route/Browse.pm:155 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
+#: lib/Ebooksforlib/Route/Browse.pm:155 views/layouts/main.tt:123 views/layouts/main.tt:147 views/layouts/main.tt:183
 msgid "Search"
 msgstr ""
 
@@ -563,11 +587,11 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: views/layouts/main.tt:240 views/layouts/main.tt:257
+#: views/layouts/main.tt:236 views/layouts/main.tt:253
 msgid "What you need to borrow"
 msgstr ""
 
-#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:21 views/superadmin_delete_book.tt:33
 msgid "Yes"
 msgstr ""
 
@@ -575,7 +599,7 @@ msgstr ""
 msgid "You are not connected to any libraries."
 msgstr ""
 
-#: views/layouts/main.tt:191
+#: views/layouts/main.tt:177
 msgid "You are not logged in."
 msgstr ""
 
@@ -615,7 +639,7 @@ msgstr ""
 msgid "You searched for"
 msgstr ""
 
-#: views/anon_toggle.tt:14
+#: views/anon_toggle.tt:13
 msgid "Your reading history <em>is</em> being stored"
 msgstr ""
 
@@ -631,7 +655,7 @@ msgstr ""
 msgid "Your reading history is not being stored"
 msgstr ""
 
-#: views/layouts/main.tt:191
+#: views/layouts/main.tt:177
 msgid "about"
 msgstr ""
 
@@ -655,7 +679,11 @@ msgstr ""
 msgid "consortium"
 msgstr ""
 
-#: views/book.tt:139 views/my.tt:112 views/my.tt:55 views/my.tt:67
+#: views/superadmin_stats_loantime.tt:20
+msgid "day"
+msgstr ""
+
+#: views/book.tt:139 views/my.tt:112 views/my.tt:55 views/my.tt:67 views/superadmin_stats_loantime.tt:7 views/superadmin_stats_loantime.tt:9
 msgid "days"
 msgstr ""
 
@@ -671,7 +699,11 @@ msgstr ""
 msgid "here"
 msgstr ""
 
-#: views/my.tt:68
+#: views/superadmin_stats_loantime.tt:31
+msgid "hour"
+msgstr ""
+
+#: views/my.tt:68 views/superadmin_stats_loantime.tt:18
 msgid "hours"
 msgstr ""
 
@@ -683,7 +715,7 @@ msgstr ""
 msgid "lets you borrow electronic books for free from your local library."
 msgstr ""
 
-#: views/my.tt:69
+#: views/my.tt:69 views/superadmin_stats_loantime.tt:29
 msgid "minutes"
 msgstr ""
 
@@ -699,7 +731,7 @@ msgstr ""
 msgid "or choose a different library below"
 msgstr ""
 
-#: views/layouts/main.tt:191
+#: views/layouts/main.tt:177
 msgid "or find out more"
 msgstr ""
 

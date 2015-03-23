@@ -84,4 +84,44 @@ get '/superadmin/stats/failed' => require_role superadmin => sub {
     };
 };
 
+get '/superadmin/stats/loantime' => require_role superadmin => sub { 
+
+    # Average loan time
+    my $average_sql = "SELECT AVG(TIMESTAMPDIFF(DAY, loaned, returned)) AS average FROM old_loans;";
+    my $average = database->selectrow_array($average_sql);
+
+    # Loan times in days
+    my $days_sql = "
+        SELECT ROUND(TIMESTAMPDIFF(DAY, loaned, returned)) AS loantime, COUNT(*) as count
+        FROM old_loans 
+        GROUP BY loantime
+    ";
+    my $days = database->selectall_arrayref( $days_sql, { Slice => {} });
+
+    # Loan times in hours, for loans shorter than a day
+    my $hours_sql = "
+        SELECT ROUND(TIMESTAMPDIFF(HOUR, loaned, returned)) AS loantime, COUNT(*) as count 
+        FROM old_loans
+        GROUP BY loantime
+        HAVING loantime < 25
+    ";
+    my $hours = database->selectall_arrayref( $hours_sql, { Slice => {} });    
+
+    # Loan times in minutes, for loans shorter than an hour
+    my $minutes_sql = "
+        SELECT ROUND(TIMESTAMPDIFF(MINUTE, loaned, returned)) AS loantime, COUNT(*) as count
+        FROM old_loans
+        GROUP BY loantime
+        HAVING loantime < 61
+    ";
+    my $minutes = database->selectall_arrayref( $minutes_sql, { Slice => {} }); 
+
+    template 'superadmin_stats_loantime', { 
+        'average' => $average,
+        'days'    => $days,
+        'hours'   => $hours,
+        'minutes' => $minutes,
+    };
+};
+
 true;

@@ -10,6 +10,7 @@
                 <a tabindex="-1" href="#">[% l('Statistics') %]</a>
                 <ul class="dropdown-menu">
                     <li><a href="/superadmin/stats/mostpop">[% l('Most popular titles') %]</a></li>
+                    <li><a href="/superadmin/stats/loantime">[% l('Loantimes') %]</a></li>
                 </ul>
             </li>
         </ul>

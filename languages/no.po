@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views/layouts/main.tt:239 views/layouts/main.tt:256
+#: views/layouts/main.tt:235 views/layouts/main.tt:252
 msgid "About"
 msgstr "Om"
 
@@ -71,7 +71,7 @@ msgstr "Admin"
 msgid "Admin actions"
 msgstr "Admin"
 
-#: views/layouts/main.tt:136
+#: views/layouts/main.tt:129
 msgid "Administer loans"
 msgstr "Administrer lån"
 
@@ -106,6 +106,10 @@ msgstr "Er du sikker på at du ønsker å slette denne boka, inkludert alle tilk
 #: views/book.tt:340
 msgid "Authors"
 msgstr "Forfattere"
+
+#: views/superadmin_stats_loantime.tt:5
+msgid "Average loantime"
+msgstr "Gjennomsnittlig låneitd"
 
 #: views/superadmin_mostpop.tt:43
 msgid "Back to default view"
@@ -147,7 +151,7 @@ msgstr "Lånt"
 msgid "Choose a list..."
 msgstr "Velg en liste..."
 
-#: lib/Ebooksforlib.pm:161
+#: lib/Ebooksforlib.pm:171
 msgid "Choose library"
 msgstr "Velg bibliotek"
 
@@ -163,11 +167,11 @@ msgstr "Klikk her for å begynne å lagre lånehistorikk"
 msgid "Click here to stop storing your reading history"
 msgstr "Klikk her for å slutte å lagre lånehistorikk"
 
-#: views/layouts/main.tt:241 views/layouts/main.tt:258
+#: views/layouts/main.tt:237 views/layouts/main.tt:254
 msgid "Contact"
 msgstr "Kontakt oss"
 
-#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53
+#: views/admin_stats_gender.tt:11 views/admin_stats_gender.tt:32 views/admin_stats_gender.tt:53 views/superadmin_stats_loantime.tt:12 views/superadmin_stats_loantime.tt:23 views/superadmin_stats_loantime.tt:34
 msgid "Count"
 msgstr "Antall"
 
@@ -195,6 +199,10 @@ msgstr "Data-URL"
 msgid "Date"
 msgstr "Utgitt"
 
+#: views/superadmin_stats_loantime.tt:12
+msgid "Days"
+msgstr "Dager"
+
 #: views/book.tt:346 views/books_imported.tt:13 views/creators.tt:32
 msgid "Delete"
 msgstr "Slett"
@@ -219,7 +227,7 @@ msgstr "Omtale"
 msgid "Display"
 msgstr "Vis"
 
-#: views/anon_toggle.tt:19
+#: views/anon_toggle.tt:18
 msgid "Do you want to change?"
 msgstr "Ønsker du å endre?"
 
@@ -275,6 +283,10 @@ msgstr "Fil-ID"
 msgid "Files and items"
 msgstr "Filer og eksemplarer"
 
+#: views/superadmin_stats_loantime.tt:20 views/superadmin_stats_loantime.tt:31
+msgid "For loans that were shorter than one"
+msgstr "For lån kortere enn en"
+
 #: views/admin.tt:21 views/admin_navbar.tt:17 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
 msgid "Gender"
 msgstr "Kjønn"
@@ -303,13 +315,17 @@ msgstr "Gå til"
 msgid "Go to the front page"
 msgstr "Gå til forsiden"
 
-#: views/layouts/main.tt:249 views/layouts/main.tt:265
+#: views/layouts/main.tt:245 views/layouts/main.tt:261
 msgid "Help"
 msgstr "Hjelp"
 
 #: views/list.tt:8
 msgid "Home"
 msgstr "Forsiden"
+
+#: views/superadmin_stats_loantime.tt:23 views/superadmin_stats_loantime.tt:34
+msgid "Hours"
+msgstr "Timer"
 
 #: views/book.tt:46 views/superadmin_delete_book.tt:7
 msgid "ISBN"
@@ -319,7 +335,7 @@ msgstr "ISBN"
 msgid "If you choose to change this, you can still anonymize individual loans at any time"
 msgstr "Dersom du velger å endre dette vil du fortsatt kunne anonymisere individuelle lån når som helst"
 
-#: views/anon_toggle.tt:15
+#: views/anon_toggle.tt:14
 msgid "If you choose to change this, your existing history will not be autmatically anonymized, you will have to do it by hand"
 msgstr "Dersom du velger å endre dette vil din eksisterende historikk ikke bli anonymisert autmatisk, du må selv gjøre det"
 
@@ -383,11 +399,19 @@ msgstr "Lånet utløper"
 msgid "Loan period"
 msgstr "Lånetid"
 
+#: views/superadmin_stats_loantime.tt:18 views/superadmin_stats_loantime.tt:29 views/superadmin_stats_loantime.tt:9
+msgid "Loantime in"
+msgstr "Lånetid i"
+
+#: views/superadmin_navbar.tt:13
+msgid "Loantimes"
+msgstr "Lånetider"
+
 #: views/books_lists.tt:52
 msgid "Local lists"
 msgstr "Lokale lister"
 
-#: views/layouts/main.tt:191 views/layouts/main.tt:264 views/login_form.tt:23
+#: views/layouts/main.tt:177 views/layouts/main.tt:260 views/login_form.tt:23
 msgid "Log in"
 msgstr "Logg inn"
 
@@ -395,7 +419,7 @@ msgstr "Logg inn"
 msgid "Log in failed"
 msgstr "Innloggin mislyktes"
 
-#: views/layouts/main.tt:142 views/layouts/main.tt:250
+#: views/layouts/main.tt:135 views/layouts/main.tt:246
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -419,7 +443,7 @@ msgstr "Mer enn én aktiv sesjon"
 msgid "Most popular titles"
 msgstr "Mest populære titler"
 
-#: views/layouts/main.tt:135 views/layouts/main.tt:247
+#: views/layouts/main.tt:128 views/layouts/main.tt:243
 msgid "My books"
 msgstr "Mine bøker"
 
@@ -427,7 +451,7 @@ msgstr "Mine bøker"
 msgid "My page"
 msgstr "Min side"
 
-#: lib/Ebooksforlib/Route/MyProfile.pm:31 views/layouts/main.tt:141 views/layouts/main.tt:248 views/my.tt:6
+#: lib/Ebooksforlib/Route/MyProfile.pm:31 views/layouts/main.tt:134 views/layouts/main.tt:244 views/my.tt:6
 msgid "My profile"
 msgstr "Min profil"
 
@@ -443,7 +467,7 @@ msgstr "Hjelp til innloggingen?"
 msgid "New user?"
 msgstr "Ny bruker?"
 
-#: views/anon_toggle.tt:23 views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
 msgid "No"
 msgstr "Nei"
 
@@ -455,7 +479,7 @@ msgstr "Ingen tilgjengelige eksemplarer"
 msgid "Normal view"
 msgstr "Normal visning"
 
-#: lib/Ebooksforlib.pm:176
+#: lib/Ebooksforlib.pm:186
 msgid "Not a valid library."
 msgstr "Ikke et gyldig bibliotek."
 
@@ -539,7 +563,7 @@ msgstr "Levert"
 msgid "Save"
 msgstr "Lagre"
 
-#: lib/Ebooksforlib/Route/Browse.pm:155 views/layouts/main.tt:130 views/layouts/main.tt:154 views/layouts/main.tt:186
+#: lib/Ebooksforlib/Route/Browse.pm:155 views/layouts/main.tt:123 views/layouts/main.tt:147 views/layouts/main.tt:183
 msgid "Search"
 msgstr "Søk"
 
@@ -623,11 +647,11 @@ msgstr "Brukere"
 msgid "What you need in order to borrow"
 msgstr "Dette trenger du for å låne"
 
-#: views/layouts/main.tt:240 views/layouts/main.tt:257
+#: views/layouts/main.tt:236 views/layouts/main.tt:253
 msgid "What you need to borrow"
 msgstr "Dette trenger du for å låne"
 
-#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:21 views/superadmin_delete_book.tt:33
 msgid "Yes"
 msgstr "Ja"
 
@@ -647,7 +671,7 @@ msgstr "Du er logget inn ved biblioteket du har valgt, og kan låne bøker."
 msgid "You are not connected to any libraries."
 msgstr "Du er ikke knyttet til noen bibliotek."
 
-#: views/layouts/main.tt:191
+#: views/layouts/main.tt:177
 msgid "You are not logged in."
 msgstr "Du er ikke logget inn"
 
@@ -711,7 +735,7 @@ msgstr "Du søkte etter"
 msgid "Your account has been blocked"
 msgstr "Kontoen din har blitt sperret"
 
-#: views/anon_toggle.tt:14
+#: views/anon_toggle.tt:13
 msgid "Your reading history <em>is</em> being stored"
 msgstr "Lesehistorikken din <em>blir</em> lagret"
 
@@ -727,7 +751,7 @@ msgstr "Lesehistorikken din blir lagret"
 msgid "Your reading history is not being stored"
 msgstr "Lesehistorikken din blir ikke lagret"
 
-#: views/layouts/main.tt:191
+#: views/layouts/main.tt:177
 msgid "about"
 msgstr "om"
 
@@ -755,7 +779,11 @@ msgstr "av"
 msgid "consortium"
 msgstr "konsortium"
 
-#: views/book.tt:139 views/my.tt:112 views/my.tt:55 views/my.tt:67
+#: views/superadmin_stats_loantime.tt:20
+msgid "day"
+msgstr "dag"
+
+#: views/book.tt:139 views/my.tt:112 views/my.tt:55 views/my.tt:67 views/superadmin_stats_loantime.tt:7 views/superadmin_stats_loantime.tt:9
 msgid "days"
 msgstr "dager"
 
@@ -775,7 +803,11 @@ msgstr "forsiden"
 msgid "here"
 msgstr "her"
 
-#: views/my.tt:68
+#: views/superadmin_stats_loantime.tt:31
+msgid "hour"
+msgstr "time"
+
+#: views/my.tt:68 views/superadmin_stats_loantime.tt:18
 msgid "hours"
 msgstr "timer"
 
@@ -787,7 +819,7 @@ msgstr "eksemplarer"
 msgid "lets you borrow electronic books for free from your local library."
 msgstr "lar deg låne elektroniske bøker gratis fra ditt bibliotek"
 
-#: views/my.tt:69
+#: views/my.tt:69 views/superadmin_stats_loantime.tt:29
 msgid "minutes"
 msgstr "minutter"
 
@@ -807,7 +839,7 @@ msgstr "eller"
 msgid "or choose a different library below"
 msgstr "eller velg et annet bibliotek nedenfor"
 
-#: views/layouts/main.tt:191
+#: views/layouts/main.tt:177
 msgid "or find out more"
 msgstr "eller finn ut mer"
 

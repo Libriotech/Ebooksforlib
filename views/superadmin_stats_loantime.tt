@@ -1,0 +1,40 @@
+<div class="container">
+
+<h2>[% l('Loantimes') %]</h2>
+
+<h3>[% l('Average loantime') %]</h3>
+
+<p>[% average %] [% l('days') %]</p>
+
+<h3>[% l('Loantime in') %] [% l('days') %]</h3>
+
+<table class="table table-striped table-bordered table-hover">
+<tr><th>[% l('Days') %]</th><th>[% l('Count') %]</th></tr>
+[% FOREACH x IN days %]
+    <tr><td>[% x.loantime %]</td><td>[% x.count %]</td></tr>
+[% END %]
+</table>
+
+<h3>[% l('Loantime in') %] [% l('hours') %]</h3>
+
+<p>[% l('For loans that were shorter than one') %] [% l('day') %].</p>
+
+<table class="table table-striped table-bordered table-hover">
+<tr><th>[% l('Hours') %]</th><th>[% l('Count') %]</th></tr>
+[% FOREACH x IN hours %]
+    <tr><td>[% x.loantime %]</td><td>[% x.count %]</td></tr>
+[% END %]
+</table>
+
+<h3>[% l('Loantime in') %] [% l('minutes') %]</h3>
+
+<p>[% l('For loans that were shorter than one') %] [% l('hour') %].</p>
+
+<table class="table table-striped table-bordered table-hover">
+<tr><th>[% l('Hours') %]</th><th>[% l('Count') %]</th></tr>
+[% FOREACH x IN minutes %]
+    <tr><td>[% x.loantime %]</td><td>[% x.count %]</td></tr>
+[% END %]
+</table>
+
+</div>
