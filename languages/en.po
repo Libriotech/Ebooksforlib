@@ -23,7 +23,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: views/admin_stats_gender.tt:26
+#: views/admin_stats_gender.tt:26 views/book.tt:315
 msgid "Active loans"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: views/book.tt:337
+#: views/book.tt:398
 msgid "Admin actions"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Administer loans"
 msgstr ""
 
-#: views/admin.tt:20 views/admin_navbar.tt:16
+#: views/admin.tt:20 views/admin_navbar.tt:16 views/book.tt:324
 msgid "Age"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
 msgstr ""
 
-#: views/book.tt:340
+#: views/book.tt:401
 msgid "Authors"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: views/book.tt:343
+#: views/book.tt:404
 msgid "Covers"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: views/book.tt:346 views/books_imported.tt:13 views/creators.tt:32
+#: views/book.tt:407 views/books_imported.tt:13 views/creators.tt:32
 msgid "Delete"
 msgstr ""
 
@@ -215,11 +215,11 @@ msgstr ""
 msgid "Do you want to change?"
 msgstr ""
 
-#: views/my.tt:102
+#: views/book.tt:321 views/my.tt:102
 msgid "Due"
 msgstr ""
 
-#: views/book.tt:339 views/creator.tt:18 views/list.tt:28
+#: views/book.tt:400 views/creator.tt:18 views/list.tt:28
 msgid "Edit"
 msgstr ""
 
@@ -267,7 +267,7 @@ msgstr ""
 msgid "For loans that were shorter than one"
 msgstr ""
 
-#: views/admin.tt:21 views/admin_navbar.tt:17 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52
+#: views/admin.tt:21 views/admin_navbar.tt:17 views/admin_stats_gender.tt:10 views/admin_stats_gender.tt:31 views/admin_stats_gender.tt:52 views/book.tt:323
 msgid "Gender"
 msgstr ""
 
@@ -339,7 +339,7 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: views/book.tt:342
+#: views/book.tt:403
 msgid "Items"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Last edited"
 msgstr ""
 
-#: views/my.tt:19 views/superadmin_mostpop.tt:13
+#: views/book.tt:318 views/my.tt:19 views/superadmin_mostpop.tt:13
 msgid "Library"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgstr ""
 msgid "Limitations"
 msgstr ""
 
-#: views/book.tt:341 views/book.tt:70 views/lists.tt:13
+#: views/book.tt:402 views/book.tt:70 views/lists.tt:13
 msgid "Lists"
 msgstr ""
 
@@ -375,11 +375,15 @@ msgstr ""
 msgid "Loan period"
 msgstr ""
 
+#: views/book.tt:320
+msgid "Loaned"
+msgstr ""
+
 #: views/superadmin_stats_loantime.tt:18 views/superadmin_stats_loantime.tt:29 views/superadmin_stats_loantime.tt:9
 msgid "Loantime in"
 msgstr ""
 
-#: views/superadmin_navbar.tt:13
+#: views/superadmin_navbar.tt:13 views/superadmin_stats_loantime.tt:3
 msgid "Loantimes"
 msgstr ""
 
@@ -407,7 +411,7 @@ msgstr ""
 msgid "Maximum number of concurrent loans"
 msgstr ""
 
-#: views/book.tt:325
+#: views/book.tt:386
 msgid "More books by"
 msgstr ""
 
@@ -459,7 +463,7 @@ msgstr ""
 msgid "Number of books"
 msgstr ""
 
-#: views/admin_stats_gender.tt:47 views/my.tt:81
+#: views/admin_stats_gender.tt:47 views/book.tt:315 views/my.tt:81
 msgid "Old loans"
 msgstr ""
 
@@ -495,6 +499,10 @@ msgstr ""
 msgid "Percentage"
 msgstr ""
 
+#: views/book.tt:319
+msgid "Provider"
+msgstr ""
+
 #: views/book.tt:43
 msgid "Publication year"
 msgstr ""
@@ -507,7 +515,7 @@ msgstr ""
 msgid "Return"
 msgstr ""
 
-#: views/my.tt:103
+#: views/book.tt:322 views/my.tt:103
 msgid "Returned"
 msgstr ""
 
@@ -529,6 +537,14 @@ msgstr ""
 
 #: views/admin_navbar.tt:9
 msgid "Show all authors"
+msgstr ""
+
+#: views/book.tt:251
+msgid "Show item data"
+msgstr ""
+
+#: views/book.tt:294
+msgid "Show loan stats"
 msgstr ""
 
 #: views/search.tt:31
@@ -573,6 +589,10 @@ msgstr ""
 
 #: views/my.tt:42 views/my.tt:99 views/superadmin_delete_book.tt:6 views/superadmin_pages_edit.tt:8
 msgid "Title"
+msgstr ""
+
+#: views/book.tt:315
+msgid "Total"
 msgstr ""
 
 #: views/admin_stats_gender.tt:18 views/admin_stats_gender.tt:39 views/admin_stats_gender.tt:60
@@ -653,6 +673,10 @@ msgstr ""
 
 #: views/my.tt:88
 msgid "Your reading history is not being stored"
+msgstr ""
+
+#: views/book.tt:325
+msgid "Zipcode"
 msgstr ""
 
 #: views/layouts/main.tt:177
