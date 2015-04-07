@@ -1,5 +1,11 @@
 [% USE date %]
 
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
+
 <!-- STINAVIGERING
 ************************************* -->
 <ul class="path">
@@ -268,7 +274,10 @@
     [% FOREACH file IN book.files %]
         [% FOREACH item IN file.items %]
             <tr>
-                <td>[% file.id %]</td>
+                <td>[% file.id %]
+                    <button type="button" tabindex="0" data-trigger="focus" class="btn" data-toggle="popover" data-html="true" title="Details for file [% file.id %]"
+                            data-content="provider: [% file.provider.name %]<br>updated: [% file.updated %]<br>from_path: [% file.from_path %]">Details</button>
+                </td>
                 <td>[% item.id %]</td>
                 <td>[% item.library_id %] ([% item.library.name %])</td>
                 <td>[% item.deleted %]</td>
