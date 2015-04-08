@@ -85,9 +85,9 @@
         [% toggle_target = '/anon_toggle_ok' %]
     [% END %] 
     [% IF user.anonymize == 1 %]
-        <strong title="[% l('Your reading history is not being stored') %]">[% l('Anonymize') %]</strong> | <a title="[% l('Click here to start storing your reading history') %]" href="[% toggle_target %]?[% INCLUDE 'csrf_link.tt' %]">[% l('Keep history') %]</a>
+        <strong title="[% l('Your reading history is not being stored') %]">[% l('Delete history') %]</strong> | <a title="[% l('Click here to start storing your reading history') %]" href="[% toggle_target %]?[% INCLUDE 'csrf_link.tt' %]">[% l('Keep history') %]</a>
 	[% ELSE %]
-		<a title="[% l('Click here to stop storing your reading history') %]" href="[% toggle_target %]?[% INCLUDE 'csrf_link.tt' %]">[% l('Anonymize') %]</a> | <strong title="[% l('Your reading history is being stored') %]">[% l('Keep history') %]</strong>
+		<a title="[% l('Click here to stop storing your reading history') %]" href="[% toggle_target %]?[% INCLUDE 'csrf_link.tt' %]">[% l('Delete history') %]</a> | <strong title="[% l('Your reading history is being stored') %]">[% l('Keep history') %]</strong>
 	[% END %]
 </div>
 </h3>
@@ -116,7 +116,7 @@
             [% IF settings.toggle_anon_confirm == 0 %]
                 [% anon_target = '/anon_ok' %]
             [% END %]
-            <td><a href="[% anon_target %]/[% loan.id %]?[% INCLUDE 'csrf_link.tt' %]" class="btn">[% l('Anonymize') %]</a></td>
+            <td><a href="[% anon_target %]/[% loan.id %]?[% INCLUDE 'csrf_link.tt' %]" class="btn">[% l('Delete') %]</a></td>
         </tr>
     [% END %]
     </tbody>

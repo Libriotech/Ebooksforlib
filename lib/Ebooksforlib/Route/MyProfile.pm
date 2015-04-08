@@ -69,7 +69,7 @@ get '/anon_toggle_ok' => require_login sub {
     try {
         $user->set_column( 'anonymize', $new_anonymize );
         $user->update;
-        flash info => 'Your anonymization setting was updated!';
+        flash info => l( 'Your anonymization setting was updated!' );
         # Log
         _log2db({
             logcode => 'ANONTOGGLE',
@@ -115,7 +115,7 @@ get '/anon_ok/:id' => require_login sub {
         try {
             $oldloan->set_column( 'user_id', 1 );
             $oldloan->update;
-            flash info => 'Your loan was anonymized!';
+            flash info => l( 'Your loan was anonymized!' );
             # Log
             _log2db({
                 logcode => 'ANONYMIZE',
