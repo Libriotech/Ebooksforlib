@@ -501,7 +501,7 @@ msgstr "Antall bøker"
 
 #: views/admin_stats_gender.tt:47 views/book.tt:324 views/my.tt:81
 msgid "Old loans"
-msgstr "Gamle lån"
+msgstr "Tidligere lån"
 
 #: views/superadmin_delete_book.tt:23
 msgid "On loan"
