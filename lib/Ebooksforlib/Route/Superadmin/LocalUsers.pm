@@ -290,4 +290,44 @@ get '/users/delete_ok/:id?' => require_role superadmin => sub {
     
 };
 
+## Unlock users with too many failed logins
+
+get '/users/unlock/:id?' => require_role superadmin => sub { 
+    
+    # Confirm unlock
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    template 'users_unlock', { user => $user };
+    
+};
+
+get '/users/unlock_ok/:id?' => require_role superadmin => sub { 
+    
+    unless ( _check_csrftoken( param 'csrftoken' ) ) {
+        return redirect '/';
+    }
+    
+    # Do the actual unlock
+    my $id = param 'id';
+    my $user = rset('User')->find( $id );
+    # TODO Check that this user is ready to be deleted!
+    try {
+        $user->set_column( 'failed', 0 );
+        $user->set_column( 'token', '' );
+        $user->update;
+        flash info => 'A user was unlocked!';
+        info "Unlocked user with ID = $id";
+        _log2db({
+            logcode => 'UNLOCK',
+            logmsg  => "user_id: $id",
+        });
+        redirect '/superadmin/stats/failed';
+    } catch {
+        flash error => "Oops, we got an error:<br />".errmsg($_);
+        error "$_";
+        redirect '/superadmin';
+    };
+    
+};
+
 true;

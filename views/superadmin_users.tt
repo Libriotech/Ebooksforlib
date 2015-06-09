@@ -30,6 +30,9 @@
             <a href="/users/roles/[% user.id %]"><img src="/images/bricks.png" height="16" width="16" alt="Edit roles" title="Edit roles"></a>
             <a href="/users/libraries/[% user.id %]"><img src="/images/building.png" height="16" width="16" alt="Edit library-connections" title="Edit library-connections"></a>
             <a href="/users/delete/[% user.id %]"><img src="/images/user_delete.png" height="16" width="16" alt="Delete" title="Delete"></a>
+            [% IF user.token != '' %]
+                <a href="/users/unlock/[% user.id %]"><img src="/images/lock_go.png" height="16" width="16" alt="[% l('Unlock') %]" title="[% l('Unlock') %]"></a>
+            [% END %]
         </td>
     </tr>
     [% END %]

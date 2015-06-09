@@ -1,13 +1,14 @@
 <div class="container">
 
-<h2>Users with failed logins</h2>
+<h2>[% l('Users with failed logins') %]</h2>
 
 <table class="table table-striped table-bordered table-hover">
 <tr>
-    <th>Failed logins</th>
-    <th>Name</th>
-    <th>Username</th>
-    <th>Libraries</th>
+    <th>[% l('Failed logins') %]</th>
+    <th>[% l('Name') %]</th>
+    <th>[% l('Username') %]</th>
+    <th>[% l('Libraries') %]</th>
+    <th>[% l('Actions') %]</th>
 </tr>
 [% FOREACH user IN failed %]
 <tr>
@@ -18,6 +19,11 @@
         [% FOREACH library IN user.libraries %]
             [% library.name %],
         [% END %]
+    </td>
+    <td>
+    [% IF user.token != '' %]
+        <a href="/users/unlock/[% user.id %]"><img src="/images/lock_go.png" height="16" width="16" alt="[% l('Unlock') %]" title="[% l('Unlock') %]"></a>
+    [% END %]
     </td>
 </tr>
 [% END %]
