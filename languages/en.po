@@ -19,7 +19,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: views/creators.tt:15
+#: views/creators.tt:15 views/superadmin_stats_failed.tt:11
 msgid "Actions"
 msgstr ""
 
@@ -89,6 +89,10 @@ msgstr ""
 
 #: views/superadmin_delete_book.tt:33
 msgid "Are you sure you want to completely delete this book, including its files, items and any loans"
+msgstr ""
+
+#: views/users_unlock.tt:5
+msgid "Are you sure you want to unlock the user called"
 msgstr ""
 
 #: views/book.tt:410
@@ -247,7 +251,7 @@ msgstr ""
 msgid "Expires"
 msgstr ""
 
-#: views/superadmin_navbar.tt:8
+#: views/superadmin_navbar.tt:8 views/superadmin_stats_failed.tt:7
 msgid "Failed logins"
 msgstr ""
 
@@ -351,6 +355,10 @@ msgstr ""
 msgid "Last edited"
 msgstr ""
 
+#: views/superadmin_stats_failed.tt:10
+msgid "Libraries"
+msgstr ""
+
 #: views/book.tt:327 views/my.tt:19 views/superadmin_mostpop.tt:13
 msgid "Library"
 msgstr ""
@@ -431,7 +439,7 @@ msgstr ""
 msgid "My profile"
 msgstr ""
 
-#: views/creators.tt:13 views/my.tt:14
+#: views/creators.tt:13 views/my.tt:14 views/superadmin_stats_failed.tt:8
 msgid "Name"
 msgstr ""
 
@@ -439,7 +447,7 @@ msgstr ""
 msgid "Need help logging in?"
 msgstr ""
 
-#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:22 views/superadmin_delete_book.tt:33 views/users_unlock.tt:9
 msgid "No"
 msgstr ""
 
@@ -599,7 +607,11 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: views/login_form.tt:6 views/my.tt:13
+#: views/superadmin_stats_failed.tt:25 views/superadmin_users.tt:34
+msgid "Unlock"
+msgstr ""
+
+#: views/login_form.tt:6 views/my.tt:13 views/superadmin_stats_failed.tt:9
 msgid "Username"
 msgstr ""
 
@@ -607,11 +619,15 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#: views/superadmin_stats_failed.tt:3
+msgid "Users with failed logins"
+msgstr ""
+
 #: views/layouts/main.tt:236 views/layouts/main.tt:253
 msgid "What you need to borrow"
 msgstr ""
 
-#: views/anon_toggle.tt:21 views/superadmin_delete_book.tt:33
+#: views/anon_toggle.tt:21 views/superadmin_delete_book.tt:33 views/users_unlock.tt:8
 msgid "Yes"
 msgstr ""
 
